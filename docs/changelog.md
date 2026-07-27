@@ -5,6 +5,83 @@ next: false
 
 # Changelog
 
+## 1.2.6 · 2026-07-27
+
+### Added
+
+#### Session-Level Chat Git
+
+- AI-generated code changes from the same session can now be submitted together.
+- Added simultaneous detection and processing for multiple Git repositories.
+- Chat tasks and code review status now synchronize automatically after submission.
+
+#### Providers, Models, and Capabilities
+
+- Added the **Poolside Platform** provider with access to **Poolside Laguna** through an OpenAI-compatible configuration.
+- Added model configurations for **Qwen3.8**, **Opus 5**, and **Pangu**.
+- Enhanced **LongCat** with inference replay, preserving reasoning context after tool calls.
+
+#### Remote Workspace Security
+
+- Added a security warning when accessing the Linux root directory `/` in a remote environment.
+- Linux virtual file system paths such as `/proc`, `/sys`, and `/dev` are now excluded automatically.
+
+### Improvements
+
+#### Code Review
+
+- Redesigned the **Accept/Reject** action bar for individual code blocks.
+- Updated **Keep All** to follow the current theme’s accent color.
+- Reduced the height of inline action bars for a more compact code area.
+- Review action bars now collapse and reset automatically after a successful Git commit.
+
+#### Model Selector
+
+- After a key is entered for the first time, only five recommended models are enabled by default to reduce list redundancy.
+- OpenAI-compatible provider capabilities now adapt to the selected API format.
+
+#### Code Submission and SCM Refresh
+
+- Git status in the Activity Bar now refreshes automatically after files are saved.
+- Chat Git submissions are now uniformly treated as **Keep All Changes**, automatically completing the corresponding code review steps.
+
+#### Interface
+
+- Removed the unread indicator from notification titles.
+- Improved hover-menu switching for OpenAI-compatible model groups.
+- Fixed the vertical alignment of tool-count text.
+- Enabled the Kimi Mono icon style in the light theme.
+
+### Fixes
+
+#### WSL and Remote Git
+
+- Fixed a WSL extension host startup crash.
+- Fixed inconsistent WSL server proxy configuration.
+- Git status checks and AI-generated commit messages in WSL and SSH environments now run through a remote-aware execution channel.
+- Prevented Git commands for remote workspaces from running against local paths.
+- Fixed an issue where the Agent automatically closed Git repositories after modifying files.
+- Fixed incorrect relative-path display in remote URIs.
+
+#### Remote SSH
+
+- Fixed Remote SSH password-expiration handling. Saved passwords are now cleared when rejected by the server, and users are prompted to re-enter the password during the same connection attempt.
+- Prevented Remote SSH from downloading REH server packages with mismatched commit hashes, avoiding version mismatch errors and remote host startup failures.
+
+#### Chat Rendering
+
+- Added Trusted Types support for Mermaid charts.
+- Improved Mermaid tag sanitization to prevent unsafe or malformed tags from causing rendering failures.
+
+#### Rules and Memory
+
+- Fixed empty content being saved after an editor lost focus.
+- Fixed the resource manager not refreshing promptly after changes to the `.breezell` configuration.
+
+#### Remote Tree View
+
+- Stopped meaningless tree-view errors from being emitted repeatedly when SSH Hosts configuration is missing.
+
 ## 1.2.5 · 2026-07-22
 
 ### Added
