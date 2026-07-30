@@ -5,6 +5,49 @@ next: false
 
 # Changelog
 
+## 1.2.7 · 2026-07-29
+
+### New Features
+
+- Improved understanding and navigation efficiency for large codebases.
+- Added optional answer-quality insights, presenting this turn’s evaluation across answer quality, requirement understanding, and verification confidence.
+- Cache statistics details now support pagination, linked filtering, and multiple languages.
+
+### Fixes
+
+#### Source Control and Agent Runtime
+
+- Fixed the commit-message input becoming empty or invalid after refreshing a source-control repository, switching views, or rebuilding components.
+- Fixed Agent reasoning stalls, incorrect terminal-state detection, lost background-command exit codes, and tasks ending prematurely.
+- Fixed queue-message editing, tool-call feedback, task-list restoration, and continuous-turn state issues.
+
+#### Chat and Remote Environments
+
+- Fixed original conversations being truncated prematurely when editing and resending messages. Messages are now replaced atomically after validation completes.
+- Fixed remote-path issues in WSL and Remote SSH environments, and improved host startup, password retries, and server caching.
+
+#### Rendering, Models, and State
+
+- Fixed KaTeX block-formula parsing, code-block themes, Chinese font rendering, and file-icon alignment.
+- Fixed some models incorrectly displaying empty responses, exposing error stacks, or issuing abnormal provider network requests.
+- Fixed deleted content reappearing in Super Memory and browser-panel states reverting unexpectedly.
+
+### Improvements
+
+#### Agent Search and Execution
+
+- Optimized Agent search, tool invocation, task execution, and termination logic to reduce redundant conclusions, unnecessary waiting, and abnormal interruptions.
+- Optimized result limits, execution timeouts, and streaming status for large-scale code searches to reduce resource consumption from oversized result sets.
+
+#### Chat Experience
+
+- Improved chat completion status, the bottom toolbar, scroll positioning, and long-conversation loading.
+
+#### Settings and Usage
+
+- Refactored model-account and OAuth sign-in cards, unifying the visual hierarchy and interaction patterns across the Settings page.
+- Improved Codex usage, model metadata, and related status indicators.
+
 ## 1.2.6 · 2026-07-27
 
 ### Added
