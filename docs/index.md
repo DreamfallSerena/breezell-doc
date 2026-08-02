@@ -35,7 +35,63 @@ head:
 <script setup>
 import { onMounted } from 'vue'
 
+const shouyewenben = {
+  'ja-JP': {
+    'Swiss-built engineering workspace': 'スイス生まれのエンジニアリング・ワークスペース',
+    'Turn scattered project context into shippable changes.': '散在するプロジェクトの文脈を、リリース可能な変更へ。',
+    'Breezell keeps code, decisions, tools, and review loops in one focused workspace, so teams can understand a project, make precise changes, and move from investigation to delivery without switching context.': 'Breezell はコード、意思決定、ツール、レビューの流れを一つのワークスペースに集約します。チームはコンテキストを切り替えずにプロジェクトを理解し、的確な変更から提供まで進められます。',
+    'Get Started': 'はじめる',
+    'Visit Website': '公式サイトを見る',
+    'Work modes': '作業モード',
+    'Project context': 'プロジェクトコンテキスト',
+    'Workspace': 'ワークスペース',
+    'Current task': '現在のタスク',
+    'Refactor payment flow': '決済フローをリファクタリング',
+    'Read controllers, services, and schema changes.': 'コントローラー、サービス、スキーマの変更を確認します。',
+    'Patch the smallest safe layer and clean imports.': '最小かつ安全な層を修正し、インポートを整理します。',
+    'Check diagnostics before handing work back.': '作業を戻す前に診断結果を確認します。',
+    'Context connected': 'コンテキスト接続済み',
+    'Agent ready': 'エージェント準備完了',
+    'Six development modes': '6 つの開発モード',
+    'Switch to the right AI workflow for every task.': 'すべてのタスクに最適な AI ワークフローを選択。',
+    'Ask questions, explain code, debug ideas, and move quickly through conversation.': '質問、コードの説明、アイデアのデバッグを対話の中で素早く行えます。',
+    'Let AI inspect the project, edit files, use tools, and complete coding tasks.': 'AI にプロジェクトの確認、ファイル編集、ツール利用、コーディングタスクの完了を任せられます。',
+    'Review and diagnose without changing files, ideal for audits and architecture checks.': 'ファイルを変更せずにレビューと診断を行えます。監査やアーキテクチャの確認に最適です。',
+    'Create a structured implementation path before touching complex code.': '複雑なコードに手を加える前に、構造化された実装手順を作成します。',
+    'Use causal reasoning and context awareness for deeper product and code decisions.': '因果推論とコンテキスト認識を用いて、より深いプロダクトとコードの判断を行います。',
+    'Coordinate multiple AI teammates for large features and parallel workflows.': '複数の AI チームメイトを連携させ、大規模な機能と並列ワークフローに対応します。',
+  },
+}
+
+function fanyishouye() {
+  const wenben = shouyewenben[document.documentElement.lang]
+  const rongqi = document.querySelector('.shouye')
+
+  if (!wenben || !rongqi) {
+    return
+  }
+
+  const bianliqi = document.createTreeWalker(rongqi, NodeFilter.SHOW_TEXT)
+  const jiedian = []
+  let dangqian = bianliqi.nextNode()
+
+  while (dangqian) {
+    jiedian.push(dangqian)
+    dangqian = bianliqi.nextNode()
+  }
+
+  jiedian.forEach((jiedian) => {
+    const yuanwen = jiedian.textContent?.trim()
+    const yiyi = yuanwen && wenben[yuanwen]
+
+    if (yiyi) {
+      jiedian.textContent = yiyi
+    }
+  })
+}
+
 onMounted(() => {
+  fanyishouye()
   const yuansu = document.querySelectorAll('.gundongyujiazai')
 
   if (!('IntersectionObserver' in window)) {

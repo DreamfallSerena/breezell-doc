@@ -356,3 +356,76 @@ html.mulugundongzhong {
     animation: none;
   }
 }
+
+.VPNavBarSocialLinks.social-links > a:nth-child(4),
+.VPSocialLinks.social-links-list > a:nth-child(4) {
+  display: none;
+}
+
+.VPNavBarTranslations .button {
+  min-width: 88px;
+  padding: 0 0.25rem;
+  color: var(--vp-c-text-1);
+  background: transparent;
+  transition: color 0.18s ease;
+}
+
+.VPNavBarTranslations .button:hover {
+  color: var(--vp-c-brand-1);
+}
+
+.VPNavBarTranslations .button:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 2px;
+}
+
+.VPNavBarTranslations .button .text {
+  gap: 0.32rem;
+}
+
+.VPNavBarTranslations .button .text::after {
+  content: "English";
+  font-family: var(--vp-font-family-base);
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+html[lang="ja-JP"] .VPNavBarTranslations .button .text::after {
+  content: "日本語";
+}
+
+html[lang="ko-KR"] .VPNavBarTranslations .button .text::after {
+  content: "한국어";
+}
+
+html[lang="es-ES"] .VPNavBarTranslations .button .text::after {
+  content: "Español";
+}
+
+html[lang="pt-BR"] .VPNavBarTranslations .button .text::after {
+  content: "Português";
+}
+
+html[lang="ru-RU"] .VPNavBarTranslations .button .text::after {
+  content: "Русский";
+}
+
+html[lang="zh-CN"] .VPNavBarTranslations .button .text::after {
+  content: "简体中文";
+}
+
+html[lang="zh-TW"] .VPNavBarTranslations .button .text::after {
+  content: "繁體中文";
+}
+
+@media (max-width: 959px) {
+  .VPNavBarTranslations .button {
+    min-width: 32px;
+    padding: 0 0.38rem;
+  }
+
+  .VPNavBarTranslations .button .text::after {
+    display: none;
+  }
+}

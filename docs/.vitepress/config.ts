@@ -1,9 +1,17 @@
 import { defineConfig } from "vitepress";
+import { duoyuyanpeizhi } from "./duoyuyan";
 
 export default defineConfig({
   title: "Breezell Docs",
   description: "Official documentation for Breezell",
   lang: "en-US",
+  locales: {
+    root: {
+      label: "English",
+      lang: "en-US",
+    },
+    ...duoyuyanpeizhi,
+  },
   cleanUrls: true,
   ignoreDeadLinks: true,
   markdown: {
@@ -71,7 +79,7 @@ export default defineConfig({
       {
         text: "Guide",
         link: "/introduction",
-        activeMatch: "^/(introduction|settings-page-language-settings|custom-api|feature-options-overview|dialog-box-overview|mode-selection)(/|$)",
+        activeMatch: "^/(introduction|settings-page-language-settings|custom-api|prompt-settings|feature-options-overview|dialog-box-overview|mode-selection)(/|$)",
       },
       { text: "About", link: "/about" },
       { text: "Contact", link: "/contact" },
@@ -107,6 +115,7 @@ export default defineConfig({
             { text: "Introduction", link: "/introduction" },
             { text: "Language Settings", link: "/settings-page-language-settings" },
             { text: "Custom API", link: "/custom-api" },
+            { text: "Prompt Settings", link: "/prompt-settings" },
             { text: "Feature Options Overview", link: "/feature-options-overview" },
           ],
         },
@@ -129,6 +138,7 @@ export default defineConfig({
             { text: "Introduction", link: "/introduction" },
             { text: "Language Settings", link: "/settings-page-language-settings" },
             { text: "Custom API", link: "/custom-api" },
+            { text: "Prompt Settings", link: "/prompt-settings" },
             { text: "Feature Options Overview", link: "/feature-options-overview" },
           ],
         },
@@ -151,6 +161,7 @@ export default defineConfig({
             { text: "Introduction", link: "/introduction" },
             { text: "Language Settings", link: "/settings-page-language-settings" },
             { text: "Custom API", link: "/custom-api" },
+            { text: "Prompt Settings", link: "/prompt-settings" },
             { text: "Feature Options Overview", link: "/feature-options-overview" },
           ],
         },
@@ -169,6 +180,7 @@ export default defineConfig({
             { text: "Introduction", link: "/introduction" },
             { text: "Language Settings", link: "/settings-page-language-settings" },
             { text: "Custom API", link: "/custom-api" },
+            { text: "Prompt Settings", link: "/prompt-settings" },
             { text: "Feature Options Overview", link: "/feature-options-overview" },
           ],
         },
