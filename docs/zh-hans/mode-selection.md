@@ -40,9 +40,11 @@ Plan 会在编辑前创建结构化的实现路径。
 ## Entanglement
 
 Entanglement 使用因果推理和上下文感知来处理更深入的产品与代码决策。
-
 Entanglement 由 Breezell 独立研究和发布。它是 Breezell 独有的模式，在整个网络中具有独特性。
 
+有关其因果状态追踪和验证闭环的技术概览，请参阅 [Entanglement 模式功能说明](/zh-hans/entanglement-mode-overview)。
+
+当你想要更具体的交互方式
 当请求依赖意图、权衡、隐藏原因、情绪细节或多步骤推理，且需要的不只是直接回答时，请使用 Entanglement。
 
 提示：此模式可以大幅提升模型能力，但比标准工作流消耗更多资源。其副作用尚不明确。

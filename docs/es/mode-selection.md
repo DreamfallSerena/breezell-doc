@@ -43,6 +43,8 @@ Entanglement utiliza razonamiento causal y comprensión del contexto para tomar 
 
 Entanglement ha sido investigado y desarrollado de forma independiente por Breezell. Es un modo exclusivo de Breezell y único en la web.
 
+Para consultar una descripción técnica de su seguimiento del estado causal y su ciclo de validación, visita [Resumen del modo Entanglement](/es/entanglement-mode-overview).
+
 Usa Entanglement cuando una solicitud dependa de la intención, las compensaciones, las causas ocultas, los matices emocionales o un razonamiento de varios pasos que requiera algo más que una respuesta directa.
 
 Consejo: este modo puede mejorar considerablemente la capacidad del modelo, pero consume más recursos que los flujos de trabajo estándar. Se desconocen sus efectos secundarios.
