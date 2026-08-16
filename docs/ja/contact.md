@@ -25,7 +25,6 @@
 公式チャンネルも利用できます。
 
 - Telegram チャンネル: [https://t.me/BreezellCode](https://t.me/BreezellCode)
-- Discord コミュニティ: [https://discord.gg/gRBk8rDsc](https://discord.gg/gRBk8rDsc)
 - X アカウント: [https://x.com/BreezellCode](https://x.com/BreezellCode)
 - 公式サイト: [https://breezell.com](https://breezell.com)
 

@@ -25,7 +25,6 @@
 공식 채널을 방문할 수 있습니다.
 
 - Telegram 채널: [https://t.me/BreezellCode](https://t.me/BreezellCode)
-- Discord 커뮤니티: [https://discord.gg/gRBk8rDsc](https://discord.gg/gRBk8rDsc)
 - X 계정: [https://x.com/BreezellCode](https://x.com/BreezellCode)
 - 공식 웹사이트: [https://breezell.com](https://breezell.com)
 

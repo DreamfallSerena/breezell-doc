@@ -194,7 +194,6 @@ Navigation menus usually have social icons visitors can use to visit your social
 socialLinks: [
   { icon: "github", link: "https://github.com/Evavic44/adocs" },
   { icon: "twitter", link: "https://twitter.com/victorekea" },
-  { icon: "discord", link: "", target: "_blank" },
 ];
 ```
 
@@ -202,7 +201,6 @@ By default only 7 popular icons are provided. If you want to add a custom icon, 
 
 ```js
 }
-  "discord"
   "facebook"
   "github"
   "instagram"

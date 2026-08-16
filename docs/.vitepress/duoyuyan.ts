@@ -10,6 +10,7 @@ type yuyanwenben = {
   kaishi: string;
   yuyanshezhi: string;
   zidingyiapi: string;
+  zidingyishijue: string;
   tishicishezhi: string;
   gongnengxuanxiang: string;
   gaojicaozuo: string;
@@ -37,6 +38,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     kaishi: "Get Started",
     yuyanshezhi: "Language Settings",
     zidingyiapi: "Custom API",
+    zidingyishijue: "Custom Model Vision",
     tishicishezhi: "Prompt Settings",
     gongnengxuanxiang: "Feature Options Overview",
     gaojicaozuo: "Advanced Operations",
@@ -62,6 +64,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     kaishi: "はじめに",
     yuyanshezhi: "言語設定",
     zidingyiapi: "カスタム API",
+    zidingyishijue: "カスタムモデルの視覚機能",
     tishicishezhi: "プロンプト設定",
     gongnengxuanxiang: "機能オプションの概要",
     gaojicaozuo: "高度な操作",
@@ -87,6 +90,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     kaishi: "시작하기",
     yuyanshezhi: "언어 설정",
     zidingyiapi: "사용자 지정 API",
+    zidingyishijue: "사용자 지정 모델 비전",
     tishicishezhi: "프롬프트 설정",
     gongnengxuanxiang: "기능 옵션 개요",
     gaojicaozuo: "고급 작업",
@@ -112,6 +116,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     kaishi: "Primeros pasos",
     yuyanshezhi: "Configuración de idioma",
     zidingyiapi: "API personalizada",
+    zidingyishijue: "Visión para modelos personalizados",
     tishicishezhi: "Configuración de instrucciones",
     gongnengxuanxiang: "Resumen de opciones",
     gaojicaozuo: "Operaciones avanzadas",
@@ -137,6 +142,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     kaishi: "Primeiros passos",
     yuyanshezhi: "Configurações de idioma",
     zidingyiapi: "API personalizada",
+    zidingyishijue: "Visão para modelos personalizados",
     tishicishezhi: "Configurações de prompt",
     gongnengxuanxiang: "Visão geral das opções",
     gaojicaozuo: "Operações avançadas",
@@ -162,6 +168,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     kaishi: "Начало работы",
     yuyanshezhi: "Настройки языка",
     zidingyiapi: "Пользовательский API",
+    zidingyishijue: "Зрение для пользовательских моделей",
     tishicishezhi: "Настройки промпта",
     gongnengxuanxiang: "Обзор параметров",
     gaojicaozuo: "Расширенные операции",
@@ -187,6 +194,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     kaishi: "快速开始",
     yuyanshezhi: "语言设置",
     zidingyiapi: "自定义 API",
+    zidingyishijue: "自定义模型视觉",
     tishicishezhi: "提示词设置",
     gongnengxuanxiang: "功能选项概览",
     gaojicaozuo: "高级操作",
@@ -212,6 +220,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     kaishi: "快速開始",
     yuyanshezhi: "語言設定",
     zidingyiapi: "自訂 API",
+    zidingyishijue: "自訂模型視覺",
     tishicishezhi: "提示詞設定",
     gongnengxuanxiang: "功能選項總覽",
     gaojicaozuo: "進階操作",
@@ -248,6 +257,7 @@ function qudebianlan(luyou: string, wenben: yuyanwenben) {
     { text: wenben.kaishi, link: lianjie("/introduction") },
     { text: wenben.yuyanshezhi, link: lianjie("/settings-page-language-settings") },
     { text: wenben.zidingyiapi, link: lianjie("/custom-api") },
+    { text: wenben.zidingyishijue, link: lianjie("/custom-model-vision") },
     { text: wenben.tishicishezhi, link: lianjie("/prompt-settings") },
     { text: wenben.gongnengxuanxiang, link: lianjie("/feature-options-overview") },
   ];
@@ -298,8 +308,8 @@ export function qudezhutipeizhi(luyou: string) {
   const jiemian = jiemianwenben[luyou as keyof typeof jiemianwenben];
   const lianjie = (lujing: string) => qudelianjie(luyou, lujing);
   const zhinanzhengze = luyou === "root"
-    ? "^/(introduction|settings-page-language-settings|custom-api|prompt-settings|feature-options-overview|dialog-box-overview|mode-selection|entanglement-mode-overview)(/|$)"
-    : `^/${luyou}/(introduction|settings-page-language-settings|custom-api|prompt-settings|feature-options-overview|dialog-box-overview|mode-selection|entanglement-mode-overview)(/|$)`;
+    ? "^/(introduction|settings-page-language-settings|custom-api|custom-model-vision|prompt-settings|feature-options-overview|dialog-box-overview|mode-selection|entanglement-mode-overview)(/|$)"
+    : `^/${luyou}/(introduction|settings-page-language-settings|custom-api|custom-model-vision|prompt-settings|feature-options-overview|dialog-box-overview|mode-selection|entanglement-mode-overview)(/|$)`;
 
   return {
     search: {

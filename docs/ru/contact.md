@@ -25,7 +25,6 @@
 Вы можете посетить наши официальные каналы:
 
 - Канал Telegram: [https://t.me/BreezellCode](https://t.me/BreezellCode)
-- Сообщество Discord: [https://discord.gg/gRBk8rDsc](https://discord.gg/gRBk8rDsc)
 - Аккаунт X: [https://x.com/BreezellCode](https://x.com/BreezellCode)
 - Официальный сайт: [https://breezell.com](https://breezell.com)
 

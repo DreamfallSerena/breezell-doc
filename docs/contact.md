@@ -25,7 +25,6 @@ Visit the official Breezell website for product information, resources, and the 
 You can visit our official channels:
 
 - Telegram Channel: [https://t.me/BreezellCode](https://t.me/BreezellCode)
-- Discord Community: [https://discord.gg/gRBk8rDsc](https://discord.gg/gRBk8rDsc)
 - X Account: [https://x.com/BreezellCode](https://x.com/BreezellCode)
 - Official Website: [https://breezell.com](https://breezell.com)
 

@@ -25,7 +25,6 @@
 你可以造訪我們的官方頻道：
 
 - Telegram 頻道：[https://t.me/BreezellCode](https://t.me/BreezellCode)
-- Discord 社群：[https://discord.gg/gRBk8rDsc](https://discord.gg/gRBk8rDsc)
 - X 帳號：[https://x.com/BreezellCode](https://x.com/BreezellCode)
 - 官方網站：[https://breezell.com](https://breezell.com)
 
