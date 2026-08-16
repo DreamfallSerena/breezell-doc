@@ -136,6 +136,7 @@ export default defineConfig({
           text: "Announcements",
           items: [
             { text: "Version 1.2.8 Access Update", link: "/version-1-2-8-access-update" },
+          { text: "How to Invite New Users", link: "/invite-new-users" },
           ],
         },
       ],
@@ -172,6 +173,7 @@ export default defineConfig({
           text: "Announcements",
           items: [
             { text: "Version 1.2.8 Access Update", link: "/version-1-2-8-access-update" },
+          { text: "How to Invite New Users", link: "/invite-new-users" },
           ],
         },
       ],
@@ -208,6 +210,7 @@ export default defineConfig({
           text: "Announcements",
           items: [
             { text: "Version 1.2.8 Access Update", link: "/version-1-2-8-access-update" },
+          { text: "How to Invite New Users", link: "/invite-new-users" },
           ],
         },
       ],
@@ -240,6 +243,7 @@ export default defineConfig({
           text: "Announcements",
           items: [
             { text: "Version 1.2.8 Access Update", link: "/version-1-2-8-access-update" },
+          { text: "How to Invite New Users", link: "/invite-new-users" },
           ],
         },
       ],

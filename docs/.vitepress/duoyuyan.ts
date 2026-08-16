@@ -7,6 +7,7 @@ type yuyanwenben = {
   gengxinrizhi: string;
   gonggao: string;
   gonggaobiaoti: string;
+  yaoqingjiaocheng: string;
   kaishi: string;
   yuyanshezhi: string;
   zidingyiapi: string;
@@ -35,6 +36,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     gengxinrizhi: "Changelog",
     gonggao: "Announcements",
     gonggaobiaoti: "Version 1.2.8 Access Update",
+    yaoqingjiaocheng: "How to Invite New Users",
     kaishi: "Get Started",
     yuyanshezhi: "Language Settings",
     zidingyiapi: "Custom API",
@@ -61,6 +63,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     gengxinrizhi: "更新履歴",
     gonggao: "お知らせ",
     gonggaobiaoti: "バージョン 1.2.8 の利用方法に関するお知らせ",
+    yaoqingjiaocheng: "新規ユーザーを招待する方法",
     kaishi: "はじめに",
     yuyanshezhi: "言語設定",
     zidingyiapi: "カスタム API",
@@ -87,6 +90,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     gengxinrizhi: "변경 사항",
     gonggao: "공지",
     gonggaobiaoti: "1.2.8 버전 이용 방식 변경 안내",
+    yaoqingjiaocheng: "새 사용자 초대 방법",
     kaishi: "시작하기",
     yuyanshezhi: "언어 설정",
     zidingyiapi: "사용자 지정 API",
@@ -113,6 +117,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     gengxinrizhi: "Registro de cambios",
     gonggao: "Anuncios",
     gonggaobiaoti: "Actualización de acceso de la versión 1.2.8",
+    yaoqingjiaocheng: "Cómo invitar a nuevos usuarios",
     kaishi: "Primeros pasos",
     yuyanshezhi: "Configuración de idioma",
     zidingyiapi: "API personalizada",
@@ -139,6 +144,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     gengxinrizhi: "Registro de alterações",
     gonggao: "Comunicados",
     gonggaobiaoti: "Atualização de acesso da versão 1.2.8",
+    yaoqingjiaocheng: "Como convidar novos usuários",
     kaishi: "Primeiros passos",
     yuyanshezhi: "Configurações de idioma",
     zidingyiapi: "API personalizada",
@@ -165,6 +171,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     gengxinrizhi: "Журнал изменений",
     gonggao: "Объявления",
     gonggaobiaoti: "Обновление доступа в версии 1.2.8",
+    yaoqingjiaocheng: "Как пригласить новых пользователей",
     kaishi: "Начало работы",
     yuyanshezhi: "Настройки языка",
     zidingyiapi: "Пользовательский API",
@@ -191,6 +198,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     gengxinrizhi: "更新日志",
     gonggao: "公告",
     gonggaobiaoti: "1.2.8 版本调整说明",
+    yaoqingjiaocheng: "邀请新用户教程",
     kaishi: "快速开始",
     yuyanshezhi: "语言设置",
     zidingyiapi: "自定义 API",
@@ -217,6 +225,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     gengxinrizhi: "更新日誌",
     gonggao: "公告",
     gonggaobiaoti: "1.2.8 版本調整說明",
+    yaoqingjiaocheng: "邀請新使用者教學",
     kaishi: "快速開始",
     yuyanshezhi: "語言設定",
     zidingyiapi: "自訂 API",
@@ -270,6 +279,7 @@ function qudebianlan(luyou: string, wenben: yuyanwenben) {
   ];
   const gonggao = [
     { text: wenben.gonggaobiaoti, link: lianjie("/version-1-2-8-access-update") },
+    { text: wenben.yaoqingjiaocheng, link: lianjie("/invite-new-users") },
   ];
 
   return {
