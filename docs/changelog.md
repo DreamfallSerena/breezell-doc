@@ -5,6 +5,38 @@ next: false
 
 # Changelog
 
+## 1.2.8 · 2026-08-16
+
+### New Features
+
+- Reworked Agent, Entanglement, and Teams modes for more reliable workflows.
+- Added OpenCode Go and Meta integrations, along with per-model API protocol selection.
+- Image Studio now supports Seedance 2.5. DeepSeek models can now hand off images for vision recognition.
+- Added GLM-5.3 and Grok 4.6, and improved compatibility with DeepSeek-specific model formats.
+- Initial setup now lets users choose their interface language during installation.
+- Redesigned the empty conversation page with feature cards and left/right navigation.
+
+### Improvements
+
+- Teams now provides more detailed task-progress reporting.
+- Long conversations now automatically prune stale or invalid context to reduce context bloat and unnecessary overhead.
+- Improved memory-retrieval accuracy, and waiting-state prompts now update dynamically as tasks progress.
+- Terminal sessions are now grouped by purpose. Silent commands remain active until their execution budget is exhausted instead of stopping prematurely.
+- Improved Git-status refresh and synchronization after review, rollback, and submission actions.
+- Mode-switch separators now remain visible, making it easier to review where a mode changed during a conversation.
+
+### Fixes
+
+- Fixed Teams conversations freezing or becoming stuck in an idle state, as well as diffs remaining visible after submission.
+- Fixed chat notifications not being delivered when the Breezell window is minimized.
+- Fixed normal conversations being interrupted after an image-recognition handoff completes, and browser emulation views occasionally becoming stuck.
+- Fixed inaccurate terminal output, issues with chained PowerShell commands, and background commands repeatedly looping.
+- Fixed the Source Control commit input disappearing or becoming invalid after refresh.
+- Fixed queued messages not being sent when pressing Enter, as well as Analyze tasks stopping unexpectedly or repeatedly restarting.
+- Fixed issues with Grok subscription-based conversations, hidden reasoning becoming stuck, and invalid paths causing exceptions.
+- Fixed rollback operations unintentionally affecting unrelated changes, MCP tools resolving to the wrong path, and Linux packaging issues.
+- Fixed various other bugs and stability issues.
+
 ## 1.2.7 · 2026-07-29
 
 ### New Features

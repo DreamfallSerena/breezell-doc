@@ -5,6 +5,38 @@ next: false
 
 # Registro de alterações
 
+## 1.2.8 · 2026-08-16
+
+### Novos recursos
+
+- Os modos Agent, Entanglement e Teams foram reformulados para fluxos de trabalho mais confiáveis.
+- Foram adicionadas integrações com OpenCode Go e Meta, além da seleção de protocolo de API por modelo.
+- O Image Studio agora oferece suporte ao Seedance 2.5. Os modelos DeepSeek agora podem encaminhar imagens para reconhecimento visual.
+- Foram adicionados GLM-5.3 e Grok 4.6, com melhor compatibilidade para formatos de modelo específicos do DeepSeek.
+- A configuração inicial agora permite escolher o idioma da interface durante a primeira instalação.
+- A página de conversa vazia foi redesenhada com cartões de recursos e navegação para a esquerda e direita.
+
+### Melhorias
+
+- O modo Teams agora fornece relatórios de progresso de tarefas mais detalhados.
+- Conversas longas agora removem automaticamente o contexto obsoleto ou inválido para reduzir o acúmulo de contexto e a sobrecarga desnecessária.
+- A precisão da recuperação de memória foi aprimorada, e os prompts do estado de espera agora são atualizados dinamicamente conforme as tarefas avançam.
+- As sessões de terminal agora são agrupadas por finalidade. Comandos silenciosos permanecem ativos até que seu orçamento de execução se esgote, em vez de serem encerrados prematuramente.
+- A atualização e a sincronização do status do Git foram aprimoradas após ações de revisão, reversão e envio.
+- Os separadores de troca de modo agora permanecem visíveis, facilitando revisar onde a mudança de modo ocorreu em uma conversa.
+
+### Correções
+
+- Foram corrigidas conversas do Teams que congelavam ou ficavam presas em estado ocioso, bem como diffs que permaneciam visíveis após o envio.
+- Foi corrigido o problema de notificações de chat não serem entregues quando a janela do Breezell estava minimizada.
+- Foram corrigidas conversas normais interrompidas após a conclusão de uma transferência de reconhecimento de imagem e visualizações de emulação do navegador que ocasionalmente ficavam travadas.
+- Foram corrigidas saídas imprecisas do terminal, problemas com comandos PowerShell encadeados e comandos em segundo plano que entravam repetidamente em loop.
+- Foi corrigido o campo de entrada de commit do Source Control que desaparecia ou ficava inválido após a atualização.
+- Foram corrigidas mensagens na fila que não eram enviadas ao pressionar Enter, além de tarefas de Analyze que paravam inesperadamente ou reiniciavam repetidamente.
+- Foram corrigidos problemas com conversas baseadas em assinatura do Grok, raciocínio oculto travado e caminhos inválidos que causavam exceções.
+- Foram corrigidas operações de reversão que afetavam involuntariamente alterações não relacionadas, ferramentas MCP que resolviam o caminho errado e problemas de empacotamento no Linux.
+- Foram corrigidos outros bugs e problemas de estabilidade.
+
 ## 1.2.7 · 2026-07-29
 
 ### Novos recursos

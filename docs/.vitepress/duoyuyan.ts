@@ -5,6 +5,8 @@ type yuyanwenben = {
   guanyu: string;
   lianxi: string;
   gengxinrizhi: string;
+  gonggao: string;
+  gonggaobiaoti: string;
   kaishi: string;
   yuyanshezhi: string;
   zidingyiapi: string;
@@ -30,6 +32,8 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     guanyu: "About",
     lianxi: "Contact",
     gengxinrizhi: "Changelog",
+    gonggao: "Announcements",
+    gonggaobiaoti: "Version 1.2.8 Access Update",
     kaishi: "Get Started",
     yuyanshezhi: "Language Settings",
     zidingyiapi: "Custom API",
@@ -53,6 +57,8 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     guanyu: "概要",
     lianxi: "お問い合わせ",
     gengxinrizhi: "更新履歴",
+    gonggao: "お知らせ",
+    gonggaobiaoti: "バージョン 1.2.8 の利用方法に関するお知らせ",
     kaishi: "はじめに",
     yuyanshezhi: "言語設定",
     zidingyiapi: "カスタム API",
@@ -76,6 +82,8 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     guanyu: "소개",
     lianxi: "문의",
     gengxinrizhi: "변경 사항",
+    gonggao: "공지",
+    gonggaobiaoti: "1.2.8 버전 이용 방식 변경 안내",
     kaishi: "시작하기",
     yuyanshezhi: "언어 설정",
     zidingyiapi: "사용자 지정 API",
@@ -99,6 +107,8 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     guanyu: "Acerca de",
     lianxi: "Contacto",
     gengxinrizhi: "Registro de cambios",
+    gonggao: "Anuncios",
+    gonggaobiaoti: "Actualización de acceso de la versión 1.2.8",
     kaishi: "Primeros pasos",
     yuyanshezhi: "Configuración de idioma",
     zidingyiapi: "API personalizada",
@@ -122,6 +132,8 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     guanyu: "Sobre",
     lianxi: "Contato",
     gengxinrizhi: "Registro de alterações",
+    gonggao: "Comunicados",
+    gonggaobiaoti: "Atualização de acesso da versão 1.2.8",
     kaishi: "Primeiros passos",
     yuyanshezhi: "Configurações de idioma",
     zidingyiapi: "API personalizada",
@@ -145,6 +157,8 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     guanyu: "О проекте",
     lianxi: "Контакты",
     gengxinrizhi: "Журнал изменений",
+    gonggao: "Объявления",
+    gonggaobiaoti: "Обновление доступа в версии 1.2.8",
     kaishi: "Начало работы",
     yuyanshezhi: "Настройки языка",
     zidingyiapi: "Пользовательский API",
@@ -168,6 +182,8 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     guanyu: "关于",
     lianxi: "联系",
     gengxinrizhi: "更新日志",
+    gonggao: "公告",
+    gonggaobiaoti: "1.2.8 版本调整说明",
     kaishi: "快速开始",
     yuyanshezhi: "语言设置",
     zidingyiapi: "自定义 API",
@@ -191,6 +207,8 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     guanyu: "關於",
     lianxi: "聯絡我們",
     gengxinrizhi: "更新日誌",
+    gonggao: "公告",
+    gonggaobiaoti: "1.2.8 版本調整說明",
     kaishi: "快速開始",
     yuyanshezhi: "語言設定",
     zidingyiapi: "自訂 API",
@@ -240,6 +258,9 @@ function qudebianlan(luyou: string, wenben: yuyanwenben) {
   const moshidaoyin = [
     { text: wenben.jiuchanmoshi, link: lianjie("/entanglement-mode-overview") },
   ];
+  const gonggao = [
+    { text: wenben.gonggaobiaoti, link: lianjie("/version-1-2-8-access-update") },
+  ];
 
   return {
     [lianjie("/about")]: [
@@ -247,23 +268,27 @@ function qudebianlan(luyou: string, wenben: yuyanwenben) {
       { text: wenben.kaishi, items: zhinan },
       { text: wenben.gaojicaozuo, items: gaoji },
       { text: wenben.moshijieshao, items: moshidaoyin },
+      { text: wenben.gonggao, items: gonggao },
     ],
     [lianjie("/contact")]: [
       { text: wenben.lianxi, items: [{ text: wenben.lianxi, link: lianjie("/contact") }] },
       { text: wenben.kaishi, items: zhinan },
       { text: wenben.gaojicaozuo, items: gaoji },
       { text: wenben.moshijieshao, items: moshidaoyin },
+      { text: wenben.gonggao, items: gonggao },
     ],
     [lianjie("/changelog")]: [
       { text: wenben.gengxinrizhi, items: [{ text: wenben.gengxinrizhi, link: lianjie("/changelog") }] },
       { text: wenben.kaishi, items: zhinan },
       { text: wenben.gaojicaozuo, items: gaoji },
       { text: wenben.moshijieshao, items: moshidaoyin },
+      { text: wenben.gonggao, items: gonggao },
     ],
     [lianjie("/")]: [
       { text: wenben.kaishi, items: zhinan },
       { text: wenben.gaojicaozuo, items: gaoji },
       { text: wenben.moshijieshao, items: moshidaoyin },
+      { text: wenben.gonggao, items: gonggao },
     ],
   };
 }
