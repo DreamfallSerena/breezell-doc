@@ -34,6 +34,10 @@ Make sure you have a Breezell account and are signed in on the official website.
 
 ![Account page with the Generate invite link button](/invitation-guide/generate-invite-link.png)
 
+::: tip
+If Breezell temporarily cannot read your unlock status, sign out of your account and sign in again. Then return to the Account page and check the status.
+:::
+
 ## Send the invitation to a friend
 
 After the link is generated, Breezell provides a message similar to this:

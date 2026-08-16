@@ -34,6 +34,10 @@ Verifique se você tem uma conta do Breezell e se está conectado ao site oficia
 
 ![Página Account com o botão Generate invite link](/invitation-guide/generate-invite-link.png)
 
+::: tip Dica
+Se o status de desbloqueio não puder ser lido temporariamente, saia da conta, entre novamente e volte à página Account para verificar o status.
+:::
+
 ## Envie o convite a um amigo
 
 Depois que o link for gerado, o Breezell mostrará uma mensagem semelhante a esta:

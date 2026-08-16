@@ -34,6 +34,10 @@ Breezell 会为您的账号生成专属邀请链接，您可以将它分享给�
 
 ![Account 页面中的 Generate invite link 按钮](/invitation-guide/generate-invite-link.png)
 
+::: tip 提示
+如果暂时无法读取解锁状态，请先退出账号并重新登录，然后返回 Account 页面再次查看。
+:::
+
 ## 把邀请发送给朋友
 
 生成链接后，Breezell 会提供类似下面的消息：

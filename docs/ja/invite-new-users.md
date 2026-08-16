@@ -34,6 +34,10 @@ Breezell アカウントを用意し、公式サイトにログインしてい�
 
 ![Account ページの Generate invite link ボタン](/invitation-guide/generate-invite-link.png)
 
+::: tip ヒント
+アンロック状態を一時的に読み込めない場合は、一度アカウントからログアウトして再度ログインし、Account ページに戻って状態を確認してください。
+:::
+
 ## 友人に招待を送る
 
 リンクを生成すると、Breezell に次のようなメッセージが表示されます。

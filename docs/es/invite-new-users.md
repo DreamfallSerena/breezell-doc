@@ -34,6 +34,10 @@ Asegúrate de tener una cuenta de Breezell y de haber iniciado sesión en el sit
 
 ![Página Account con el botón Generate invite link](/invitation-guide/generate-invite-link.png)
 
+::: tip Consejo
+Si temporalmente no se puede leer el estado de desbloqueo, cierra sesión, vuelve a iniciarla y regresa a la página Account para comprobar el estado.
+:::
+
 ## Envía la invitación a un amigo
 
 Después de generar el enlace, Breezell muestra un mensaje similar al siguiente:

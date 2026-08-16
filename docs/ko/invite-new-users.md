@@ -34,6 +34,10 @@ Breezell 계정이 있고 공식 웹사이트에 로그인되어 있는지 확�
 
 ![Account 페이지의 Generate invite link 버튼](/invitation-guide/generate-invite-link.png)
 
+::: tip 안내
+잠금 해제 상태를 일시적으로 불러올 수 없다면 계정에서 로그아웃한 뒤 다시 로그인하고, Account 페이지로 돌아가 상태를 확인하세요.
+:::
+
 ## 친구에게 초대 보내기
 
 링크를 생성하면 Breezell에 다음과 유사한 메시지가 표시됩니다.
