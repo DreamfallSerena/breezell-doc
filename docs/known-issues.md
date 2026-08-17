@@ -5,13 +5,13 @@ description: Known issues in Breezell version 1.2.8 and their repair status.
 
 # Known Issues
 
-We have identified the following issues in Breezell version 1.2.8. Both issues are currently being fixed and will be addressed in an upcoming update.
+We have identified the following issues in Breezell version 1.2.8. We are working to resolve them and will share updates as they become available.
 
 ## Some conversations may not load
 
-> **Status: Being fixed**
+> **Status: Fixed**
 
-Some conversations may fail to load correctly in the current version. Your data and conversation content remain safe and will not be lost. A new update to resolve this issue will be released soon.
+This issue has been fixed. Your data and conversation content remain safe and will not be lost.
 
 ## Entanglement Mode output formatting
 
