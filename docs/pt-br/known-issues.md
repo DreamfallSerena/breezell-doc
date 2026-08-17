@@ -25,6 +25,12 @@ No modo Entanglement, o formato da saída pode ocasionalmente aparecer incorreto
 
 Algumas janelas do Breezell podem falhar ou encerrar inesperadamente por motivos desconhecidos. Estamos investigando o problema e compartilharemos novas informações assim que estiverem disponíveis.
 
+## Navegador integrado exibe uma página em branco
+
+> **Status: em correção**
+
+O navegador integrado pode exibir uma página em branco ao abrir sites. Estamos trabalhando para corrigir esse problema.
+
 ## Agradecemos a sua paciência
 
 Estamos trabalhando para resolver esses problemas o mais rápido possível. Agradecemos a sua compreensão e paciência.
