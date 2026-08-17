@@ -19,6 +19,12 @@ En la versión actual, algunas conversaciones pueden no cargarse correctamente. 
 
 En el modo Entanglement, el formato de salida puede mostrarse incorrectamente en ocasiones. Este problema también se corregirá en la próxima actualización.
 
+## Cierres inesperados
+
+> **Estado: en investigación**
+
+Algunas ventanas de Breezell pueden cerrarse o fallar inesperadamente por motivos desconocidos. Estamos investigando el problema y compartiremos más información cuando esté disponible.
+
 ## Gracias por tu paciencia
 
 Estamos trabajando para resolver estos problemas lo antes posible. Gracias por tu comprensión y paciencia.
