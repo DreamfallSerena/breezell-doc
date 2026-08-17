@@ -5,13 +5,13 @@ description: Problemas conhecidos do Breezell versão 1.2.8 e seu status de corr
 
 # Problemas conhecidos
 
-Identificamos os seguintes problemas no Breezell versão 1.2.8. Ambos estão sendo corrigidos e serão resolvidos em uma próxima atualização.
+Identificamos os seguintes problemas no Breezell versão 1.2.8. Estamos trabalhando para resolvê-los e compartilharemos atualizações assim que houver novidades.
 
 ## Algumas conversas podem não carregar
 
-> **Status: em correção**
+> **Status: corrigido**
 
-Na versão atual, algumas conversas podem não carregar corretamente. Seus dados e o conteúdo das conversas permanecem seguros e não serão perdidos. Uma atualização para resolver esse problema será lançada em breve.
+Este problema foi corrigido. Seus dados e o conteúdo das conversas permanecem seguros e não serão perdidos.
 
 ## Formatação da saída no modo Entanglement
 
