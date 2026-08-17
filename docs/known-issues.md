@@ -19,6 +19,12 @@ Some conversations may fail to load correctly in the current version. Your data 
 
 In Entanglement Mode, the output format may occasionally appear incorrect. This issue will also be fixed in the upcoming update.
 
+## Unexpected crashes
+
+> **Status: Investigating**
+
+Some Breezell windows may unexpectedly crash or terminate for unknown reasons. We are currently investigating the issue and will share further updates when more information is available.
+
 ## Thank you for your patience
 
 We are working to resolve these issues as soon as possible. Thank you for your understanding and patience.
