@@ -31,6 +31,12 @@ Some Breezell windows may unexpectedly crash or terminate for unknown reasons. W
 
 The built-in browser may display a blank page when opening websites. We are working to fix this issue.
 
+## Analyze mode may expose trailing tags
+
+> **Status: Being resolved**
+
+Analyze mode may unintentionally display trailing tags at the end of a response. We are working to resolve this issue.
+
 ## Thank you for your patience
 
 We are working to resolve these issues as soon as possible. Thank you for your understanding and patience.
