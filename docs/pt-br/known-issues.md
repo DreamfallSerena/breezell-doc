@@ -31,6 +31,12 @@ Algumas janelas do Breezell podem falhar ou encerrar inesperadamente por motivos
 
 O navegador integrado pode exibir uma página em branco ao abrir sites. Estamos trabalhando para corrigir esse problema.
 
+## O modo Analyze pode exibir tags residuais
+
+> **Status: em resolução**
+
+O modo Analyze pode exibir tags residuais no final das respostas. Estamos trabalhando para resolver esse problema.
+
 ## Agradecemos a sua paciência
 
 Estamos trabalhando para resolver esses problemas o mais rápido possível. Agradecemos a sua compreensão e paciência.
