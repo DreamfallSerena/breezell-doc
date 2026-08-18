@@ -15,9 +15,9 @@ This issue has been fixed. Your data and conversation content remain safe and wi
 
 ## Entanglement Mode output formatting
 
-> **Status: Being fixed**
+> **Status: Fixed**
 
-In Entanglement Mode, the output format may occasionally appear incorrect. This issue will also be fixed in the upcoming update.
+This issue has been fixed.
 
 ## Unexpected crashes
 
