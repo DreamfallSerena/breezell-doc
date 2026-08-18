@@ -15,9 +15,9 @@ Este problema foi corrigido. Seus dados e o conteúdo das conversas permanecem s
 
 ## Formatação da saída no modo Entanglement
 
-> **Status: em correção**
+> **Status: corrigido**
 
-No modo Entanglement, o formato da saída pode ocasionalmente aparecer incorreto. Esse problema também será corrigido na próxima atualização.
+Este problema foi corrigido.
 
 ## Falhas inesperadas
 
