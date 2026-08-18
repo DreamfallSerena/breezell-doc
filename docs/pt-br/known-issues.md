@@ -33,7 +33,7 @@ O navegador integrado pode exibir uma página em branco ao abrir sites. Estamos 
 
 ## O modo Analyze pode exibir tags residuais
 
-> **Status: em resolução**
+> **Status: em correção**
 
 O modo Analyze pode exibir tags residuais no final das respostas. Estamos trabalhando para resolver esse problema.
 
