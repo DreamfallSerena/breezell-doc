@@ -33,7 +33,7 @@ The built-in browser may display a blank page when opening websites. We are work
 
 ## Analyze mode may expose trailing tags
 
-> **Status: Being resolved**
+> **Status: Being fixed**
 
 Analyze mode may unintentionally display trailing tags at the end of a response. We are working to resolve this issue.
 
