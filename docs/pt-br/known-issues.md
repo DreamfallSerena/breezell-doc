@@ -37,6 +37,14 @@ O navegador integrado pode exibir uma página em branco ao abrir sites. Estamos 
 
 O modo Analyze pode exibir tags residuais no final das respostas. Estamos trabalhando para resolver esse problema.
 
+## A configuração de janela de contexto personalizada não era aplicada aos modelos Codex
+
+> **Status: corrigido**
+
+Após configurar a janela de contexto do gpt-5.6-sol para 512K (512.000 tokens), o Breezell continuava exibindo um limite máximo de contexto de 272K em novas conversas. Reiniciar o cliente ou criar uma nova conversa não aplicava a configuração.
+
+Este problema foi corrigido. O Breezell agora aplica e exibe corretamente a janela de contexto personalizada configurada.
+
 ## Agradecemos a sua paciência
 
 Estamos trabalhando para resolver esses problemas o mais rápido possível. Agradecemos a sua compreensão e paciência.
