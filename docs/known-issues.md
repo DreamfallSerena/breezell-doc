@@ -27,9 +27,9 @@ Some Breezell windows may unexpectedly crash or terminate for unknown reasons. W
 
 ## Built-in browser displays a blank page
 
-> **Status: Being fixed**
+> **Status: Fixed**
 
-The built-in browser may display a blank page when opening websites. We are working to fix this issue.
+This issue has been fixed.
 
 ## Analyze mode may expose trailing tags
 
