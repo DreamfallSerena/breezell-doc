@@ -37,6 +37,14 @@ The built-in browser may display a blank page when opening websites. We are work
 
 Analyze mode may unintentionally display trailing tags at the end of a response. We are working to resolve this issue.
 
+## Custom context window setting was not applied for Codex models
+
+> **Status: Fixed**
+
+After setting the context window for gpt-5.6-sol to 512K (512,000 tokens), Breezell continued to display a 272K maximum context window in new conversations. Restarting the client or creating a new conversation did not apply the setting.
+
+This issue has been fixed. Breezell now correctly applies and displays the configured custom context window.
+
 ## Thank you for your patience
 
 We are working to resolve these issues as soon as possible. Thank you for your understanding and patience.
