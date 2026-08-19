@@ -27,9 +27,9 @@ Algunas ventanas de Breezell pueden cerrarse o fallar inesperadamente por motivo
 
 ## El navegador integrado muestra una página en blanco
 
-> **Estado: en proceso de corrección**
+> **Estado: solucionado**
 
-El navegador integrado puede mostrar una página en blanco al abrir sitios web. Estamos trabajando para corregir este problema.
+Este problema se ha solucionado.
 
 ## El modo Analyze puede mostrar etiquetas residuales
 
