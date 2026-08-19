@@ -33,9 +33,9 @@ The built-in browser may display a blank page when opening websites. We are work
 
 ## Analyze mode may expose trailing tags
 
-> **Status: Being fixed**
+> **Status: Fixed**
 
-Analyze mode may unintentionally display trailing tags at the end of a response. We are working to resolve this issue.
+This issue has been fixed.
 
 ## Custom context window setting was not applied for Codex models
 
