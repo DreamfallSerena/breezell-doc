@@ -33,9 +33,9 @@ O navegador integrado pode exibir uma página em branco ao abrir sites. Estamos 
 
 ## O modo Analyze pode exibir tags residuais
 
-> **Status: em correção**
+> **Status: corrigido**
 
-O modo Analyze pode exibir tags residuais no final das respostas. Estamos trabalhando para resolver esse problema.
+Este problema foi corrigido.
 
 ## A configuração de janela de contexto personalizada não era aplicada aos modelos Codex
 
