@@ -45,6 +45,12 @@ Após configurar a janela de contexto do gpt-5.6-sol para 512K (512.000 tokens),
 
 Este problema foi corrigido. O Breezell agora aplica e exibe corretamente a janela de contexto personalizada configurada.
 
+## A cota do login direto do Grok é exibida incorretamente
+
+> **Status: em correção**
+
+Ao usar o login direto do Grok, a cota disponível pode ser exibida incorretamente. Estamos trabalhando para corrigir esse problema.
+
 ## Agradecemos a sua paciência
 
 Estamos trabalhando para resolver esses problemas o mais rápido possível. Agradecemos a sua compreensão e paciência.
