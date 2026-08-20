@@ -47,9 +47,9 @@ Este problema se ha solucionado. Breezell ahora aplica y muestra correctamente l
 
 ## La cuota del inicio de sesión directo de Grok se muestra incorrectamente
 
-> **Estado: en proceso de corrección**
+> **Estado: solucionado**
 
-Al iniciar sesión directamente con Grok, la cuota disponible puede mostrarse de forma incorrecta. Estamos trabajando para corregir este problema.
+Este problema se ha solucionado.
 
 ## Gracias por tu paciencia
 
