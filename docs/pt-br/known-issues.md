@@ -47,9 +47,9 @@ Este problema foi corrigido. O Breezell agora aplica e exibe corretamente a jane
 
 ## A cota do login direto do Grok é exibida incorretamente
 
-> **Status: em correção**
+> **Status: corrigido**
 
-Ao usar o login direto do Grok, a cota disponível pode ser exibida incorretamente. Estamos trabalhando para corrigir esse problema.
+Este problema foi corrigido.
 
 ## Agradecemos a sua paciência
 
