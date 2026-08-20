@@ -45,6 +45,12 @@ Después de configurar la ventana de contexto de gpt-5.6-sol en 512K (512.000 to
 
 Este problema se ha solucionado. Breezell ahora aplica y muestra correctamente la ventana de contexto personalizada configurada.
 
+## La cuota del inicio de sesión directo de Grok se muestra incorrectamente
+
+> **Estado: en proceso de corrección**
+
+Al iniciar sesión directamente con Grok, la cuota disponible puede mostrarse de forma incorrecta. Estamos trabajando para corregir este problema.
+
 ## Gracias por tu paciencia
 
 Estamos trabajando para resolver estos problemas lo antes posible. Gracias por tu comprensión y paciencia.
