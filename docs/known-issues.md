@@ -45,6 +45,12 @@ After setting the context window for gpt-5.6-sol to 512K (512,000 tokens), Breez
 
 This issue has been fixed. Breezell now correctly applies and displays the configured custom context window.
 
+## Grok direct login quota display issue
+
+> **Status: Being fixed**
+
+When using Grok direct login, the available quota may be displayed incorrectly. We are working to fix this issue.
+
 ## Thank you for your patience
 
 We are working to resolve these issues as soon as possible. Thank you for your understanding and patience.
