@@ -47,9 +47,9 @@ This issue has been fixed. Breezell now correctly applies and displays the confi
 
 ## Grok direct login quota display issue
 
-> **Status: Being fixed**
+> **Status: Fixed**
 
-When using Grok direct login, the available quota may be displayed incorrectly. We are working to fix this issue.
+This issue has been fixed.
 
 ## Thank you for your patience
 
