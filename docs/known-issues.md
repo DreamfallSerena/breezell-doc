@@ -21,10 +21,9 @@ This issue has been fixed.
 
 ## Unexpected crashes
 
-> **Status: Investigating**
+> **Status: Awaiting user verification**
 
-Some Breezell windows may unexpectedly crash or terminate for unknown reasons. We are currently investigating the issue and will share further updates when more information is available.
-
+A fix is ready, and we are awaiting user verification to confirm that the issue has been fully resolved.
 ## Built-in browser displays a blank page
 
 > **Status: Fixed**
