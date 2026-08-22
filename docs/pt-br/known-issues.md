@@ -24,6 +24,7 @@ Este problema foi corrigido.
 > **Status: aguardando verificação dos usuários**
 
 A correção está pronta e estamos aguardando a verificação dos usuários para confirmar que o problema foi totalmente resolvido.
+
 ## Navegador integrado exibe uma página em branco
 
 > **Status: corrigido**
