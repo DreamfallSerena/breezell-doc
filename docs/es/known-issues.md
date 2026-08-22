@@ -24,6 +24,7 @@ Este problema se ha solucionado.
 > **Estado: pendiente de verificación por parte de los usuarios**
 
 La corrección está lista y estamos esperando la verificación de los usuarios para confirmar que el problema se ha resuelto por completo.
+
 ## El navegador integrado muestra una página en blanco
 
 > **Estado: solucionado**
