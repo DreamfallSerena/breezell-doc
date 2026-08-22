@@ -21,10 +21,9 @@ Este problema foi corrigido.
 
 ## Falhas inesperadas
 
-> **Status: em investigação**
+> **Status: aguardando verificação dos usuários**
 
-Algumas janelas do Breezell podem falhar ou encerrar inesperadamente por motivos desconhecidos. Estamos investigando o problema e compartilharemos novas informações assim que estiverem disponíveis.
-
+A correção está pronta e estamos aguardando a verificação dos usuários para confirmar que o problema foi totalmente resolvido.
 ## Navegador integrado exibe uma página em branco
 
 > **Status: corrigido**
