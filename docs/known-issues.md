@@ -24,6 +24,7 @@ This issue has been fixed.
 > **Status: Awaiting user verification**
 
 A fix is ready, and we are awaiting user verification to confirm that the issue has been fully resolved.
+
 ## Built-in browser displays a blank page
 
 > **Status: Fixed**
