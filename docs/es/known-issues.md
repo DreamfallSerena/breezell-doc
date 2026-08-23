@@ -51,6 +51,12 @@ Este problema se ha solucionado. Breezell ahora aplica y muestra correctamente l
 
 Este problema se ha solucionado.
 
+## La compresión automática no se activaba al cambiar de ventana de contexto
+
+> **Estado: solucionado**
+
+Al cambiar de ventana de contexto, la compresión automática podía no activarse, por lo que las conversaciones no se comprimían como se esperaba. Este problema se ha solucionado.
+
 ## Gracias por tu paciencia
 
 Estamos trabajando para resolver estos problemas lo antes posible. Gracias por tu comprensión y paciencia.
