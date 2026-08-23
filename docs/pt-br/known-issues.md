@@ -51,6 +51,12 @@ Este problema foi corrigido. O Breezell agora aplica e exibe corretamente a jane
 
 Este problema foi corrigido.
 
+## A compactação automática não era acionada após a troca de janela de contexto
+
+> **Status: corrigido**
+
+Após trocar a janela de contexto, a compactação automática podia não ser acionada, fazendo com que as conversas não fossem compactadas conforme o esperado. Este problema foi corrigido.
+
 ## Agradecemos a sua paciência
 
 Estamos trabalhando para resolver esses problemas o mais rápido possível. Agradecemos a sua compreensão e paciência.
