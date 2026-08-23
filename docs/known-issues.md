@@ -51,6 +51,12 @@ This issue has been fixed. Breezell now correctly applies and displays the confi
 
 This issue has been fixed.
 
+## Automatic compression did not run after switching the context window
+
+> **Status: Fixed**
+
+After switching the context window, automatic compression could fail to trigger, so conversations were not compressed as expected. This issue has been fixed.
+
 ## Thank you for your patience
 
 We are working to resolve these issues as soon as possible. Thank you for your understanding and patience.
