@@ -5,6 +5,49 @@ next: false
 
 # Changelog
 
+## 1.3.0 · 2026-08-25
+
+### New Features
+
+- Added an **all-new interface layout**, available under **Breezell Settings > Appearance**.
+- Added **SiliconFlow**, **OpenCode Go**, and **Meta** as model providers, along with per-model API format selection for **Chat Completions**, **Responses**, and **Anthropic Messages**.
+- **OpenRouter** now supports selectable API formats. **Claude** and **OpenAI** use their native APIs by default.
+- Added support for **Gemini 3.7 Flash** and **Dots Studio dots3-note Preview**.
+- Chat now supports **video attachments**, with video preview directly inside the workspace.
+- Added **Teams worktree isolation**: teammates can edit code in independent Git worktrees, and idle teammates can be automatically spun back up when needed.
+- **MCP servers** now run inside the workspace extension host. Closing the project window also terminates their child processes.
+- Redesigned **Advanced Model Settings**, including default thinking settings and pass-through support for **reasoning effort**.
+- Added a new **input tray**, consolidating quick commands and tool popovers into a cleaner interaction flow.
+- **Unsent drafts** are now preserved in chat history, and teammates can now be assigned labels.
+- Added two new themes: **Breezell Warm** and **Breezell Paper**. Theme palettes have also been expanded, and the launch screen now follows the editor's active color scheme.
+- Added a **folder picker** in the **All** list as a fallback when folders cannot be dragged from the Explorer.
+- Added an **About** window that displays the installed Breezell version.
+- Code completion now takes **recent edits** and **language-specific comments** into account for more relevant suggestions.
+
+### Fixes
+
+- When using **ds4** or other text-only models through an **OpenAI-Compatible** provider, images can now be sent directly if vision support is configured on the provider. A separate vision proxy no longer needs to be configured in the IDE.
+- Official text-only models such as **DeepSeek** still block image attachments when no vision model is configured, preventing invalid requests.
+- Switching modes while a response is still streaming no longer immediately displays a **"Switched to ..."** notification. The notification now appears only after the current response finishes.
+- **Edit cards** now jump to the correct location on the first click.
+- **Context usage** now reflects the context actually used by the request, fixing inflated or inconsistent usage readings.
+- The MCP server list now refreshes after the extension host restarts, and server names are now emphasized in the input tray.
+- Fixed synchronization issues across **Git, Command Palette, History, and Explorer**, including cases where pending diffs disappeared after a commit.
+- Fixed chat notifications not appearing while the Breezell window is minimized.
+- Fixed **WSL / Remote URI handling** and **REH cache validation**.
+- Fixed white flashes when the browser webview is recreated and cases where the native webview intercepted splitter dragging.
+- **GLM [1m]** is no longer incorrectly routed through **Chat Completions**.
+- Improved default theme behavior after installation and corrected **red/green diff contrast**.
+
+### Improvements
+
+- Refined the **chat interface**, **Mermaid rendering**, **theme controls**, **Settings rows**, and terminal approval copy.
+- Improved interactions across the **input tray** and tool popovers.
+- Improved **Plan mode switching behavior**: Breezell will still ask questions when clarification is needed, and relevant cards will no longer be hidden.
+- Added adjustable font sizing for **Ask Question** options.
+- Improved **memory recall reliability**, with clearer messaging while recall is in progress.
+- Code completion suggestions now better match the **language of the current file**.
+
 ## 1.2.8 · 2026-08-16
 
 ### New Features
