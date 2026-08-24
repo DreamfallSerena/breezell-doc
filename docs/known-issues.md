@@ -57,6 +57,12 @@ This issue has been fixed.
 
 After switching the context window, automatic compression could fail to trigger, so conversations were not compressed as expected. This issue has been fixed.
 
+## Dropdown menus show native styling and overly narrow borders
+
+> **Status: Being fixed**
+
+Some dropdown menus may expose native control styling, and their borders may render too narrowly. We are working to fix these display issues.
+
 ## Thank you for your patience
 
 We are working to resolve these issues as soon as possible. Thank you for your understanding and patience.
