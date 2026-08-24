@@ -57,6 +57,12 @@ Este problema foi corrigido.
 
 Após trocar a janela de contexto, a compactação automática podia não ser acionada, fazendo com que as conversas não fossem compactadas conforme o esperado. Este problema foi corrigido.
 
+## Menus suspensos exibem estilos nativos e bordas muito estreitas
+
+> **Status: em correção**
+
+Alguns menus suspensos podem exibir o estilo nativo dos controles, e suas bordas podem ser renderizadas de forma muito estreita. Estamos trabalhando para corrigir esses problemas de exibição.
+
 ## Agradecemos a sua paciência
 
 Estamos trabalhando para resolver esses problemas o mais rápido possível. Agradecemos a sua compreensão e paciência.
