@@ -5,6 +5,49 @@ next: false
 
 # Registro de cambios
 
+## 1.3.0 · 2026-08-25
+
+### Nuevas funciones
+
+- Se añadió un **diseño de interfaz completamente nuevo**, disponible en **Breezell Settings > Appearance**.
+- Se añadieron **SiliconFlow**, **OpenCode Go** y **Meta** como proveedores de modelos, junto con la selección del formato de API por modelo para **Chat Completions**, **Responses** y **Anthropic Messages**.
+- **OpenRouter** ahora permite seleccionar el formato de API. **Claude** y **OpenAI** usan sus API nativas de forma predeterminada.
+- Se añadió compatibilidad con **Gemini 3.7 Flash** y **Dots Studio dots3-note Preview**.
+- El chat ahora admite **archivos adjuntos de vídeo**, con vista previa de vídeo directamente dentro del espacio de trabajo.
+- Se añadió el **aislamiento de worktrees de Teams**: los compañeros pueden editar código en worktrees de Git independientes, y los compañeros inactivos pueden reactivarse automáticamente cuando sea necesario.
+- Los **servidores MCP** ahora se ejecutan dentro del host de extensiones del espacio de trabajo. Al cerrar la ventana del proyecto también se terminan sus procesos secundarios.
+- Se rediseñaron los **ajustes avanzados del modelo**, incluidos los ajustes de pensamiento predeterminados y el soporte de envío directo de **reasoning effort**.
+- Se añadió una nueva **bandeja de entrada**, que reúne los comandos rápidos y las ventanas emergentes de herramientas en un flujo de interacción más limpio.
+- Los **borradores no enviados** ahora se conservan en el historial de chat y ahora se pueden asignar etiquetas a los compañeros.
+- Se añadieron dos nuevos temas: **Breezell Warm** y **Breezell Paper**. También se ampliaron las paletas de temas y la pantalla de inicio ahora sigue el esquema de color activo del editor.
+- Se añadió un **selector de carpetas** a la lista **All** como alternativa cuando no se pueden arrastrar carpetas desde el Explorador.
+- Se añadió una ventana **About** que muestra la versión instalada de Breezell.
+- La finalización de código ahora tiene en cuenta las **ediciones recientes** y los **comentarios específicos del lenguaje** para ofrecer sugerencias más relevantes.
+
+### Correcciones
+
+- Al usar **ds4** u otros modelos de solo texto mediante un proveedor **OpenAI-Compatible**, ahora se pueden enviar imágenes directamente si el proveedor tiene configurado soporte de visión. Ya no es necesario configurar un proxy de visión independiente en el IDE.
+- Los modelos oficiales de solo texto, como **DeepSeek**, siguen bloqueando los archivos adjuntos de imagen cuando no hay ningún modelo de visión configurado, lo que evita solicitudes no válidas.
+- Al cambiar de modo mientras una respuesta sigue en streaming, ya no se muestra de inmediato una notificación de **"Cambiado a ..."**. La notificación aparece solo después de que finalice la respuesta actual.
+- Las **tarjetas de edición** ahora saltan a la ubicación correcta con el primer clic.
+- El **uso de contexto** ahora refleja el contexto utilizado realmente por la solicitud, lo que corrige lecturas infladas o inconsistentes.
+- La lista de servidores MCP ahora se actualiza después de reiniciar el host de extensiones, y los nombres de los servidores ahora se destacan en la bandeja de entrada.
+- Se corrigieron problemas de sincronización entre **Git, la paleta de comandos, el historial y el explorador**, incluidos casos en los que los diffs pendientes desaparecían después de un commit.
+- Se corrigió que las notificaciones de chat no aparecieran mientras la ventana de Breezell estaba minimizada.
+- Se corrigieron la gestión de **WSL / URI remotas** y la validación de caché de **REH**.
+- Se corrigieron destellos blancos al recrear el webview del navegador y casos en los que el webview nativo interceptaba el arrastre del divisor.
+- **GLM [1m]** ya no se enruta incorrectamente a través de **Chat Completions**.
+- Se mejoró el comportamiento del tema predeterminado después de la instalación y se corrigió el **contraste rojo/verde de los diffs**.
+
+### Mejoras
+
+- Se refinaron la **interfaz de chat**, el **renderizado de Mermaid**, los **controles de tema**, las **filas de Settings** y los textos de aprobación del terminal.
+- Se mejoraron las interacciones en la **bandeja de entrada** y las ventanas emergentes de herramientas.
+- Se mejoró el **comportamiento de cambio del modo Plan**: Breezell seguirá haciendo preguntas cuando se necesite aclaración y las tarjetas relevantes ya no se ocultarán.
+- Se añadió un tamaño de fuente ajustable para las opciones de **Ask Question**.
+- Se mejoró la **fiabilidad de recuperación de memoria**, con mensajes más claros mientras la recuperación está en curso.
+- Las sugerencias de finalización de código ahora se ajustan mejor al **idioma del archivo actual**.
+
 ## 1.2.8 · 2026-08-16
 
 ### Nuevas funciones
