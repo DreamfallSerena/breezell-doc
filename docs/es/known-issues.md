@@ -57,6 +57,12 @@ Este problema se ha solucionado.
 
 Al cambiar de ventana de contexto, la compresión automática podía no activarse, por lo que las conversaciones no se comprimían como se esperaba. Este problema se ha solucionado.
 
+## Los menús desplegables muestran estilos nativos y bordes demasiado estrechos
+
+> **Estado: en proceso de corrección**
+
+Algunos menús desplegables pueden mostrar el estilo nativo de los controles y sus bordes pueden renderizarse demasiado estrechos. Estamos trabajando para corregir estos problemas de visualización.
+
 ## Gracias por tu paciencia
 
 Estamos trabajando para resolver estos problemas lo antes posible. Gracias por tu comprensión y paciencia.
