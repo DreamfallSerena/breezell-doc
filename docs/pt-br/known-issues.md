@@ -63,6 +63,18 @@ Após trocar a janela de contexto, a compactação automática podia não ser ac
 
 Alguns menus suspensos podem exibir o estilo nativo dos controles, e suas bordas podem ser renderizadas de forma muito estreita. Estamos trabalhando para corrigir esses problemas de exibição.
 
+## Problema nas configurações de nível de raciocínio dos modelos da série Kimi
+
+> **Status: em correção**
+
+No Breezell 1.3.0, as configurações de nível de raciocínio dos modelos da série Kimi podem não ser aplicadas corretamente. Estamos trabalhando para corrigir esse problema.
+
+## O chat pode travar brevemente ao enviar mensagens
+
+> **Status: em correção**
+
+No Breezell 1.3.0, a interface de chat pode travar brevemente após o envio de uma mensagem. Estamos trabalhando para melhorar esse comportamento.
+
 ## Agradecemos a sua paciência
 
 Estamos trabalhando para resolver esses problemas o mais rápido possível. Agradecemos a sua compreensão e paciência.
