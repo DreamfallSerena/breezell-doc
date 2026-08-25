@@ -63,6 +63,18 @@ After switching the context window, automatic compression could fail to trigger,
 
 Some dropdown menus may expose native control styling, and their borders may render too narrowly. We are working to fix these display issues.
 
+## Kimi-series model reasoning-level settings issue
+
+> **Status: Being fixed**
+
+In Breezell 1.3.0, the reasoning-level settings for Kimi-series models may not be applied correctly. We are working to fix this issue.
+
+## Chat may stutter when sending messages
+
+> **Status: Being fixed**
+
+In Breezell 1.3.0, the chat interface may briefly stutter after a message is sent. We are working to improve this behavior.
+
 ## Thank you for your patience
 
 We are working to resolve these issues as soon as possible. Thank you for your understanding and patience.
