@@ -63,6 +63,18 @@ Al cambiar de ventana de contexto, la compresión automática podía no activars
 
 Algunos menús desplegables pueden mostrar el estilo nativo de los controles y sus bordes pueden renderizarse demasiado estrechos. Estamos trabajando para corregir estos problemas de visualización.
 
+## Problema con los niveles de razonamiento de los modelos de la serie Kimi
+
+> **Estado: en proceso de corrección**
+
+En Breezell 1.3.0, es posible que la configuración del nivel de razonamiento de los modelos de la serie Kimi no se aplique correctamente. Estamos trabajando para corregir este problema.
+
+## La interfaz de chat puede bloquearse brevemente al enviar mensajes
+
+> **Estado: en proceso de corrección**
+
+En Breezell 1.3.0, la interfaz de chat puede bloquearse brevemente después de enviar un mensaje. Estamos trabajando para mejorar este comportamiento.
+
 ## Gracias por tu paciencia
 
 Estamos trabajando para resolver estos problemas lo antes posible. Gracias por tu comprensión y paciencia.
