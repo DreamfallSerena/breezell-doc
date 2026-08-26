@@ -1,18 +1,60 @@
 ---
-title: Configuración de instrucciones
-description: Aprende a abrir el control de configuración de instrucciones en el cuadro de diálogo de Breezell.
+title: Configuración de instrucciones y habilidades
+description: Configura reglas, memorias, habilidades y el comportamiento relacionado de la IA para un espacio de trabajo o de forma global.
 ---
 
-# Configuración de instrucciones
+# Configuración de instrucciones y habilidades
 
-## Abrir la configuración de instrucciones
+Esta página reúne las instrucciones, el conocimiento reutilizable y los flujos de trabajo que puede utilizar Breezell.
 
-La flecha de la imagen señala el botón de configuración de instrucciones de la barra de herramientas situada en la esquina superior derecha del cuadro de diálogo. Está inmediatamente a la derecha del botón **New Chat** (`+`).
+## Abrir la configuración
 
-![Botón de configuración de instrucciones resaltado en el cuadro de diálogo](/custom-api/prompt-settings.png)
+La flecha resalta el botón **Rules, Memories & Skills** de la barra de herramientas situada en la esquina superior derecha. Está inmediatamente a la derecha del botón **New Chat** (+).
 
-Haz clic en este botón para abrir la configuración de instrucciones y definir las indicaciones que quieres que Breezell siga durante la conversación.
+![Botón de configuración de instrucciones y habilidades resaltado](/prompt-settings/prompt-and-skill-settings-button.png)
 
-## Escribe instrucciones claras
+Haz clic en el botón para abrir el panel de configuración.
 
-Describe el rol, el objetivo, el formato de salida y las restricciones que quieres que siga Breezell. Mantén las instrucciones específicas y centradas para que la conversación tenga una dirección clara.
+## Ámbitos de espacio de trabajo y global
+
+La barra lateral divide la configuración en dos ámbitos:
+
+- **Workspace:** Se aplica únicamente al proyecto actual. Los archivos se guardan en el directorio **.breezell** del proyecto para que la configuración permanezca vinculada al espacio de trabajo.
+- **Global:** Se aplica a todos los espacios de trabajo. Úsalo para preferencias y flujos de trabajo que deban estar disponibles en cualquier proyecto.
+
+Selecciona primero el ámbito y después **Rules**, **Memories**, **Skills** o **Commit**. La etiqueta junto al título confirma el ámbito activo.
+
+## Reglas
+
+Las reglas son instrucciones personalizadas que Breezell debe seguir en el ámbito seleccionado. Pueden definir convenciones de código, herramientas obligatorias, formatos de respuesta, restricciones del proyecto u otras indicaciones persistentes.
+
+![Configuración de reglas del espacio de trabajo](/prompt-settings/rules-settings.png)
+
+En el ámbito Workspace, el archivo se guarda en **{workspace}/.breezell/rules/breezell.md**. Escribe instrucciones concretas y sin contradicciones. La acción **Clear** elimina el contenido del ámbito de reglas activo.
+
+## Memorias
+
+Las memorias conservan datos, preferencias, decisiones y contexto del proyecto para conversaciones posteriores. El número junto a **Memories** indica cuántas entradas existen en ese ámbito.
+
+![Editor de memoria del espacio de trabajo](/prompt-settings/memory-settings.png)
+
+Escribe una memoria clara cada vez y selecciona **Save** o pulsa **Ctrl+Enter**. Las memorias del espacio de trabajo se guardan en **{workspace}/.breezell/memories/workspace_memories.md**. Utiliza las memorias globales únicamente para información aplicable a varios proyectos.
+
+## Habilidades
+
+Las habilidades son paquetes de instrucciones reutilizables que enseñan a Breezell a realizar una tarea o flujo de trabajo específico. Abre **Skills** en el ámbito deseado para crearlas o administrarlas.
+
+![Crear una habilidad para el espacio de trabajo](/prompt-settings/skill-creation.png)
+
+Para crear una habilidad:
+
+1. Introduce un nombre único formado únicamente por letras minúsculas y guiones.
+2. Añade una descripción breve que explique con claridad cuándo y para qué debe utilizarse.
+3. Escribe en el editor principal las instrucciones, los pasos, las restricciones y el resultado esperado.
+4. Selecciona **Create Skill**.
+
+Una habilidad del espacio de trabajo se guarda en **{workspace}/.breezell/skills/<name>/SKILL.md**. Limita cada habilidad a una responsabilidad repetible para que Breezell pueda seleccionarla y aplicarla de forma fiable.
+
+## Commit
+
+La sección **Commit** mantiene separada la configuración relacionada con los commits en los ámbitos Workspace y Global. Guarda los requisitos específicos del proyecto en Workspace y las preferencias reutilizables en Global.
