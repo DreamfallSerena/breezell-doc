@@ -48,6 +48,19 @@ next: false
 - Improved **memory recall reliability**, with clearer messaging while recall is in progress.
 - Code completion suggestions now better match the **language of the current file**.
 
+## 1.2.9 · 2026-08-24
+
+### Fixes
+
+- Fixed cases where some conversations could not be loaded correctly.
+- Fixed incorrect output formatting in Entanglement mode.
+- Improved stability and fixed cases where Breezell windows could crash or terminate unexpectedly.
+- Fixed blank pages when opening websites in the built-in browser.
+- Fixed trailing tags being exposed at the end of Analyze mode responses.
+- Fixed custom context window settings for Codex models not being applied or displayed correctly.
+- Fixed incorrect quota displays when using Grok direct login.
+- Fixed automatic compression not being triggered after switching the context window.
+
 ## 1.2.8 · 2026-08-16
 
 ### New Features
