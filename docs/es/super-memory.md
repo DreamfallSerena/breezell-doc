@@ -237,3 +237,45 @@ Breezell verifica el resultado mediante un flujo de 14 comprobaciones en el nave
 - **La IA corrige las causas raíz:** Transfiere los principios de estado compartido, identidad estable, persistencia validada y verificación integral, sin copiar líneas antiguas.
 - **La recuperación explícita es opcional:** La solicitud menciona la memoria solo para hacer visible la demostración. Normalmente, Super Memory puede recuperar automáticamente las entradas pertinentes.
 
+## Memorias residentes (P0)
+
+Cualquier entrada de Super Memory puede marcarse como **Resident** cuando deba estar disponible en cada recuperación, aunque la solicitud actual no tenga relación semántica con ella.
+
+### Marcar una entrada como residente
+
+Pasa el cursor o selecciona el icono de chincheta de una tarjeta. La indicación **Set resident** identifica esta acción.
+
+![Acción para marcar una memoria como residente](/super-memory/set-resident-action.png)
+
+Después de hacerlo:
+
+- La entrada pasa a **P0**.
+- Aparece la etiqueta **Resident**.
+- La chincheta se resalta para indicar que la entrada es residente.
+- Aumenta el contador de capacidad. En el ejemplo cambia a **Resident 1/12**.
+- La entrada aparece al filtrar por P0.
+
+![Memoria convertida en P0 Resident](/super-memory/p0-resident-memory.png)
+
+P0 es el nivel de prioridad permanente. A diferencia de P1 y P2, que tienen ciclos de vida temporales, una entrada residente permanece disponible hasta que el usuario elimina ese estado.
+
+### Inyección residente en una conversación nueva
+
+Cuando Super Memory realiza la recuperación, las entradas residentes se inyectan de forma independiente de la relevancia semántica.
+
+![Memoria residente inyectada en una conversación nueva](/super-memory/resident-memory-injection.png)
+
+En el ejemplo, el nuevo chat solo contiene “Hello”, pero el estado indica:
+
+> Injected 1 memories (1 resident · 0 relevant)
+
+Se ha inyectado una entrada P0 residente aunque no se encontró ninguna memoria adicional por relevancia. Esto permite mantener conocimientos críticos disponibles en cada ciclo de recuperación.
+
+### Cuándo utilizar P0
+
+Utiliza Resident para información que deba guiar siempre a la IA, como invariantes esenciales de arquitectura, flujos obligatorios, reglas duraderas de recuperación o preferencias fundamentales.
+
+No marques como residentes ubicaciones temporales, detalles de una sola tarea ni registros extensos de poco valor. Estas entradas se incorporan al contexto y pueden influir en todas las respuestas, por lo que deben ser concisas y realmente universales. La interfaz muestra actualmente una capacidad máxima de 12 entradas residentes.
+
+Vuelve a seleccionar la chincheta resaltada para quitar el estado Resident cuando ya no sea necesario recuperar la entrada siempre.
+

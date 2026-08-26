@@ -237,3 +237,45 @@ Breezell then verifies the Reading Library through a 14-check browser workflow a
 - **The AI repairs root causes:** It transfers the shared-state, stable-identity, persistence-boundary, and end-to-end verification principles instead of reproducing old code line by line.
 - **Explicit recall is optional:** The prompt requests memory review only to make the demonstration easy to observe. In normal conversations, relevant Super Memory entries can be recalled automatically.
 
+## Resident memories (P0)
+
+Any Super Memory entry can be made **Resident** when it should be available during every memory recall, regardless of whether the current request matches it semantically.
+
+### Set an entry as resident
+
+Hover over or select the pin icon on a memory card. The **Set resident** tooltip identifies the action.
+
+![Set resident action on a memory card](/super-memory/set-resident-action.png)
+
+After the action:
+
+- The entry is promoted to **P0**.
+- A **Resident** badge appears on the card.
+- The pin is highlighted to show that the entry is always resident.
+- The resident-capacity counter increases. In the example it changes to **Resident 1/12**.
+- The entry appears when filtering by P0.
+
+![Memory promoted to P0 Resident](/super-memory/p0-resident-memory.png)
+
+P0 is the permanent priority tier. Unlike P1 and P2 items with time-based lifecycles, a resident entry remains available until the user removes its resident status.
+
+### Resident injection in a new conversation
+
+When Super Memory runs retrieval, resident entries are injected independently of semantic relevance.
+
+![Resident memory injected into a new conversation](/super-memory/resident-memory-injection.png)
+
+In the example, a new chat contains only “Hello,” but the status still reports:
+
+> Injected 1 memories (1 resident · 0 relevant)
+
+This means one P0 resident entry was injected even though no additional relevance-matched memory was found. Resident memory therefore provides a reliable way to keep critical knowledge available in every recall cycle.
+
+### When to use P0
+
+Use Resident status for information that should consistently guide the AI, such as critical architecture invariants, mandatory workflows, durable recovery rules, or essential preferences.
+
+Avoid making temporary file locations, one-time task details, or large low-value records resident. Resident entries are injected into request context and can influence every response, so they should remain concise and genuinely universal. The interface currently shows capacity for up to 12 resident entries.
+
+Select the highlighted pin again to remove Resident status when an entry no longer needs to be recalled every time.
+

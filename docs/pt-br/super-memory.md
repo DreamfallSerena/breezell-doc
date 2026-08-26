@@ -237,3 +237,45 @@ O Breezell verifica o resultado com um fluxo de 14 testes no navegador e restaur
 - **A IA corrige causas raiz:** Ela transfere os princípios de estado compartilhado, identidade estável, persistência validada e verificação integral, sem copiar o código antigo linha por linha.
 - **A recuperação explícita é opcional:** O pedido menciona memória apenas para tornar a demonstração observável. Normalmente, itens relevantes do Super Memory podem ser recuperados automaticamente.
 
+## Memórias residentes (P0)
+
+Qualquer item do Super Memory pode ser definido como **Resident** quando precisar estar disponível em toda recuperação, mesmo que a solicitação atual não tenha relação semântica com ele.
+
+### Definir um item como residente
+
+Passe o cursor ou selecione o ícone de alfinete no cartão. A dica **Set resident** identifica a ação.
+
+![Ação para definir uma memória como residente](/super-memory/set-resident-action.png)
+
+Após a ação:
+
+- O item passa para **P0**.
+- Um selo **Resident** aparece no cartão.
+- O alfinete fica destacado para indicar o estado residente.
+- O contador de capacidade aumenta. No exemplo, ele muda para **Resident 1/12**.
+- O item aparece no filtro P0.
+
+![Memória promovida a P0 Resident](/super-memory/p0-resident-memory.png)
+
+P0 é o nível de prioridade permanente. Diferentemente de P1 e P2, que possuem ciclos de vida temporais, um item residente continua disponível até que o usuário remova esse estado.
+
+### Injeção residente em uma nova conversa
+
+Quando o Super Memory executa a recuperação, os itens residentes são injetados independentemente da relevância semântica.
+
+![Memória residente injetada em uma nova conversa](/super-memory/resident-memory-injection.png)
+
+No exemplo, o novo chat contém apenas “Hello”, mas o estado informa:
+
+> Injected 1 memories (1 resident · 0 relevant)
+
+Um item P0 Resident foi injetado mesmo sem outra memória correspondente por relevância. Isso mantém conhecimentos críticos disponíveis em todos os ciclos de recuperação.
+
+### Quando usar P0
+
+Use Resident para informações que devem orientar a IA de forma consistente, como invariantes essenciais de arquitetura, fluxos obrigatórios, regras duradouras de recuperação ou preferências fundamentais.
+
+Evite tornar residentes locais temporários de arquivos, detalhes de uma única tarefa ou registros extensos de baixo valor. Esses itens são injetados no contexto e podem influenciar todas as respostas, portanto devem ser concisos e realmente universais. A interface mostra atualmente capacidade para até 12 itens residentes.
+
+Selecione o alfinete destacado novamente para remover o estado Resident quando o item não precisar mais ser recuperado sempre.
+
