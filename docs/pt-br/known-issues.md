@@ -21,9 +21,9 @@ Este problema foi corrigido.
 
 ## Falhas inesperadas
 
-> **Status: aguardando verificação dos usuários**
+> **Status: corrigido**
 
-A correção está pronta e estamos aguardando a verificação dos usuários para confirmar que o problema foi totalmente resolvido.
+Este problema foi corrigido.
 
 ## Navegador integrado exibe uma página em branco
 
@@ -59,21 +59,21 @@ Após trocar a janela de contexto, a compactação automática podia não ser ac
 
 ## Menus suspensos exibem estilos nativos e bordas muito estreitas
 
-> **Status: em correção**
+> **Status: corrigido**
 
-Alguns menus suspensos podem exibir o estilo nativo dos controles, e suas bordas podem ser renderizadas de forma muito estreita. Estamos trabalhando para corrigir esses problemas de exibição.
+Este problema foi corrigido.
 
 ## Problema nas configurações de nível de raciocínio dos modelos da série Kimi
 
-> **Status: em correção**
+> **Status: corrigido**
 
-No Breezell 1.3.0, as configurações de nível de raciocínio dos modelos da série Kimi podem não ser aplicadas corretamente. Estamos trabalhando para corrigir esse problema.
+Este problema foi corrigido.
 
 ## O chat pode travar brevemente ao enviar mensagens
 
-> **Status: em correção**
+> **Status: corrigido**
 
-No Breezell 1.3.0, a interface de chat pode travar brevemente após o envio de uma mensagem. Estamos trabalhando para melhorar esse comportamento.
+Este problema foi corrigido.
 
 ## Agradecemos a sua paciência
 
