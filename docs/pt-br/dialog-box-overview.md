@@ -106,6 +106,26 @@ Cada linha de servidor inclui:
 
 ![Referência MCP inserida no campo de entrada](/dialog-box/mcp-invocation-reference.png)
 
+## Skills
+
+O ponteiro destaca o botão **Skills** na bandeja de entrada. Abra-o para gerenciar as Skills que o Breezell pode usar.
+
+![Painel de Skills integradas](/dialog-box/skills-built-in.png)
+
+O painel separa as Skills em duas guias:
+
+- **Built-in:** Skills oficiais incluídas no Breezell. Elas ficam disponíveis sem a necessidade de criar ou configurar uma Skill pessoal.
+- **My Skills:** Skills que você mesmo configura ou cria.
+
+![Painel My Skills](/dialog-box/skills-my-skills.png)
+
+As Skills de ambas as guias podem ser controladas individualmente:
+
+- **Seta de invocação:** insere `@<nome-da-skill>` no campo de entrada atual. Envie a solicitação com essa menção para permitir que a IA invoque a Skill selecionada.
+- **Interruptor:** ativa ou desativa a Skill. Uma Skill desativada fica indisponível para a IA até ser ativada novamente.
+
+![Menção de Skill inserida no campo de entrada](/dialog-box/skill-invocation-reference.png)
+
 ## Menu de menções
 
 O ponteiro destaca a área de contexto rápido usada para abrir o menu de menções. O menu permite adicionar arquivos, pastas, ferramentas MCP e Skills à mensagem atual.

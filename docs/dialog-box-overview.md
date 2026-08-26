@@ -106,6 +106,26 @@ Each server row includes:
 
 ![MCP reference inserted into the input](/dialog-box/mcp-invocation-reference.png)
 
+## Skills
+
+The pointer highlights the **Skills** button in the input tray. Open it to manage the skills that Breezell can use.
+
+![Built-in skills panel](/dialog-box/skills-built-in.png)
+
+The panel separates skills into two tabs:
+
+- **Built-in:** official skills included with Breezell. They are available without creating or configuring a personal skill.
+- **My Skills:** skills that you configure or create yourself.
+
+![My Skills panel](/dialog-box/skills-my-skills.png)
+
+Skills in either tab can be controlled individually:
+
+- **Invocation arrow:** inserts `@<skill-name>` into the current input. Send the request with this mention to let the AI invoke the selected skill.
+- **On/off switch:** enables or disables the skill. A disabled skill is unavailable to the AI until it is enabled again.
+
+![Skill mention inserted into the input](/dialog-box/skill-invocation-reference.png)
+
 ## Mention Menu
 
 The pointer highlights the quick context area used to open the mention menu. The mention menu lets you add files, folders, MCP tools, and skills to the current message.

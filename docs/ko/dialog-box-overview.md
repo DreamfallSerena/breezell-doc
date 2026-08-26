@@ -106,6 +106,26 @@ Breezell Browser는 Breezell에 내장된 브라우저 도구입니다. 대화 �
 
 ![입력란에 삽입된 MCP 참조](/dialog-box/mcp-invocation-reference.png)
 
+## Skills(스킬)
+
+포인터가 입력 트레이의 **Skills** 버튼을 강조 표시합니다. 이 버튼을 열어 Breezell이 사용할 수 있는 스킬을 관리할 수 있습니다.
+
+![기본 제공 스킬 패널](/dialog-box/skills-built-in.png)
+
+스킬은 다음 두 탭으로 구분됩니다.
+
+- **Built-in:** Breezell에 공식적으로 기본 제공되는 스킬입니다. 개인 스킬을 만들거나 구성하지 않아도 사용할 수 있습니다.
+- **My Skills:** 사용자가 직접 구성하거나 만든 스킬입니다.
+
+![My Skills 패널](/dialog-box/skills-my-skills.png)
+
+두 탭의 스킬을 각각 제어할 수 있습니다.
+
+- **호출 화살표:** 현재 입력란에 `@<skill-name>`을 삽입합니다. 이 멘션이 포함된 요청을 보내면 AI가 선택한 스킬을 호출할 수 있습니다.
+- **켜기/끄기 스위치:** 스킬을 활성화하거나 비활성화합니다. 비활성화된 스킬은 다시 활성화할 때까지 AI가 사용할 수 없습니다.
+
+![입력란에 삽입된 스킬 멘션](/dialog-box/skill-invocation-reference.png)
+
 ## 멘션 메뉴
 
 포인터가 멘션 메뉴를 여는 데 사용되는 빠른 컨텍스트 영역을 강조 표시합니다. 멘션 메뉴를 통해 현재 메시지에 파일, 폴더, MCP 도구 및 Skills를 추가할 수 있습니다.

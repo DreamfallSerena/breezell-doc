@@ -106,6 +106,26 @@ Breezell Browser 是 Breezell 内置的浏览器工具。你可以使用它打�
 
 ![输入框中插入的 MCP 引用](/dialog-box/mcp-invocation-reference.png)
 
+## 技能
+
+指针突出显示输入托盘中的 **Skills（技能）** 按钮。打开后可以管理 Breezell 可供 AI 使用的技能。
+
+![官方内置技能面板](/dialog-box/skills-built-in.png)
+
+技能面板分为两个选项卡：
+
+- **Built-in（内置技能）：** Breezell 官方自带的技能，无需自行创建或配置即可使用。
+- **My Skills（我的技能）：** 由你自行配置或创建的技能。
+
+![我的技能面板](/dialog-box/skills-my-skills.png)
+
+两个选项卡中的技能均可单独控制：
+
+- **调用箭头：** 点击后会在当前输入框中插入 `@<技能名称>`。发送包含该提及的请求，即可让 AI 调用所选技能。
+- **启用开关：** 用于开启或关闭技能。关闭后，AI 将无法使用该技能，直至重新开启。
+
+![输入框中插入的技能提及](/dialog-box/skill-invocation-reference.png)
+
 ## 提及菜单
 
 指针突出显示用于打开提及菜单的快捷上下文区域。提及菜单允许你将文件、文件夹、MCP 工具和技能添加到当前消息中。
