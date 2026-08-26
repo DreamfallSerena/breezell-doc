@@ -129,3 +129,59 @@ Após uma análise mais profunda, o Super Memory adiciona itens estruturados de 
 - **A memória ajuda em trabalhos futuros da IA:** Outras tarefas podem recuperar o histórico do arquivo, o método de correção ou a lição de engenharia sem depender apenas da conversa original.
 - **Normalmente não é necessário pedir uma reflexão:** A pergunta é usada aqui para fazer um teste pequeno produzir um resultado evidente. Em erros duradouros ou importantes, o Super Memory pode identificar e registrar automaticamente experiências de correção sem que o usuário precise fazer essa pergunta.
 
+## Análise detalhada: por que a categoria Memory está vazia
+
+Ao filtrar este exemplo por **Memory**, são exibidos **0 itens**, embora o Super Memory tenha extraído conhecimento útil com sucesso.
+
+![Categoria Memory vazia após a correção](/super-memory/empty-memory-category.png)
+
+Isso representa uma classificação intencional, não uma falha de extração. A correção não produziu uma preferência pessoal duradoura, um fato estável do usuário ou uma instrução permanente que pertencesse à Memory geral. Em vez de duplicar tudo como memória genérica, o Super Memory classificou cada resultado como Skill, Experience, Trajectory ou Resource.
+
+## Skill: padrão reutilizável de recuperação do localStorage
+
+O item **P1 Skill** transforma uma correção específica em um procedimento reutilizável para persistência de estado no cliente.
+
+![Skill expandida para correção do localStorage](/super-memory/localstorage-skill-detail.png)
+
+O cartão mostra:
+
+- **Tags:** localStorage, JSON, hidratação de estado e recuperação de dados facilitam a localização em problemas relacionados.
+- **L1 Overview:** Armazenar arrays de tarefas com JSON.stringify, carregá-los com JSON.parse protegido, não adicionar dados iniciais depois de um carregamento válido e descartar valores antigos irrecuperáveis antes de restaurar um padrão limpo.
+- **Why Remembered:** Identifica o item como um padrão verificado de persistência e recuperação reutilizável em aplicações com estado.
+- **L2 Full Content:** Preserva o modo de falha detalhado e o procedimento completo de recuperação.
+- **Metadados:** Exibe prioridade P1, tipo, estado, confirmações, acessos, última atualização e ciclo de vida.
+
+Isso é mais útil do que uma nota vaga dizendo que o localStorage foi corrigido, pois fornece um procedimento concreto que uma futura IA pode aplicar novamente.
+
+## Experience: diagnosticar estado compartilhado e identidade estável
+
+O item **P1 Experience** preserva a lição de engenharia mais ampla por trás do conjunto de falhas da interface.
+
+![Experience expandida sobre estado compartilhado](/super-memory/repair-experience-detail.png)
+
+O resumo explica que, quando tarefas, filtros, contadores e persistência falham juntos, a investigação deve começar no array compartilhado e em suas transições. Também registra a necessidade de identificadores estáveis sem colisões e de um fluxo completo que teste novamente validação, teclado, filtros, contadores, limpeza e persistência após recarregar.
+
+As tags abrangem gerenciamento de estado, depuração, UI, identidade estável, invariantes, testes e localStorage. **Why Remembered** identifica o item como uma lista reutilizável para funções que dependem de um único modelo de estado.
+
+A distinção é importante: Skill registra um método repetível; Experience registra o raciocínio de diagnóstico, as invariantes e a estratégia de verificação.
+
+## Trajectory: preservar o caminho real da correção
+
+O item **P2 Trajectory** mantém a forma como a tarefa ocorreu, e não apenas a conclusão.
+
+![Trajectory expandida da correção](/super-memory/repair-trajectory-detail.png)
+
+Ele contém o objetivo original, o resultado recuperado, a sequência de ferramentas, um erro recuperável, as etapas seguintes e o resultado final. Neste exemplo, registra 14 chamadas de ferramentas envolvendo leitura de código, inspeção de diretórios, gerenciamento de tarefas, edição de arquivos, navegação e avaliação pelo navegador.
+
+Os rótulos P2 e unverified mantêm esse histórico temporário separado de Skill e Experience P1, que são mais reutilizáveis. O caminho exato continua disponível quando necessário, enquanto as conclusões importantes ficam armazenadas em formas mais duráveis.
+
+## Por que essa classificação é importante
+
+- **Memory** armazena fatos, preferências e informações permanentes; nenhuma foi criada neste teste.
+- **Skill** armazena um método reutilizável.
+- **Experience** armazena o raciocínio sobre a causa raiz e a lista de verificação.
+- **Trajectory** armazena a sequência de ações, erros e recuperação.
+- **Resource** armazena arquivos concretos e locais modificados.
+
+Essa separação mantém a recuperação precisa e controlável. Uma tarefa futura pode buscar o método, a lição, o histórico de execução ou o recurso modificado separadamente, sem carregar uma única memória genérica excessiva.
+

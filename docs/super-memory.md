@@ -129,3 +129,59 @@ After the repair is examined at a deeper level, Super Memory adds higher-value s
 - **Memory becomes useful to future AI work:** Later tasks can retrieve the relevant file history, repair method, or engineering lesson instead of relying only on the original conversation transcript.
 - **Manual reflection is not normally required:** The follow-up question is used here to make a very small test produce an obvious result. For longer-running or high-value bugs, Super Memory can automatically identify and record durable repair experience without requiring the user to ask this question.
 
+## Deep dive: why the Memory category is empty
+
+Filtering this example by **Memory** shows **0 items**, even though Super Memory successfully extracted useful knowledge.
+
+![Empty Memory category after the repair](/super-memory/empty-memory-category.png)
+
+This is intentional classification, not an extraction failure. The repair did not produce a durable personal preference, stable user fact, or standing instruction that belonged in general Memory. Instead of duplicating everything as generic memory, Super Memory placed each result in the type that best describes its future use: Skill, Experience, Trajectory, and Resource.
+
+## Skill: a reusable localStorage recovery pattern
+
+The **P1 Skill** entry turns one specific repair into a reusable procedure for client-side state persistence.
+
+![Expanded localStorage repair Skill](/super-memory/localstorage-skill-detail.png)
+
+The card shows:
+
+- **Tags:** localStorage, JSON, state hydration, and data recovery make the skill easier to retrieve for related problems.
+- **L1 Overview:** Store task arrays with JSON.stringify, load them using guarded JSON.parse, avoid adding seed data after a valid load, and discard unrecoverable legacy values such as object-to-string corruption before restoring a clean default.
+- **Why Remembered:** The system identifies this as a verified persistence and recovery pattern reusable in stateful client applications.
+- **L2 Full Content:** Preserves the detailed failure mode and the complete recovery procedure for deeper retrieval when needed.
+- **Metadata:** The card exposes its P1 priority, type, activity state, confirmation count, access count, last update, and lifecycle information.
+
+This is more useful than a vague note saying that localStorage was fixed: it gives a future AI a concrete procedure it can apply again.
+
+## Experience: diagnosing shared state and stable identity
+
+The **P1 Experience** entry preserves the broader engineering lesson behind the group of UI failures.
+
+![Expanded shared-state repair Experience](/super-memory/repair-experience-detail.png)
+
+Its overview explains that when tasks, filters, counters, and persistence fail together, the investigation should begin at their shared tasks array and state transitions. It also records the need for collision-safe stable identifiers and an end-to-end workflow that retests input validation, keyboard submission, filters, counters, clearing, and reload persistence together.
+
+The tags cover state management, debugging, UI, stable identity, invariants, testing, and localStorage. **Why Remembered** identifies the entry as a reusable checklist for features whose handlers, rendering, counters, filters, and persistence depend on one state model.
+
+The distinction is important: the Skill records a repeatable repair method, while the Experience records the diagnostic reasoning, invariants, and verification strategy.
+
+## Trajectory: preserving the actual repair path
+
+The **P2 Trajectory** entry retains how the task unfolded, not only the final lesson.
+
+![Expanded Task Manager repair Trajectory](/super-memory/repair-trajectory-detail.png)
+
+It contains the original goal, recovered outcome, tool sequence, one recoverable error, subsequent successful steps, and final result. In this example, the trajectory records 14 tool calls across code reading, directory inspection, to-do tracking, file editing, browser navigation, and browser evaluation.
+
+The P2 and unverified labels keep this short-lived execution trace separate from the more reusable P1 Skill and Experience. It remains available when the AI needs to inspect the exact repair path, while the higher-value conclusions are stored in more durable forms.
+
+## Why this classification matters
+
+- **Memory** stores durable facts, preferences, and standing information; none were created in this test.
+- **Skill** stores a reusable method for solving the problem again.
+- **Experience** stores the root-cause reasoning and verification checklist.
+- **Trajectory** stores the sequence of actions, errors, and recovery.
+- **Resource** stores the concrete files and edited locations.
+
+This separation keeps retrieval precise and controllable. A future task can request the method, engineering lesson, execution history, or modified resource independently instead of loading one oversized generic memory.
+
