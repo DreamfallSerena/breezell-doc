@@ -79,7 +79,7 @@ export default defineConfig({
       {
         text: "Guide",
         link: "/introduction",
-        activeMatch: "^/(introduction|settings-page-language-settings|custom-api|custom-model-vision|prompt-settings|feature-options-overview|dialog-box-overview|mode-selection|entanglement-mode-overview)(/|$)",
+        activeMatch: "^/(introduction|settings-page-language-settings|custom-api|custom-model-vision|prompt-settings|feature-options-overview|dialog-box-overview|super-memory|mode-selection|entanglement-mode-overview)(/|$)",
       },
       { text: "About", link: "/about" },
       { text: "Contact", link: "/contact" },
@@ -123,6 +123,7 @@ export default defineConfig({
           text: "Advanced Operations",
           items: [
             { text: "Dialog Box Overview", link: "/dialog-box-overview" },
+            { text: "Super Memory", link: "/super-memory" },
             { text: "Mode Selection", link: "/mode-selection" },
           ],
         },
@@ -161,6 +162,7 @@ export default defineConfig({
           text: "Advanced Operations",
           items: [
             { text: "Dialog Box Overview", link: "/dialog-box-overview" },
+            { text: "Super Memory", link: "/super-memory" },
             { text: "Mode Selection", link: "/mode-selection" },
           ],
         },
@@ -199,6 +201,7 @@ export default defineConfig({
           text: "Advanced Operations",
           items: [
             { text: "Dialog Box Overview", link: "/dialog-box-overview" },
+            { text: "Super Memory", link: "/super-memory" },
             { text: "Mode Selection", link: "/mode-selection" },
           ],
         },
@@ -233,6 +236,7 @@ export default defineConfig({
           text: "Advanced Operations",
           items: [
             { text: "Dialog Box Overview", link: "/dialog-box-overview" },
+            { text: "Super Memory", link: "/super-memory" },
             { text: "Mode Selection", link: "/mode-selection" },
           ],
         },

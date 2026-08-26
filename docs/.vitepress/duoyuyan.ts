@@ -18,6 +18,7 @@ type yuyanwenben = {
   gaojicaozuo: string;
   moshijieshao: string;
   duihuakuang: string;
+  chaojijiyi: string;
   jiuchanmoshi: string;
   moshi: string;
   yemian: string;
@@ -48,6 +49,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     gaojicaozuo: "Advanced Operations",
     moshijieshao: "Mode Guides",
     duihuakuang: "Dialog Box Overview",
+    chaojijiyi: "Super Memory",
     jiuchanmoshi: "Entanglement Mode Overview",
     moshi: "Mode Selection",
     yemian: "On this page",
@@ -76,6 +78,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     gaojicaozuo: "高度な操作",
     moshijieshao: "モードガイド",
     duihuakuang: "ダイアログボックスの概要",
+    chaojijiyi: "Super Memory",
     jiuchanmoshi: "Entanglement モードの概要",
     moshi: "モードの選択",
     yemian: "このページの内容",
@@ -104,6 +107,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     gaojicaozuo: "고급 작업",
     moshijieshao: "모드 안내",
     duihuakuang: "대화 상자 개요",
+    chaojijiyi: "Super Memory",
     jiuchanmoshi: "Entanglement 모드 개요",
     moshi: "모드 선택",
     yemian: "이 페이지에서",
@@ -132,6 +136,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     gaojicaozuo: "Operaciones avanzadas",
     moshijieshao: "Guías de modos",
     duihuakuang: "Resumen del cuadro de diálogo",
+    chaojijiyi: "Super Memory",
     jiuchanmoshi: "Resumen del modo Entanglement",
     moshi: "Selección de modo",
     yemian: "En esta página",
@@ -160,6 +165,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     gaojicaozuo: "Operações avançadas",
     moshijieshao: "Guias de modos",
     duihuakuang: "Visão geral da caixa de diálogo",
+    chaojijiyi: "Super Memory",
     jiuchanmoshi: "Visão geral do modo Entanglement",
     moshi: "Seleção de modo",
     yemian: "Nesta página",
@@ -188,6 +194,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     gaojicaozuo: "Расширенные операции",
     moshijieshao: "Руководства по режимам",
     duihuakuang: "Обзор диалогового окна",
+    chaojijiyi: "Super Memory",
     jiuchanmoshi: "Обзор режима Entanglement",
     moshi: "Выбор режима",
     yemian: "На этой странице",
@@ -216,6 +223,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     gaojicaozuo: "高级操作",
     moshijieshao: "模式介绍",
     duihuakuang: "对话框概览",
+    chaojijiyi: "超级记忆",
     jiuchanmoshi: "Entanglement 模式功能说明",
     moshi: "模式选择",
     yemian: "本页内容",
@@ -244,6 +252,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     gaojicaozuo: "進階操作",
     moshijieshao: "模式介紹",
     duihuakuang: "對話方塊總覽",
+    chaojijiyi: "超級記憶",
     jiuchanmoshi: "Entanglement 模式功能說明",
     moshi: "模式選擇",
     yemian: "本頁內容",
@@ -281,6 +290,7 @@ function qudebianlan(luyou: string, wenben: yuyanwenben) {
   ];
   const gaoji = [
     { text: wenben.duihuakuang, link: lianjie("/dialog-box-overview") },
+    { text: wenben.chaojijiyi, link: lianjie("/super-memory") },
     { text: wenben.moshi, link: lianjie("/mode-selection") },
   ];
   const moshidaoyin = [
@@ -328,8 +338,8 @@ export function qudezhutipeizhi(luyou: string) {
   const jiemian = jiemianwenben[luyou as keyof typeof jiemianwenben];
   const lianjie = (lujing: string) => qudelianjie(luyou, lujing);
   const zhinanzhengze = luyou === "root"
-    ? "^/(introduction|settings-page-language-settings|custom-api|custom-model-vision|prompt-settings|feature-options-overview|dialog-box-overview|mode-selection|entanglement-mode-overview)(/|$)"
-    : `^/${luyou}/(introduction|settings-page-language-settings|custom-api|custom-model-vision|prompt-settings|feature-options-overview|dialog-box-overview|mode-selection|entanglement-mode-overview)(/|$)`;
+    ? "^/(introduction|settings-page-language-settings|custom-api|custom-model-vision|prompt-settings|feature-options-overview|dialog-box-overview|super-memory|mode-selection|entanglement-mode-overview)(/|$)"
+    : `^/${luyou}/(introduction|settings-page-language-settings|custom-api|custom-model-vision|prompt-settings|feature-options-overview|dialog-box-overview|super-memory|mode-selection|entanglement-mode-overview)(/|$)`;
 
   return {
     search: {
