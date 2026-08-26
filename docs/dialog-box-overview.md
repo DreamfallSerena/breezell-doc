@@ -126,6 +126,23 @@ Skills in either tab can be controlled individually:
 
 ![Skill mention inserted into the input](/dialog-box/skill-invocation-reference.png)
 
+## Message Capacity
+
+The pointer highlights the **Message Capacity** button in the input tray. Message Capacity analyzes the local storage used by saved conversations. It is a storage report, not the model context window or the application's live memory usage.
+
+![Message Capacity button](/dialog-box/message-capacity-button.png)
+
+The dashboard provides:
+
+- **Scope and time range:** switch between the current workspace and all workspaces, and review the last 7, 30, or 90 days.
+- **Current usage and trend:** view total storage use, its change over the selected period, and a chart of storage growth.
+- **Storage breakdown:** compare message content, images and attachments, tool results, and checkpoints. The dashed line represents reclaimable space.
+- **Summary metrics:** see the number of conversations and messages, the largest conversation, and the amount of reclaimable space.
+- **Conversation inspection:** search, sort, filter, and select conversations. Each row shows its message count, storage size, and notable storage type; active or queued conversations are clearly identified.
+- **Safe cleanup:** reclaim storage that the panel marks as eligible for cleanup. Review the current scope, filters, and selections before running it.
+
+![Message Capacity dashboard](/dialog-box/message-capacity-dashboard.png)
+
 ## Mention Menu
 
 The pointer highlights the quick context area used to open the mention menu. The mention menu lets you add files, folders, MCP tools, and skills to the current message.

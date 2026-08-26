@@ -126,6 +126,23 @@ As Skills de ambas as guias podem ser controladas individualmente:
 
 ![Menção de Skill inserida no campo de entrada](/dialog-box/skill-invocation-reference.png)
 
+## Capacidade de mensagens
+
+O ponteiro destaca o botão **Message Capacity** na bandeja de entrada. A Capacidade de mensagens analisa o armazenamento local usado pelas conversas salvas. Trata-se de um relatório de armazenamento, não da janela de contexto do modelo nem do uso de memória ativa do aplicativo.
+
+![Botão Message Capacity](/dialog-box/message-capacity-button.png)
+
+O painel oferece:
+
+- **Escopo e período:** alterne entre o workspace atual e todos os workspaces e consulte os últimos 7, 30 ou 90 dias.
+- **Uso atual e tendência:** veja o uso total de armazenamento, a mudança durante o período selecionado e um gráfico de crescimento.
+- **Detalhamento do armazenamento:** compare conteúdo de mensagens, imagens e anexos, resultados de ferramentas e checkpoints. A linha tracejada representa o espaço recuperável.
+- **Métricas resumidas:** veja a quantidade de conversas e mensagens, a maior conversa e o espaço recuperável.
+- **Inspeção de conversas:** pesquise, ordene, filtre e selecione conversas. Cada linha mostra a quantidade de mensagens, o tamanho armazenado e o tipo de conteúdo em destaque; conversas ativas ou na fila são identificadas claramente.
+- **Limpeza segura:** recupera o armazenamento que o painel marca como elegível para limpeza. Revise o escopo, os filtros e a seleção atuais antes de executar.
+
+![Painel de Capacidade de mensagens](/dialog-box/message-capacity-dashboard.png)
+
 ## Menu de menções
 
 O ponteiro destaca a área de contexto rápido usada para abrir o menu de menções. O menu permite adicionar arquivos, pastas, ferramentas MCP e Skills à mensagem atual.

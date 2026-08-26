@@ -126,6 +126,23 @@ Las Skills de ambas pestañas se pueden controlar individualmente:
 
 ![Mención de una Skill insertada en el campo de entrada](/dialog-box/skill-invocation-reference.png)
 
+## Capacidad de mensajes
+
+El puntero resalta el botón **Message Capacity** de la bandeja de entrada. Capacidad de mensajes analiza el almacenamiento local utilizado por las conversaciones guardadas. Es un informe de almacenamiento, no la ventana de contexto del modelo ni el uso de memoria activa de la aplicación.
+
+![Botón Message Capacity](/dialog-box/message-capacity-button.png)
+
+El panel ofrece:
+
+- **Alcance y período:** permite alternar entre el espacio de trabajo actual y todos los espacios de trabajo, y consultar los últimos 7, 30 o 90 días.
+- **Uso actual y tendencia:** muestra el almacenamiento total utilizado, su variación durante el período seleccionado y un gráfico de crecimiento.
+- **Desglose del almacenamiento:** compara el contenido de los mensajes, las imágenes y archivos adjuntos, los resultados de herramientas y los puntos de control. La línea discontinua representa el espacio recuperable.
+- **Métricas resumidas:** muestra la cantidad de conversaciones y mensajes, la conversación de mayor tamaño y el espacio recuperable.
+- **Inspección de conversaciones:** permite buscar, ordenar, filtrar y seleccionar conversaciones. Cada fila muestra el número de mensajes, el tamaño almacenado y el tipo de contenido destacado; las conversaciones activas o en cola aparecen identificadas.
+- **Limpieza segura:** recupera el almacenamiento que el panel considera apto para limpieza. Revisa el alcance, los filtros y la selección actuales antes de ejecutarla.
+
+![Panel de Capacidad de mensajes](/dialog-box/message-capacity-dashboard.png)
+
 ## Menú de menciones
 
 El puntero resalta el área de contexto rápido que se utiliza para abrir el menú de menciones. Este menú permite añadir archivos, carpetas, herramientas MCP y Skills al mensaje actual.
