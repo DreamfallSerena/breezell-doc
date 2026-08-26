@@ -5,6 +5,23 @@ next: false
 
 # Registro de alterações
 
+## 1.3.1 · 2026-08-26
+
+### Correções
+
+- Corrigido um problema em que o **histórico de chat podia desaparecer após a alteração da identidade do espaço de trabalho**.
+- Corrigido um problema em **Breezell Settings** no qual componentes de menu suspenso montados incorretamente podiam causar comportamentos inesperados.
+- Corrigido o **comportamento incorreto de zoom no navegador integrado**.
+- Corrigido o dimensionamento do layout do chat para que a **área de conversa não seja mais comprimida pela altura da página**.
+- Corrigido um problema em que a **renderização da ferramenta de edição podia causar uma falha**.
+- Corrigido o problema em que as **notificações do sistema eram estendidas incorretamente por toda a largura** ao usar a nova interface do Breezell.
+- Corrigido o **alinhamento da área de entrada inferior** para que os espaçamentos esquerdo e direito correspondam ao painel de chat.
+
+### Melhorias
+
+- Melhorados o **desempenho geral e a capacidade de resposta**.
+- Aprimoradas as **capacidades e a confiabilidade do mecanismo de modelos**.
+
 ## 1.3.0 · 2026-08-25
 
 ### Novos recursos
