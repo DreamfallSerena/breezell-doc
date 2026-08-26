@@ -48,6 +48,19 @@ next: false
 - Melhorada a **confiabilidade da recuperação de memória**, com mensagens mais claras enquanto a recuperação está em andamento.
 - As sugestões de conclusão de código agora correspondem melhor ao **idioma do arquivo atual**.
 
+## 1.2.9 · 2026-08-24
+
+### Correções
+
+- Corrigidos casos em que algumas conversas não eram carregadas corretamente.
+- Corrigida a formatação incorreta da saída no modo Entanglement.
+- Melhorada a estabilidade e corrigidos casos em que janelas do Breezell podiam falhar ou encerrar inesperadamente.
+- Corrigidas páginas em branco ao abrir sites no navegador integrado.
+- Corrigida a exibição de tags residuais no final das respostas do modo Analyze.
+- Corrigidas as configurações de janela de contexto personalizada dos modelos Codex que não eram aplicadas ou exibidas corretamente.
+- Corrigida a exibição incorreta da cota ao usar o login direto do Grok.
+- Corrigido o problema em que a compactação automática não era acionada após trocar a janela de contexto.
+
 ## 1.2.8 · 2026-08-16
 
 ### Novos recursos
