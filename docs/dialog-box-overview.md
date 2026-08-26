@@ -143,6 +143,27 @@ The dashboard provides:
 
 ![Message Capacity dashboard](/dialog-box/message-capacity-dashboard.png)
 
+## Cache Hits
+
+The pointer highlights the **Cache Hit** button in the input tray. The **Cache Broadcast** panel summarizes provider prompt-cache reuse for the current chat or workspace. These are request-cache analytics; they are separate from local conversation storage and the model's context capacity.
+
+![Cache Hit button](/dialog-box/cache-hit-button.png)
+
+The panel provides the following information and controls:
+
+- **Scope:** Switch between the current chat and the entire workspace.
+- **Hit-rate summary:** Compare today, yesterday, and the lifetime total, including recorded turns, hit rate, and cache-read volume.
+- **Token breakdown:** Review input tokens, cache reads, cache writes, and output tokens. Cache reads are the reusable input tokens served from cache instead of being processed again.
+- **Estimated savings:** See the equivalent input tokens saved and an estimated saving based on list prices. This is a reference estimate; actual billing can vary by provider, model, and route.
+- **Per-turn details:** Inspect the provider, model, reasoning and speed settings, hit rate, timestamp, and duration for each turn. Selecting a turn shows its input, cache-read, cache-write, and output totals.
+- **Trend:** Use the chart to see how the hit rate changes from older to newer requests.
+- **Actions:** Copy a summary or clear the statistics for the selected scope.
+
+![Cache Broadcast panel](/dialog-box/cache-hit-dashboard.png)
+
+Provider caches are temporary. A long idle period, restart, model or speed change, or backend-route change can produce a 0% hit; later requests may warm the cache again.
+
+
 ## Mention Menu
 
 The pointer highlights the quick context area used to open the mention menu. The mention menu lets you add files, folders, MCP tools, and skills to the current message.

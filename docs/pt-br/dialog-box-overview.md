@@ -143,6 +143,27 @@ O painel oferece:
 
 ![Painel de Capacidade de mensagens](/dialog-box/message-capacity-dashboard.png)
 
+## Acertos de cache
+
+O ponteiro destaca o botão **Cache Hit (Acertos de cache)** na bandeja de entrada. O painel **Cache Broadcast** resume a reutilização do cache de prompts do provedor no chat atual ou no espaço de trabalho. Essas são estatísticas do cache de solicitações, independentes do armazenamento local das conversas e da capacidade de contexto do modelo.
+
+![Botão Acertos de cache](/dialog-box/cache-hit-button.png)
+
+O painel oferece as seguintes informações e controles:
+
+- **Escopo:** Alterne entre o chat atual e todo o espaço de trabalho.
+- **Resumo da taxa de acertos:** Compare hoje, ontem e o total histórico, incluindo turnos registrados, taxa de acertos e volume de leitura do cache.
+- **Detalhamento de tokens:** Veja tokens de entrada, leituras e gravações de cache e tokens de saída. As leituras de cache são tokens de entrada reutilizáveis fornecidos pelo cache em vez de processados novamente.
+- **Economia estimada:** Veja o equivalente em tokens de entrada economizados e uma estimativa baseada nos preços de tabela. O valor é apenas uma referência; a cobrança real pode variar conforme o provedor, o modelo e a rota.
+- **Detalhes por turno:** Consulte o provedor, o modelo, as configurações de raciocínio e velocidade, a taxa de acertos, o horário e a duração de cada turno. Ao selecionar um turno, são exibidos os totais de entrada, leitura de cache, gravação de cache e saída.
+- **Tendência:** Use o gráfico para acompanhar a mudança da taxa de acertos das solicitações mais antigas para as mais recentes.
+- **Ações:** Copie um resumo ou limpe as estatísticas do escopo selecionado.
+
+![Painel Cache Broadcast](/dialog-box/cache-hit-dashboard.png)
+
+Os caches do provedor são temporários. Um longo período de inatividade, uma reinicialização ou uma mudança de modelo, velocidade ou rota de backend pode resultar em 0% de acertos; solicitações posteriores podem aquecer o cache novamente.
+
+
 ## Menu de menções
 
 O ponteiro destaca a área de contexto rápido usada para abrir o menu de menções. O menu permite adicionar arquivos, pastas, ferramentas MCP e Skills à mensagem atual.

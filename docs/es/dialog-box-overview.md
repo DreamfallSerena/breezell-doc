@@ -143,6 +143,27 @@ El panel ofrece:
 
 ![Panel de Capacidad de mensajes](/dialog-box/message-capacity-dashboard.png)
 
+## Aciertos de caché
+
+El puntero resalta el botón **Cache Hit (Aciertos de caché)** de la bandeja de entrada. El panel **Cache Broadcast** resume la reutilización de la caché de instrucciones del proveedor en el chat actual o en el espacio de trabajo. Estas estadísticas corresponden a la caché de solicitudes y son independientes del almacenamiento local de las conversaciones y de la capacidad de contexto del modelo.
+
+![Botón Aciertos de caché](/dialog-box/cache-hit-button.png)
+
+El panel ofrece la siguiente información y controles:
+
+- **Ámbito:** Permite alternar entre el chat actual y todo el espacio de trabajo.
+- **Resumen de aciertos:** Compara los datos de hoy, ayer y del total histórico, incluidos los turnos registrados, la tasa de aciertos y el volumen leído desde la caché.
+- **Desglose de tokens:** Muestra los tokens de entrada, las lecturas y escrituras de caché y los tokens de salida. Las lecturas de caché son tokens de entrada reutilizables que se obtienen de la caché en lugar de procesarse de nuevo.
+- **Ahorro estimado:** Muestra los tokens de entrada equivalentes ahorrados y una estimación basada en precios de lista. Es solo una referencia; la facturación real puede variar según el proveedor, el modelo y la ruta.
+- **Detalles por turno:** Permite revisar el proveedor, el modelo, los ajustes de razonamiento y velocidad, la tasa de aciertos, la hora y la duración de cada turno. Al seleccionar un turno se muestran sus totales de entrada, lectura de caché, escritura de caché y salida.
+- **Tendencia:** El gráfico muestra cómo cambia la tasa de aciertos desde las solicitudes más antiguas hasta las más recientes.
+- **Acciones:** Permite copiar un resumen o borrar las estadísticas del ámbito seleccionado.
+
+![Panel Cache Broadcast](/dialog-box/cache-hit-dashboard.png)
+
+Las cachés del proveedor son temporales. Un periodo prolongado de inactividad, un reinicio o un cambio de modelo, velocidad o ruta de backend puede generar un 0 % de aciertos; las solicitudes posteriores pueden volver a preparar la caché.
+
+
 ## Menú de menciones
 
 El puntero resalta el área de contexto rápido que se utiliza para abrir el menú de menciones. Este menú permite añadir archivos, carpetas, herramientas MCP y Skills al mensaje actual.
