@@ -185,3 +185,55 @@ The P2 and unverified labels keep this short-lived execution trace separate from
 
 This separation keeps retrieval precise and controllable. A future task can request the method, engineering lesson, execution history, or modified resource independently instead of loading one oversized generic memory.
 
+## Validation: reuse in a new conversation and a different app
+
+A second test verifies whether the extracted knowledge remains useful beyond the original Task Manager conversation.
+
+The old conversation is deleted, then a new conversation is created for a different HTML application: a Reading Library stored in **test2.html**. Its interface and data model use books instead of tasks, but it intentionally contains the same family of state, identity, filtering, counter, keyboard, deletion, and localStorage defects.
+
+### 1. Start from a separate conversation
+
+![New Reading Library test in a separate conversation](/super-memory/reading-library-new-session.png)
+
+For demonstration purposes, the request explicitly asks Breezell to review relevant stored memories, prior lessons, and learned patterns before making changes. This makes recall visible during the test. Under normal use, Super Memory can automatically recall relevant knowledge without this explicit instruction.
+
+### 2. Recall knowledge from the deleted conversation
+
+Before editing **test2.html**, Breezell retrieves the earlier **P1 Skill** for guarded JSON hydration and the **P2 Resource** records that point to edited regions of the old **test.html** file.
+
+![Breezell recalling Skill and Resource entries](/super-memory/reading-library-memory-recall.png)
+
+This demonstrates two different forms of recall:
+
+- **Skill recall:** Supplies the reusable persistence pattern: guarded JSON.stringify and JSON.parse, safe rejection of corrupted legacy data, and restoration of a clean default.
+- **Resource recall:** Preserves the concrete origin of the learned pattern by showing which regions of the previous file were modified.
+
+In this test, deleting the original conversation did not remove the structured Super Memory entries extracted from it. The useful knowledge remained available to a later conversation.
+
+### 3. Transfer the method instead of copying the old patch
+
+Breezell applies the previous lesson to the Reading Library's shared **books** state rather than copying code written for the old **tasks** array.
+
+![Reading Library repaired using recalled knowledge](/super-memory/reading-library-repair-result.png)
+
+The new repair includes:
+
+- Guarded JSON serialization and parsing.
+- Safe removal of unrecoverable legacy values such as object-to-string corruption.
+- Loading a valid empty library without duplicating the example book.
+- Deterministic unique book identities instead of collision-prone timestamps.
+- Correct read and unread counters, filters, and empty-filter states.
+- Correct status toggling, targeted deletion, and clearing of read books.
+- Input validation and Enter-only keyboard submission.
+- Event handlers that operate on each book's stable identity.
+
+Breezell then verifies the Reading Library through a 14-check browser workflow and restores the pre-test localStorage value afterward.
+
+### What the second test proves
+
+- **Memory survives the original chat in structured form:** Deleting the previous conversation does not prevent the extracted Skill and Resource entries from being recalled in this test.
+- **Recall generalizes across implementations:** A pattern learned from a Task Manager is applied to a different Reading Library because the underlying state and persistence failures are structurally related.
+- **Skills are more than patch history:** The P1 Skill provides a reusable solution method, while P2 Resources preserve supporting implementation history.
+- **The AI repairs root causes:** It transfers the shared-state, stable-identity, persistence-boundary, and end-to-end verification principles instead of reproducing old code line by line.
+- **Explicit recall is optional:** The prompt requests memory review only to make the demonstration easy to observe. In normal conversations, relevant Super Memory entries can be recalled automatically.
+

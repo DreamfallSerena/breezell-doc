@@ -185,3 +185,55 @@ Os rótulos P2 e unverified mantêm esse histórico temporário separado de Skil
 
 Essa separação mantém a recuperação precisa e controlável. Uma tarefa futura pode buscar o método, a lição, o histórico de execução ou o recurso modificado separadamente, sem carregar uma única memória genérica excessiva.
 
+## Validação: reutilização em uma nova conversa e outro aplicativo
+
+Um segundo teste verifica se o conhecimento extraído continua útil fora da conversa original do Task Manager.
+
+A conversa antiga é excluída e uma nova é criada para outro aplicativo HTML: uma Reading Library em **test2.html**. Ela trabalha com livros em vez de tarefas, mas contém intencionalmente a mesma família de erros de estado, identidade, filtros, contadores, teclado, exclusão e localStorage.
+
+### 1. Iniciar em uma conversa separada
+
+![Novo teste da Reading Library em outra conversa](/super-memory/reading-library-new-session.png)
+
+Para a demonstração, a solicitação pede explicitamente que o Breezell examine memórias, lições e padrões relevantes antes de fazer alterações. Isso torna a recuperação visível. No uso normal, o Super Memory pode recuperar automaticamente o conhecimento relevante sem essa instrução.
+
+### 2. Recuperar conhecimento da conversa excluída
+
+Antes de editar **test2.html**, o Breezell recupera a **P1 Skill** anterior de carregamento JSON protegido e os registros **P2 Resource** que apontam para regiões editadas do antigo **test.html**.
+
+![Breezell recuperando itens Skill e Resource](/super-memory/reading-library-memory-recall.png)
+
+Isso mostra duas formas de recuperação:
+
+- **Skill:** Fornece o padrão reutilizável de persistência: JSON.stringify e JSON.parse protegidos, rejeição segura de dados antigos corrompidos e restauração de um padrão limpo.
+- **Resource:** Preserva a origem concreta do padrão ao mostrar quais regiões do arquivo anterior foram modificadas.
+
+Neste teste, excluir a conversa original não removeu os itens estruturados extraídos pelo Super Memory. O conhecimento permaneceu disponível para a conversa seguinte.
+
+### 3. Transferir o método sem copiar o patch antigo
+
+O Breezell aplica a lição ao estado compartilhado **books** da Reading Library, em vez de copiar o código criado para o antigo array **tasks**.
+
+![Reading Library corrigida com conhecimento recuperado](/super-memory/reading-library-repair-result.png)
+
+A nova correção inclui:
+
+- Serialização e análise JSON protegidas.
+- Remoção segura de valores antigos irrecuperáveis.
+- Carregamento de uma biblioteca vazia válida sem duplicar o livro de exemplo.
+- Identidades únicas determinísticas em vez de timestamps sujeitos a colisões.
+- Contadores, filtros e estados vazios corretos.
+- Alternância de estado, exclusão direcionada e limpeza dos livros lidos.
+- Validação de entrada e envio apenas com Enter.
+- Eventos baseados na identidade estável de cada livro.
+
+O Breezell verifica o resultado com um fluxo de 14 testes no navegador e restaura o valor anterior do localStorage ao final.
+
+### O que o segundo teste comprova
+
+- **O conhecimento estruturado permanece após a conversa:** Excluir o diálogo anterior não impediu a recuperação de Skill e Resource neste teste.
+- **A recuperação se generaliza entre implementações:** Um padrão aprendido com tarefas é aplicado a livros porque as falhas de estado e persistência são estruturalmente relacionadas.
+- **Skill é mais do que histórico de patch:** P1 Skill fornece um método reutilizável, enquanto P2 Resource preserva o histórico concreto.
+- **A IA corrige causas raiz:** Ela transfere os princípios de estado compartilhado, identidade estável, persistência validada e verificação integral, sem copiar o código antigo linha por linha.
+- **A recuperação explícita é opcional:** O pedido menciona memória apenas para tornar a demonstração observável. Normalmente, itens relevantes do Super Memory podem ser recuperados automaticamente.
+

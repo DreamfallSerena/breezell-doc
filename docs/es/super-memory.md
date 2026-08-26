@@ -185,3 +185,55 @@ Las etiquetas P2 y unverified mantienen este rastro temporal separado de Skill y
 
 Esta separación mantiene la recuperación precisa y controlable. Una tarea futura puede solicitar por separado el método, la lección, el historial de ejecución o el recurso modificado, sin cargar una única memoria genérica sobredimensionada.
 
+## Validación: reutilización en una conversación nueva y otra aplicación
+
+Una segunda prueba comprueba si el conocimiento extraído sigue siendo útil fuera de la conversación original del administrador de tareas.
+
+Se elimina la conversación anterior y se crea una nueva para una aplicación HTML diferente: una biblioteca de lectura guardada en **test2.html**. Su interfaz y modelo utilizan libros en lugar de tareas, pero contiene intencionadamente la misma familia de errores de estado, identidad, filtros, contadores, teclado, eliminación y localStorage.
+
+### 1. Comenzar en otra conversación
+
+![Nueva prueba de la biblioteca de lectura](/super-memory/reading-library-new-session.png)
+
+Para la demostración, la solicitud pide explícitamente a Breezell que revise memorias, lecciones y patrones relevantes antes de realizar cambios. Esto permite ver la recuperación durante la prueba. En el uso normal, Super Memory puede recuperar automáticamente el conocimiento pertinente sin esta indicación.
+
+### 2. Recuperar conocimiento de la conversación eliminada
+
+Antes de editar **test2.html**, Breezell recupera la **P1 Skill** anterior sobre carga JSON protegida y los registros **P2 Resource** que señalan regiones modificadas del antiguo archivo **test.html**.
+
+![Breezell recupera entradas Skill y Resource](/super-memory/reading-library-memory-recall.png)
+
+Esto muestra dos formas de recuperación:
+
+- **Skill:** Proporciona el patrón reutilizable de persistencia: JSON.stringify y JSON.parse protegidos, rechazo seguro de datos antiguos dañados y restauración de un estado limpio.
+- **Resource:** Conserva el origen concreto del patrón al mostrar qué regiones del archivo anterior se modificaron.
+
+En esta prueba, eliminar la conversación original no eliminó las entradas estructuradas extraídas por Super Memory. El conocimiento útil siguió disponible para otra conversación.
+
+### 3. Transferir el método sin copiar el parche anterior
+
+Breezell aplica la lección al estado compartido **books** de la biblioteca en lugar de copiar el código creado para la antigua matriz **tasks**.
+
+![Biblioteca reparada mediante conocimiento recuperado](/super-memory/reading-library-repair-result.png)
+
+La nueva reparación incluye:
+
+- Serialización y análisis JSON protegidos.
+- Eliminación segura de valores antiguos irrecuperables.
+- Carga de una biblioteca vacía válida sin duplicar el libro de ejemplo.
+- Identidades únicas deterministas en lugar de marcas de tiempo propensas a colisiones.
+- Contadores, filtros y estados vacíos correctos.
+- Cambio de estado, eliminación dirigida y limpieza de libros leídos.
+- Validación de entradas y envío mediante la tecla Enter.
+- Controladores que operan sobre la identidad estable de cada libro.
+
+Breezell verifica el resultado mediante un flujo de 14 comprobaciones en el navegador y restaura después el valor de localStorage anterior a la prueba.
+
+### Qué demuestra la segunda prueba
+
+- **El conocimiento estructurado sobrevive a la conversación:** Eliminar el diálogo anterior no impide recuperar Skill y Resource en esta prueba.
+- **La recuperación se generaliza entre implementaciones:** Un patrón aprendido con tareas se aplica a libros porque los errores subyacentes de estado y persistencia están relacionados.
+- **Skill es más que un historial de parches:** P1 Skill ofrece un método reutilizable y P2 Resource conserva el historial concreto.
+- **La IA corrige las causas raíz:** Transfiere los principios de estado compartido, identidad estable, persistencia validada y verificación integral, sin copiar líneas antiguas.
+- **La recuperación explícita es opcional:** La solicitud menciona la memoria solo para hacer visible la demostración. Normalmente, Super Memory puede recuperar automáticamente las entradas pertinentes.
+
