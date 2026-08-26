@@ -55,6 +55,15 @@ Workspace のルールは **{workspace}/.breezell/rules/breezell.md** に保存�
 
 Workspace スキルは `{workspace}/.breezell/skills/<name>/SKILL.md` に保存されます。Breezell が確実に選択して適用できるように、各スキルは 1 つの繰り返し可能な役割に絞ってください。
 
-## Commit
+## コミットメッセージ
 
-**Commit** セクションでは、コミット関連の設定を Workspace と Global に分けて管理します。プロジェクト固有の要件は Workspace に、再利用する設定は Global に保存します。
+**Commit** では、Breezell が Git のコミットメッセージを生成するときに使用するプロンプトをカスタマイズできます。
+
+![ワークスペースのコミットメッセージ設定](/prompt-settings/commit-message-settings.png)
+
+- **カスタムプロンプト：** エディターに内容を入力すると、Breezell に組み込まれている Conventional Commits プロンプトが完全に置き換えられます。
+- **範囲の優先順位：** Workspace のコミットプロンプトは Global より優先されます。リポジトリ固有の規則は Workspace に、プロジェクト間で共通する既定値は Global に設定します。
+- **自動コンテキスト：** 現在の差分、ブランチ、最近のコミットは引き続き Breezell からモデルに提供されます。カスタムプロンプトでは、必要なスタイル、言語、形式、制約だけを指定できます。
+- **既定値に戻す：** **Clear** を選択するとカスタム内容が削除され、組み込みプロンプトに戻ります。
+
+Workspace のコミットプロンプトは **{workspace}/.breezell/rules/commit_prompt.md** に保存されます。

@@ -55,6 +55,15 @@ Workspace 규칙은 **{workspace}/.breezell/rules/breezell.md**에 저장됩니�
 
 Workspace 스킬은 `{workspace}/.breezell/skills/<name>/SKILL.md`에 저장됩니다. Breezell이 안정적으로 선택하고 적용할 수 있도록 각 스킬을 하나의 반복 가능한 역할에 집중하세요.
 
-## Commit
+## 커밋 메시지
 
-**Commit** 섹션에서는 커밋 관련 설정을 Workspace와 Global 범위로 나누어 관리합니다. 프로젝트별 요구 사항은 Workspace에, 재사용할 환경설정은 Global에 저장합니다.
+**Commit**에서는 Breezell이 Git 커밋 메시지를 생성할 때 사용하는 프롬프트를 사용자 지정할 수 있습니다.
+
+![워크스페이스 커밋 메시지 설정](/prompt-settings/commit-message-settings.png)
+
+- **사용자 지정 프롬프트:** 편집기에 내용이 있으면 Breezell의 기본 Conventional Commits 프롬프트를 완전히 대체합니다.
+- **범위 우선순위:** Workspace 커밋 프롬프트가 Global 프롬프트보다 우선합니다. 저장소별 규칙은 Workspace에, 여러 프로젝트에서 공유할 기본 설정은 Global에 작성하세요.
+- **자동 컨텍스트:** 현재 변경 사항, 브랜치 및 최근 커밋은 Breezell이 계속 모델에 컨텍스트로 제공합니다. 사용자 지정 프롬프트에는 필요한 스타일, 언어, 형식 및 제약 조건만 지정하면 됩니다.
+- **기본값 복원:** **Clear**를 선택하면 사용자 지정 내용이 삭제되고 기본 프롬프트가 복원됩니다.
+
+Workspace 커밋 프롬프트는 **{workspace}/.breezell/rules/commit_prompt.md**에 저장됩니다.

@@ -55,6 +55,15 @@ To create a skill:
 
 A workspace skill is stored at `{workspace}/.breezell/skills/<name>/SKILL.md`. Keep each skill focused on one repeatable responsibility so Breezell can select and apply it reliably.
 
-## Commit
+## Commit message
 
-The **Commit** section keeps commit-related configuration separate for the workspace and global scopes. Place project-specific commit requirements under Workspace, and reusable preferences under Global.
+**Commit** lets you customize the prompt Breezell uses to generate Git commit messages.
+
+![Workspace Commit Message settings](/prompt-settings/commit-message-settings.png)
+
+- **Custom prompt:** When this editor contains text, it completely replaces Breezell's built-in Conventional Commits prompt.
+- **Scope priority:** A Workspace commit prompt takes precedence over the Global prompt. Use Workspace for repository-specific conventions and Global for defaults shared across projects.
+- **Automatic context:** Breezell still supplies the current diff, branch, and recent commits to the model, so the custom prompt only needs to describe the required style, language, format, and constraints.
+- **Restore the default:** Select **Clear** to remove the custom content and restore the built-in prompt.
+
+The Workspace commit prompt is stored at **{workspace}/.breezell/rules/commit_prompt.md**.

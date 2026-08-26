@@ -55,6 +55,15 @@ Para crear una habilidad:
 
 Una habilidad del espacio de trabajo se guarda en `{workspace}/.breezell/skills/<name>/SKILL.md`. Limita cada habilidad a una responsabilidad repetible para que Breezell pueda seleccionarla y aplicarla de forma fiable.
 
-## Commit
+## Mensajes de commit
 
-La sección **Commit** mantiene separada la configuración relacionada con los commits en los ámbitos Workspace y Global. Guarda los requisitos específicos del proyecto en Workspace y las preferencias reutilizables en Global.
+**Commit** permite personalizar la instrucción que utiliza Breezell para generar mensajes de commit de Git.
+
+![Configuración de mensajes de commit del espacio de trabajo](/prompt-settings/commit-message-settings.png)
+
+- **Instrucción personalizada:** Cuando el editor contiene texto, sustituye por completo la instrucción integrada de Conventional Commits de Breezell.
+- **Prioridad de ámbitos:** La instrucción de Workspace tiene prioridad sobre la de Global. Utiliza Workspace para las convenciones específicas del repositorio y Global para los valores predeterminados compartidos entre proyectos.
+- **Contexto automático:** Breezell sigue proporcionando al modelo el diff actual, la rama y los commits recientes. La instrucción personalizada solo necesita definir el estilo, el idioma, el formato y las restricciones.
+- **Restaurar el valor predeterminado:** Selecciona **Clear** para eliminar el contenido personalizado y recuperar la instrucción integrada.
+
+La instrucción de commit de Workspace se guarda en **{workspace}/.breezell/rules/commit_prompt.md**.

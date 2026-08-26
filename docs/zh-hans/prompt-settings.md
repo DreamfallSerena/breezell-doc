@@ -55,6 +55,15 @@ description: 在工作区或全局范围内配置规则、记忆、技能及相�
 
 工作区技能保存在 `{workspace}/.breezell/skills/<name>/SKILL.md`。每个技能应只负责一种可重复执行的任务，便于 Breezell 准确选择并稳定调用。
 
-## 提交
+## 提交信息
 
-**Commit（提交）** 用于分别管理工作区和全局范围内与提交相关的配置。项目专用要求应放在工作区，跨项目复用的偏好应放在全局。
+**Commit（提交）** 用于自定义 Breezell 生成 Git 提交信息时使用的提示词。
+
+![工作区提交信息设置](/prompt-settings/commit-message-settings.png)
+
+- **自定义提示词：** 编辑区域中存在内容时，它会完全替换 Breezell 内置的 Conventional Commits 提示词。
+- **范围优先级：** Workspace（工作区）提交提示词的优先级高于 Global（全局）。仓库专用规范应放在工作区，跨项目通用的默认要求应放在全局。
+- **自动上下文：** Breezell 仍会自动向模型提供当前差异、所在分支和近期提交记录，因此自定义提示词只需规定所需的风格、语言、格式和限制。
+- **恢复默认设置：** 点击 **Clear（清除）** 会删除自定义内容并恢复内置提示词。
+
+工作区提交提示词保存在 **{workspace}/.breezell/rules/commit_prompt.md**。
