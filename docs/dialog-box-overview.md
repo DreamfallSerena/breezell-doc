@@ -80,6 +80,18 @@ The pointer highlights the **Manual compress** control in the context panel. Thi
 
 Manual compression is useful during long conversations, especially when the context window is becoming large but you still want to continue in the same session.
 
+## Quick Phrases
+
+The pointer highlights the **Quick Phrases** button in the input tray. Quick Phrases let you save frequently used prompts or instructions and reuse them in new messages without typing them again.
+
+![Quick Phrases button in the input tray](/dialog-box/quick-phrases-button.png)
+
+Open **Quick Phrases** to view and organize saved phrases. Use **Add** to create a phrase. The **All phrases** pane contains every saved phrase; drag a phrase to **Favorites** on the right to keep frequently used items close at hand. Drag it back to remove it from Favorites.
+
+Select a saved phrase to insert it into the current input. You can still edit the text before sending the message.
+
+![Quick Phrases manager](/dialog-box/quick-phrases-manager.png)
+
 ## Mention Menu
 
 The pointer highlights the quick context area used to open the mention menu. The mention menu lets you add files, folders, MCP tools, and skills to the current message.

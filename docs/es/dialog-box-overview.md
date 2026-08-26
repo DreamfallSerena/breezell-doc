@@ -80,6 +80,18 @@ El puntero resalta el control **Manual compress** del panel de contexto. Esta ac
 
 La compresión manual resulta útil durante conversaciones largas, especialmente cuando la ventana de contexto está creciendo pero aún quieres continuar en la misma sesión.
 
+## Frases rápidas
+
+El puntero resalta el botón **Quick Phrases** de la bandeja de entrada. Las frases rápidas permiten guardar prompts o instrucciones frecuentes y reutilizarlos en mensajes nuevos sin volver a escribirlos.
+
+![Botón Quick Phrases en la bandeja de entrada](/dialog-box/quick-phrases-button.png)
+
+Abre **Quick Phrases** para consultar y organizar las frases guardadas. Usa **Add** para crear una frase. El panel **All phrases** contiene todas las frases guardadas; arrastra una frase a **Favorites**, a la derecha, para tener a mano las que utilizas con más frecuencia. Arrástrala de vuelta para quitarla de Favoritos.
+
+Selecciona una frase guardada para insertarla en el campo de entrada actual. Puedes editar el texto antes de enviar el mensaje.
+
+![Gestor de frases rápidas](/dialog-box/quick-phrases-manager.png)
+
 ## Menú de menciones
 
 El puntero resalta el área de contexto rápido que se utiliza para abrir el menú de menciones. Este menú permite añadir archivos, carpetas, herramientas MCP y Skills al mensaje actual.
