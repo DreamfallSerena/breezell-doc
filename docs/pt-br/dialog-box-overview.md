@@ -92,6 +92,20 @@ Selecione uma frase salva para inseri-la no campo de entrada atual. Você ainda 
 
 ![Gerenciador de frases rápidas](/dialog-box/quick-phrases-manager.png)
 
+## Servidores MCP
+
+O ponteiro destaca o botão **MCP** na bandeja de entrada. Abra-o para ver os servidores MCP configurados e controlar se cada servidor está disponível para o Breezell.
+
+![Controles dos servidores MCP](/dialog-box/mcp-server-controls.png)
+
+Cada linha de servidor inclui:
+
+- **Seta de invocação:** insere `/mcp:<nome-do-servidor>` no campo de entrada atual. Envie a solicitação com essa referência para permitir que a IA chame o servidor MCP selecionado.
+- **Interruptor:** ativa ou desativa um servidor MCP existente. Um servidor desativado fica indisponível para a IA até ser ativado novamente.
+- **Indicador de integridade:** um ponto verde indica que o servidor MCP está conectado e íntegro. Um ponto vermelho indica que ele está indisponível ou com estado anormal; verifique a configuração ou o processo antes de invocá-lo.
+
+![Referência MCP inserida no campo de entrada](/dialog-box/mcp-invocation-reference.png)
+
 ## Menu de menções
 
 O ponteiro destaca a área de contexto rápido usada para abrir o menu de menções. O menu permite adicionar arquivos, pastas, ferramentas MCP e Skills à mensagem atual.

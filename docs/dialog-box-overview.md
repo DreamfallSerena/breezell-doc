@@ -92,6 +92,20 @@ Select a saved phrase to insert it into the current input. You can still edit th
 
 ![Quick Phrases manager](/dialog-box/quick-phrases-manager.png)
 
+## MCP Servers
+
+The pointer highlights the **MCP** button in the input tray. Open it to view configured MCP servers and control whether each server is available to Breezell.
+
+![MCP server controls](/dialog-box/mcp-server-controls.png)
+
+Each server row includes:
+
+- **Invocation arrow:** inserts `/mcp:<server-name>` into the current input. Send the request with this reference to let the AI call the selected MCP server.
+- **On/off switch:** enables or disables an existing MCP server. A disabled server is unavailable to the AI until it is enabled again.
+- **Health indicator:** a green dot means the MCP server is connected and healthy. A red dot means it is unavailable or unhealthy; check its configuration or process before invoking it.
+
+![MCP reference inserted into the input](/dialog-box/mcp-invocation-reference.png)
+
 ## Mention Menu
 
 The pointer highlights the quick context area used to open the mention menu. The mention menu lets you add files, folders, MCP tools, and skills to the current message.
