@@ -53,7 +53,7 @@ Workspace 규칙은 **{workspace}/.breezell/rules/breezell.md**에 저장됩니�
 3. 기본 편집기에 스킬 지침, 절차, 제약 조건 및 예상 출력을 작성합니다.
 4. **Create Skill**을 선택합니다.
 
-Workspace 스킬은 **{workspace}/.breezell/skills/<name>/SKILL.md**에 저장됩니다. Breezell이 안정적으로 선택하고 적용할 수 있도록 각 스킬을 하나의 반복 가능한 역할에 집중하세요.
+Workspace 스킬은 `{workspace}/.breezell/skills/<name>/SKILL.md`에 저장됩니다. Breezell이 안정적으로 선택하고 적용할 수 있도록 각 스킬을 하나의 반복 가능한 역할에 집중하세요.
 
 ## Commit
 

@@ -53,7 +53,7 @@ Para crear una habilidad:
 3. Escribe en el editor principal las instrucciones, los pasos, las restricciones y el resultado esperado.
 4. Selecciona **Create Skill**.
 
-Una habilidad del espacio de trabajo se guarda en **{workspace}/.breezell/skills/<name>/SKILL.md**. Limita cada habilidad a una responsabilidad repetible para que Breezell pueda seleccionarla y aplicarla de forma fiable.
+Una habilidad del espacio de trabajo se guarda en `{workspace}/.breezell/skills/<name>/SKILL.md`. Limita cada habilidad a una responsabilidad repetible para que Breezell pueda seleccionarla y aplicarla de forma fiable.
 
 ## Commit
 

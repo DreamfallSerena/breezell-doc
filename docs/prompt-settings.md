@@ -53,7 +53,7 @@ To create a skill:
 3. Write the skill instructions, workflow, constraints, and expected output in the main editor.
 4. Select **Create Skill**.
 
-A workspace skill is stored at **{workspace}/.breezell/skills/<name>/SKILL.md**. Keep each skill focused on one repeatable responsibility so Breezell can select and apply it reliably.
+A workspace skill is stored at `{workspace}/.breezell/skills/<name>/SKILL.md`. Keep each skill focused on one repeatable responsibility so Breezell can select and apply it reliably.
 
 ## Commit
 

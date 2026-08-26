@@ -53,7 +53,7 @@ Workspace のルールは **{workspace}/.breezell/rules/breezell.md** に保存�
 3. メインエディターに手順、制約、期待する出力を含むスキル指示を記述します。
 4. **Create Skill** を選択します。
 
-Workspace スキルは **{workspace}/.breezell/skills/<name>/SKILL.md** に保存されます。Breezell が確実に選択して適用できるように、各スキルは 1 つの繰り返し可能な役割に絞ってください。
+Workspace スキルは `{workspace}/.breezell/skills/<name>/SKILL.md` に保存されます。Breezell が確実に選択して適用できるように、各スキルは 1 つの繰り返し可能な役割に絞ってください。
 
 ## Commit
 

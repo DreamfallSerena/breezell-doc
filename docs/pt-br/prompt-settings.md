@@ -53,7 +53,7 @@ Para criar uma habilidade:
 3. Escreva no editor principal as instruções, as etapas, as restrições e o resultado esperado.
 4. Selecione **Create Skill**.
 
-Uma habilidade do Workspace é armazenada em **{workspace}/.breezell/skills/<name>/SKILL.md**. Mantenha cada habilidade focada em uma responsabilidade repetível para que o Breezell possa selecioná-la e aplicá-la com confiabilidade.
+Uma habilidade do Workspace é armazenada em `{workspace}/.breezell/skills/<name>/SKILL.md`. Mantenha cada habilidade focada em uma responsabilidade repetível para que o Breezell possa selecioná-la e aplicá-la com confiabilidade.
 
 ## Commit
 

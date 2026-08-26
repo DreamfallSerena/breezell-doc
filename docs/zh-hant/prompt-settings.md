@@ -53,7 +53,7 @@ description: 在工作區或全域範圍內設定規則、記憶、技能及相�
 3. 在主要編輯區域中撰寫技能指令、執行步驟、限制條件和預期輸出。
 4. 點擊 **Create Skill（建立技能）**。
 
-工作區技能儲存在 **{workspace}/.breezell/skills/<name>/SKILL.md**。每個技能應只負責一種可重複執行的任務，方便 Breezell 準確選擇並穩定呼叫。
+工作區技能儲存在 `{workspace}/.breezell/skills/<name>/SKILL.md`。每個技能應只負責一種可重複執行的任務，方便 Breezell 準確選擇並穩定呼叫。
 
 ## 提交
 
