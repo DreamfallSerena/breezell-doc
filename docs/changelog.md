@@ -5,6 +5,23 @@ next: false
 
 # Changelog
 
+## 1.3.1 · 2026-08-26
+
+### Fixes
+
+- Fixed an issue where **chat history could disappear after the workspace identity changed**.
+- Fixed an issue in **Breezell Settings** where incorrectly mounted dropdown components could cause unexpected behavior.
+- Fixed incorrect **zoom behavior in the built-in browser**.
+- Fixed chat layout sizing so the **conversation area is no longer compressed by the page height**.
+- Fixed an issue where **edit tool rendering could cause a crash**.
+- Fixed **system notifications incorrectly stretching to full width** when using the new Breezell UI.
+- Corrected the **bottom input area's alignment** so its left and right spacing now matches the surrounding chat panel.
+
+### Improvements
+
+- Improved overall **performance and responsiveness**.
+- Enhanced **model engine capabilities and reliability**.
+
 ## 1.3.0 · 2026-08-25
 
 ### New Features
