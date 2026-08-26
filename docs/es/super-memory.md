@@ -77,3 +77,55 @@ Context e Insights permiten ver con claridad qué extrae Super Memory, qué info
 ## Memorias activas e inactivas
 
 Las memorias activas permanecen disponibles para recuperarse cuando sean pertinentes. Las memorias inactivas se conservan, pero se separan del conjunto activo, lo que mantiene centrado el contexto actual sin perder información que pueda resultar útil más adelante.
+
+## Demostración: convertir una reparación en memoria reutilizable
+
+Este ejemplo utiliza un administrador de tareas HTML con errores intencionados para mostrar cómo Super Memory convierte una breve sesión de reparación en conocimiento reutilizable.
+
+La solicitud pide a la IA que inspeccione todo el código y corrija la creación, eliminación y finalización de tareas, los filtros, los contadores, la persistencia en localStorage, la entrada mediante teclado y la eliminación de tareas completadas, sin cambiar la interfaz ni el comportamiento previstos.
+
+### 1. Inspeccionar y reparar el administrador de tareas
+
+Breezell inspecciona el código, identifica las causas raíz compartidas, corrige la implementación y verifica el flujo completo, en lugar de tratar cada síntoma visible como un error independiente.
+
+![Breezell reparando el administrador de tareas](/super-memory/task-manager-repair.png)
+
+La reparación abarca serialización y análisis, carga duplicada, datos guardados dañados, validación de tareas vacías, identidades estables, teclado, cambio de estado, eliminación dirigida, filtros, contadores y limpieza de tareas completadas.
+
+### 2. Registros iniciales de recursos P2
+
+Como se trata de una prueba pequeña y el primer resultado describe principalmente modificaciones concretas, Super Memory registra inicialmente dos secciones editadas de **test.html** como entradas **P2 Resource**.
+
+![Registros de recursos P2 creados durante la reparación](/super-memory/p2-resource-records.png)
+
+Estas entradas conservan qué cambió y dónde. P2 asigna una prioridad menor a estos detalles de implementación de corta duración sin eliminar el rastro de la reparación, de modo que la IA pueda recordar posteriormente qué zonas del archivo se modificaron.
+
+### 3. Provocar una reflexión más profunda
+
+Para esta demostración breve, el usuario pregunta:
+
+> ¿Qué lecciones aprendiste al resolver este problema?
+
+![La IA resume las lecciones de la reparación](/super-memory/repair-lessons.png)
+
+La respuesta identifica principios reutilizables: corregir el origen del estado compartido y no cada síntoma, identificar los elementos de una colección de forma estable, recalcular el estado derivado en todas las rutas de renderizado, validar la persistencia como un límite de datos, revisar los predicados booleanos, detener entradas no válidas, evitar identificadores basados solo en la hora y comprobar las funciones mediante un flujo realista de principio a fin.
+
+### 4. Extraer conocimiento estructurado de la reparación
+
+Tras analizar la reparación con mayor profundidad, Super Memory añade entradas estructuradas de mayor valor:
+
+- Una **P1 Experience** sobre la reparación del estado compartido y la identidad estable de las tareas.
+- Una **P1 Skill** para reparar datos dañados de localStorage mediante serialización y análisis protegidos.
+- Una **P2 Trajectory** que resume el problema de múltiples errores y su proceso de resolución.
+- Los registros **P2 Resource** originales que conservan las ubicaciones modificadas.
+
+![Memorias estructuradas tras la reflexión](/super-memory/structured-repair-memories.png)
+
+### Qué demuestra este ejemplo
+
+- **La profundidad de extracción se adapta al valor:** Las modificaciones pequeñas pueden comenzar como recursos P2, mientras que el conocimiento reutilizable sobre causas raíz puede convertirse en habilidades y experiencias P1.
+- **Cada tipo de memoria cumple una función:** Resource y Trajectory conservan lo ocurrido; Skill y Experience conservan cómo y por qué se resolvió.
+- **La prioridad sigue siendo controlable:** P1 conserva durante más tiempo el conocimiento reutilizable, mientras P2 mantiene disponibles los detalles temporales sin darles peso permanente.
+- **La memoria ayuda en trabajos futuros:** Otras tareas pueden recuperar el historial del archivo, el método de reparación o las lecciones de ingeniería sin depender únicamente del diálogo original.
+- **Normalmente no es necesario pedir una reflexión:** La pregunta se utiliza aquí para que una prueba muy pequeña produzca un resultado visible. En errores de larga duración o gran importancia, Super Memory puede detectar y registrar automáticamente experiencias duraderas sin que el usuario tenga que formular esta pregunta.
+

@@ -77,3 +77,55 @@ Together, Context and Insights provide a transparent view of what Super Memory e
 ## Active and dormant memories
 
 Active memories remain available for relevant recall. Dormant memories are retained but separated from the active set, helping keep current context focused while preserving information that may still be useful later.
+
+## Demonstration: turning a repair into reusable memory
+
+This example uses an intentionally broken HTML Task Manager to demonstrate how Super Memory changes a short repair session into reusable knowledge.
+
+The repair request asks the AI to inspect the entire codebase and fix task creation, deletion, completion, filtering, counters, localStorage persistence, keyboard input, and clearing completed tasks without changing the intended interface or behavior.
+
+### 1. Inspect and repair the Task Manager
+
+Breezell inspects the code, identifies the shared root causes, repairs the implementation, and verifies the complete workflow rather than treating each visible symptom as an independent bug.
+
+![Breezell repairing the Task Manager](/super-memory/task-manager-repair.png)
+
+The repair covers serialization and parsing, duplicate loading, malformed saved data, empty-task validation, stable task identities, keyboard handling, completion toggling, targeted deletion, filters, counters, and clearing completed tasks.
+
+### 2. Initial P2 resource records
+
+Because this is a small test and the first result mainly describes concrete file edits, Super Memory initially records two edited sections of **test.html** as **P2 Resource** entries.
+
+![P2 resource records created from the repair](/super-memory/p2-resource-records.png)
+
+These entries preserve what changed and where it changed. P2 gives this short-lived implementation detail a lower priority without discarding the repair trace, making it available if the AI later needs to recall which file regions were modified.
+
+### 3. Prompt deeper reflection
+
+For this compact demonstration, the user asks:
+
+> What lessons did you learn from solving this issue?
+
+![AI summarizing lessons from the repair](/super-memory/repair-lessons.png)
+
+The answer identifies reusable engineering lessons: repair the owner of shared state rather than every symptom, address collection items by stable identity, recompute derived state on every render path, treat persistence as a validated data boundary, review Boolean predicates carefully, terminate invalid input paths, avoid timestamp-only identities, and verify features through a realistic end-to-end workflow.
+
+### 4. Extract structured repair knowledge
+
+After the repair is examined at a deeper level, Super Memory adds higher-value structured entries:
+
+- A **P1 Experience** about repairing shared task state and stable identity.
+- A **P1 Skill** for repairing corrupted localStorage persistence with guarded serialization and parsing.
+- A **P2 Trajectory** that summarizes the multi-bug Task Manager problem and its resolution path.
+- The original **P2 Resource** records that preserve the edited file locations.
+
+![Structured repair memories after reflection](/super-memory/structured-repair-memories.png)
+
+### What this demonstrates
+
+- **Extraction depth adapts to value:** Small edits may begin as P2 resources, while reusable root-cause knowledge can be promoted into P1 skills and experiences.
+- **Different memory types have different jobs:** Resource and Trajectory preserve what happened; Skill and Experience preserve how and why the problem was solved.
+- **Priority remains controllable:** P1 retains the more reusable repair knowledge longer, while P2 keeps short-term implementation details available without giving them permanent weight.
+- **Memory becomes useful to future AI work:** Later tasks can retrieve the relevant file history, repair method, or engineering lesson instead of relying only on the original conversation transcript.
+- **Manual reflection is not normally required:** The follow-up question is used here to make a very small test produce an obvious result. For longer-running or high-value bugs, Super Memory can automatically identify and record durable repair experience without requiring the user to ask this question.
+
