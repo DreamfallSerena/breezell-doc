@@ -37,6 +37,43 @@ O painel oferece as seguintes visualizações e controles:
 
 Quando ainda não há itens, o painel informa que as memórias serão extraídas automaticamente das conversas. Com o uso contínuo, itens úteis podem aparecer aqui sem que o usuário precise escrevê-los manualmente.
 
+## Principais vantagens
+
+O Super Memory combina extração automática avançada com uma recuperação eficiente e altamente controlável:
+
+- **Extração avançada:** Dois modelos internos do Breezell analisam as conversas e transformam informações úteis em itens estruturados de Memory, Skill, Experience, Trajectory e Resource, sem exigir entrada manual.
+- **Recuperação eficiente:** Tipo, prioridade, estado, atualidade e índice de memória compilado ajudam a limitar a recuperação às informações relevantes para a tarefa atual.
+- **Injeção de contexto controlável:** A visualização Context mostra o snapshot injetado no turno atual, a prévia do índice para o próximo turno e o tamanho estimado em tokens.
+- **Controle explícito do ciclo de vida:** As prioridades P0 permanente, P1 de 30 dias e P2 de 7 dias funcionam com os estados Active e Dormant para preservar conhecimentos importantes e limitar a duração de informações temporárias.
+- **Integridade observável do conhecimento:** Estado da compilação, versões da origem e do compilador, recursos desatualizados, falhas, verificações, correções, atualidade e itens não sincronizados podem ser inspecionados.
+- **Visibilidade de tokens:** A extração não consome tokens do modelo configurado pelo usuário. Quando a memória recuperada é injetada em uma solicitação, ela passa a fazer parte do contexto dessa solicitação; a prévia e as estatísticas de economia tornam esse uso visível.
+
+## Contexto e controle de recuperação
+
+![Visualização Context do Super Memory](/super-memory/super-memory-context.png)
+
+A visualização **Context** mostra como a memória participa das conversas:
+
+- **Current Turn Injection:** Exibe o snapshot de memória injetado no turno atual. Se ainda não houver um snapshot, o painel mostra claramente um estado vazio.
+- **Memory Index Preview:** Apresenta o índice preparado para o próximo turno e estima seu tamanho em tokens.
+- **Conversation Turns:** Mostra o número de turnos da conversa atual e permite consultar a atividade de memória por turno.
+
+Esses controles mostram se houve injeção de memória, o que está sendo preparado para o próximo turno e o custo aproximado de contexto.
+
+## Insights e integridade do sistema
+
+![Visualização Insights do Super Memory](/super-memory/super-memory-insights.png)
+
+A visualização **Insights** resume o estado e a eficácia do sistema de memória:
+
+- **Project Knowledge Health:** Exibe a última compilação, as versões do compilador e da origem, recursos desatualizados, compilações com falha e totais verificados ou corrigidos.
+- **Token Savings:** Mostra a economia de tokens quando há atividade suficiente registrada.
+- **Viking Filesystem:** Apresenta as quantidades de Memories, Skills, Experiences, Trajectories, Resources e itens Unsynced.
+- **Priority Distribution:** Mostra a distribuição de itens P0 permanentes, P1 de 30 dias e P2 de 7 dias.
+- **Freshness Pulse:** Agrupa conhecimentos atualizados nas últimas 24 horas, 7 dias, 30 dias ou em um período anterior.
+
+Context e Insights oferecem uma visão transparente do que o Super Memory extrai, do que pode recuperar e de quão atualizado e íntegro permanece o conhecimento armazenado.
+
 ## Memórias ativas e inativas
 
 As memórias ativas permanecem disponíveis para recuperação quando forem relevantes. As memórias inativas são preservadas, mas ficam separadas do conjunto ativo, mantendo o contexto atual focado sem perder informações que possam ser úteis posteriormente.
