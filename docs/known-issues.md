@@ -21,9 +21,9 @@ This issue has been fixed.
 
 ## Unexpected crashes
 
-> **Status: Awaiting user verification**
+> **Status: Fixed**
 
-A fix is ready, and we are awaiting user verification to confirm that the issue has been fully resolved.
+This issue has been fixed.
 
 ## Built-in browser displays a blank page
 
@@ -59,21 +59,21 @@ After switching the context window, automatic compression could fail to trigger,
 
 ## Dropdown menus show native styling and overly narrow borders
 
-> **Status: Being fixed**
+> **Status: Fixed**
 
-Some dropdown menus may expose native control styling, and their borders may render too narrowly. We are working to fix these display issues.
+This issue has been fixed.
 
 ## Kimi-series model reasoning-level settings issue
 
-> **Status: Being fixed**
+> **Status: Fixed**
 
-In Breezell 1.3.0, the reasoning-level settings for Kimi-series models may not be applied correctly. We are working to fix this issue.
+This issue has been fixed.
 
 ## Chat may stutter when sending messages
 
-> **Status: Being fixed**
+> **Status: Fixed**
 
-In Breezell 1.3.0, the chat interface may briefly stutter after a message is sent. We are working to improve this behavior.
+This issue has been fixed.
 
 ## Thank you for your patience
 
