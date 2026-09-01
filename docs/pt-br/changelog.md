@@ -5,6 +5,44 @@ next: false
 
 # Registro de alterações
 
+## 1.3.2 · 2026-09-01
+
+### Correções
+
+- Corrigido um problema que podia fazer todo o histórico de conversas desaparecer após trocar de espaço de trabalho, alterar caminhos WSL / remotos ou perder o estado local.
+- Corrigidos congelamentos e janelas sem resposta em conversas longas, além de travamentos da interface durante alterações de arquivos em grande escala ou `git checkout`.
+- Corrigidos links de arquivos locais no chat que apareciam bloqueados e não podiam ser abertos.
+- Corrigido o zoom do navegador integrado que voltava para 100% após atualizar a página, além de menus de modelos e popovers de modo encobertos pelo conteúdo da web.
+- Corrigida a indisponibilidade de ações da fila, como Editar, Enviar agora e Excluir, em dispositivos de toque.
+- Corrigidos deadlocks no navegador compartilhado e novos rascunhos do Agent misturados entre conversas.
+- Corrigida a alteração inesperada da identidade do espaço de trabalho da conversa, que podia causar vazamento de memória entre projetos.
+- Corrigido o estado recolhido ou expandido dos grupos de modelos que não persistia após reiniciar.
+- Corrigidas conversas longas que exibiam incorretamente “Network Error” após cerca de 50 segundos quando o problema real era a janela de contexto cheia.
+- Corrigida a troca do modelo do chat que substituía os modelos configurados separadamente para Apply e mensagens de commit do Git.
+- Corrigidos o travamento da saída de raciocínio durante a rolagem e flashes brancos em blocos de código durante o streaming.
+- Corrigido o Code Index que analisava artefatos de compilação, deixando a indexação mais lenta e usando espaço em disco desnecessário. Abrir Settings não aciona mais “Scanning workspace” repetidamente.
+- Corrigido o Agent que insistia incorretamente que comentários de código deveriam estar em inglês e recusava pedidos explícitos para usar chinês.
+- Corrigida a ferramenta de exploração da web que permanecia inativa por cerca de cinco minutos sem avançar.
+- Corrigidos cantos cortados nos cartões de execução de planos e sombras de popovers fixados sobrepondo a primeira linha das respostas.
+- Corrigidas incompatibilidades de versão do servidor remoto ao conectar a ambientes de desenvolvimento remoto a partir de compilações do código-fonte.
+
+### Melhorias
+
+- O processamento de conversas longas não bloqueia mais a interface, permitindo que as respostas apareçam progressivamente enquanto são geradas.
+- Quando a janela de contexto está quase cheia, o Breezell explica a situação com antecedência. Resultados antigos são movidos para o armazenamento local e recarregados somente quando necessários.
+- Melhorada a resposta de blocos de código e Diffs em respostas longas. O realce de sintaxe de arquivos grandes não trava mais a janela.
+- O histórico de conversas agora é agrupado em Hoje, Ontem e Anteriores, com conversas do Agent e Teams separadas.
+- Os cabeçalhos de provedores na lista de modelos permanecem fixos durante a rolagem. A conversa em foco não treme mais junto com a área de entrada.
+- O Code Index agora respeita o `.gitignore` e prioriza arquivos-fonte em vez de artefatos de compilação.
+- A inspeção da estrutura do repositório não causa mais pausas superiores a dez segundos.
+- O envio de mensagens em conversas extremamente longas está mais responsivo.
+- O popover de configurações do modelo agora se alinha à linha selecionada.
+- A geração de mensagens de commit do Git agora pode usar um modelo selecionado separadamente.
+- Os níveis de raciocínio do GPT-5.6, incluindo Pro, agora estão visíveis e podem ser selecionados.
+- Adicionados Hunyuan HY4, Kimi K3 / Video, Qwen3.8 Flash, GLM-5.3 Flash e vários novos modelos de vídeo.
+- O Image Studio agora oferece suporte ao Grok Imagine para geração de imagens 2.0 e geração de vídeos 1.5.
+- Após a compactação de conversas longas, o Breezell mantém um resumo de transição para que a conversa continue sem interrupções, enquanto o histórico local completo permanece pesquisável por palavra-chave.
+
 ## 1.3.1 · 2026-08-26
 
 ### Correções

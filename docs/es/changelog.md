@@ -5,6 +5,44 @@ next: false
 
 # Registro de cambios
 
+## 1.3.2 · 2026-09-01
+
+### Correcciones
+
+- Se corrigió un problema por el que todo el historial de chat podía desaparecer al cambiar de espacio de trabajo, modificar rutas de WSL / remotas o perder el estado local.
+- Se corrigieron bloqueos y ventanas sin respuesta en conversaciones largas, así como bloqueos de la interfaz durante cambios masivos de archivos o al ejecutar `git checkout`.
+- Se corrigieron los enlaces a archivos locales del chat que aparecían bloqueados y no se podían abrir.
+- Se corrigió el restablecimiento del zoom del navegador integrado al 100 % después de actualizar, así como los menús de modelos o ventanas emergentes de modo que quedaban ocultos detrás del contenido web.
+- Se corrigió la falta de disponibilidad en dispositivos táctiles de acciones de cola como Editar, Enviar ahora y Eliminar.
+- Se corrigieron los interbloqueos del navegador compartido y la mezcla de borradores nuevos de Agent entre conversaciones.
+- Se corrigió el cambio inesperado de la identidad del espacio de trabajo de una conversación, que podía provocar que la memoria se filtrara entre proyectos.
+- Se corrigió que el estado contraído o expandido de los grupos de modelos no se conservara después de reiniciar.
+- Se corrigió que las conversaciones largas mostraran incorrectamente un «Error de red» después de unos 50 segundos cuando el problema real era una ventana de contexto llena.
+- Se corrigió que cambiar el modelo del chat sobrescribiera los modelos configurados por separado para Apply y los mensajes de commit de Git.
+- Se corrigieron el bloqueo de la salida de razonamiento durante el desplazamiento y los destellos blancos en bloques de código durante el streaming.
+- Se corrigió que Code Index analizara artefactos de compilación, lo que ralentizaba la indexación y ocupaba espacio de disco innecesario. Abrir Settings ya no activa repetidamente «Scanning workspace».
+- Se corrigió que Agent insistiera incorrectamente en que los comentarios del código debían estar en inglés y rechazara solicitudes explícitas para usar chino.
+- Se corrigió que la herramienta de exploración web permaneciera inactiva durante unos cinco minutos sin avanzar.
+- Se corrigieron las esquinas recortadas de las tarjetas de ejecución de planes y las sombras de ventanas emergentes fijadas que se superponían a la primera línea de las respuestas.
+- Se corrigieron las diferencias de versión del servidor remoto al conectarse a entornos de desarrollo remotos desde compilaciones de código fuente.
+
+### Mejoras
+
+- El procesamiento de conversaciones largas ya no bloquea la interfaz, por lo que las respuestas aparecen progresivamente mientras se generan.
+- Cuando la ventana de contexto está cerca de llenarse, Breezell ahora lo explica antes. Los resultados antiguos se trasladan al almacenamiento local y solo se vuelven a cargar cuando son necesarios.
+- Se mejoró la respuesta de los bloques de código y los Diffs en respuestas largas. El resaltado de sintaxis de archivos grandes ya no bloquea la ventana.
+- El historial de chat ahora se agrupa en Hoy, Ayer y Anteriores, y las conversaciones de Agent y Teams se muestran por separado.
+- Los encabezados de proveedores de la lista de modelos permanecen fijados al desplazarse. La conversación activa ya no tiembla junto con el área de entrada.
+- Code Index ahora respeta `.gitignore` y se centra en los archivos de código fuente en lugar de los artefactos de compilación.
+- La inspección de la estructura del repositorio ya no provoca bloqueos de más de diez segundos.
+- El envío de mensajes en conversaciones extremadamente largas ahora responde mejor.
+- La ventana emergente de ajustes del modelo ahora se alinea con la fila seleccionada.
+- La generación de mensajes de commit de Git ahora puede usar un modelo seleccionado por separado.
+- Los niveles de razonamiento de GPT-5.6, incluido Pro, ahora son visibles y seleccionables.
+- Se añadieron Hunyuan HY4, Kimi K3 / Video, Qwen3.8 Flash, GLM-5.3 Flash y varios modelos de vídeo nuevos.
+- Image Studio ahora admite Grok Imagine para generación de imágenes 2.0 y generación de vídeo 1.5.
+- Tras comprimir una conversación larga, Breezell conserva un resumen de traspaso para continuarla con fluidez, mientras que el historial local completo sigue disponible para búsquedas por palabras clave.
+
 ## 1.3.1 · 2026-08-26
 
 ### Correcciones

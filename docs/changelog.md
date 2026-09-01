@@ -5,6 +5,44 @@ next: false
 
 # Changelog
 
+## 1.3.2 · 2026-09-01
+
+### Fixes
+
+- Fixed an issue where the entire chat history could disappear after switching workspaces, changing WSL / remote paths, or losing local state.
+- Fixed freezes and unresponsive windows in long conversations, as well as UI lockups during large-scale file changes or `git checkout`.
+- Fixed local file links in chat appearing as blocked and becoming unclickable.
+- Fixed built-in browser zoom resetting to 100% after a refresh, and model dropdowns or mode popovers being obscured by web content.
+- Fixed queue actions such as Edit, Send Now, and Delete being unavailable on touch devices.
+- Fixed shared browser deadlocks and new Agent drafts being mixed across conversations.
+- Fixed conversation workspace identity changing unexpectedly, which could cause memory to leak across projects.
+- Fixed model group collapse states not persisting across restarts.
+- Fixed long conversations incorrectly reporting a “Network Error” after around 50 seconds when the actual issue was a full context window.
+- Fixed switching the chat model overwriting separately configured models for Apply and Git commit messages.
+- Fixed reasoning output getting stuck while scrolling, and white flashes in streaming code blocks.
+- Fixed Code Index scanning build artifacts, which caused slower indexing and unnecessary disk usage. Opening Settings no longer repeatedly triggers “Scanning workspace.”
+- Fixed Agent incorrectly insisting that code comments must be in English and refusing explicit requests to use Chinese.
+- Fixed the web exploration tool idling for around five minutes without making progress.
+- Fixed clipped corners on plan execution cards and pinned popover shadows overlapping the first line of replies.
+- Fixed remote server version mismatches when connecting to remote development environments from source builds.
+
+### Improvements
+
+- Long-conversation processing no longer blocks the interface, allowing replies to appear progressively as they are generated.
+- When the context window is close to full, Breezell now explains the situation earlier. Older results are moved to local storage and reloaded only when needed.
+- Improved responsiveness for code blocks and Diffs in long responses. Syntax highlighting for large files no longer locks up the window.
+- Chat history is now grouped into Today, Yesterday, and Earlier, with Agent and Teams conversations separated.
+- Provider headers in the model list now stay pinned while scrolling. The currently focused conversation no longer jitters with the input area.
+- Code Index now respects `.gitignore` and focuses on source files instead of build artifacts.
+- Inspecting repository structure no longer causes stalls lasting more than ten seconds.
+- Sending messages in extremely long conversations is now more responsive.
+- The model settings popover now aligns with the currently selected row.
+- Git commit message generation can now use a separately selected model.
+- GPT-5.6 reasoning levels, including Pro, are now visible and selectable.
+- Added Hunyuan HY4, Kimi K3 / Video, Qwen3.8 Flash, GLM-5.3 Flash, and a range of new video models.
+- Image Studio now supports Grok Imagine image generation 2.0 and video generation 1.5.
+- After long-conversation compression, Breezell now keeps a handoff summary so the conversation can continue smoothly, while the complete local history remains searchable by keyword.
+
 ## 1.3.1 · 2026-08-26
 
 ### Fixes
