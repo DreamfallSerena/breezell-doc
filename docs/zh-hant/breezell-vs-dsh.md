@@ -1,6 +1,6 @@
 ---
-title: Breezell 與 DSH 的差異
-description: 從維護模式、擴充能力、體驗一致性和安全邊界等方面比較 Breezell 與 DSH（deepseek-harness）。
+title: "Breezell 與 DSH 的差異"
+description: "從維護模式、擴充能力、體驗一致性和安全邊界等方面比較 Breezell 與 DSH（deepseek-harness）。"
 ---
 
 # Breezell 與 DSH：最根本的差異是什麼？

@@ -1,6 +1,6 @@
 ---
-title: Breezell и DSH
-description: Практическое сравнение Breezell и DSH (deepseek-harness): сопровождение, расширяемость, единообразие и границы безопасности.
+title: "Breezell и DSH"
+description: "Практическое сравнение Breezell и DSH (deepseek-harness): сопровождение, расширяемость, единообразие и границы безопасности."
 ---
 
 # Breezell и DSH: в чём принципиальная разница?

@@ -1,6 +1,6 @@
 ---
-title: Breezell e DSH
-description: Comparação prática entre Breezell e DSH (deepseek-harness), incluindo manutenção, extensibilidade, consistência e limites de segurança.
+title: "Breezell e DSH"
+description: "Comparação prática entre Breezell e DSH (deepseek-harness), incluindo manutenção, extensibilidade, consistência e limites de segurança."
 ---
 
 # Breezell e DSH: qual é a diferença fundamental?

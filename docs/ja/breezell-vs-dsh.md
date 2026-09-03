@@ -1,6 +1,6 @@
 ---
-title: Breezell と DSH の違い
-description: Breezell と DSH（deepseek-harness）を、保守、拡張性、一貫性、セキュリティ境界の観点から比較します。
+title: "Breezell と DSH の違い"
+description: "Breezell と DSH（deepseek-harness）を、保守、拡張性、一貫性、セキュリティ境界の観点から比較します。"
 ---
 
 # Breezell と DSH：根本的な違い
