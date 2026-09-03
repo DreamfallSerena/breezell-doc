@@ -16,6 +16,9 @@ One of the questions we receive most often is how Breezell differs from DSH (dee
 | Maintenance | Features and integrations can depend heavily on community contributors | Core features, integrations, and product behavior are coordinated officially |
 | Extensibility | Broad freedom and faster experimentation | More controlled today, with extensibility opening gradually |
 | Consistency | Experience and quality can vary between extensions | More consistent behavior, design, and release standards |
+| BYOK configuration | Unified, lightweight provider and model configuration | Often depends on the native integration or additional community extensions |
+| Model coverage | Broad built-in support for providers, API formats, and model capabilities | Native coverage is narrower without additional integrations |
+| Built-in workflows | Six integrated modes cover conversation, analysis, planning, autonomous work, causal reasoning, and parallel collaboration | Additional workflows may require plugins or custom assembly |
 | Security boundary | Depends strongly on each extension's source, permissions, and implementation | The officially maintained core stays within a more controlled boundary |
 | Main trade-off | Greater flexibility requires users to evaluate extensions carefully | Greater control means fixes and features may need to wait for official development |
 
@@ -37,6 +40,35 @@ When users do not install untrusted third-party extensions, the core Breezell ex
 
 ::: info A security boundary, not an absolute guarantee
 No extensible development tool is automatically risk-free. Review the source, publisher, permissions, and reputation of any third-party extension before installing it.
+:::
+
+## BYOK configuration and model coverage
+
+Breezell treats **Bring Your Own Key (BYOK)** as a first-class product capability. Providers, endpoints, API keys, API formats, models, and capability options follow a more unified configuration model, making setup lighter and easier to maintain.
+
+Breezell supports a broad range of providers, model families, API formats, reasoning levels, vision capabilities, image models, and video models through the same interface. Compared with native DSH without additional community integrations, Breezell provides wider built-in model coverage and avoids requiring a separate plugin or custom configuration path for every provider.
+
+## Six intelligent modes, built in
+
+| Mode | Purpose |
+| --- | --- |
+| **Chat** | Quick questions and conversations |
+| **Agent** | Edits files and uses tools autonomously |
+| **Analyze** | Deep analysis without editing |
+| **Plan** | Produces an implementation plan before coding |
+| **Entanglement** | Causal reasoning with emotional awareness |
+| **Teams** | Parallel AI teammates for complex tasks |
+
+These are native Breezell workflows, not mode labels supplied by separate plugins. Users can move from a quick question to analysis, planning, autonomous implementation, causal exploration, or multi-agent collaboration without installing another extension just to add a new working mode.
+
+The modes share Breezell's integrated context, tools, permissions, memory, interface, and task-state infrastructure. This keeps their behavior consistent and lets each mode remain specialized without fragmenting the overall experience.
+
+## Agent capability
+
+Breezell Agent has been optimized for tool selection, file editing, context management, recovery, verification, and long-running task continuity. In the coding workflows currently supported by both products, the Breezell team's product assessment is that **Breezell Agent provides stronger end-to-end autonomy and execution reliability than native DSH**.
+
+::: info Scope of this comparison
+This is Breezell's product assessment based on internal development and observed use, not a universal independent benchmark. Results can vary by model, task, repository, configuration, and environment.
 :::
 
 ## The trade-off
