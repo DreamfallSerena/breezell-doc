@@ -16,9 +16,9 @@ One of the questions we receive most often is how Breezell differs from DSH (dee
 | Maintenance | Features and integrations can depend heavily on community contributors | Core features, integrations, and product behavior are coordinated officially |
 | Extensibility | Broad freedom and faster experimentation | More controlled today, with extensibility opening gradually |
 | Consistency | Experience and quality can vary between extensions | More consistent behavior, design, and release standards |
-| BYOK configuration | Unified, lightweight provider and model configuration | Often depends on the native integration or additional community extensions |
-| Model coverage | Broad built-in support for providers, API formats, and model capabilities | Native coverage is narrower without additional integrations |
-| Built-in workflows | Six integrated modes cover conversation, analysis, planning, autonomous work, causal reasoning, and parallel collaboration | Additional workflows may require plugins or custom assembly |
+| BYOK configuration | Often depends on the native integration or additional community extensions | Unified, lightweight provider and model configuration |
+| Model coverage | Native coverage is narrower without additional integrations | Broad built-in support for providers, API formats, and model capabilities |
+| Built-in workflows | Additional workflows may require plugins or custom assembly | Six integrated modes cover conversation, analysis, planning, autonomous work, causal reasoning, and parallel collaboration |
 | Security boundary | Depends strongly on each extension's source, permissions, and implementation | The officially maintained core stays within a more controlled boundary |
 | Main trade-off | Greater flexibility requires users to evaluate extensions carefully | Greater control means fixes and features may need to wait for official development |
 

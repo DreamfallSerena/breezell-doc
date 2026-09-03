@@ -16,9 +16,9 @@ Uma das perguntas mais frequentes é como o Breezell difere do DSH (deepseek-har
 | Manutenção | Recursos e integrações podem depender da comunidade | O núcleo e as integrações são coordenados oficialmente |
 | Extensibilidade | Ampla liberdade e experimentação rápida | Mais controlada hoje, com abertura gradual |
 | Consistência | Experiência e qualidade podem variar | Comportamento, design e lançamentos mais consistentes |
-| Configuração BYOK | Configuração unificada e leve de provedores e modelos | Pode depender da integração nativa ou de extensões comunitárias |
-| Cobertura de modelos | Amplo suporte nativo a provedores, formatos de API e capacidades | A cobertura nativa é menor sem integrações adicionais |
-| Fluxos integrados | Seis modos cobrem conversa, análise, planejamento, trabalho autônomo, raciocínio causal e colaboração paralela | Fluxos adicionais podem exigir plugins ou configuração manual |
+| Configuração BYOK | Pode depender da integração nativa ou de extensões comunitárias | Configuração unificada e leve de provedores e modelos |
+| Cobertura de modelos | A cobertura nativa é menor sem integrações adicionais | Amplo suporte nativo a provedores, formatos de API e capacidades |
+| Fluxos integrados | Fluxos adicionais podem exigir plugins ou configuração manual | Seis modos cobrem conversa, análise, planejamento, trabalho autônomo, raciocínio causal e colaboração paralela |
 | Segurança | Depende da origem, permissões e implementação da extensão | O núcleo oficial fica em um limite mais controlado |
 | Contrapartida | Flexibilidade exige avaliação cuidadosa | Recursos podem aguardar o desenvolvimento oficial |
 
