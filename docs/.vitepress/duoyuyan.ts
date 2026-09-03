@@ -3,6 +3,7 @@ type yuyanwenben = {
   yuyan: string;
   zhinan: string;
   guanyu: string;
+  duibi: string;
   lianxi: string;
   gengxinrizhi: string;
   gonggao: string;
@@ -35,6 +36,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     yuyan: "en-US",
     zhinan: "Guide",
     guanyu: "About",
+    duibi: "Breezell vs DSH",
     lianxi: "Contact",
     gengxinrizhi: "Changelog",
     gonggao: "Announcements",
@@ -65,6 +67,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     yuyan: "ja-JP",
     zhinan: "ガイド",
     guanyu: "概要",
+    duibi: "Breezell と DSH の違い",
     lianxi: "お問い合わせ",
     gengxinrizhi: "更新履歴",
     gonggao: "お知らせ",
@@ -95,6 +98,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     yuyan: "ko-KR",
     zhinan: "가이드",
     guanyu: "소개",
+    duibi: "Breezell과 DSH의 차이",
     lianxi: "문의",
     gengxinrizhi: "변경 사항",
     gonggao: "공지",
@@ -125,6 +129,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     yuyan: "es-ES",
     zhinan: "Guía",
     guanyu: "Acerca de",
+    duibi: "Breezell frente a DSH",
     lianxi: "Contacto",
     gengxinrizhi: "Registro de cambios",
     gonggao: "Anuncios",
@@ -155,6 +160,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     yuyan: "pt-BR",
     zhinan: "Guia",
     guanyu: "Sobre",
+    duibi: "Breezell e DSH",
     lianxi: "Contato",
     gengxinrizhi: "Registro de alterações",
     gonggao: "Comunicados",
@@ -185,6 +191,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     yuyan: "ru-RU",
     zhinan: "Руководство",
     guanyu: "О проекте",
+    duibi: "Breezell и DSH",
     lianxi: "Контакты",
     gengxinrizhi: "Журнал изменений",
     gonggao: "Объявления",
@@ -215,6 +222,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     yuyan: "zh-CN",
     zhinan: "指南",
     guanyu: "关于",
+    duibi: "Breezell 与 DSH 的区别",
     lianxi: "联系",
     gengxinrizhi: "更新日志",
     gonggao: "公告",
@@ -245,6 +253,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     yuyan: "zh-TW",
     zhinan: "指南",
     guanyu: "關於",
+    duibi: "Breezell 與 DSH 的差異",
     lianxi: "聯絡我們",
     gengxinrizhi: "更新日誌",
     gonggao: "公告",
@@ -289,6 +298,10 @@ function qudelianjie(luyou: string, lujing: string) {
 
 function qudebianlan(luyou: string, wenben: yuyanwenben) {
   const lianjie = (lujing: string) => qudelianjie(luyou, lujing);
+  const guanyuneirong = [
+    { text: wenben.guanyu, link: lianjie("/about") },
+    { text: wenben.duibi, link: lianjie("/breezell-vs-dsh") },
+  ];
   const zhinan = [
     { text: wenben.kaishi, link: lianjie("/introduction") },
     { text: wenben.yuyanshezhi, link: lianjie("/settings-page-language-settings") },
@@ -313,8 +326,15 @@ function qudebianlan(luyou: string, wenben: yuyanwenben) {
   ];
 
   return {
+    [lianjie("/breezell-vs-dsh")]: [
+      { text: wenben.guanyu, items: guanyuneirong },
+      { text: wenben.kaishi, items: zhinan },
+      { text: wenben.gaojicaozuo, items: gaoji },
+      { text: wenben.moshijieshao, items: moshidaoyin },
+      { text: wenben.gonggao, items: gonggao },
+    ],
     [lianjie("/about")]: [
-      { text: wenben.guanyu, items: [{ text: wenben.guanyu, link: lianjie("/about") }] },
+      { text: wenben.guanyu, items: guanyuneirong },
       { text: wenben.kaishi, items: zhinan },
       { text: wenben.gaojicaozuo, items: gaoji },
       { text: wenben.moshijieshao, items: moshidaoyin },
