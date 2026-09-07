@@ -27,31 +27,32 @@ En la parte superior de este menú verás una opción llamada **Breezell Setting
 
 ![Menú de configuración con Breezell Settings seleccionado](/language-settings/settings-menu-current.png)
 
-Al hacerlo, se abrirá una nueva pestaña llamada **Breezell Settings**.
+Al abrir **Breezell Settings** entras en **Box**. Los ajustes se abren como **Breezell Console**, con **Breezell Settings** ya seleccionado en la barra lateral izquierda.
 
-![Página de Breezell Settings](/language-settings/breezell-settings-current.png)
+![Página de Breezell Settings en Box](/language-settings/breezell-settings-current.png)
 
 ## Busca la configuración de idioma
 
-En la página **Breezell Settings**, revisa la barra lateral izquierda.
+Dentro de Box, revisa la barra lateral izquierda bajo **Breezell Settings**.
 
 La barra lateral contiene varias secciones, entre ellas:
 
 - Models
 - Feature Options
-- Appearance
-- General
+- FIM
+- General & Language
 - Code Index
 - MCP
 - Privacy
+- Experimental
 
-Haz clic en **General** en la barra lateral izquierda.
+Haz clic en **General & Language** en la barra lateral izquierda.
 
-Después de abrir la página **General**, verás la configuración de idioma cerca de la parte superior.
+Después de abrir la página **General & Language**, verás la configuración de idioma cerca de la parte superior.
 
 La opción de idioma se muestra como un selector desplegable. De forma predeterminada, puede mostrar **English**.
 
-![Selector de idioma en la página General](/language-settings/language-dropdown-current.png)
+![Selector de idioma en la página General & Language](/language-settings/language-dropdown-current.png)
 
 Haz clic en el selector y elige el idioma que quieres usar.
 
@@ -69,7 +70,7 @@ Para cambiar el idioma de Breezell:
 
 1. Haz clic en el icono de configuración situado en la esquina superior derecha del editor.
 2. Haz clic en **Breezell Settings** en el menú.
-3. Abre la sección **General** desde la barra lateral izquierda.
+3. Box se abre como **Breezell Console**. Abre **General & Language** desde la barra lateral izquierda.
 4. Busca el selector de idioma.
 5. Elige el idioma que quieres usar.
 

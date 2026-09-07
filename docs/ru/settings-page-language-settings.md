@@ -27,31 +27,32 @@ Breezell сейчас поддерживает следующие языки и�
 
 ![Меню настроек с выбранным Breezell Settings](/language-settings/settings-menu-current.png)
 
-После этого откроется новая вкладка **Breezell Settings**.
+Открытие **Breezell Settings** переносит вас в **Box**. Настройки открываются как **Breezell Console**, и в левой боковой панели уже выбран пункт **Breezell Settings**.
 
-![Страница Breezell Settings](/language-settings/breezell-settings-current.png)
+![Страница Breezell Settings в Box](/language-settings/breezell-settings-current.png)
 
 ## Найдите настройку языка
 
-На странице **Breezell Settings** посмотрите на левую боковую панель.
+В Box посмотрите на левую боковую панель в разделе **Breezell Settings**.
 
 Боковая панель содержит несколько разделов, например:
 
 - Models
 - Feature Options
-- Appearance
-- General
+- FIM
+- General & Language
 - Code Index
 - MCP
 - Privacy
+- Experimental
 
-Нажмите **General** в левой боковой панели.
+Нажмите **General & Language** в левой боковой панели.
 
-После перехода на страницу **General** настройка языка будет находиться в верхней части страницы.
+После перехода на страницу **General & Language** настройка языка будет находиться в верхней части страницы.
 
 Параметр языка представлен раскрывающимся списком. По умолчанию в нём может быть указано **English**.
 
-![Раскрывающийся список языка на странице General](/language-settings/language-dropdown-current.png)
+![Раскрывающийся список языка на странице General & Language](/language-settings/language-dropdown-current.png)
 
 Нажмите раскрывающийся список и выберите нужный язык.
 
@@ -69,7 +70,7 @@ Breezell сейчас поддерживает следующие языки и�
 
 1. Нажмите значок настроек в правом верхнем углу редактора.
 2. Нажмите **Breezell Settings** в меню.
-3. Откройте раздел **General** в левой боковой панели.
+3. Box открывается как **Breezell Console**. Откройте **General & Language** в левой боковой панели.
 4. Найдите раскрывающийся список языков.
 5. Выберите нужный язык.
 
