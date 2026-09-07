@@ -10,7 +10,10 @@ Se o inglês não for seu idioma nativo, você poderá instalar a extensão de i
 Atualmente, o Breezell oferece suporte aos seguintes idiomas de interface:
 
 - English
+- Japanese
 - Korean
+- Spanish
+- Portuguese (Brazil)
 - Russian
 - Simplified Chinese
 - Traditional Chinese

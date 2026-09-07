@@ -10,7 +10,10 @@ If your native language is not English, you can install the corresponding VS Cod
 Breezell currently supports the following interface languages:
 
 - English
+- Japanese
 - Korean
+- Spanish
+- Portuguese (Brazil)
 - Russian
 - Simplified Chinese
 - Traditional Chinese

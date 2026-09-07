@@ -10,7 +10,10 @@ description: Узнайте, как изменить язык интерфейс
 Breezell сейчас поддерживает следующие языки интерфейса:
 
 - English
+- Japanese
 - Korean
+- Spanish
+- Portuguese (Brazil)
 - Russian
 - Simplified Chinese
 - Traditional Chinese

@@ -10,7 +10,10 @@ description: 了解如何从设置页面更改 Breezell 界面语言。
 Breezell 目前支持以下界面语言：
 
 - English
+- Japanese
 - Korean
+- Spanish
+- Portuguese (Brazil)
 - Russian
 - Simplified Chinese
 - Traditional Chinese

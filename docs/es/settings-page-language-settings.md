@@ -10,7 +10,10 @@ Si tu idioma nativo no es el inglés, puedes instalar la extensión de idioma co
 Actualmente, Breezell admite los siguientes idiomas de interfaz:
 
 - English
+- Japanese
 - Korean
+- Spanish
+- Portuguese (Brazil)
 - Russian
 - Simplified Chinese
 - Traditional Chinese

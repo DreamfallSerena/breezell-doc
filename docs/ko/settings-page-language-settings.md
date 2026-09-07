@@ -10,7 +10,10 @@ description: 설정 페이지에서 Breezell 인터페이스 언어를 변경하
 Breezell은 현재 다음 인터페이스 언어를 지원합니다.
 
 - English
+- Japanese
 - Korean
+- Spanish
+- Portuguese (Brazil)
 - Russian
 - Simplified Chinese
 - Traditional Chinese
