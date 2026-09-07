@@ -50,12 +50,6 @@ O ponteiro destaca o controle de upload de arquivos.
 
 Clique neste controle para anexar arquivos locais à mensagem atual antes de enviá-la ao Breezell. Os arquivos enviados tornam-se parte do contexto da solicitação, permitindo que o Breezell os inspecione ou consulte ao responder.
 
-## ~~Exploração avançada~~
-
-> **Obsoleto após a versão 1.2.5.** O controle dedicado de Exploração avançada não está mais disponível. Quando uma solicitação exige pesquisa mais profunda, o Breezell invoca automaticamente os recursos relacionados para aprendizado ativo, investigação mais ampla e exploração mais completa.
-
-![Controle de Exploração avançada](/dialog-box/input-tools-expanded.png)
-
 ## Navegador Breezell
 
 O ponteiro destaca o controle **Breezell Browser**.
@@ -91,78 +85,6 @@ Abra **Quick Phrases** para visualizar e organizar as frases salvas. Use **Add**
 Selecione uma frase salva para inseri-la no campo de entrada atual. Você ainda pode editar o texto antes de enviar a mensagem.
 
 ![Gerenciador de frases rápidas](/dialog-box/quick-phrases-manager.png)
-
-## Servidores MCP
-
-O ponteiro destaca o botão **MCP** na bandeja de entrada. Abra-o para ver os servidores MCP configurados e controlar se cada servidor está disponível para o Breezell.
-
-![Controles dos servidores MCP](/dialog-box/mcp-server-controls.png)
-
-Cada linha de servidor inclui:
-
-- **Seta de invocação:** insere `/mcp:<nome-do-servidor>` no campo de entrada atual. Envie a solicitação com essa referência para permitir que a IA chame o servidor MCP selecionado.
-- **Interruptor:** ativa ou desativa um servidor MCP existente. Um servidor desativado fica indisponível para a IA até ser ativado novamente.
-- **Indicador de integridade:** um ponto verde indica que o servidor MCP está conectado e íntegro. Um ponto vermelho indica que ele está indisponível ou com estado anormal; verifique a configuração ou o processo antes de invocá-lo.
-
-![Referência MCP inserida no campo de entrada](/dialog-box/mcp-invocation-reference.png)
-
-## Skills
-
-O ponteiro destaca o botão **Skills** na bandeja de entrada. Abra-o para gerenciar as Skills que o Breezell pode usar.
-
-![Painel de Skills integradas](/dialog-box/skills-built-in.png)
-
-O painel separa as Skills em duas guias:
-
-- **Built-in:** Skills oficiais incluídas no Breezell. Elas ficam disponíveis sem a necessidade de criar ou configurar uma Skill pessoal.
-- **My Skills:** Skills que você mesmo configura ou cria.
-
-![Painel My Skills](/dialog-box/skills-my-skills.png)
-
-As Skills de ambas as guias podem ser controladas individualmente:
-
-- **Seta de invocação:** insere `@<nome-da-skill>` no campo de entrada atual. Envie a solicitação com essa menção para permitir que a IA invoque a Skill selecionada.
-- **Interruptor:** ativa ou desativa a Skill. Uma Skill desativada fica indisponível para a IA até ser ativada novamente.
-
-![Menção de Skill inserida no campo de entrada](/dialog-box/skill-invocation-reference.png)
-
-## Capacidade de mensagens
-
-O ponteiro destaca o botão **Message Capacity** na bandeja de entrada. A Capacidade de mensagens analisa o armazenamento local usado pelas conversas salvas. Trata-se de um relatório de armazenamento, não da janela de contexto do modelo nem do uso de memória ativa do aplicativo.
-
-![Botão Message Capacity](/dialog-box/message-capacity-button.png)
-
-O painel oferece:
-
-- **Escopo e período:** alterne entre o workspace atual e todos os workspaces e consulte os últimos 7, 30 ou 90 dias.
-- **Uso atual e tendência:** veja o uso total de armazenamento, a mudança durante o período selecionado e um gráfico de crescimento.
-- **Detalhamento do armazenamento:** compare conteúdo de mensagens, imagens e anexos, resultados de ferramentas e checkpoints. A linha tracejada representa o espaço recuperável.
-- **Métricas resumidas:** veja a quantidade de conversas e mensagens, a maior conversa e o espaço recuperável.
-- **Inspeção de conversas:** pesquise, ordene, filtre e selecione conversas. Cada linha mostra a quantidade de mensagens, o tamanho armazenado e o tipo de conteúdo em destaque; conversas ativas ou na fila são identificadas claramente.
-- **Limpeza segura:** recupera o armazenamento que o painel marca como elegível para limpeza. Revise o escopo, os filtros e a seleção atuais antes de executar.
-
-![Painel de Capacidade de mensagens](/dialog-box/message-capacity-dashboard.png)
-
-## Acertos de cache
-
-O ponteiro destaca o botão **Cache Hit (Acertos de cache)** na bandeja de entrada. O painel **Cache Broadcast** resume a reutilização do cache de prompts do provedor no chat atual ou no espaço de trabalho. Essas são estatísticas do cache de solicitações, independentes do armazenamento local das conversas e da capacidade de contexto do modelo.
-
-![Botão Acertos de cache](/dialog-box/cache-hit-button.png)
-
-O painel oferece as seguintes informações e controles:
-
-- **Escopo:** Alterne entre o chat atual e todo o espaço de trabalho.
-- **Resumo da taxa de acertos:** Compare hoje, ontem e o total histórico, incluindo turnos registrados, taxa de acertos e volume de leitura do cache.
-- **Detalhamento de tokens:** Veja tokens de entrada, leituras e gravações de cache e tokens de saída. As leituras de cache são tokens de entrada reutilizáveis fornecidos pelo cache em vez de processados novamente.
-- **Economia estimada:** Veja o equivalente em tokens de entrada economizados e uma estimativa baseada nos preços de tabela. O valor é apenas uma referência; a cobrança real pode variar conforme o provedor, o modelo e a rota.
-- **Detalhes por turno:** Consulte o provedor, o modelo, as configurações de raciocínio e velocidade, a taxa de acertos, o horário e a duração de cada turno. Ao selecionar um turno, são exibidos os totais de entrada, leitura de cache, gravação de cache e saída.
-- **Tendência:** Use o gráfico para acompanhar a mudança da taxa de acertos das solicitações mais antigas para as mais recentes.
-- **Ações:** Copie um resumo ou limpe as estatísticas do escopo selecionado.
-
-![Painel Cache Broadcast](/dialog-box/cache-hit-dashboard.png)
-
-Os caches do provedor são temporários. Um longo período de inatividade, uma reinicialização ou uma mudança de modelo, velocidade ou rota de backend pode resultar em 0% de acertos; solicitações posteriores podem aquecer o cache novamente.
-
 
 ## Menu de menções
 

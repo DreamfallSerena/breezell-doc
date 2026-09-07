@@ -50,12 +50,6 @@ The pointer highlights the file upload control.
 
 Click this control to attach local files to the current message before sending it to Breezell. Uploaded files become part of the request context, so Breezell can inspect or reference them while answering.
 
-## ~~Advanced Exploration~~
-
-> **Deprecated after version 1.2.5.** The dedicated Advanced Exploration control is no longer available. When a request requires deeper research, Breezell automatically invokes the related capabilities for active learning, broader investigation, and more thorough exploration.
-
-![Advanced Exploration control](/dialog-box/input-tools-expanded.png)
-
 ## Breezell Browser
 
 The pointer highlights the **Breezell Browser** control.
@@ -91,78 +85,6 @@ Open **Quick Phrases** to view and organize saved phrases. Use **Add** to create
 Select a saved phrase to insert it into the current input. You can still edit the text before sending the message.
 
 ![Quick Phrases manager](/dialog-box/quick-phrases-manager.png)
-
-## MCP Servers
-
-The pointer highlights the **MCP** button in the input tray. Open it to view configured MCP servers and control whether each server is available to Breezell.
-
-![MCP server controls](/dialog-box/mcp-server-controls.png)
-
-Each server row includes:
-
-- **Invocation arrow:** inserts `/mcp:<server-name>` into the current input. Send the request with this reference to let the AI call the selected MCP server.
-- **On/off switch:** enables or disables an existing MCP server. A disabled server is unavailable to the AI until it is enabled again.
-- **Health indicator:** a green dot means the MCP server is connected and healthy. A red dot means it is unavailable or unhealthy; check its configuration or process before invoking it.
-
-![MCP reference inserted into the input](/dialog-box/mcp-invocation-reference.png)
-
-## Skills
-
-The pointer highlights the **Skills** button in the input tray. Open it to manage the skills that Breezell can use.
-
-![Built-in skills panel](/dialog-box/skills-built-in.png)
-
-The panel separates skills into two tabs:
-
-- **Built-in:** official skills included with Breezell. They are available without creating or configuring a personal skill.
-- **My Skills:** skills that you configure or create yourself.
-
-![My Skills panel](/dialog-box/skills-my-skills.png)
-
-Skills in either tab can be controlled individually:
-
-- **Invocation arrow:** inserts `@<skill-name>` into the current input. Send the request with this mention to let the AI invoke the selected skill.
-- **On/off switch:** enables or disables the skill. A disabled skill is unavailable to the AI until it is enabled again.
-
-![Skill mention inserted into the input](/dialog-box/skill-invocation-reference.png)
-
-## Message Capacity
-
-The pointer highlights the **Message Capacity** button in the input tray. Message Capacity analyzes the local storage used by saved conversations. It is a storage report, not the model context window or the application's live memory usage.
-
-![Message Capacity button](/dialog-box/message-capacity-button.png)
-
-The dashboard provides:
-
-- **Scope and time range:** switch between the current workspace and all workspaces, and review the last 7, 30, or 90 days.
-- **Current usage and trend:** view total storage use, its change over the selected period, and a chart of storage growth.
-- **Storage breakdown:** compare message content, images and attachments, tool results, and checkpoints. The dashed line represents reclaimable space.
-- **Summary metrics:** see the number of conversations and messages, the largest conversation, and the amount of reclaimable space.
-- **Conversation inspection:** search, sort, filter, and select conversations. Each row shows its message count, storage size, and notable storage type; active or queued conversations are clearly identified.
-- **Safe cleanup:** reclaim storage that the panel marks as eligible for cleanup. Review the current scope, filters, and selections before running it.
-
-![Message Capacity dashboard](/dialog-box/message-capacity-dashboard.png)
-
-## Cache Hits
-
-The pointer highlights the **Cache Hit** button in the input tray. The **Cache Broadcast** panel summarizes provider prompt-cache reuse for the current chat or workspace. These are request-cache analytics; they are separate from local conversation storage and the model's context capacity.
-
-![Cache Hit button](/dialog-box/cache-hit-button.png)
-
-The panel provides the following information and controls:
-
-- **Scope:** Switch between the current chat and the entire workspace.
-- **Hit-rate summary:** Compare today, yesterday, and the lifetime total, including recorded turns, hit rate, and cache-read volume.
-- **Token breakdown:** Review input tokens, cache reads, cache writes, and output tokens. Cache reads are the reusable input tokens served from cache instead of being processed again.
-- **Estimated savings:** See the equivalent input tokens saved and an estimated saving based on list prices. This is a reference estimate; actual billing can vary by provider, model, and route.
-- **Per-turn details:** Inspect the provider, model, reasoning and speed settings, hit rate, timestamp, and duration for each turn. Selecting a turn shows its input, cache-read, cache-write, and output totals.
-- **Trend:** Use the chart to see how the hit rate changes from older to newer requests.
-- **Actions:** Copy a summary or clear the statistics for the selected scope.
-
-![Cache Broadcast panel](/dialog-box/cache-hit-dashboard.png)
-
-Provider caches are temporary. A long idle period, restart, model or speed change, or backend-route change can produce a 0% hit; later requests may warm the cache again.
-
 
 ## Mention Menu
 
