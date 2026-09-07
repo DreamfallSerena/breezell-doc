@@ -5,6 +5,69 @@ next: false
 
 # Registro de alterações
 
+## 1.3.3 · 2026-09-07
+
+### Novos recursos
+
+#### Box workbench
+- A barra de título agora alterna entre **Box** e **Agent** em um clique. Box é uma tela de gestão independente que reúne modelos e provedores, conta e uso, Super Memory, Code Review, o marketplace MCP, o navegador de banco de dados, a limpeza de dados e as Settings.
+- **Modelos:** a configuração do provedor fica ao lado da lista de modelos. Adicione ou remova endpoints compatíveis com OpenAI. Escolha um caminho de rede por provedor — inclusive modelos oficiais da Breezell — Direct, System proxy, Global proxy ou um proxy personalizado. Teste a conectividade em um clique.
+- **Vault:** criptografa endpoints de relay e credenciais e preenche onde for preciso. Sem ficar copiando chaves.
+- **Completar código (FIM):** o completar pode usar conexão própria e o protocolo FIM nativo de cada vendor. Os principais vêm como presets.
+- **Limpeza de dados:** veja estatísticas locais, compacte o banco e rode checagens de integridade. Cada manutenção fica registrada.
+- **Navegador de banco:** refeito, com várias conexões e navegação agrupada mais clara.
+- **Marketplace MCP:** organizado por categoria, com a página redesenhada.
+- As notas de privacidade passam a cards e cobrem mais detalhes.
+
+#### Breezell Mind
+- A conversa mantém um caderno de trabalho. Quando um fio longo bate no orçamento, o histórico antigo é dobrado para as notas e o essencial.
+- **Citar esta conversa** ficou mais leve: só leva o último turno e a lista de arquivos envolvidos. O histórico completo é lido sob demanda.
+- A compactação de contexto prepara e atualiza em segundo plano um documento de handoff. O registro original fica no disco. Há aviso se a compactação rodou vezes demais.
+
+#### Conversa
+- Depois de um turno, aparecem sugestões de “o que fazer agora” — clique para seguir.
+- Uma conversa pode abrir como aba do editor, ao lado do código.
+- Menções `@` de arquivos e símbolos estão tão rápidas quanto o Quick Open. `/` abre o menu de Skills.
+- Menu de modelos: interruptor **Breezell Max Plus**.
+- Prompt de sistema do Agent reescrito: deixa mais claro o que cada turno deve fazer. Depois de trabalho real, há um fechamento curto. O idioma dos comentários segue o seu.
+- Caminhos de arquivo nas mensagens viram chips clicáveis e permanecem consistentes.
+
+#### Modelos
+- Adicionados **GPT-6 Astra**, **Claude Fable 5.1**, **Gemini 3.8 Flash**, **Muse Spark 1.3** e **OpenCode Go Omen Alpha**.
+- Modelos sem busca na web própria agora caem para a busca nativa do provedor.
+- Preços do Claude Sonnet 5 atualizados para as tarifas oficiais.
+
+#### Editor
+- Edite Markdown no lugar e alterne o preview sem sair do arquivo.
+- A visualização de Diff ganha o submenu **Diff View** para modos de comparação. Editores personalizados podem mostrar diffs.
+- Ao abrir um arquivo, você escolhe o tipo de editor.
+- As opções de recursos em Settings foram redesenhadas. A geração de mensagem de commit do Git tem o próprio card de modelo.
+- O painel da conta vira um cartão de assinatura: selo do plano, saldo, validade e cota de Super Memory de relance. O botão da conta mostra o avatar.
+
+### Correções
+- Um `<` sem fechar no stream não trava mais o restante do texto. Código no painel de raciocínio renderiza como texto puro; fences sem linguagem ainda recebem highlight.
+- Respostas vazias do modelo disparam um retry automático em vez de encerrar o turno em silêncio. Streams que o upstream marca depois como vazios são preservados.
+- A contagem de tokens depois da compactação de contexto bate com o que de fato é enviado.
+- Trocar o modelo da conversa não sobrescreve mais os modelos escolhidos para Apply e mensagens de commit do Git.
+- O auto-scroll do raciocínio não se solta sozinho; blocos de código em streaming não piscam em branco.
+- Subagentes de Analyze não pedem mais, por engano, para mudar para o modo Agent.
+- O navegador embutido não digita mais no campo da IA quando o modo anônimo está desligado.
+- Pedidos do Poolside Laguna com screenshot não falham mais inteiros; passam pelo proxy de visão.
+- A estimativa de tokens de anexos antes do envio está correta. A compactação de emergência consegue dobrar o turno atual.
+- Os cards de erro nomeiam o provedor que de fato falhou.
+- Comandos de extensão no terminal não esperam mais o timeout inteiro da integração do shell para rodar.
+- Bolhas de execução de plano mantêm o raio das quinas. A sombra da mensagem do usuário não cobre mais o texto abaixo.
+- As configurações flutuantes do modelo alinham com a linha correspondente.
+- A página de Code Index em Settings não varre mais o workspace inteiro a cada abertura. Artefatos de build ficam de fora do índice.
+- **Linux:** restaurado o pool de buffer de 8 KiB do Node para evitar regressões em alguns cenários.
+
+### Melhorias
+- `repo_map` não trava mais a UI por dezenas de segundos. Diffs por linha das edições em streaming e a persistência da conversa saem da thread da UI.
+- Ferramentas de exploração têm timeout — rede morta não segura o Agent por cinco minutos. Explorações que falham viram uma linha cinza quieta de “tentou”.
+- A sidebar ficou mais leve: marketplace MCP e Super Memory moram no Box. O histórico é paginado e agrupado. Ajuste na posição do selo da conta.
+- Runtime atualizado para **Electron 43.6** (Chromium 150 / Node 24).
+- Os instaladores levam só os binários da plataforma atual, então o pacote fica menor.
+
 ## 1.3.2 · 2026-09-01
 
 ### Correções

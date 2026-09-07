@@ -5,6 +5,69 @@ next: false
 
 # Changelog
 
+## 1.3.3 · 2026-09-07
+
+### New Features
+
+#### Box workbench
+- The title bar now switches between **Box** and **Agent** in one click. Box is a standalone management surface that brings together models and providers, account and usage, Super Memory, Code Review, the MCP marketplace, the database browser, data cleanup, and Settings.
+- **Models:** Provider config sits next to the model list. Add or remove OpenAI-compatible endpoints. Choose a network path per provider — including official Breezell models — Direct, System proxy, Global proxy, or a custom proxy. Probe and test connectivity in one click.
+- **Vault:** Encrypts relay endpoints and account credentials, then fills them in where you need them. No more copying keys around.
+- **Code completion (FIM):** Completions can use their own connection and each vendor’s native FIM protocol. Major vendors ship as presets.
+- **Data cleanup:** Inspect local data stats, compact the database, and run integrity checks. Every maintenance pass is logged.
+- **Database browser:** Rebuilt, with multiple connections and clearer grouped navigation.
+- **MCP marketplace:** Organized by category, with a redesigned page.
+- Privacy notes now use a card layout and cover more of the details.
+
+#### Breezell Mind
+- Conversations keep a running working notebook. When a long thread hits the budget line, older history is folded down to the notes and the essentials.
+- **Quote this conversation** is lighter: quoting another thread only carries the latest turn plus the files involved. Full history is read on demand.
+- Context compression now prepares and refreshes a background handoff document. The raw record stays on disk. You get a warning if compression has run too many times.
+
+#### Conversation
+- After a turn finishes, you get a few “what you can do next” suggestions — click to continue.
+- A conversation can open as an editor tab, side by side with the code.
+- `@` mentions for files and symbols are as fast as Quick Open. `/` opens the Skills menu.
+- Model menu: **Breezell Max Plus** toggle.
+- Agent system prompt rewritten: clearer about what each turn is for. After real work lands, you get a short wrap-up. Comment language follows yours.
+- File paths in messages render as clickable file chips and stay consistent across renders.
+
+#### Models
+- Added **GPT-6 Astra**, **Claude Fable 5.1**, **Gemini 3.8 Flash**, **Muse Spark 1.3**, and **OpenCode Go Omen Alpha**.
+- Models without built-in web search now fall back to the provider’s native search.
+- Claude Sonnet 5 pricing updated to the latest official rates.
+
+#### Editor
+- Edit Markdown in place and toggle preview without leaving the file.
+- Diff view adds a **Diff View** submenu for comparison modes. Custom editors can show diffs.
+- When opening a file, you can choose among editor types.
+- Feature options in Settings redesigned. Git commit-message generation has its own model card.
+- Account panel restyled as a membership card: plan badge, balance, expiry, and Super Memory quota at a glance. The account button shows your avatar.
+
+### Fixes
+- An unclosed `<` in a stream no longer freezes the rest of the text. Reasoning-pane code renders as plain text; code fences without a language still highlight.
+- Empty model replies trigger an automatic retry instead of silently ending the turn. Streams the upstream later marks empty are kept.
+- Token counts after context compression now match what is actually sent.
+- Changing the conversation model no longer overwrites the models chosen for Apply and Git commit messages.
+- Reasoning auto-scroll no longer detaches on its own; streaming code blocks no longer flash white.
+- Analyze sub-agents no longer spuriously ask you to switch to Agent mode.
+- The built-in browser no longer types keystrokes into the AI input when incognito is turned off.
+- Poolside Laguna requests that include a screenshot no longer fail the whole call; they now go through the vision proxy.
+- Attachment token estimates before send are accurate. Emergency compression can fold the current turn.
+- Error cards name the provider that actually failed.
+- Terminal extension commands no longer wait out the full shell-integration timeout before they run.
+- Plan-execution bubbles keep their corner radius. User-message shadows no longer cover the text below.
+- Model hover settings align to the row they belong to.
+- The code-index page in Settings no longer rescans the whole workspace on every open. Build artifacts are excluded from indexing.
+- **Linux:** Restored the 8 KiB Node buffer pool to avoid regressions in some workloads.
+
+### Improvements
+- `repo_map` no longer freezes the UI for tens of seconds. Line-level diffs for streaming edits and conversation persistence both leave the UI thread.
+- Explore tools have timeouts — a dead network will not pin the Agent for five minutes. Failed explores collapse to one quiet gray “tried” line.
+- Sidebar is lighter: MCP marketplace and Super Memory live in Box. History is paginated and grouped. Account badge placement tweaked.
+- Runtime upgraded to **Electron 43.6** (Chromium 150 / Node 24).
+- Installers ship only the binaries for the current platform, so packages are smaller.
+
 ## 1.3.2 · 2026-09-01
 
 ### Fixes
