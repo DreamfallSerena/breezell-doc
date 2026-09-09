@@ -5,6 +5,59 @@ next: false
 
 # Registro de alterações
 
+## 1.3.5 · 2026-09-09
+
+### Correções
+- Abrir uma janela nova depois da 1.3.4 podia pintar um quadro preto e ficar em branco. A janela agora desenha na primeira exibição.
+
+## 1.3.4 · 2026-09-09
+
+### Novos recursos
+- **Reescrita de prompt:** a varinha da bandeja de entrada tracejada reescreve o rascunho no compositor. Primeiro o preview, depois a troca. Nunca envia sozinha.
+- **Contabilização de uso de recursos:** tokens de enviar mensagem, sugestões de acompanhamento e reescrita de prompt vão para Box → Feature usage, separados do uso da conversa.
+- **Confirmação de rollback:** ao reverter a partir de uma bolha do usuário, a bandeja de entrada pede confirmação primeiro, para não derrubar um ramo por engano.
+- **Copiar / ramificar na barra do turno:** Copiar é texto puro. Ramificar a partir de um turno abre um chat novo; a conversa do editor fica no editor.
+- **Menu de ramos do editor:** **Open in Editor** da sidebar abre uma coluna de chat dedicada, sem lotar a faixa de abas de arquivo.
+- **Image 2.5 Studio:** os fluxos de imagem foram atualizados; os ramos podem ser gerenciados no editor.
+- **Aprovação automática de banco:** criar uma conexão de banco pode passar pelo Auto.
+- **Ferramenta de escrita de memória:** `update_memory` é o único caminho que grava memória do usuário (workspace / global; add / replace / delete). Outras notas no disco não são mais mutadas ad hoc.
+- **Tokenização nativa:** a contagem local de tokens segue o tokenizer de cada modelo.
+- **Diffs de Review no estilo GitHub:** Code Review usa git-diff-view.
+- **Backup de chat em zip:** exporta como arquivo zip. JSON legado ainda importa.
+- **Salto da paleta de comandos:** ao abrir um arquivo, salta para o hunk mais recente desse arquivo.
+- **Preço de API compatível:** linhas compatíveis com OpenAI podem definir uma tarifa $/1M personalizada.
+- **Rota de rede do Box:** na página Models: Direct, System proxy, Global ou Custom.
+- **Menu de modo abre para cima:** o seletor de modo acima do compositor prefere abrir para cima.
+
+### Correções
+- Trocar o modelo de um chat não muda mais o padrão global nem o de outras conversas.
+- Uso do Codex no tema claro: removidas as cápsulas coloridas difíceis de ler (por exemplo `5d`). O uso passa a texto puro na bandeja.
+- **Stop** encerra o turno na hora. Edições canceladas não voltam para o disco. Os cards não desaparecem mais.
+- Tremulação do `edit_file`: arquivos limpos atualizam por etag. Reescritas de arquivo inteiro encolhem para o intervalo alterado. Um editor aberto não recarrega mais a página inteira.
+- Servidores MCP empacotados falhavam ao iniciar (erro de construtor Ajv). PATH / cwd / env remotos e o relatório de erro também foram corrigidos.
+- **WSL:** o lock de instalação é liberado depois que o serviço sobe, então janelas seguintes e **Open Folder** não dão mais timeout.
+- **Chave de API do Grok:** todo o tráfego passa pela Responses API. O streaming não chega mais em blocos atrasados.
+- Os cards de erro seguem o provedor que de fato falhou.
+- URIs inválidos na página Review não derrubam mais a página inteira.
+- Caminhos do diretório home (`~/`) nas respostas são clicáveis.
+- Cards do Vault: removido o lift no hover que fazia os cards «flutuarem».
+- Ícones **Quote** / **Copy** no tema claro usam a cor de primeiro plano do botão e não desbotam mais.
+- Avatares do trilho recolhido permanecem quadrados.
+- O dropdown de filtro de uso ancora à esquerda do botão e não cobre mais a sidebar do Box.
+- Abas segmentadas quebram linha em painéis estreitos.
+- Regex de reticências da barra de título: o ponto de largura total agora é um escape `\u`.
+
+### Melhorias
+- A barra de rolagem do compositor sobrepõe o conteúdo como a lista de chat. Sem calha extra à direita.
+- Timeouts de busca / execução: processos `rg` travados agora têm timeout rígido para a janela não congelar.
+- Estouro de contexto: orçamento, dicas uv e cards de landing vazios batem com o shell de chat atual.
+- Saltos longos da barra de histórico teleportam um recorte em vez de expandir a cauda inteira.
+- O painel de confirmação de rollback ficou mais largo; a ação de confirmar mostra ⏎.
+- Diffs de Review tokenizam só as linhas visíveis. A paginação ficou mais rápida.
+- Página Models do Box: o título gruda no topo. Cada linha de provedor mostra status e rota.
+- A bolha do anel de contexto usa o mesmo fundo da bandeja de entrada.
+- O texto de Skills e Memory está localizado. Controles de exclusão usam uma cor neutra.
+
 ## 1.3.3 · 2026-09-07
 
 ### Novos recursos

@@ -5,6 +5,59 @@ next: false
 
 # Changelog
 
+## 1.3.5 · 2026-09-09
+
+### Fixes
+- Opening a new window after 1.3.4 could render a black frame and stay blank. The window now paints on first show.
+
+## 1.3.4 · 2026-09-09
+
+### New Features
+- **Prompt rewrite:** The wand in the dashed input tray rewrites the draft in the composer. Preview first, then replace. It never auto-sends.
+- **Feature usage accounting:** Tokens for send message, follow-up suggestions, and prompt rewrite now land in Box → Feature usage, separate from conversation usage.
+- **Rollback confirm:** Rolling back from a user bubble asks for confirmation in the input tray first, so you don't drop a branch by accident.
+- **Copy / branch from the turn bar:** Copy is plain text. Branching from a turn opens a new chat; the editor conversation stays in the editor.
+- **Editor branch menu:** Sidebar **Open in Editor** now opens a dedicated chat column instead of crowding the file tab strip.
+- **Image 2.5 Studio:** Image workflows are upgraded; branches can be managed from the editor.
+- **Database auto-approve:** Creating a database connection can go through Auto.
+- **Memory write tool:** `update_memory` is the only path that writes user memory (workspace / global; add / replace / delete). Other notes on disk are no longer mutated ad hoc.
+- **Native tokenization:** Local token counts follow each model's tokenizer.
+- **GitHub-style Review diffs:** Code Review now uses git-diff-view.
+- **Chat backup zip:** Export as a zip archive. Legacy JSON still imports.
+- **Command palette jump:** Opening a file jumps to that file's latest hunk.
+- **Compatible API pricing:** OpenAI-compatible rows can set a custom $/1M rate.
+- **Box network route:** On the Models page: Direct, System proxy, Global, or Custom.
+- **Mode menu opens upward:** The mode picker above the composer prefers opening up.
+
+### Fixes
+- Changing the model on one chat no longer changes the global default or other conversations.
+- Light-theme Codex usage: removed hard-to-read colored capsules (for example `5d`). Usage is now plain text on the tray.
+- **Stop** ends the turn immediately. Canceled edits are not written back to disk. Cards no longer vanish.
+- `edit_file` flicker: clean files refresh by etag. Full-file rewrites shrink to the changed range. An open editor no longer reloads the whole page.
+- Packaged MCP servers failed to start (Ajv constructor error). Remote PATH / cwd / env and error reporting are fixed as well.
+- **WSL:** The install lock is released after the service is up, so later windows and **Open Folder** no longer time out.
+- **Grok API key:** All traffic goes through the Responses API. Streaming no longer arrives in late chunks.
+- Error cards now follow the provider that actually failed.
+- Invalid URIs on the Review page no longer crash the whole page.
+- Home-directory (`~/`) paths in replies are clickable.
+- Vault cards: removed the hover lift that made cards "float."
+- Light-theme **Quote** / **Copy** icons use the button foreground color and no longer wash out.
+- Collapsed-rail avatars stay square.
+- The usage filter dropdown anchors to the left of the button and no longer covers the Box sidebar.
+- Segmented tabs wrap in narrow panels.
+- Title-bar ellipsis regex: the full-width period is now a `\u` escape.
+
+### Improvements
+- Composer scrollbar overlays content like the chat list. No extra gutter on the right.
+- Search / exec timeouts: stuck `rg` processes now have a hard timeout so the window doesn't freeze.
+- Context overflow: budget, uv hints, and empty landing cards match the current chat shell.
+- History-bar long jumps teleport a slice instead of expanding the entire tail.
+- Rollback confirm panel is wider; the confirm action shows ⏎.
+- Review diffs tokenize visible lines only. Paging is faster.
+- Box Models page: the title sticks to the top. Each provider row shows status and route.
+- Context-ring bubble uses the same background as the input tray.
+- Skills and Memory copy is localized. Delete controls use a neutral color.
+
 ## 1.3.3 · 2026-09-07
 
 ### New Features

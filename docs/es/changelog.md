@@ -5,6 +5,59 @@ next: false
 
 # Registro de cambios
 
+## 1.3.5 · 2026-09-09
+
+### Correcciones
+- Abrir una ventana nueva tras 1.3.4 podía pintar un marco negro y quedarse en blanco. La ventana ahora se dibuja en el primer show.
+
+## 1.3.4 · 2026-09-09
+
+### Nuevas funciones
+- **Reescritura de prompt:** la varita de la bandeja de entrada discontinua reescribe el borrador del compositor. Primero se previsualiza, luego se sustituye. Nunca se envía sola.
+- **Contabilidad de uso de funciones:** los tokens de enviar mensaje, sugerencias de seguimiento y reescritura de prompt van a Box → Feature usage, aparte del uso de la conversación.
+- **Confirmación de rollback:** al revertir desde una burbuja de usuario, primero se pide confirmación en la bandeja de entrada, para no tirar una rama por error.
+- **Copiar / ramificar desde la barra del turno:** Copiar es texto plano. Ramificar desde un turno abre un chat nuevo; la conversación del editor se queda en el editor.
+- **Menú de ramas del editor:** **Open in Editor** de la barra lateral abre una columna de chat dedicada, sin abarrotar la tira de pestañas de archivos.
+- **Image 2.5 Studio:** los flujos de imagen se actualizan; las ramas se gestionan desde el editor.
+- **Autoaprobación de bases de datos:** crear una conexión de base de datos puede pasar por Auto.
+- **Herramienta de escritura de memoria:** `update_memory` es el único camino que escribe memoria de usuario (workspace / global; add / replace / delete). El resto de notas en disco ya no se mutan ad hoc.
+- **Tokenización nativa:** el recuento local de tokens sigue el tokenizer de cada modelo.
+- **Diffs de Review al estilo GitHub:** Code Review usa git-diff-view.
+- **Copia de chat en zip:** exporta como archivo zip. El JSON legado sigue importándose.
+- **Salto desde la paleta de comandos:** al abrir un archivo se salta al último hunk de ese archivo.
+- **Precios de API compatible:** las filas compatibles con OpenAI pueden fijar una tarifa $/1M personalizada.
+- **Ruta de red de Box:** en la página Models: Direct, System proxy, Global o Custom.
+- **El menú de modo abre hacia arriba:** el selector de modo encima del compositor prefiere abrirse hacia arriba.
+
+### Correcciones
+- Cambiar el modelo de un chat ya no cambia el valor global ni el de otras conversaciones.
+- Uso de Codex en tema claro: se quitan las cápsulas de color difíciles de leer (por ejemplo `5d`). El uso pasa a texto plano en la bandeja.
+- **Stop** cierra el turno al momento. Las ediciones canceladas no se escriben a disco. Las tarjetas ya no desaparecen.
+- Parpadeo de `edit_file`: los archivos limpios se refrescan por etag. Las reescrituras de archivo completo se recortan al rango cambiado. Un editor abierto ya no recarga la página entera.
+- Los servidores MCP empaquetados no arrancaban (error de constructor Ajv). También se corrigen PATH / cwd / env remotos y el informe de errores.
+- **WSL:** el bloqueo de instalación se libera cuando el servicio está arriba, así que las ventanas posteriores y **Open Folder** ya no hacen timeout.
+- **Clave de API de Grok:** todo el tráfico pasa por la Responses API. El streaming ya no llega en bloques tardíos.
+- Las tarjetas de error siguen al proveedor que realmente falló.
+- Los URI inválidos en la página Review ya no tumban la página entera.
+- Las rutas del directorio home (`~/`) en las respuestas son clicables.
+- Tarjetas de Vault: se quita el lift al pasar el cursor que las hacía «flotar».
+- Iconos **Quote** / **Copy** en tema claro: usan el color de primer plano del botón y ya no se lavan.
+- Los avatares del rail plegado se quedan cuadrados.
+- El desplegable de filtro de uso se ancla a la izquierda del botón y ya no cubre la barra lateral de Box.
+- Las pestañas segmentadas se envuelven en paneles estrechos.
+- Regex de elipsis de la barra de título: el punto de ancho completo ahora es un escape `\u`.
+
+### Mejoras
+- La barra de desplazamiento del compositor se superpone al contenido como la lista de chat. Sin canal extra a la derecha.
+- Timeouts de búsqueda / ejecución: los procesos `rg` colgados tienen un timeout duro para que la ventana no se congele.
+- Desbordamiento de contexto: presupuesto, pistas uv y tarjetas de aterrizaje vacías coinciden con el shell de chat actual.
+- Los saltos largos de la barra de historial teletransportan un trozo en lugar de expandir toda la cola.
+- El panel de confirmación de rollback es más ancho; la acción de confirmar muestra ⏎.
+- Los diffs de Review solo tokenizan las líneas visibles. El paginado es más rápido.
+- Página Models de Box: el título se queda arriba. Cada fila de proveedor muestra estado y ruta.
+- La burbuja del anillo de contexto usa el mismo fondo que la bandeja de entrada.
+- El texto de Skills y Memory está localizado. Los controles de borrar usan un color neutro.
+
 ## 1.3.3 · 2026-09-07
 
 ### Nuevas funciones
