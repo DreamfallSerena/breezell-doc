@@ -5,6 +5,33 @@ next: false
 
 # Changelog
 
+## 1.3.6 · 2026-09-15
+
+### New Features
+- **Atlas local code search:** Semantic search and index cards. Excluded directories are remembered. Questions about how code relates prefer Atlas.
+- **Plan mode blueprints:** Click **Start** on the blueprint card to begin. Execution still uses todos.
+- **Selection assistant:** Search selected text in the built-in browser, an external browser, or Bing. Queued messages can be reordered by dragging.
+- **Oversized paste or drop:** Huge pastes no longer blow up the composer. They land as a file chip; the model reads them as a file.
+- **PDF attachments:** Sakana, Mistral, Gateway, xAI, Kimi, Qwen-Doc, and similar channels can attach PDFs.
+- **Completion sounds:** When a turn finishes, Breezell can ring or speak. Error speech is off by default. Pick a voice in Box.
+- **Open Browser** in the editor. The tab-strip scrollbar is gone; the middle mouse wheel pans left and right.
+- **Usage:** Cache and Token in separate columns. Cache reads and writes bill at official usage rates. Sub-Agents roll up under the parent session. The OpenAI-compatible account pool has its own page.
+- **Models and providers:** Volcengine Ark can pull the model list with AK/SK, including Agent Plan (OpenAI / Anthropic) presets. Added AIHubMix and Sakana Fugu (Max / Ultra v2). Azure Foundry and Vertex Gemini are filled in. DeepSeek V4.1 Flash and Kimi K2.8 Preview join the roster.
+
+### Fixes
+- **Code Review** re-diffs against each edit's own pre-edit snapshot, so sessions no longer mix.
+- Dragging chat tabs no longer crashes the window. Terminal cards don't interfere with each other.
+- The selection assistant no longer covers highlights. Consecutive send count is visible. **Quote** no longer looks like a full page. Reasoning stays visible on empty replies.
+- The Box usage tab is no longer squashed. Rankings fill the width. Provider cards can switch time ranges.
+- Official model lists and list prices come through correctly. Ordinary plan lists still render as todos. Blueprint nodes stay consistent in files, cards, and **Start** bubbles.
+- Background Agent work and index writes no longer stall the conversation you are looking at.
+- Vue tool errors are reported correctly.
+
+### Improvements
+- Agent work style is tighter: retry on failure, use draft files, and follow along when state changes.
+- Electron upgraded to 43.7.0.
+- Box toggles are searchable. The dashboard keeps painting. Cleanup drops unused blueprints and terminal logs.
+
 ## 1.3.5 · 2026-09-09
 
 ### Fixes

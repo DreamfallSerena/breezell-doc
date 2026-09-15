@@ -5,6 +5,33 @@ next: false
 
 # Registro de alterações
 
+## 1.3.6 · 2026-09-15
+
+### Novos recursos
+- **Busca local Atlas:** busca semântica e cards de índice. Diretórios excluídos são lembrados. Perguntas sobre como o código se relaciona preferem Atlas.
+- **Blueprints do Plan mode:** clique **Start** no card do blueprint para começar. A execução continua com todos.
+- **Assistente de seleção:** pesquise o texto selecionado (navegador embutido / navegador externo / Bing). Mensagens na fila reordenam arrastando.
+- **Cola ou solta enorme:** não estoura mais o compositor. Vira um chip de arquivo; o modelo lê como arquivo.
+- **Anexos PDF:** Sakana, Mistral, Gateway, xAI, Kimi, Qwen-Doc e canais semelhantes podem anexar PDF.
+- **Som ao concluir:** ao terminar um turno pode tocar ou falar. Fala de erro vem desligada por padrão. Escolha a voz no Box.
+- **Open Browser** no editor. Some a barra de rolagem da faixa de abas; a roda do botão do meio desliza esquerda e direita.
+- **Uso:** colunas separadas para cache e Token. Leituras e escritas de cache cobram as tarifas oficiais. Sub-Agents entram na sessão pai. O pool de contas compatíveis com OpenAI tem página própria.
+- **Modelos e provedores:** Volcengine Ark puxa a lista de modelos com AK/SK, com presets Agent Plan (OpenAI / Anthropic). Incluídos AIHubMix e Sakana Fugu (Max / Ultra v2). Completados Azure Foundry e Vertex Gemini. DeepSeek V4.1 Flash e Kimi K2.8 Preview entram na lista.
+
+### Correções
+- **Code Review** refaz o diff contra o snapshot pré-edição de cada alteração. As sessões não se misturam mais.
+- Arrastar abas de chat não derruba mais a janela. Cards de terminal não interferem uns nos outros.
+- O assistente de seleção não cobre mais o destaque. Dá para ver a contagem de envios seguidos. **Quote** não parece mais uma página inteira. O raciocínio continua visível em respostas vazias.
+- A aba de uso do Box não fica mais esmagada. O ranking preenche a largura. Cards de provedor podem trocar o intervalo.
+- Listas oficiais de modelos e preços saem corretamente. Listas Plan comuns ainda aparecem como todos. Nós de blueprint ficam consistentes em arquivos, cards e bolhas **Start**.
+- Agent em segundo plano e escritas de índice não travam mais a conversa que você está vendo.
+- Corrigidos erros do Vue tool.
+
+### Melhorias
+- O jeito de trabalhar do Agent ficou mais apertado: retry em falha, arquivos de rascunho, e acompanhar quando o estado muda.
+- Electron sobe para 43.7.0.
+- Interruptores do Box são pesquisáveis. O dashboard continua pintando. A limpeza remove blueprints e logs de terminal sem uso.
+
 ## 1.3.5 · 2026-09-09
 
 ### Correções
