@@ -5,6 +5,25 @@ next: false
 
 # Changelog
 
+## 1.3.7 · 2026-09-17
+
+### Improvements
+- Dropped the on-device full-repo vector index. Search now uses grep.
+- Background jobs and indexing no longer stall the conversation you are in.
+- Usage rankings align with the cards and can switch by period. Sub-Agent usage is billed under the parent conversation.
+- Conversation tags no longer interfere with each other. Cloning a chat no longer blows out the layout. The model stays attached to that conversation.
+
+### Fixes
+- Deleted chat history is no longer restored automatically.
+- Terminal cards near the input no longer yank the page down and bounce it back.
+- Plan cards and the chat layout no longer push each other apart. Todo cards render correctly.
+- Built-in SSH works again. It no longer goes through Microsoft Remote-SSH.
+- The selection search assistant no longer covers highlights. Consecutive tool-call counts stay visible.
+- Opening **More** on a conversation page no longer crashes.
+- Clicking a branch no longer overflows the stack.
+- On the conversation page, OpenAI-compatible and API providers make the current model obvious when you pick one.
+- Plan mode is fixed.
+
 ## 1.3.6 · 2026-09-15
 
 ### New Features

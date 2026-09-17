@@ -5,6 +5,25 @@ next: false
 
 # Registro de alterações
 
+## 1.3.7 · 2026-09-17
+
+### Melhorias
+- Saiu o índice vetorial de repositório inteiro no dispositivo. A busca agora usa grep.
+- Jobs em segundo plano e indexação não travam mais a conversa em que você está.
+- Rankings de uso alinham com os cards e podem trocar por período. Uso de sub-Agents entra na conversa pai.
+- Tags de conversa não se atropelam. Clonar um chat não estoura mais o layout. O modelo fica preso àquela conversa.
+
+### Correções
+- Histórico de chat apagado não é mais restaurado sozinho.
+- Cards de terminal perto da entrada não puxam mais a página para baixo e devolvem.
+- Cards Plan e o layout do chat não se empurram. Cards Todo renderizam certo.
+- SSH embutido volta a funcionar. Não passa mais pelo Microsoft Remote-SSH.
+- O assistente de busca da seleção não cobre mais o destaque. A contagem de chamadas de ferramenta seguidas continua visível.
+- Abrir **More** numa página de conversa não crasha mais.
+- Clicar num ramo não estoura mais a pilha.
+- Na página da conversa, provedores OpenAI-compatíveis e API deixam o modelo atual óbvio ao escolher.
+- Plan mode foi corrigido.
+
 ## 1.3.6 · 2026-09-15
 
 ### Novos recursos
