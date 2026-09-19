@@ -5,6 +5,42 @@ next: false
 
 # Changelog
 
+## 1.3.8 · 2026-09-19
+
+More models in one editor, cleaner switching mid-conversation, and a tighter Plan loop — same thread, same context.
+
+### New Features
+- **Providers & models:** StepFun and AiMass are now first-class providers. Qwen 3.8 lands with the 27B and Omni-Flash variants. Zhipu GLM-5.3-FlashX is in the list.
+- **Doubao Seed 2.1:** Pro 0915 and Evolving are available.
+- **Official protocol wiring:** OpenCode, Zhipu, Kimi, and DeepSeek now follow each vendor’s official plan tiers and protocol formats (Chat / Responses / Anthropic).
+- **OpenRouter:** New slugs appear in the model list. Free models show a FREE ribbon; retired models are stamped Unavailable.
+- **Model picker in chat:** Switching models opens an in-panel picker with Models and Compatible tabs.
+- **Models page:** Jump back to top, or jump to the latest additions.
+
+### Fixes
+- **Paste image:** Images are sent to the model as pixels. Breezell no longer looks for image.png in the repo.
+- **Composer:** Line breaks are preserved. Shift+Enter is hinted in the input.
+- **Plan / Todo:** Task status in .plan.md stays in sync as work moves. Resuming an old plan pulls todos with it. update_todo_list no longer re-marks items while a plan is executing.
+- **Codebase Exploring:** Fold groups rebuilt.
+- **Edit cards:** Completed cards collapse by default — controlled from the box feature toggle.
+- **Citation pills:** Styling matches the editor selection helper.
+- **Account pool:** Rotation is per request, not pinned to a single conversation.
+- **Built-in browser:** Tabs are isolated per workbench window.
+- **Explorer:** Project folders named dev or run are no longer hidden.
+- **PDF preview:** Scroll, zoom, and drag work.
+- **Video preview:** Duplicate selectors removed. Send to chat is available.
+- **Minimize hang:** The unresponsive dialog waits 15 seconds before appearing, so fewer false alarms.
+- **Context windows:** Qwen 3.8-27B can switch 256K / 1M. Short-context windows and list prices follow the official tables.
+- **Thinking intensity:** Official tier names aligned across providers, including DeepSeek.
+- **Compatible slots:** Shared config-column width. Capability tags sit under the token line.
+- **Admin:** Model-management table header stays pinned. Fetching the model list is fixed. Reference price and long-cache fields line up.
+- **Sidebar:** The overflow panel on the top activity bar no longer paints outside the sidebar.
+
+### Improvements
+- Retired GPT-5.3-Codex-Spark removed from the catalog.
+- Conversation body color matches tool-card filenames.
+- Electron updated to 43.7.3.
+
 ## 1.3.7 · 2026-09-17
 
 ### Improvements

@@ -5,6 +5,42 @@ next: false
 
 # Registro de alterações
 
+## 1.3.8 · 2026-09-19
+
+Mais modelos em um único editor, trocas mais limpas no meio da conversa e um ciclo de Plan mais integrado — mesma thread, mesmo contexto.
+
+### Novos recursos
+- **Provedores e modelos:** StepFun e AiMass agora são provedores de primeira classe. O Qwen 3.8 chega com as variantes 27B e Omni-Flash. Zhipu GLM-5.3-FlashX foi adicionado à lista.
+- **Doubao Seed 2.1:** Pro 0915 e Evolving já estão disponíveis.
+- **Integração de protocolos oficiais:** OpenCode, Zhipu, Kimi e DeepSeek agora seguem os planos oficiais e formatos de protocolo de cada fornecedor (Chat / Responses / Anthropic).
+- **OpenRouter:** novos identificadores aparecem na lista de modelos. Modelos gratuitos exibem uma fita FREE; modelos descontinuados recebem o selo Unavailable.
+- **Seletor de modelos no chat:** alternar modelos abre um seletor no próprio painel com as guias Models e Compatible.
+- **Página Models:** volte ao topo ou pule diretamente para as adições mais recentes.
+
+### Correções
+- **Colar imagem:** imagens são enviadas ao modelo como pixels. O Breezell não procura mais por image.png no repositório.
+- **Composer:** quebras de linha são preservadas. O atalho Shift+Enter agora é indicado no campo de entrada.
+- **Plan / Todo:** o status das tarefas em .plan.md permanece sincronizado conforme o trabalho avança. Retomar um plano antigo traz os todos de volta. O update_todo_list não remarca mais itens enquanto um plano está em execução.
+- **Exploração da base de código:** grupos de recolhimento foram reconstruídos.
+- **Cards de edição:** cards concluídos são recolhidos por padrão — controlado pela chave de recursos no Box.
+- **Pílulas de citação:** estilo alinhado com o assistente de seleção do editor.
+- **Pool de contas:** o rodízio passa a ser por solicitação, sem ficar preso a uma única conversa.
+- **Navegador embutido:** as abas são isoladas por janela de workbench.
+- **Explorer:** pastas de projeto chamadas dev ou run não ficam mais ocultas.
+- **Pré-visualização de PDF:** rolagem, zoom e arrasto funcionam normalmente.
+- **Pré-visualização de vídeo:** seletores duplicados foram removidos. Enviar para o chat está disponível.
+- **Minimizar travamentos falsos:** o aviso de aplicativo sem resposta aguarda 15 segundos antes de aparecer, reduzindo alarmes falsos.
+- **Janelas de contexto:** o Qwen 3.8-27B pode alternar entre 256K e 1M. Janelas de contexto curto e preços de tabela seguem as tabelas oficiais.
+- **Intensidade de pensamento:** os nomes oficiais de níveis foram alinhados entre os provedores, incluindo o DeepSeek.
+- **Slots compatíveis:** largura de coluna de configuração compartilhada. As tags de recursos ficam sob a linha de tokens.
+- **Administração:** o cabeçalho da tabela de gerenciamento de modelos permanece fixo. A busca da lista de modelos foi corrigida. Os campos de preço de referência e cache longo agora estão alinhados.
+- **Barra lateral:** o painel excedente da barra de atividades superior não é mais renderizado fora da barra lateral.
+
+### Melhorias
+- Removido do catálogo o modelo descontinuado GPT-5.3-Codex-Spark.
+- A cor do corpo da conversa agora corresponde aos nomes de arquivo dos cards de ferramentas.
+- Electron atualizado para a versão 43.7.3.
+
 ## 1.3.7 · 2026-09-17
 
 ### Melhorias
