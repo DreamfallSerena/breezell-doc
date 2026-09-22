@@ -5,6 +5,34 @@ next: false
 
 # Changelog
 
+## 1.3.9 · 2026-09-22
+
+### New Features
+- **Preconfigured models:** Claude Opus 5.5, GPT 6 Sol, GPT 6 Terra, GPT 6 Luna, Gemini 4 Pro, Qwen4 Max, Qwen4 Plus, Qwen4 Flash, and Qwen4 27B.
+- **China Telecom Xingchen:** Xing4.0-29B.
+- **Xiaomi:** MiMo-V2.6 Pro, Pro UltraSpeed, and Flash. Also MiMo-V2.5 and V2.5 Pro.
+- **Tongyi:** Qwen3.8-2.4T-A95B, Qwen-Doc-Turbo, and Qwen-Long.
+- Sign in to Gemini with a Google account (Antigravity Code Assist).
+- Image generation now includes **Hy Image 3.5** and **Qwen Image 2.1**.
+- When Super Memory is used up, a notice card appears above the input box.
+- Editor notifications can show images and links; documents open on click.
+- Conversation export and import now have a progress panel and can be canceled mid-way.
+- Grok shows your current subscription tier.
+- In Box, broken compatible services and models get a badge and can be retested individually.
+
+### Fixes
+- Canceling generation no longer wipes the reply that already streamed.
+- Streaming output no longer jitters line height; tool cards stay clickable.
+- Right-clicking the title bar no longer crashes the window.
+- Abnormal values or looping data no longer leave the sidebar blank.
+- Chat sidebar failed to load because of a CSS comment syntax error.
+- Backslashes in Windows paths are preserved; if a file read fails, Breezell retries with forward slashes.
+- Looking up a Git commit no longer walks the entire history.
+
+### Improvements
+- Long conversations scroll more stably.
+- Editor performance is faster.
+
 ## 1.3.8 · 2026-09-19
 
 More models in one editor, cleaner switching mid-conversation, and a tighter Plan loop — same thread, same context.

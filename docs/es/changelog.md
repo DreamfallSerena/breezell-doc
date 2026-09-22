@@ -5,6 +5,34 @@ next: false
 
 # Registro de cambios
 
+## 1.3.9 · 2026-09-22
+
+### Nuevas funciones
+- **Modelos preconfigurados:** Claude Opus 5.5, GPT 6 Sol, GPT 6 Terra, GPT 6 Luna, Gemini 4 Pro, Qwen4 Max, Qwen4 Plus, Qwen4 Flash y Qwen4 27B.
+- **China Telecom Xingchen:** Xing4.0-29B.
+- **Xiaomi:** MiMo-V2.6 Pro, Pro UltraSpeed y Flash. También MiMo-V2.5 y V2.5 Pro.
+- **Tongyi:** Qwen3.8-2.4T-A95B, Qwen-Doc-Turbo y Qwen-Long.
+- Inicia sesión en Gemini con una cuenta de Google (Antigravity Code Assist).
+- La generación de imágenes ahora incluye **Hy Image 3.5** y **Qwen Image 2.1**.
+- Cuando Super Memory se agota, aparece una tarjeta de aviso encima del cuadro de entrada.
+- Las notificaciones del editor pueden mostrar imágenes y enlaces; los documentos se abren al hacer clic.
+- Exportar e importar conversaciones ahora tienen un panel de progreso y se pueden cancelar a mitad.
+- Grok muestra tu nivel de suscripción actual.
+- En Box, los servicios y modelos compatibles rotos llevan una insignia y se pueden volver a probar uno a uno.
+
+### Correcciones
+- Cancelar la generación ya no borra la respuesta que ya se había transmitido.
+- La salida en streaming ya no titila la altura de línea; las tarjetas de herramientas siguen clicables.
+- Clic derecho en la barra de título ya no tira la ventana.
+- Valores anómalos o datos en bucle ya no dejan la barra lateral en blanco.
+- La barra lateral del chat no cargaba por un error de sintaxis en un comentario CSS.
+- Las barras invertidas en rutas de Windows se conservan; si falla la lectura de un archivo, Breezell reintenta con barras normales.
+- Buscar un commit de Git ya no recorre todo el historial.
+
+### Mejoras
+- Las conversaciones largas se desplazan con más estabilidad.
+- El rendimiento del editor es más rápido.
+
 ## 1.3.8 · 2026-09-19
 
 Más modelos en un único editor, transiciones más limpias a mitad de conversación y un ciclo de Plan más integrado: mismo hilo, mismo contexto.

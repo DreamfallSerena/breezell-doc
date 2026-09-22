@@ -5,6 +5,34 @@ next: false
 
 # 更新日誌
 
+## 1.3.9 · 2026-09-22
+
+### 新功能
+- **預置模型：** Claude Opus 5.5、GPT 6 Sol、GPT 6 Terra、GPT 6 Luna、Gemini 4 Pro、Qwen4 Max、Qwen4 Plus、Qwen4 Flash、Qwen4 27B。
+- **中國電信星辰 Xingchen：** Xing4.0-29B。
+- **小米 Xiaomi：** MiMo-V2.6 Pro、Pro UltraSpeed、Flash，以及 MiMo-V2.5 和 V2.5 Pro。
+- **通義 Tongyi：** Qwen3.8-2.4T-A95B、Qwen-Doc-Turbo、Qwen-Long。
+- 可用 Google 帳號登入 Gemini（Antigravity Code Assist）。
+- 影像生成新增 **Hy Image 3.5** 和 **Qwen Image 2.1**。
+- Super Memory 用盡時，輸入框上方會出現提示卡片。
+- 編輯器通知可顯示圖片和連結；點擊即可開啟文件。
+- 對話匯出和匯入有進度面板，中途可以取消。
+- Grok 會顯示目前訂閱檔位。
+- 在 Box 裡，損壞的相容服務和模型會打上標記，並可單獨重測。
+
+### 修正
+- 取消生成不會再清掉已經流出的回覆。
+- 串流輸出不再抖動行高；工具卡片仍可點擊。
+- 右鍵標題列不再把視窗打崩。
+- 異常數值或循環資料不再讓側邊欄空白。
+- 聊天側邊欄因 CSS 註解語法錯誤無法載入。
+- Windows 路徑裡的反斜線會保留；讀檔失敗時，Breezell 會用正斜線再試一次。
+- 查找 Git commit 不再遍歷整段歷史。
+
+### 改善
+- 長對話捲動更穩。
+- 編輯器效能更快。
+
 ## 1.3.8 · 2026-09-19
 
 在同一個編輯器中容納更多模型，對話中切換更順暢，並帶來更緊湊的 Plan 閉環 —— 同一執行緒，同一上下文。
