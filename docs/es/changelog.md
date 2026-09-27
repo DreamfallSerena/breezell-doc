@@ -5,6 +5,46 @@ next: false
 
 # Registro de cambios
 
+## 1.4.0 · 2026-09-26
+
+### Nuevas funciones
+
+#### Modelos y capacidades
+- **Modelos preconfigurados:** se añadieron GLM-5.5 Flash, GLM-5.4, Kimi K4, DeepSeek V4.1 Pro y Muse Spark 1.4.
+- **Image Studio:** ahora admite Hy Image 3.5 y Qwen Image 2.1.
+
+#### Interacción y diseño
+- Las vistas previas de diseño ahora usan el tema actual del editor y las variables de diseño propias del proyecto, en lugar de aplicar una paleta fija. Las variables CSS no declaradas ahora devuelven una explicación en vez de hacer fallar toda la llamada. Si el workspace contiene `DESIGN.md`, sus reglas se incluyen en el prompt del flujo de trabajo.
+- Las tarjetas de propuestas de diseño se muestran por defecto de una en una y ocupando todo el ancho del panel. Puedes cambiar entre propuestas con pestañas o con las flechas del teclado; la comparación en paralelo sigue disponible con un clic.
+- Las propuestas confirmadas se guardan como archivos HTML independientes en `.breezell/design/`. Los resultados de las herramientas hacen que la especificación, el plan y la implementación apunten al mismo archivo para evitar desviaciones respecto al diseño elegido.
+
+#### Notificaciones
+- El panel de notificaciones ahora muestra la lista a la izquierda y los detalles a la derecha.
+- Todas las notificaciones importantes permanecen fijadas arriba; ya no se muestra únicamente la primera.
+- La lista y el panel de detalles se desplazan de forma independiente.
+
+### Correcciones
+
+#### Conversación y Agent
+- Al crear una rama nueva, primero se copia el cuerpo de la conversación original. Las ramas antiguas que ya hayan perdido el contenido pueden recuperarlo por número de línea.
+- Los mensajes recargados liberan la altura del marcador de posición cuando vuelve el contenido. Los bloques de herramientas o razonamiento contraídos ya no conservan la altura que tenían al estar expandidos. El botón de rama ignora clics repetidos hasta que termina la creación.
+- Las conversaciones largas se abren como una única lista continua: el contenido al que aún no se ha desplazado mantiene marcadores de posición y se carga al llegar. Se eliminaron el aviso de “mensajes archivados” y la antigua ventana que conservaba solo la cola. La altura de línea sigue siendo válida tras volver a montar la vista y el resaltado de código en streaming se actualiza de forma incremental, sin hacer parpadear el bloque completo.
+- Volver a abrir la conversación actual ya no repite el proceso de cambio, por lo que no acorta la conversación ni descarta contenido fuera del final. Si una instantánea Git local no incluye archivos de esa conversación, se conserva el contador de diffs pendientes del historial.
+- El cuerpo de una conversación solo lo libera la vista que lo está mostrando. Si la conversación ya está abierta en una pestaña del editor, volver a abrirla regresa a esa pestaña en vez de crear una segunda copia en la barra lateral, evitando que dos vistas desmonten mutuamente el contenido visible.
+- Cuando una ventana está minimizada, Breezell desactiva el throttling en segundo plano y evita que la aplicación se suspenda mientras haya una ejecución activa. El comportamiento normal vuelve al terminar la ejecución, recargar la ventana o cerrarla.
+- Si el modelo seleccionado se elimina u oculta, el selector cambia automáticamente a otro modelo visible. Si todos están desactivados, Breezell pide activar uno primero.
+- Durante un periodo, la lectura y escritura de archivos externos estaba desactivada de forma predeterminada y ese valor `false` quedaba guardado, por lo que cambios posteriores del valor predeterminado no afectaban a configuraciones ya persistidas. La actualización vuelve a activar ambos permisos y registra una marca de migración, conservando cualquier cambio manual posterior del usuario.
+- El cuadro de diálogo de commit ahora se monta en la capa del workbench. Las operaciones de rama iniciadas desde pestañas del editor ya no quedan recortadas por la barra lateral.
+
+#### Almacenamiento
+- Al eliminar una conversación se compacta inmediatamente la base de datos para devolver al disco el espacio que antes solo pasaba a la freelist de SQLite. Las bases de datos antiguas ejecutan una vez un `VACUUM` completo y los registros muestran la cantidad real de espacio recuperado.
+- Los `VACUUM` completos programados ahora esperan a la cola de escritura del historial y solo se ejecutan cuando no hay conversaciones transmitiendo contenido ni herramientas en ejecución.
+- Eliminar una conversación también borra su transcripción original de `breezellTranscripts`. La limpieza entre varios workspaces mantiene un periodo de gracia para las conversaciones que siguen activas en otras ventanas, igual que con los archivos del disco.
+
+### Mejoras
+- El conjunto de rutas sin commit de la lista de historial ahora se calcula una sola vez cuando hay cambios y se mantiene en caché hasta que cambie el estado de SCM, se restaure una ruta o cambie el rango del diff. Con unos 1.000 archivos modificados, se reduce el coste de un redibujado que antes rondaba los 25 ms; con unos 10.000, se reduce de forma sustancial el coste anterior de unos 265 ms.
+- Las funciones de idioma de Settings ahora se almacenan en caché por idioma en lugar de recrearse en cada renderizado, evitando invalidar la caché de toda la página. El shell de Box solo se vuelve a renderizar cuando cambia el idioma. La búsqueda de navegación, contraer grupos o contraer la barra lateral ya no hace que se vuelva a dibujar la página de contenido. El sondeo OAuth reutiliza el resultado anterior cuando el estado no ha cambiado.
+
 ## 1.3.9 · 2026-09-22
 
 ### Nuevas funciones
