@@ -5,6 +5,46 @@ next: false
 
 # Changelog
 
+## 1.4.0 · 2026-09-26
+
+### New Features
+
+#### Models & Capabilities
+- **Preconfigured models:** GLM-5.5 Flash, GLM-5.4, Kimi K4, DeepSeek V4.1 Pro, and Muse Spark 1.4.
+- **Image Studio:** Added support for Hy Image 3.5 and Qwen Image 2.1.
+
+#### Interaction & Design
+- Design previews now use the editor's current theme and the project's own design variables instead of applying a fixed color palette. Undefined CSS variables now return guidance instead of failing the request. If the workspace contains `DESIGN.md`, its rules are included in the workflow prompt.
+- Design proposal cards now default to a full-panel, one-at-a-time view. Switch between proposals with tabs or the arrow keys; side-by-side comparison is still available in one click.
+- Confirmed proposals are saved as standalone HTML files under `.breezell/design/`. Tool results now point the specification, plan, and implementation back to the same file so the implementation stays aligned with the selected design.
+
+#### Notifications
+- The notification panel now uses a list on the left and details on the right.
+- All important notifications stay pinned at the top instead of showing only the first one.
+- The list and detail panes scroll independently.
+
+### Fixes
+
+#### Conversation & Agent
+- Creating a branch now copies the source conversation body first. Older branches that already lost their body can recover it by line number.
+- Reloaded messages release their placeholder height after the body returns. Collapsed tool and reasoning blocks no longer keep the height they had while expanded. The branch button ignores repeated clicks until branching finishes.
+- Long conversations now open as one continuous list: bodies that have not yet scrolled into view keep placeholders and load on demand. Removed the “archived messages” notice and the old tail-only window. Line height remains valid after remounting, and streaming syntax highlighting now updates incrementally instead of flashing the whole code block.
+- Opening the currently selected conversation again no longer replays the switch transition, preventing the conversation from being shortened or losing content outside the tail. If a local Git snapshot does not cover files from that conversation, the pending diff count in history is preserved.
+- Conversation bodies are released only by the view that is currently displaying them. If a conversation is already open in an editor tab, opening it again returns to that tab instead of pulling a second copy into the sidebar, preventing the two views from unmounting each other's on-screen content.
+- While a window is minimized, Breezell disables background throttling and prevents app suspension for active runs. Normal behavior resumes when the run ends, the window reloads, or the window closes.
+- If the selected model is deleted or hidden, the model chip automatically switches to another visible model. If every model is disabled, Breezell prompts you to enable one first.
+- External file read/write permissions were temporarily defaulted off and that `false` value was persisted, so later default changes could not affect already-saved settings. Upgrading now re-enables both permissions and records a migration marker, while preserving choices users make afterward.
+- The commit dialog is now mounted at the workbench layer. Branch operations started from editor tabs are no longer clipped by the sidebar.
+
+#### Storage
+- Deleting a conversation now immediately compacts the database so space that previously only moved to SQLite's freelist is returned to disk. Older databases run one full `VACUUM`, and logs record the measured amount of storage reclaimed.
+- Scheduled full `VACUUM` operations now wait for the history-write queue and run only when no conversation is streaming or executing tools.
+- Deleting a conversation also removes its raw transcript from `breezellTranscripts`. Multi-workspace cleanup keeps the same grace period used for disk files for conversations that are still active in other windows.
+
+### Improvements
+- The uncommitted-path set in History is now computed once when changes occur and cached until SCM state, path restoration, or the diff range changes. With about 1,000 dirty files, a redraw that previously took roughly 25 ms is reduced; with about 10,000 files, the previous roughly 265 ms redraw cost is substantially reduced.
+- Language functions in Settings are now cached per language instead of being recreated on every render, avoiding whole-page cache invalidation. The Box shell rerenders only when the language changes. Navigation search, collapsing groups, or collapsing the sidebar no longer redraws the content page. OAuth polling reuses the previous result when the state has not changed.
+
 ## 1.3.9 · 2026-09-22
 
 ### New Features
