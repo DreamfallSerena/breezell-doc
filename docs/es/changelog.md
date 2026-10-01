@@ -5,6 +5,31 @@ next: false
 
 # Registro de cambios
 
+## 1.4.1 · 2026-10-01
+
+### Nuevas funciones
+- **Preanálisis de memoria en Box (experimental):** se seleccionan los recuerdos relevantes antes de cada respuesta. La página de análisis de memoria muestra el progreso en streaming. La ranura del modelo se llama **MemoryPreflight**.
+- Ahora se pueden exportar paquetes de memoria desde Box.
+- El inicio de sesión de escritorio ahora se confirma en el navegador antes de volver al editor.
+- **Interruptor de monitorización de rendimiento en Box:** la supervisión de rendimiento ahora se puede activar o desactivar. Las estadísticas agrupan las ventanas por servidor remoto y se limpian los hosts de extensiones residuales.
+- El búfer del terminal ahora se limpia automáticamente.
+- Ahora puedes citar conversaciones anteriores en la sesión actual; se identifican con un robot dorado y se borran junto con la bandeja de entrada.
+- Las operaciones del navegador con IA ahora se ejecutan de forma predeterminada en ventanas ocultas; las capturas de página pasan a leer el árbol de accesibilidad, configurable en las opciones de funciones de Box.
+- Se añade compatibilidad con el proveedor de modelos AMD, **GPT-6.1 Sol** y **Gemini 4 Argon**.
+
+### Correcciones
+- **Conservar todo / Rechazar todo** ahora solo afecta a la conversación actual. Los cambios de nombre y archivos nuevos confirmados se resuelven correctamente y la barra de acciones se limpia.
+- Cada paso de las herramientas se mantiene en la fila de carga y no pasa al estado completado hasta recibir el resultado.
+- Los bloques de código en streaming ahora se cierran conforme a la especificación CommonMark. El parámetro de esfuerzo de razonamiento enviado a Gemini se limita a los niveles ofrecidos realmente por Code Assist.
+- El análisis de memoria ya no falla al encontrar un `{}` vacío. La planificación de búsquedas es más precisa y consume menos tokens.
+- Las tarjetas de scripts ahora solo muestran el recuento de archivos modificados (por ejemplo, "1 edited") en lugar de volver a listar todos los nombres de archivo.
+- Se proporciona el motivo detallado cuando falla la validación de suscripciones. Los subprocesos detenidos antes de tiempo finalizan de inmediato sin quedar colgados.
+- Se solucionaron los parpadeos y tirones de diseño en la página de conversación.
+- Corrección de varios errores menores y mejoras de estabilidad.
+
+### Mejoras
+- Los diffs en Code Review ahora se montan bajo demanda, las mediciones de diseño se ejecutan en lotes y la recuperación en la memoria es más rápida.
+
 ## 1.4.0 · 2026-09-26
 
 ### Nuevas funciones

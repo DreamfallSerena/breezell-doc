@@ -5,6 +5,31 @@ next: false
 
 # Changelog
 
+## 1.4.1 · 2026-10-01
+
+### New Features
+- **Memory pre-analysis (experimental) in Box:** Relevant memories are selected before each reply. The memory analysis page shows streaming progress. The model slot is named **MemoryPreflight**.
+- Export memory packs directly from Box.
+- Desktop sign-in now confirms in the browser before returning to the editor.
+- **Performance monitoring toggle in Box:** Performance monitoring can be switched on or off. Metrics group windows by remote server, and leftover extension hosts are cleaned up.
+- Terminal buffers are cleaned up automatically.
+- Quote earlier conversations into the current session, marked with a golden robot icon, and cleared together with the input tray.
+- AI browser operations now run in hidden windows by default; page snapshots switch to reading the accessibility tree, configurable in Box feature options.
+- Added support for AMD model provider, **GPT-6.1 Sol**, and **Gemini 4 Argon**.
+
+### Fixes
+- **Keep All / Reject All** only applies to the current conversation. Committed renames and new files settle properly, allowing the action bar to clear.
+- Tool steps hold at the loading row until results arrive, then transition to the completed state.
+- Streaming code fences now close according to CommonMark specifications. Thinking effort sent to Gemini is restricted to tiers actually supported by Code Assist.
+- Memory analysis no longer fails when encountering an empty `{}`. Search planning is more accurate and consumes fewer tokens.
+- Script cards now only display the count of modified files (for example, "1 edited") instead of relisting every filename.
+- Clear error details are provided when subscription validation fails. Subprocesses stopped early terminate immediately without lingering.
+- Resolved layout jitter and twitching issues on the conversation page.
+- Various minor bug fixes and stability improvements.
+
+### Improvements
+- Diffs in Code Review are now mounted on demand, layout measurements are batched, and memory retrieval is noticeably faster.
+
 ## 1.4.0 · 2026-09-26
 
 ### New Features

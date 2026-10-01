@@ -5,6 +5,71 @@ next: false
 
 # Registro de alterações
 
+## 1.4.1 · 2026-10-01
+
+### Novos recursos
+- **Pré-análise de memória no Box (experimental):** memórias relevantes são selecionadas antes de cada resposta. A página de análise de memória mostra o progresso do streaming. O slot do modelo chama-se **MemoryPreflight**.
+- Agora é possível exportar pacotes de memória a partir do Box.
+- O login no desktop agora é confirmado no navegador antes de retornar ao editor.
+- **Alternância de monitoramento de desempenho no Box:** o monitoramento de desempenho agora pode ser ligado ou desligado. As métricas agrupam janelas por servidor remoto e limpam extension hosts órfãos.
+- O buffer do terminal agora é limpo automaticamente.
+- Agora é possível citar conversas anteriores na sessão atual; elas vêm marcadas com um robô dourado e são limpas junto com a bandeja de entrada.
+- Operações do navegador por IA agora rodam por padrão em janelas ocultas; os snapshots de página passam a ler a árvore de acessibilidade, configurável nas opções de recursos do Box.
+- Adicionado suporte ao provedor de modelos AMD, **GPT-6.1 Sol** e **Gemini 4 Argon**.
+
+### Correções
+- **Manter tudo / Rejeitar tudo** agora afeta apenas a conversa atual. Renomeações e arquivos novos confirmados são liquidados corretamente, permitindo limpar a barra de ações.
+- Cada etapa das ferramentas permanece na linha de carregamento e só passa ao estado concluído quando o resultado chega.
+- Os blocos de código em streaming agora fecham de acordo com o padrão CommonMark. O esforço de raciocínio enviado ao Gemini fica restrito aos níveis suportados de fato pelo Code Assist.
+- A análise de memória não falha mais ao encontrar `{}` vazio. O planejamento de busca ficou mais preciso e consome menos tokens.
+- Os cards de script agora exibem apenas a quantidade de arquivos modificados (por exemplo, "1 edited"), sem listar novamente todos os nomes de arquivo.
+- O motivo detalhado é exibido quando a validação de assinatura falha. Subprocessos interrompidos precocemente encerram imediatamente sem deixar processos órfãos.
+- Corrigidas as oscilações e trepidações de layout na página de conversa.
+- Correção de vários pequenos bugs e melhorias de estabilidade.
+
+### Melhorias
+- Os diffs no Code Review agora são montados sob demanda, as medições de layout passam a ser feitas em lote e a busca no banco de memórias ficou mais rápida.
+
+## 1.4.0 · 2026-09-26
+
+### Novos recursos
+
+#### Modelos e recursos
+- **Modelos pré-configurados:** adicionados GLM-5.5 Flash, GLM-5.4, Kimi K4, DeepSeek V4.1 Pro e Muse Spark 1.4.
+- **Image Studio:** suporte a Hy Image 3.5 e Qwen Image 2.1.
+
+#### Interação e design
+- As prévias de design agora usam o tema atual do editor e as próprias variáveis de design do projeto, em vez de aplicar uma paleta fixa. Variáveis CSS não declaradas agora retornam orientações em vez de falhar a solicitação. Se o workspace contiver `DESIGN.md`, suas regras são incluídas no prompt do fluxo de trabalho.
+- Cards de propostas de design agora são exibidos por padrão em painel inteiro, um por vez. Alterne entre propostas com abas ou teclas direcionais; a comparação lado a lado continua disponível com um clique.
+- Propostas confirmadas são salvas como arquivos HTML independentes em `.breezell/design/`. Os resultados das ferramentas apontam especificação, plano e implementação para o mesmo arquivo, evitando divergências em relação ao design selecionado.
+
+#### Notificações
+- O painel de notificações agora conta com uma lista à esquerda e detalhes à direita.
+- Todas as notificações importantes permanecem fixadas no topo, em vez de mostrar apenas a primeira.
+- Os painéis de lista e detalhes rolam de forma independente.
+
+### Correções
+
+#### Conversa e Agent
+- Ao criar um ramo, o corpo da conversa de origem é copiado primeiro. Ramos antigos que já haviam perdido o corpo podem recuperá-lo por número de linha.
+- Mensagens recarregadas liberam a altura do espaço reservado após o retorno do corpo. Blocos recolhidos de ferramentas e raciocínio não mantêm mais a altura que tinham quando expandidos. O botão de ramificação ignora cliques repetidos até que a operação termine.
+- Conversas longas agora abrem como uma lista contínua única: corpos ainda não rolados mantêm placeholders e carregam sob demanda. O aviso de “mensagens arquivadas” e a antiga janela restrita ao final foram removidos. A altura da linha permanece válida após remontar, e o destaque de sintaxe em streaming agora atualiza incrementalmente, sem piscar o bloco de código inteiro.
+- Reabrir a conversa selecionada no momento não repete a animação de transição, evitando que a conversa seja encurtada ou perca conteúdo fora do final. Se um snapshot Git local não cobrir os arquivos dessa conversa, a contagem de diffs pendentes no histórico é preservada.
+- O corpo da conversa só é liberado pela visualização que o está exibindo no momento. Se uma conversa já estiver aberta em uma aba do editor, reabri-la retorna àquela aba em vez de puxar uma segunda cópia para a barra lateral, evitando que duas visualizações desmontem mutuamente o conteúdo visível.
+- Enquanto uma janela estiver minimizada, o Breezell desativa a contenção em segundo plano e impede a suspensão do aplicativo durante execuções ativas. O comportamento normal é retomado após a execução terminar, a janela recarregar ou fechar.
+- Se o modelo selecionado for excluído ou ocultado, o seletor muda automaticamente para outro modelo visível. Se todos os modelos estiverem desativados, o Breezell solicita ativar um primeiro.
+- As permissões de leitura/escrita de arquivos externos ficaram temporariamente desativadas por padrão e esse valor `false` foi persistido, impedindo que mudanças futuras no padrão afetassem configurações já salvas. A atualização reativa ambas as permissões e grava um marcador de migração, preservando escolhas manuais posteriores do usuário.
+- A caixa de diálogo de commit agora é montada na camada do workbench. Operações de ramo iniciadas em abas do editor não são mais cortadas pela barra lateral.
+
+#### Armazenamento
+- A exclusão de uma conversa compacta imediatamente o banco de dados, devolvendo ao disco o espaço que antes apenas ia para a freelist do SQLite. Bancos de dados antigos executam um `VACUUM` completo e os logs registram a quantidade real de armazenamento recuperada.
+- Operações agendadas de `VACUUM` completo agora aguardam a fila de gravação do histórico e são executadas apenas quando nenhuma conversa está transmitindo streaming ou executando ferramentas.
+- A exclusão de uma conversa também remove sua transcrição original de `breezellTranscripts`. A limpeza de múltiplos workspaces mantém o mesmo período de carência usado para arquivos em disco para conversas ainda ativas em outras janelas.
+
+### Melhorias
+- O conjunto de caminhos não commitados no histórico agora é calculado uma vez quando ocorrem alterações e armazenado em cache até que o estado do SCM, restauração de caminho ou intervalo de diff mudem. Com cerca de 1.000 arquivos modificados, a redução no redesenho é perceptível; com cerca de 10.000 arquivos, o custo anterior de redesenho é substancialmente reduzido.
+- As funções de idioma nas configurações agora são armazenadas em cache por idioma em vez de serem recriadas a cada renderização, evitando a invalidação de cache de toda a página. A casca do Box renderiza novamente apenas quando o idioma muda. Pesquisa de navegação, recolher grupos ou recolher a barra lateral não redesenha mais a página de conteúdo. A sondagem OAuth reutiliza o resultado anterior quando o estado não mudou.
+
 ## 1.3.9 · 2026-09-22
 
 ### Novos recursos
