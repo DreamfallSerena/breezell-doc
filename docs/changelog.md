@@ -5,6 +5,45 @@ next: false
 
 # Changelog
 
+## 1.4.2 · 2026-10-10
+
+### New Features
+- **Desktop control:** Inspect the screen, click, and type on Windows; macOS uses a native Swift helper for the same capabilities. Supports launching applications by name, and window snapshots now capture overlay popups and modal layers. Fully supported in Entanglement mode. Linux is currently not supported and planned for future release.
+- **Model monitoring in Box:** A new dedicated page that checks configured or authenticated providers only when opened, displaying status history via a 90-day color bar.
+- **Automatic model selection (experimental):** Deconstructs and cross-checks tasks with a dedicated analysis page. Network and conversation pages now provide layer-by-layer visibility into the active model routing, with automatic route diagnostics for stalled requests.
+- **Direct account sign-in:** Added direct sign-in for DeepSeek, MiniMax, and OpenRouter, as well as desktop client sign-in for Gemini.
+- **Image Studio:** Generate images and videos via OpenRouter.
+- **New models:** Added Claude Haiku 5.5 (with optional thinking toggle), Claude Opus 5.5, Mistral Large 4, Nano Banana 2.1, Fledge Alpha, Ling 3.1 Flash, Apodex 1.1 Mini, Aion 3.5 / Mini, Pareto 26.10 Preview, and Glyph Cluster. Ultrafast mode is now available for GPT-6.1 Sol and GPT-6 Astra, including on Codex. Step 5 Preview now supports video input.
+- **Entanglement mode improvements:** Introduces strict verification and adaptive modes. You can now ask questions during active tasks with responses preserved in session state. The causal engine now enforces a "fail-first, pass-after-fix" reproduction gate.
+- **Conversations:** One-click translation for reasoning steps. Web links now display site favicons. File links feature streamlined path hints with built-in image previews. Images can be zoomed with the scroll wheel and panned by dragging. Added the ability to branch from any message turn.
+- **Agent:** View and terminate agent background tasks. Search recent conversations by title. Re-enable disabled Skills directly from the slash menu. Workspaces with multiple root folders now load Skills and rules across every folder.
+- **Terminal:** The status bar now displays real-time command upload and download throughput across Windows, local proxy, and macOS environments.
+- **Other updates:** Copilot displays brand icons for each model. Active plan to-do items can now be renamed or appended. Updated Superpowers skills to v6.4.2. Box usage tracking now records background requests. The model configuration page has been redesigned with a sidebar alongside adjustable list and detail panes.
+
+### Fixes
+- Fixed an issue where copying messages caused off-screen responses to turn into a long string of "x"s.
+- Resolved an issue where failed concurrent edits on the same file repeatedly spawned identical "Edit attempted" status lines.
+- Stopping context compression midway now cleanly halts the process without persisting incomplete compressed artifacts.
+- Stalled tool calls are now treated as failures and prompt for smaller, subdivided payloads instead of retrying identically.
+- Edits are no longer falsely flagged as stale when the model has already read the corresponding range or loosely matched the current text.
+- Fixed truncated responses where Google account streaming chunks split across multiple network reads dropped subsequent fragments.
+- Pressing Enter repeatedly while a message is actively transmitting no longer queues duplicate sends.
+- Prevented inactive Skill files from being injected into the system prompt when all Skills are toggled off.
+- Fixed an issue where a hanging tool call in the built-in browser froze the entire conversation session.
+- Corrected HTTP proxy requests emitting redundant `:443` port suffixes in the `Host` header; loopback addresses now reliably bypass proxies.
+- Resolved an issue where scrolling up in completed conversations unexpectedly snapped the view back to the bottom.
+- Fixed layout collisions in the Linux title bar and Image Studio where padding was missing for left-aligned window controls.
+- Fixed unconfirmed file edits being silently discarded when a tool executed a full file overwrite.
+- Fixed a failure when opening legacy conversations on Windows, and resolved two outdated TypeScript type errors in the settings package.
+
+### Improvements
+- **Long conversations:** Reduced lag, latency spikes, and frame stutter during extended sessions.
+- **Performance diagnostics:** Enabling monitoring now surfaces hot-path execution times, in-memory message body counts, and whether disk storage was queried during initialization.
+- **Runtime:** Upgraded Electron to version 43.7.9.
+- **Pricing & catalog:** Model pricing has been synced with upstream provider rates. Hosted Qwen and Grok offerings now strictly adhere to official context window tiers. The Gemini (Google) model catalog is filtered to display only conversation models actually accessible by the account.
+- **Terminal:** Removed redundant command echoes, added detection for themed shell prompts, and now reports the exit code upon command completion. Command cards remain compact until terminal output is generated.
+- **UI & design:** Unified design styling between the model selector and the settings model overlay. The conversation input box and its bottom tray are now consolidated into a single card.
+
 ## 1.4.1 · 2026-10-01
 
 ### New Features

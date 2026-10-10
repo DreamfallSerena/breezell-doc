@@ -5,6 +5,45 @@ next: false
 
 # Registro de cambios
 
+## 1.4.2 · 2026-10-10
+
+### Nuevas funciones
+- **Control de escritorio:** permite inspeccionar la pantalla, hacer clic y escribir en Windows; macOS utiliza un asistente nativo en Swift para ofrecer las mismas funciones. Permite abrir aplicaciones por su nombre y las capturas de ventana ahora reconocen capas modales y ventanas emergentes. Totalmente compatible con el modo Entanglement. Linux no es compatible actualmente y llegará en futuras versiones.
+- **Supervisión de modelos en Box:** nueva página dedicada que comprueba los proveedores configurados o autenticados solo al abrirse, mostrando el historial mediante una barra de color de 90 días.
+- **Selección automática de modelos (experimental):** descompone y revisa tareas con una página de análisis dedicada. Las páginas de red y conversación ahora permiten ver capa por capa la ruta del modelo activo, e incluyen diagnósticos de ruta para solicitudes bloqueadas.
+- **Inicio de sesión directo:** compatibilidad con inicio de sesión directo para DeepSeek, MiniMax y OpenRouter, además de inicio de sesión en cliente de escritorio para Gemini.
+- **Image Studio:** ahora permite generar imágenes y vídeos a través de OpenRouter.
+- **Nuevos modelos:** se añaden Claude Haiku 5.5 (con opción de desactivar el razonamiento), Claude Opus 5.5, Mistral Large 4, Nano Banana 2.1, Fledge Alpha, Ling 3.1 Flash, Apodex 1.1 Mini, Aion 3.5 / Mini, Pareto 26.10 Preview y Glyph Cluster. Modo Ultrafast disponible para GPT-6.1 Sol y GPT-6 Astra, también en Codex. Step 5 Preview ahora admite entrada de vídeo.
+- **Mejoras en el modo Entanglement:** incorpora verificación estricta y perfiles adaptativos. Ahora se pueden formular preguntas durante las tareas activas, conservando las respuestas. El motor causal añade el requisito de "fallar primero para reproducir y pasar tras corregir".
+- **Conversaciones:** traducción en un clic para los procesos de razonamiento. Los enlaces web ahora muestran el favicon del sitio. Los enlaces a archivos muestran una sugerencia de ruta limpia con vista previa de imágenes. Las imágenes admiten zoom con la rueda del ratón y desplazamiento por arrastre. Ahora es posible crear ramas desde cualquier turno de la conversación.
+- **Agent:** visualiza y cancela tus tareas en segundo plano. Permite buscar conversaciones recientes por título. Vuelve a habilitar Skills desactivadas directamente desde el menú de barra diagonal (`/`). Las áreas de trabajo multirraíz ahora leen Skills y reglas de cada una de sus carpetas.
+- **Terminal:** la barra de estado ahora muestra la velocidad de subida y bajada de comandos en tiempo real en Windows, proxy local y macOS.
+- **Otras novedades:** Copilot muestra el icono de marca correspondiente a cada modelo. Ahora se pueden renombrar o añadir tareas en planes en ejecución. Se actualizan las habilidades de Superpowers a la versión v6.4.2. El registro de uso de Box ahora contabiliza las solicitudes en segundo plano. La página de configuración de modelos se ha rediseñado con una barra lateral junto a paneles ajustables de lista y detalles.
+
+### Correcciones
+- Se corrigió un problema por el cual, al copiar mensajes, las respuestas fuera de pantalla se convertían en una larga cadena de "x".
+- Se corrigió un error por el cual, al fallar ediciones simultáneas en un mismo archivo, se generaba una serie repetida de mensajes "Edit attempted".
+- Al detener la compresión de contexto a mitad de proceso, la operación se cancela limpiamente sin conservar fragmentos incompletos.
+- Las llamadas a herramientas bloqueadas ahora se consideran fallidas y solicitan dividir la carga de trabajo en partes más pequeñas en lugar de reintentar de forma idéntica.
+- Las ediciones ya no se marcan erróneamente como obsoletas cuando el modelo ya ha leído el rango o coincide de forma flexible con el texto actual.
+- Se corrigió la pérdida de fragmentos finales cuando una respuesta de cuentas de Google se dividía en múltiples lecturas de red.
+- Presionar Intro repetidamente mientras se envía un mensaje ya no encola envíos duplicados.
+- Se corrigió un problema por el cual el archivo completo de Skills se seguía incluyendo en el prompt del sistema aunque todas estuvieran desactivadas.
+- Se corrigió un problema que provocaba el bloqueo de toda la sesión de conversación cuando una herramienta del navegador integrado se quedaba colgada.
+- Se corrigió el envío de puertos `:443` redundantes en la cabecera `Host` mediante proxy HTTP; las direcciones de bucle invertido (loopback) ahora omiten correctamente el proxy.
+- Se corrigió un error que provocaba que la vista saltara abruptamente hacia abajo al desplazarse hacia arriba en conversaciones finalizadas.
+- Se corrigió la falta de margen para los controles de ventana a la izquierda en la barra de título de Linux y en Image Studio.
+- Se solucionó la pérdida de ediciones pendientes de confirmación cuando una herramienta sobrescribía el archivo por completo.
+- Se corrigió el fallo al abrir conversaciones antiguas en Windows y se solucionaron dos errores de tipo obsoletos en el paquete de configuración.
+
+### Mejoras
+- **Conversaciones extensas:** reducción de tirones, picos de latencia y problemas de rendimiento en sesiones largas.
+- **Página de rendimiento:** al activar la supervisión, ahora muestra los tiempos de ejecución de rutas críticas, la cantidad de cuerpos de mensaje en memoria y si se leyó el almacenamiento en el inicio.
+- **Entorno de ejecución:** actualización de Electron a la versión 43.7.9.
+- **Precios y catálogo:** los precios de los modelos se han sincronizado con las tarifas oficiales de los proveedores. Las opciones alojadas de Qwen y Grok ahora solo mantienen los niveles oficiales de contexto. El catálogo de Gemini (Google) se limita a los modelos de conversación a los que la cuenta tiene acceso real.
+- **Terminal:** se elimina el eco innecesario de las líneas de comandos, se reconocen los prompts temáticos de la shell y se informa del código de salida (exit code) al finalizar. Las tarjetas de comandos se mantienen compactas hasta que se produce una salida.
+- **Interfaz:** estilo visual unificado entre el selector de modelos y la superposición de modelos en la configuración. El campo de entrada de la conversación y la bandeja inferior ahora se integran en una sola tarjeta.
+
 ## 1.4.1 · 2026-10-01
 
 ### Nuevas funciones

@@ -5,6 +5,45 @@ next: false
 
 # Registro de alterações
 
+## 1.4.2 · 2026-10-10
+
+### Novos recursos
+- **Controle de desktop:** visualize a tela, clique e digite no Windows; o macOS utiliza um assistente nativo em Swift para os mesmos recursos. Permite abrir aplicativos pelo nome, e os snapshots de janela agora capturam pop-ups e camadas modais. Totalmente compatível com o modo Entanglement. O Linux ainda não é compatível e está planejado para versões futuras.
+- **Monitoramento de modelos no Box:** nova página dedicada que verifica os provedores configurados ou autenticados apenas ao ser aberta, exibindo o histórico por meio de uma barra colorida de 90 dias.
+- **Seleção automática de modelos (experimental):** divide e valida tarefas com uma página de análise dedicada. As páginas de rede e conversa agora oferecem visibilidade camada por camada do roteamento do modelo ativo, além de verificações de rota para requisições travadas.
+- **Login direto de contas:** adicionado login direto para DeepSeek, MiniMax e OpenRouter, além de login pelo cliente desktop para o Gemini.
+- **Image Studio:** suporte à geração de imagens e vídeos via OpenRouter.
+- **Novos modelos:** adicionados Claude Haiku 5.5 (com alternância de desativação do pensamento), Claude Opus 5.5, Mistral Large 4, Nano Banana 2.1, Fledge Alpha, Ling 3.1 Flash, Apodex 1.1 Mini, Aion 3.5 / Mini, Pareto 26.10 Preview e Glyph Cluster. Modo Ultrafast disponível para GPT-6.1 Sol e GPT-6 Astra, inclusive no Codex. Step 5 Preview agora suporta entrada de vídeo.
+- **Aprimoramentos no modo Entanglement:** introdução de verificação estrita e perfis adaptativos. Agora é possível fazer perguntas durante tarefas ativas, com respostas preservadas na sessão. O motor causal passa a exigir a validação de "falhar primeiro e passar após a correção".
+- **Conversas:** tradução com um clique para processos de raciocínio. Links da web agora exibem o favicon do site. Links de arquivos trazem dicas simplificadas de caminho com visualização de imagens. Imagens suportam zoom com a roda do mouse e movimento por arrasto. Agora é possível criar ramificações (branching) a partir de qualquer turno da conversa.
+- **Agent:** visualize e encerre tarefas em segundo plano. Permite buscar conversas recentes pelo título. Reative Skills desativadas diretamente pelo menu de barra (`/`). Workspaces multirraiz agora carregam Skills e regras de todas as pastas.
+- **Terminal:** a barra de status agora exibe a velocidade de upload e download de comandos em tempo real no Windows, proxy local e macOS.
+- **Outras atualizações:** o Copilot exibe o ícone de marca para cada modelo. Tarefas de planos em execução agora podem ser renomeadas ou adicionadas. Habilidades do Superpowers atualizadas para a v6.4.2. A contagem de uso do Box agora registra requisições em segundo plano. A página de configuração de modelos foi remodelada com barra lateral e painéis ajustáveis de lista e detalhes.
+
+### Correções
+- Corrigido um problema em que a cópia de mensagens fazia com que respostas fora da tela se transformassem em uma longa sequência de "x".
+- Resolvido um problema em que falhas de edições paralelas no mesmo arquivo exibiam repetidamente mensagens idênticas de "Edit attempted".
+- Ao interromper a compactação de contexto em andamento, o processo é encerrado de forma limpa sem reter conteúdo incompleto.
+- Chamadas de ferramentas travadas agora são tratadas como falhas e orientam a divisão em etapas menores em vez de repetir a mesma requisição.
+- As edições não são mais marcadas indevidamente como expiradas quando o modelo já tiver lido o intervalo ou correspondido de forma aproximada ao texto atual.
+- Corrigida a perda da parte final de respostas de contas do Google quando divididas em múltiplas leituras de rede.
+- Pressionar Enter repetidamente enquanto uma mensagem está sendo enviada não enfileira mais envios duplicados.
+- Corrigido um problema em que o arquivo completo de Skills ainda era injetado no prompt do sistema mesmo com todas as Skills desativadas.
+- Corrigido o congelamento de toda a sessão de conversa quando uma ferramenta do navegador integrado entrava em espera indefinida.
+- Corrigido o envio de portas redundantes `:443` no cabeçalho `Host` via proxy HTTP; endereços de loopback agora contornam o proxy corretamente.
+- Resolvido um problema em que a rolagem para cima em conversas finalizadas fazia a tela saltar inesperadamente para o final.
+- Corrigida a falta de espaçamento para os botões de controle de janela à esquerda na barra de título do Linux e no Image Studio.
+- Corrigida a perda de edições pendentes de confirmação quando uma ferramenta realizava a sobrescrita completa de um arquivo.
+- Corrigida a falha ao abrir conversas antigas no Windows e resolvidos dois erros de tipos desatualizados no pacote de configurações.
+
+### Melhorias
+- **Conversas longas:** redução de travamentos, picos de latência e oscilações de desempenho em sessões extensas.
+- **Diagnóstico de desempenho:** ativar o monitoramento agora exibe os tempos de execução dos caminhos críticos, a contagem de corpos de mensagens na memória e se o armazenamento local foi acessado na inicialização.
+- **Runtime:** atualização do Electron para a versão 43.7.9.
+- **Preços e catálogo:** preços de modelos sincronizados com as taxas oficiais dos provedores. As opções hospedadas de Qwen e Grok mantêm apenas as camadas oficiais de contexto. A lista do Gemini (Google) passa a exibir apenas os modelos de conversa acessíveis de fato pela conta.
+- **Terminal:** removido o eco redundante da linha de comando, reconhecendo prompts personalizados do shell e exibindo o código de saída (exit code) ao término. Os cards de comando permanecem compactos até que haja saída no terminal.
+- **Interface:** estilo visual unificado entre o seletor de modelos e o modal de modelos nas configurações. A caixa de entrada de conversas e a bandeja inferior foram consolidadas em um único card.
+
 ## 1.4.1 · 2026-10-01
 
 ### Novos recursos
