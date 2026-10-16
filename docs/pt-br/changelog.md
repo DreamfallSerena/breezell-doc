@@ -5,6 +5,46 @@ next: false
 
 # Registro de alterações
 
+## 1.4.31 · Hotfix · 2026-10-15
+
+- O campo de intervalo de verificação na página de versão não exibe mais setas para cima/para baixo; digite diretamente o número de segundos.
+- Edições de arquivos, verificações de lint e checkpoints mais rápidos, além de execuções de ferramentas mais estáveis: uma única chamada de ferramenta agora segue o mesmo fluxo que várias, uma falha ao atualizar o plano não interrompe mais o turno e ferramentas aguardando aprovação em paralelo agora exibem esse status.
+- Respostas mais confiáveis via serviços de retransmissão (relay): quando um relay encerra uma resposta sem informar que terminou, o Breezell preserva a resposta completa, tenta novamente aquela que nem chegou a iniciar e exibe o que o relay enviou por último.
+- Versões completas (Full Releases) agora podem substituir atualizações rápidas (hot updates) com número de versão superior ao próprio.
+
+## 1.4.3 · 2026-10-15
+
+### Novos recursos
+- **Modelo Meta Muse Wonder:** suporta até 1 milhão de tokens de contexto, aceita entradas de vídeo e áudio e oferece intensidade de inferência ajustável em 6 níveis (do mais baixo ao mais alto).
+- **Login com conta Muse Code:** autorize via conta Meta para acessar o Muse Wonder; o login funciona com proxies HTTP personalizados.
+- **GPT-6.1 Sol adiciona contexto de 500K:** ao rotear pelo Codex e pelo Breezell, as opções agora incluem 272K, 500K ou 1M; o padrão permanece em 272K.
+- **Atualização rápida (Hot Update):** pacotes futuros podem ser baixados diretamente dentro do editor sem precisar reinstalar o instalador completo. O progresso do download é exibido e aplicado após reiniciar. Janelas remotas WSL/SSH continuam utilizáveis durante as atualizações rápidas.
+- **Menu de clique direito na caixa de entrada do chat:** inclui Desfazer, Refazer, Recortar, Copiar, Colar e Selecionar tudo.
+- **Alerta de cota esgotada:** quando a cota da sua conta Breezell acaba, um aviso com o botão "Recarregar" aparece acima da caixa de entrada e desaparece automaticamente após a recarga, evitando mensagens de erro tardias após o envio de requisições.
+
+### Melhorias
+- **Gemini 4 Argon:** alinhado com a API oficial lançada; disponível no OpenRouter e no Vertex.
+- **DeepSeek:** usa o formato Responses por padrão, exigindo apenas a chave de API nas configurações.
+- **Gemini com Conta do Google:** requisições dentro da mesma conversa compartilham o estado da sessão, melhorando a taxa de acerto de cache e reduzindo custos.
+- **Modelos de alias do Breezell:** a intensidade de inferência selecionada persiste corretamente (por exemplo, "minimal" não muda mais automaticamente para "medium") e é mapeada para o nível de modelo correspondente.
+- **Modelos de inferência:** prompts grandes via WebSocket do Responses não expiram mais após 60 segundos e recorrem automaticamente a uma nova tentativa via HTTP quando a conexão não responde.
+- **Code Review**
+- **Modo Plan:**
+  - **Permissões de ferramentas:** ferramentas de terminal e editor permanecem disponíveis para todas as ações, exceto perguntas simples, removendo o erro "This conversation has no permission to run commands".
+  - **Confirmação humana:** se a confirmação do turno anterior estiver pendente, a próxima mensagem solicitará a confirmação primeiro, sem aplicar bloqueio permanente de somente leitura.
+- **Chinês tradicional:** notificações de atualização, janela Sobre, avisos de caminho WSL, botões de diff, mensagens de erro do Image Studio, página de login do DeepSeek e nomes de países/idiomas na tradução de palavras agora são exibidos em chinês tradicional.
+
+### Correções
+- O diff de arquivos recém-criados não exibe mais uma linha em branco excluída extra indevida (anteriormente mostrava `+4 −1`).
+- Arquivos de linha única agora exibem o diff correto `+1 / −1` (anteriormente `+2 / −2`).
+- Após rolar conversas longas, os caminhos e números de linha dos arquivos editados são preservados, e as etapas do Code Review não voltam ao estado de carregamento.
+- Itens de tarefas (to-do) fora da tela mantêm seu conteúdo, sem lacunas em branco na conversa nem saltos ao rolar para cima.
+- A rolagem e os cliques no chat funcionam corretamente em telas sensíveis ao toque e ferramentas remotas de toque.
+- Após atualizar a lista de modelos, IDs de modelos personalizados não são mais marcados como expirados e removidos.
+- Falhas de login no Grok agora indicam qual rota de rede e host não puderam se conectar.
+- Corrigidos o roteamento e a cobrança para os perfis de velocidade Fast e Ultrafast.
+- A desinstalação de uma atualização rápida não exclui mais arquivos dentro do diretório de instalação (evitando falha de inicialização "Cannot find package").
+
 ## 1.4.2 · 2026-10-10
 
 ### Novos recursos

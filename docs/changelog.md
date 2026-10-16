@@ -5,6 +5,46 @@ next: false
 
 # Changelog
 
+## 1.4.31 · Hotfix · 2026-10-15
+
+- The check interval box on the version page no longer shows up/down arrows; type the number of seconds directly.
+- Faster file edits, lint checks, and checkpoints, with steadier tool runs: a single tool call now follows the same path as several, a failed plan update no longer stops the turn, and tools waiting for approval in parallel now show it.
+- More reliable replies through relay services: when a relay ends a reply without indicating completion, Breezell keeps a complete reply, retries one that never started, and shows what the relay sent last.
+- Full releases can now replace hot updates newer than their own version number.
+
+## 1.4.3 · 2026-10-15
+
+### New Features
+- **Meta Muse Wonder model:** Supports up to 1 million tokens of context and accepts video and audio inputs, with adjustable inference strength across 6 tiers from lowest to highest.
+- **Muse Code account login:** Authorize via a Meta account to access Muse Wonder; login works with custom HTTP proxies.
+- **GPT-6.1 Sol adds 500K context:** When routed through Codex and Breezell, context window options now include 272K, 500K, or 1M; the default remains 272K.
+- **Hot Update:** Future patches can be downloaded directly inside the editor without reinstalling the full installer. Download progress is displayed and takes effect after restart. WSL/SSH remote windows remain usable during hot updates.
+- **Right-click menu for chat input box:** Supports Undo, Redo, Cut, Copy, Paste, and Select All.
+- **Quota exhausted alert:** When your Breezell account runs out of quota, a prompt with a "Recharge" button appears above the input box and disappears automatically after recharging—no more delayed error messages after sending requests.
+
+### Improvements
+- **Gemini 4 Argon:** Aligned with the officially released API; now available on OpenRouter and Vertex.
+- **DeepSeek:** Defaults to the Responses format, requiring only an API key in settings.
+- **Gemini with Google Account:** Requests within the same conversation share session state, improving cache hit rates and reducing costs.
+- **Breezell alias models:** Selected inference strength persists properly (e.g., "minimal" will no longer switch to "medium" automatically) and maps to the corresponding model tier.
+- **Inference models:** Large prompts over Responses WebSocket no longer time out after 60 seconds, and automatically fall back to HTTP retry when the connection is unresponsive.
+- **Code Review**
+- **Plan Mode:**
+  - **Tool permissions:** Terminal and editor tools remain available for all actions except plain questions, removing the "This conversation has no permission to run commands" error.
+  - **Human confirmation:** If confirmation from the previous turn is pending, the next message prompts for confirmation first instead of locking the conversation into permanent read-only mode.
+- **Traditional Chinese:** Update notifications, the About window, WSL path warnings, diff buttons, Image Studio error messages, the DeepSeek login page, and country/language names in word translation now render properly in Traditional Chinese.
+
+### Fixes
+- File diff for newly created files no longer shows a spurious extra deleted blank line (previously showed `+4 −1`).
+- Single-line files now show the correct line diff `+1 / −1` (previously `+2 / −2`).
+- After scrolling long conversations, edited file paths and line numbers persist, and Code Review steps no longer revert to the loading state.
+- Off-screen to-do items retain their content, preventing blank gaps in conversations and scroll jumps when scrolling up.
+- Chat scrolling and clicks now work properly on touchscreens and remote touch tools.
+- After refreshing the model list, custom model IDs are no longer marked as expired and removed.
+- Grok login failures now indicate which network route and host failed to connect.
+- Fixed routing and billing for Fast and Ultrafast speed profiles.
+- Uninstalling a hot update no longer deletes files inside the installation directory (preventing "Cannot find package" startup failures).
+
 ## 1.4.2 · 2026-10-10
 
 ### New Features

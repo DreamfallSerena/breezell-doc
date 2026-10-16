@@ -5,6 +5,46 @@ next: false
 
 # Registro de cambios
 
+## 1.4.31 · Hotfix · 2026-10-15
+
+- El cuadro de intervalo de comprobación en la página de versión ya no muestra flechas arriba/abajo; escribe directamente el número de segundos.
+- Ediciones de archivos, comprobaciones de lint y puntos de control más rápidos, además de ejecuciones de herramientas más estables: una única llamada a herramienta ahora sigue la misma ruta que varias, una actualización de plan fallida ya no detiene el turno y las herramientas que esperan aprobación en paralelo ahora lo muestran en pantalla.
+- Respuestas más fiables a través de servicios de retransmisión (relay): cuando un servicio de retransmisión corta una respuesta sin indicar que ha finalizado, Breezell conserva la respuesta si está completa, reintenta la que nunca llegó a iniciarse y muestra lo último que envió el relay.
+- Las versiones completas ahora pueden reemplazar actualizaciones en caliente (hot updates) con un número de versión superior al suyo.
+
+## 1.4.3 · 2026-10-15
+
+### Nuevas funciones
+- **Modelo Meta Muse Wonder:** admite hasta 1 millón de tokens de contexto, acepta entradas de vídeo y audio, y ofrece intensidad de inferencia ajustable en 6 niveles (de mínimo a máximo).
+- **Inicio de sesión con cuenta de Muse Code:** autoriza mediante tu cuenta de Meta para acceder a Muse Wonder; el inicio de sesión es compatible con proxies HTTP personalizados.
+- **GPT-6.1 Sol añade contexto de 500K:** al enrutar a través de Codex y Breezell, las opciones ahora incluyen 272K, 500K o 1M; el valor predeterminado sigue siendo 272K.
+- **Actualización en caliente (Hot Update):** los futuros parches se pueden descargar directamente desde el editor sin necesidad de reinstalar el instalador completo. Se muestra el progreso de la descarga y se aplica tras reiniciar. Las ventanas remotas de WSL/SSH siguen operativas durante las actualizaciones en caliente.
+- **Menú contextual en el cuadro de entrada del chat:** incluye Deshacer, Rehacer, Cortar, Copiar, Pegar y Seleccionar todo.
+- **Aviso de cuota agotada:** cuando tu cuenta de Breezell se queda sin cuota, aparece un aviso con un botón de "Recargar" sobre el cuadro de entrada que desaparece automáticamente tras recargar, evitando errores tardíos después de enviar solicitudes.
+
+### Mejoras
+- **Gemini 4 Argon:** alineado con la API oficial publicada; ya disponible en OpenRouter y Vertex.
+- **DeepSeek:** utiliza el formato Responses de forma predeterminada y solo requiere la clave API en la configuración.
+- **Gemini con cuenta de Google:** las solicitudes dentro de una misma conversación comparten el estado de la sesión, lo que mejora la tasa de aciertos de caché y reduce costes.
+- **Modelos alias de Breezell:** la intensidad de inferencia seleccionada se conserva correctamente (por ejemplo, "minimal" ya no cambia automáticamente a "medium") y se asigna al nivel de modelo correspondiente.
+- **Modelos de inferencia:** los prompts extensos enviados por WebSocket de Responses ya no agotan el tiempo de espera a los 60 segundos, y recurren automáticamente a un reintento por HTTP cuando la conexión no responde.
+- **Code Review**
+- **Modo Plan:**
+  - **Permisos de herramientas:** las herramientas de terminal y editor permanecen disponibles para todas las acciones salvo preguntas simples, eliminando el error "This conversation has no permission to run commands".
+  - **Confirmación humana:** si queda pendiente una confirmación del turno anterior, el siguiente mensaje solicitará primero dicha confirmación sin bloquear la sesión de forma permanente en modo de solo lectura.
+- **Chino tradicional:** las notificaciones de actualización, la ventana Acerca de, las advertencias de rutas WSL, los botones de diff, los mensajes de error de Image Studio, la página de inicio de sesión de DeepSeek y los nombres de países/idiomas en la traducción de palabras ahora se muestran en chino tradicional.
+
+### Correcciones
+- El diff de archivos recién creados ya no añade una línea en blanco eliminada de más (antes mostraba `+4 −1`).
+- Los archivos de una sola línea ahora muestran el diff correcto `+1 / −1` (antes `+2 / −2`).
+- Tras desplazarse por conversaciones largas, las rutas y los números de línea de los archivos editados se conservan, y los pasos de Code Review no vuelven al estado de carga.
+- Las tareas pendientes (to-do) fuera de pantalla conservan su contenido, evitando huecos en blanco en la conversación y saltos al desplazarse hacia arriba.
+- El desplazamiento y los clics en el chat funcionan correctamente en pantallas táctiles y herramientas táctiles remotas.
+- Al actualizar la lista de modelos, los ID de modelos personalizados ya no se marcan como caducados ni se eliminan.
+- Los fallos de inicio de sesión en Grok ahora indican qué ruta de red y qué host no pudieron conectarse.
+- Se corrigieron el enrutamiento y la facturación de los perfiles de velocidad Fast y Ultrafast.
+- La desinstalación de una actualización en caliente ya no elimina archivos dentro del directorio de instalación (evitando el fallo de inicio "Cannot find package").
+
 ## 1.4.2 · 2026-10-10
 
 ### Nuevas funciones
