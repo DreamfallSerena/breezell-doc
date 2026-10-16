@@ -5,7 +5,12 @@ next: false
 
 # Registro de alterações
 
-## 1.4.31 · Hotfix · 2026-10-15
+## 1.4.32 · Hot Update · 2026-10-15
+
+- **Teams:** o card de relatório de um colega de equipe não exibe mais linhas de "x" quando a resposta do líder foi descarregada da memória; a mesma correção cobre o relatório do Analyze, a geração de mensagens de commit e os resumos do modo competitivo.
+- **Novo modelo:** Meta Muse Spark Open (pesos abertos, contexto de 1M, esforço de raciocínio `low`–`xhigh`) disponível no OpenRouter, Fireworks, Groq e em qualquer endpoint compatível com OpenAI.
+
+## 1.4.31 · Hot Update · 2026-10-15
 
 - O campo de intervalo de verificação na página de versão não exibe mais setas para cima/para baixo; digite diretamente o número de segundos.
 - Edições de arquivos, verificações de lint e checkpoints mais rápidos, além de execuções de ferramentas mais estáveis: uma única chamada de ferramenta agora segue o mesmo fluxo que várias, uma falha ao atualizar o plano não interrompe mais o turno e ferramentas aguardando aprovação em paralelo agora exibem esse status.

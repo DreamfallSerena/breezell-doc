@@ -5,7 +5,12 @@ next: false
 
 # Changelog
 
-## 1.4.31 · Hotfix · 2026-10-15
+## 1.4.32 · Hot Update · 2026-10-15
+
+- **Teams:** A teammate's report card no longer shows rows of "x" when the lead's reply has been paged out of memory; the same fix covers the Analyze report, commit-message generation, and competitive-mode summaries.
+- **New model:** Meta Muse Spark Open (open weights, 1M context, reasoning effort `low`–`xhigh`) on OpenRouter, Fireworks, Groq, and any OpenAI-compatible endpoint.
+
+## 1.4.31 · Hot Update · 2026-10-15
 
 - The check interval box on the version page no longer shows up/down arrows; type the number of seconds directly.
 - Faster file edits, lint checks, and checkpoints, with steadier tool runs: a single tool call now follows the same path as several, a failed plan update no longer stops the turn, and tools waiting for approval in parallel now show it.
