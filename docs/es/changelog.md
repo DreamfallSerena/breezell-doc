@@ -5,6 +5,17 @@ next: false
 
 # Registro de cambios
 
+## 1.4.33 · Hot Update · 2026-10-15
+
+- **Archivos adjuntos de vídeo:** cualquier vídeo arrastrado al chat se envía siempre y ya no se bloquea porque el modelo no figure en una lista de compatibilidad (por ejemplo, `kimi-k3`). Que el modelo pueda comprender el vídeo depende del propio modelo y de su proveedor. Como los formatos Anthropic y OpenAI Responses no admiten el transporte de vídeo, se informa al modelo de que el vídeo no se adjuntó y la solicitud se envía igualmente.
+- **Llamadas a herramientas más estables:** cuando un modelo escribe llamadas a herramientas como texto, un parámetro que espera una cadena ya no convierte `true`, `null` o `123` en un booleano o un número, y al reemplazar código Python ya no se reescriben `True` y `None` dentro de las cadenas como `true` y `null`.
+- **Detención y errores:** al pulsar Detener o producirse un error en medio del razonamiento, se conserva el tiempo de pensamiento con un decimal (en lugar de mostrar `0.1s` o truncarlo a segundos enteros), y la respuesta guardada ya no conserva marcas internas.
+- **Tarjeta de cambio de modo:** tras pulsar Omitir, Cancelar o finalizar la cuenta atrás, el chat espera a que termine la ejecución anterior antes de continuar para que nunca se solapen. Si envías un mensaje en cola mientras la tarjeta espera, el nuevo mensaje toma el relevo.
+- **Agent Teams:** cada compañero comienza desde el mismo primer mensaje, que incluye tu solicitud original (nunca un aviso del sistema en su lugar), incorpora el ID de la tarea y solicita la misma verificación que exige la comprobación final. Detener o disolver a un compañero limpia por completo sus recursos.
+- **Lista de herramientas:** la herramienta retirada `create_team` ya no aparece en Agent, Entanglement, Analyze ni Plan, evitando que los modelos llamen a ese punto de entrada obsoleto.
+- **Verificación de archivos:** una vez que un archivo verificado se sobrescribe por completo o es modificado por un script, la comprobación anterior deja de ser válida y el archivo debe verificarse de nuevo.
+- **Estrategia adaptativa:** una solicitud de triaje que agota el tiempo de espera se cancela siempre en lugar de mantener el modelo ocupado en segundo plano.
+
 ## 1.4.32 · Hot Update · 2026-10-15
 
 - **Teams:** la tarjeta de informe de un compañero ya no muestra filas de "x" cuando la respuesta del agente principal (lead) se ha descargado de la memoria; la misma corrección abarca el informe de Analyze, la generación de mensajes de commit y los resúmenes del modo competitivo.

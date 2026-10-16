@@ -5,6 +5,17 @@ next: false
 
 # Changelog
 
+## 1.4.33 · Hot Update · 2026-10-15
+
+- **Video attachments:** A video dropped into the chat is always sent and is no longer blocked when the model is missing from a support list (for example, `kimi-k3`). Whether the model can understand video is up to the model and its provider. Since the Anthropic and OpenAI Responses formats cannot carry video, the model is informed that the video was not attached while the request still goes through.
+- **Steadier tool calls:** When a model writes tool calls as text, a string parameter no longer converts `true`, `null`, or `123` into a boolean or number, and replacing Python code no longer rewrites `True` and `None` inside strings into `true` and `null`.
+- **Stop and errors:** Pressing Stop or hitting an error mid-thought preserves the thinking time to one decimal place (instead of showing `0.1s` or truncating to whole seconds), and the saved reply no longer retains internal markup.
+- **Mode switch card:** After Skip, Cancel, or the countdown, the chat waits for the previous run to finish before continuing so the two never overlap. Sending a queued message while the card waits lets your new message take over.
+- **Agent Teams:** Every teammate starts from the same first message, which carries your original request (never a system notice in its place), includes the task ID, and asks for the same verification that the finish check expects. Stopping or dissolving a teammate now cleans up completely.
+- **Tool list:** The retired `create_team` tool no longer appears in Agent, Entanglement, Analyze, or Plan modes, preventing models from calling a dead entry point.
+- **File verification:** Once a verified file is overwritten in full or modified by a script, the earlier check is invalidated and the file must be verified again.
+- **Adaptive strategy:** A triage request that times out is always canceled instead of keeping the model busy in the background.
+
 ## 1.4.32 · Hot Update · 2026-10-15
 
 - **Teams:** A teammate's report card no longer shows rows of "x" when the lead's reply has been paged out of memory; the same fix covers the Analyze report, commit-message generation, and competitive-mode summaries.

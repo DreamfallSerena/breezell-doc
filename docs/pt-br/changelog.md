@@ -5,6 +5,17 @@ next: false
 
 # Registro de alterações
 
+## 1.4.33 · Hot Update · 2026-10-15
+
+- **Anexos de vídeo:** um vídeo solto no chat agora é sempre enviado e não é mais bloqueado por o modelo não constar em uma lista de suporte (como o `kimi-k3`, por exemplo). A capacidade de compreender o vídeo fica a cargo do modelo e do seu provedor. Como os formatos Anthropic e OpenAI Responses não transportam vídeo, o modelo é informado de que o vídeo não foi anexado e a requisição segue normalmente.
+- **Chamadas de ferramentas mais estáveis:** quando um modelo escreve chamadas de ferramentas como texto, um parâmetro do tipo string não converte mais `true`, `null` ou `123` em booleano ou número, e a substituição de código Python não reescreve mais `True` e `None` dentro de strings como `true` e `null`.
+- **Parada e erros:** pressionar Parar ou encontrar um erro durante o raciocínio preserva o tempo de pensamento com uma casa decimal (em vez de exibir `0.1s` ou arredondar para segundos inteiros), e a resposta salva não mantém mais marcações internas.
+- **Card de troca de modo:** após Pular, Cancelar ou o fim da contagem regressiva, o chat aguarda a execução anterior terminar antes de prosseguir, evitando sobreposições. Enviar uma mensagem da fila enquanto o card aguarda faz com que a nova mensagem assuma a execução.
+- **Agent Teams:** cada colega de equipe inicia a partir da mesma primeira mensagem, que traz sua solicitação original (nunca um aviso do sistema no lugar), inclui o ID da tarefa e exige a mesma verificação esperada pela checagem de conclusão. Parar ou dissolver um colega de equipe limpa totalmente os recursos.
+- **Lista de ferramentas:** a ferramenta descontinuada `create_team` não aparece mais nos modos Agent, Entanglement, Analyze ou Plan, evitando que os modelos chamem esse ponto de entrada inativo.
+- **Verificação de arquivos:** assim que um arquivo verificado é reescrito por inteiro ou alterado por um script, a verificação anterior deixa de valer e o arquivo precisa ser verificado novamente.
+- **Estratégia adaptativa:** uma requisição de triagem que atinge o tempo limite é sempre cancelada, em vez de manter o modelo ocupado em segundo plano.
+
 ## 1.4.32 · Hot Update · 2026-10-15
 
 - **Teams:** o card de relatório de um colega de equipe não exibe mais linhas de "x" quando a resposta do líder foi descarregada da memória; a mesma correção cobre o relatório do Analyze, a geração de mensagens de commit e os resumos do modo competitivo.
