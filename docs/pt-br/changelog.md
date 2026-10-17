@@ -5,6 +5,13 @@ next: false
 
 # Registro de alterações
 
+## 1.4.34 · Hot Update · 2026-10-17
+
+- **O raciocínio não vaza mais para a resposta:** ao usar um serviço compatível com OpenAI (como o DeepSeek em um gateway próprio), se o nome do modelo não estivesse na lista integrada, o raciocínio estivesse desativado nas configurações do modelo ou a extração de raciocínio estivesse definida como `native`, o processo de pensamento aparecia no início da resposta junto com as tags `<think>`. Agora o pensamento é exibido sempre na área de raciocínio e a resposta traz apenas o resultado.
+- **Interação humana ativa apenas no modo Entanglement:** após ativar o modo estrito e a interação humana, se a estratégia adaptativa classificasse a tarefa como nível estrito no modo Agent, antes também era exigido responder a perguntas de confirmação primeiro com as ferramentas bloqueadas. Agora essa confirmação só ocorre quando você seleciona manualmente o modo Entanglement.
+- **Símbolo `@` mais nítido:** o botão `@` da caixa de entrada, o título do menu `@` e as dicas de atalho na página em branco agora usam a fonte da interface em negrito, deixando de parecer finos ou achatados.
+- **Transição mais suave para a interface clássica:** ao voltar da interface moderna para a interface clássica, a caixa de entrada não faz mais fade-out a partir da cor de fundo da interface moderna.
+
 ## 1.4.33 · Hot Update · 2026-10-15
 
 - **Anexos de vídeo:** um vídeo solto no chat agora é sempre enviado e não é mais bloqueado por o modelo não constar em uma lista de suporte (como o `kimi-k3`, por exemplo). A capacidade de compreender o vídeo fica a cargo do modelo e do seu provedor. Como os formatos Anthropic e OpenAI Responses não transportam vídeo, o modelo é informado de que o vídeo não foi anexado e a requisição segue normalmente.

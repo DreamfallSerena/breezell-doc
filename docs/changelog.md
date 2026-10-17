@@ -5,6 +5,13 @@ next: false
 
 # Changelog
 
+## 1.4.34 · Hot Update · 2026-10-17
+
+- **Thinking no longer leaks into replies:** When using an OpenAI-compatible service (such as DeepSeek behind a self-hosted gateway), if the model name was not in the built-in list, reasoning was disabled in model settings, or reasoning extraction was set to `native`, the model's thinking process could appear at the start of the reply along with `<think>` tags. Thinking now always stays in the thinking pane, leaving only the answer in the reply.
+- **Human-in-the-loop only applies in Entanglement mode:** Previously, when both strict mode and human-in-the-loop interaction were enabled in Agent mode, tasks classified as strict by the adaptive strategy would also require answering confirmation questions first and lock tools. Now this confirmation only happens when you explicitly select Entanglement mode.
+- **Clearer `@` symbol:** The `@` button in the input box, the `@` menu header, and shortcut hints on the empty state page now use the UI font with bold weight so they no longer look thin or squashed.
+- **Smoother switch to Classic UI:** When switching from the Modern UI back to the Classic UI, the input box no longer fades out from the Modern UI's background color.
+
 ## 1.4.33 · Hot Update · 2026-10-15
 
 - **Video attachments:** A video dropped into the chat is always sent and is no longer blocked when the model is missing from a support list (for example, `kimi-k3`). Whether the model can understand video is up to the model and its provider. Since the Anthropic and OpenAI Responses formats cannot carry video, the model is informed that the video was not attached while the request still goes through.

@@ -5,6 +5,13 @@ next: false
 
 # Registro de cambios
 
+## 1.4.34 · Hot Update · 2026-10-17
+
+- **El razonamiento ya no se filtra en las respuestas:** al usar un servicio compatible con OpenAI (por ejemplo, DeepSeek en una pasarela autoalojada), si el nombre del modelo no estaba en la lista integrada, se había desactivado el razonamiento en los ajustes del modelo o la extracción de razonamiento estaba configurada en `native`, el proceso de pensamiento aparecía al inicio de la respuesta junto con las etiquetas `<think>`. Ahora el pensamiento se muestra siempre en el panel de razonamiento y la respuesta contiene únicamente la contestación final.
+- **La interacción humana solo se aplica en el modo Entanglement:** al activar el modo estricto y la interacción humana, si en el modo Agent la estrategia adaptativa clasificaba una tarea como estricta, antes también se bloqueaban las herramientas y se pedía responder primero a preguntas de confirmación. Ahora esta confirmación solo se realiza cuando seleccionas explícitamente el modo Entanglement.
+- **Símbolo `@` más nítido:** el botón `@` del cuadro de entrada, el encabezado del menú `@` y los atajos de teclado de la página en blanco ahora utilizan la fuente de la interfaz en negrita para no verse delgados ni achatados.
+- **Transición más fluida a la interfaz clásica:** al volver de la interfaz moderna a la interfaz clásica, el cuadro de entrada ya no se desvanece desde el color de fondo de la interfaz moderna.
+
 ## 1.4.33 · Hot Update · 2026-10-15
 
 - **Archivos adjuntos de vídeo:** cualquier vídeo arrastrado al chat se envía siempre y ya no se bloquea porque el modelo no figure en una lista de compatibilidad (por ejemplo, `kimi-k3`). Que el modelo pueda comprender el vídeo depende del propio modelo y de su proveedor. Como los formatos Anthropic y OpenAI Responses no admiten el transporte de vídeo, se informa al modelo de que el vídeo no se adjuntó y la solicitud se envía igualmente.
