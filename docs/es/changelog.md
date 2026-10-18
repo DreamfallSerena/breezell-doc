@@ -5,6 +5,46 @@ next: false
 
 # Registro de cambios
 
+## 1.4.35 · Hot Update · 2026-10-18
+
+### Chat
+
+- **El modo Agent ya no cambia al modo Entanglement:** Con la estrategia adaptativa activada, las tareas que el modo Agent clasificaba como "estrictas" (un mensaje que describe un fallo o una nota de actualización pegada que describe correcciones, por ejemplo) se ejecutaban en modo Entanglement, mostrando el panel de investigación LOCATE／VERIFY／FIX, el criterio de finalización y la verificación estricta "este tipo de síntoma se da por resuelto con tu confirmación". Ahora el modo Agent siempre se ejecuta como Agent con el conjunto completo de herramientas; el panel de investigación de Entanglement y la verificación estricta solo aparecen cuando seleccionas tú mismo el modo Entanglement.
+- **Desplazarse hacia arriba ya no deja la vista en blanco ni salta al final:** en una conversación con un mensaje muy largo, al desplazarse hacia arriba cerca de ese mensaje la vista podía quedar en blanco de repente y, al volver a desplazarse, toda la lista regresaba al final; ocurría cada vez que se reabría la conversación. La causa era que un mensaje largo se dibujaba primero con su altura completa y se plegaba un instante después, de modo que la lista de la conversación se redistribuía una y otra vez. Ahora un mensaje largo aparece ya con su altura plegada desde el principio y el desplazamiento hacia arriba se detiene donde lo dejaste.
+- **Paciencia con los relays que retienen las respuestas:** algunos relays retienen todo el proceso de pensamiento del modelo y lo entregan solo cuando ha terminado, de modo que el chat se queda completamente inmóvil entre diez segundos y varios minutos. Los modelos marcados por la "Comprobación de streaming" ahora:
+  - se envían con la intensidad de razonamiento que configuraste y nunca se reducen automáticamente;
+  - esperan la respuesta en lugar de darla por agotada y abortar con reintento tras un silencio prolongado;
+  - mientras esperan, comprueban la API cada 5 segundos y envían un breve "hola" cada 20 segundos para confirmar que el modelo sigue respondiendo; si una comprobación falla aceleran el ritmo y vuelven al normal cuando tiene éxito;
+  - muestran "El modelo está pensando: este relay retiene el proceso de pensamiento · 32 s · API correcta (confirmada hace 3 s)", para que sepas que sigue trabajando;
+  - solo se detienen cuando una comprobación confirma que la API realmente no responde, mostrando "API confirmada sin respuesta", sin reintento automático; al desplegar se ven el número de comprobaciones y el último error.
+- **Copiar el contenido de la conversación:** el texto copiado de una conversación y pegado en otro lugar conserva el formato que veías en pantalla y ya no arrastra símbolos Markdown como `**`, `#` o `-`. "Citar" sigue conservando Markdown, y ahora los párrafos y los elementos de lista se separan con el salto de línea correcto.
+
+### Modelos y conectividad
+
+- **Nueva "Comprobación de streaming":** en Box ▸ Modelos ▸ Compatible con OpenAI ▸ Conectividad, selecciona modelos y pulsa "Comprobación de streaming". El modelo resuelve una breve pregunta de razonamiento y luego cuenta del 1 al 120 mientras Breezell registra cuándo llega cada fragmento y clasifica el resultado:
+  - Streaming normal: el contenido llega fragmento a fragmento.
+  - Pensamiento retenido: la respuesta llega fragmento a fragmento, pero el proceso de pensamiento queda retenido por el relay, así que el chat primero se queda en silencio y luego lo muestra todo de golpe.
+  - Búfer completo: toda la respuesta llega solo al final.
+  - No concluyente: la respuesta es demasiado corta.
+  Los modelos clasificados como "pensamiento retenido" o "búfer completo" quedan marcados y usan el comportamiento de espera anterior en el chat; la marca se borra cuando una nueva comprobación da un resultado normal, cuando la comprobación falla o cuando cambia el endpoint. Cada modelo usa unos 300 tokens de salida, más los tokens de razonamiento en los modelos de razonamiento.
+- **Seleccionar primero y comprobar después:** la página de conectividad ya no comprueba todos los modelos automáticamente al abrirse. Selecciona los proveedores y modelos que quieras comprobar (hay seleccionar todo y quitar selección) y elige "Solo comprobar conexión", "Comprobar seleccionados" o "Comprobación de streaming"; los elementos sin seleccionar conservan sus resultados anteriores.
+- **Nuevos modelos de OpenRouter:**
+  - DeepSeek V4.1 Flash 1017 (`deepseek/deepseek-v4.1-flash-1017`): contexto de 1M, texto e imágenes, intensidad de razonamiento low／high／max, y posibilidad de desactivar el razonamiento.
+  - Xing4.0 29B A4B gratis (`xingchen-agi/xing4.0-29b-a4b:free`): contexto de 262K, solo texto, compatible con llamadas a herramientas y razonamiento activable o desactivable.
+
+### Interfaz
+
+- **Separador con la barra lateral principal a la derecha:** en la interfaz clásica, con la barra lateral principal a la derecha, el editor y el panel inferior carecían de una línea separadora en su borde derecho; y si además se ocultaba la barra lateral secundaria, el borde izquierdo de la ventana mostraba un hueco y una línea de más. Ambos problemas están corregidos.
+- **El menú de la barra lateral de Box se muestra completo:** cuando la barra lateral de Box está plegada en una franja de iconos, el menú que aparecía al pulsar un grupo mostraba solo una franja fina. Ahora el menú se muestra completo dentro de la ventana y sigue su posición al desplazarse o cambiar el tamaño de la ventana; el selector de espacio y el menú de la cuenta funcionan igual.
+
+### Herramientas
+
+- **Llamadas a herramientas más precisas:**
+  - La búsqueda web respeta el número de resultados, la profundidad de búsqueda y el tema que indica el modelo en lugar de ignorarlos.
+  - Los parámetros de lista y booleanos declaran su tipo, de modo que los proveedores estrictos ya no reciben parámetros tratados como texto, y un parámetro cuya descripción menciona "optional" de pasada ya no se toma por opcional.
+  - La búsqueda de texto añade coincidencia de palabra completa, un límite de resultados por archivo y la posibilidad de buscar archivos excluidos por las reglas de ignorados; la búsqueda de archivos permite indicar una carpeta, y la navegación de código acepta un número de línea para llegar al punto exacto que busca el modelo.
+- **El navegador en segundo plano lo dice claramente:** cuando un modelo abre una página en el navegador sin interfaz (una ventana en segundo plano que no ves), ahora indica que la cargó en segundo plano en lugar de afirmar que la abrió para ti, y explica cómo verla: abre la pestaña "Navegador" y navega de nuevo, o desactiva "Navegador sin interfaz" en Ajustes ▸ Funciones.
+
 ## 1.4.34 · Hot Update · 2026-10-17
 
 - **El razonamiento ya no se filtra en las respuestas:** al usar un servicio compatible con OpenAI (por ejemplo, DeepSeek en una pasarela autoalojada), si el nombre del modelo no estaba en la lista integrada, se había desactivado el razonamiento en los ajustes del modelo o la extracción de razonamiento estaba configurada en `native`, el proceso de pensamiento aparecía al inicio de la respuesta junto con las etiquetas `<think>`. Ahora el pensamiento se muestra siempre en el panel de razonamiento y la respuesta contiene únicamente la contestación final.

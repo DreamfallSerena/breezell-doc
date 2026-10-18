@@ -5,6 +5,46 @@ next: false
 
 # Changelog
 
+## 1.4.35 · Hot Update · 2026-10-18
+
+### Chat
+
+- **Agent mode no longer switches to Entanglement mode:** With the adaptive strategy enabled, tasks that Agent mode judged as "strict" (a message describing a bug, or a pasted update note describing fixes, for example) used to run in Entanglement mode, showing the LOCATE / VERIFY / FIX investigation panel, the completion criterion, and the "this kind of symptom is settled by your confirmation" strict verification. Agent mode now always runs as Agent with the full toolset; the Entanglement investigation panel and strict verification appear only when you select Entanglement mode yourself.
+- **Scrolling up no longer goes blank or jumps to the bottom:** In a conversation containing a very long message, scrolling up near that message could suddenly turn the view blank, and scrolling up once more threw the whole list back to the bottom — and it happened again every time the conversation was reopened. The cause was that a long message was first rendered at full height and collapsed a moment later, so the conversation list re-laid-out back and forth. A long message now appears at its collapsed height from the start, and scrolling up stops where you scrolled to.
+- **Patience with relays that hold back replies:** Some relays withhold a model's entire thinking process and release it only once thinking has finished, leaving the chat completely still for anywhere from ten seconds to several minutes. Models marked by "Streaming Check" now:
+  - send at the reasoning effort you configured and are never turned down automatically;
+  - wait for the reply instead of deciding it timed out, aborting and retrying after a long silence;
+  - while waiting, verify the API every 5 seconds and send a short "hello" every 20 seconds to confirm the model still responds — checking faster when a check fails and returning to the normal cadence once it succeeds;
+  - show "Model is thinking — this relay holds back the thinking process · 32s · API OK (confirmed 3s ago)", so you know it is still working;
+  - stop only when a check confirms the API really is not responding, showing "API confirmed unresponsive", with no automatic retry; expand it to see the number of checks and the last error.
+- **Copying conversation text:** Text copied from a conversation and pasted elsewhere keeps the layout you saw on screen and no longer drags along `**`, `#`, `-` and other Markdown symbols. "Quote" still keeps Markdown, and paragraphs and list items now break lines correctly.
+
+### Models & Connectivity
+
+- **New "Streaming Check":** Under Box ▸ Models ▸ OpenAI-compatible ▸ Connectivity, select models and press "Streaming Check". The model answers a short reasoning question and then counts from 1 to 120 while Breezell records when each chunk arrives and classifies the result:
+  - Streaming normal: content arrives chunk by chunk.
+  - Thinking held back: the answer streams chunk by chunk, but the thinking process is withheld by the relay, so the chat goes quiet first and then shows everything at once.
+  - Fully buffered: the entire reply arrives only at the end.
+  - Inconclusive: the reply is too short.
+  Models rated "thinking held back" or "fully buffered" are marked and use the waiting behavior above in chat; the mark clears once a re-check comes back normal, a check fails, or the endpoint changes. Each model uses roughly 300 output tokens, plus reasoning tokens for reasoning models.
+- **Select first, then check:** The connectivity page no longer checks every model automatically when it opens. Select the providers and models to check (select all and clear all are available), then choose "Connection Check Only", "Check Selected" or "Streaming Check"; items you leave unchecked keep their previous results.
+- **New OpenRouter models:**
+  - DeepSeek V4.1 Flash 1017 (`deepseek/deepseek-v4.1-flash-1017`): 1M context, text and images, reasoning effort low / high / max, reasoning can be turned off.
+  - Xing4.0 29B A4B Free (`xingchen-agi/xing4.0-29b-a4b:free`): 262K context, text only, supports tool calling, reasoning can be toggled.
+
+### Interface
+
+- **Separator when the main sidebar sits on the right:** In the Classic UI with the main sidebar on the right, the editor and the bottom panel were missing a separator line on their right edge; and if the secondary sidebar was hidden at the same time, the left edge of the window gained an extra gap and a line. Both are fixed.
+- **Box sidebar menu now fully visible:** When the Box sidebar is collapsed to an icon rail, the menu popped up from a group showed only a thin strip. The menu now displays fully inside the window and follows its position when you scroll or resize the window; the space switcher and account menu behave the same way.
+
+### Tools
+
+- **More accurate tool calls:**
+  - Web search now honors the result count, search depth and topic the model specifies instead of ignoring them.
+  - List and boolean parameters declare their types, so strict providers no longer receive parameters treated as text, and a parameter whose description merely mentions "optional" is no longer mistaken for optional.
+  - Text search gains whole-word matching, a per-file result cap, and the ability to search files excluded by ignore rules; file search can target a folder; code navigation can take a line number to land on the exact spot the model wants.
+- **The background browser says so:** When a model opens a page in the headless browser (a window in the background that you cannot see), it now says the page was loaded in the background instead of claiming it opened it for you, and tells you how to watch: open the "Browser" tab and navigate again, or turn off "Headless Browser" in Settings ▸ Features.
+
 ## 1.4.34 · Hot Update · 2026-10-17
 
 - **Thinking no longer leaks into replies:** When using an OpenAI-compatible service (such as DeepSeek behind a self-hosted gateway), if the model name was not in the built-in list, reasoning was disabled in model settings, or reasoning extraction was set to `native`, the model's thinking process could appear at the start of the reply along with `<think>` tags. Thinking now always stays in the thinking pane, leaving only the answer in the reply.
