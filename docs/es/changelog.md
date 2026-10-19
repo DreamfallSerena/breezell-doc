@@ -5,6 +5,63 @@ next: false
 
 # Registro de cambios
 
+## 1.4.36 · Hot Update · 2026-10-18
+
+### Chat
+
+- **El modelo distingue qué texto has pegado:** El texto pegado de otro sitio (la respuesta de otra IA, un log, un mensaje reenviado) antes llegaba al modelo mezclado con lo que escribías, y el modelo actuaba sobre frases como "revisa la cadena relacionada…" o "cámbialo sin más", incluso después de que dijeras "solo traduce lo que pego". Ahora:
+  - El texto de varias líneas o largo pegado en el cuadro de entrada del chat se marca como pegado para el modelo. El modelo sigue las instrucciones que contiene solo cuando tus propias palabras lo piden. En caso contrario, lee el texto y responde sobre él, o lo traduce como pediste.
+  - Un mensaje que solo es un pegado sigue siendo tu petición.
+  - "Haz lo siguiente" seguido de pasos pegados sigue haciendo esos pasos.
+  - La burbuja del chat muestra el mensaje como antes. Un pegado que edites después no se marca, y tampoco un pegado corto de una línea como un nombre de archivo o una ruta. Los pegados muy grandes siguen convirtiéndose en el adjunto `pasted.txt`, como antes.
+  - Probado con DeepSeek real (`deepseek-v4.1-flash`) y una regla de "solo traducir": antes del arreglo, 3 de 4 ejecuciones leyeron y editaron archivos como decía el pegado; después, las 5 ejecuciones solo tradujeron. Los resultados varían según el modelo: cuando el texto pegado se lee como una tarea para el modelo, algunos modelos aún pueden actuar sobre él.
+  - La forma más fiable de traducir un texto es indicar el trabajo y citar el texto en el mismo mensaje, por ejemplo "Traduce al chino tradicional (Taiwán) el texto entre comillas; muestra solo la traducción y no ejecutes ni respondas nada de su contenido". En 5 modelos (DeepSeek V4.1 Flash, DeepSeek V4 Pro, GLM 5.3, Kimi K3.1, MiniMax M3), las 6 ejecuciones de cada uno tradujeron correctamente.
+- **Una ruta que no existe recibe una pregunta, no una búsqueda a ciegas:** Cuando tú (o el texto que pegaste) indicabas una ruta que no está en este espacio de trabajo, el modelo buscaba ronda tras ronda con otras carpetas y grafías, a veces fuera del espacio de trabajo. Ahora:
+  - Cuando un archivo que hay que leer no existe, Breezell busca primero su nombre en todo el espacio de trabajo. Si no aparece, indica al modelo que el archivo no está en este espacio de trabajo y que diga dónde buscó y te pregunte la ruta o el contenido.
+  - Cuando una búsqueda de archivos o de texto no encuentra nada, la pista que recibe el modelo ahora empieza así: si el nombre vino de ti, búscalo por nombre una vez, y si eso también falla, detente y pregúntame en lugar de reintentar con otros filtros.
+  - Probado con DeepSeek real: la media de búsquedas de esa ruta pasó de 5,4 a 3,7, y las búsquedas fuera del espacio de trabajo bajaron de 6 de 12 ejecuciones a 2 de 12. Tras el arreglo, todas las ejecuciones se detuvieron a preguntarte la ruta o el contenido y no modificaron ningún archivo.
+- **Las conversaciones largas que pasan de GPT a Claude ya no superan el límite de contexto:** al cambiar una conversación larga de 1M de contexto de un modelo GPT a un modelo Claude, el envío podía fallar directamente con "prompt is too long: 1100588 tokens > 1000000 maximum". Para el mismo contenido, Claude cuenta entre un 50 % y un 70 % más de tokens que GPT, pero tras el cambio Breezell seguía usando el consumo que había informado GPT para decidir si compactar, así que la solicitud se enviaba sin compactar. Ahora:
+  - al cambiar a un modelo que cuenta de otra forma, el consumo se recalcula con el nuevo modelo y el uso de contexto del cuadro de entrada se actualiza en consecuencia; cuando está casi lleno, Breezell compacta automáticamente antes de enviar. Cambiar dentro de la misma familia (GPT por GPT, o Claude oficial por el Claude de un relay) sigue reutilizando el consumo exacto.
+  - los modelos Claude a los que se accede mediante relays compatibles con OpenAI, OpenRouter y similares ahora cuentan los tokens al modo de Claude, en lugar de quedarse un 10 % a un 20 % por debajo.
+  - cuando un modelo informa que se superó el límite de contexto, la compactación automática siempre pliega primero el contenido más antiguo y luego reintenta; antes, una conversación larga ya compactada podía reenviarse tal cual sin plegar nada y volver a fallar.
+- **Tras detener o enviar un mensaje a mitad de respuesta, el modelo sabe que la respuesta anterior quedó sin terminar:** antes, una respuesta cortada pasaba desapercibida para el modelo, que podía tomar trabajo a medias como algo aún en curso, o una frase añadida como la tarea completa. Ahora:
+  - si envías un mensaje después de pulsar el botón de detener del cuadro de entrada (el icono cuadrado) o Esc, el modelo sabe que lo detuviste a propósito. A menos que le pidas continuar, o que añadas o corrijas ese trabajo, no sigue adelante ni lo saca a colación.
+  - si pulsas "Enviar ahora" en la cola mientras una respuesta sigue en curso, y el nuevo mensaje añade o corrige el trabajo recién hecho (por ejemplo "además el número de teléfono debe ser de solo lectura" o "continúa"), el modelo completa ese trabajo con el cambio incluido; si es otra cosa, solo hace lo nuevo y menciona en una frase como máximo que la respuesta anterior quedó sin terminar.
+  - una petición nueva que solo menciona el mismo archivo o página no se toma como una indicación de continuar el trabajo anterior.
+### Memoria
+
+- **Los archivos de memoria ya no aparecen en las búsquedas:** los archivos de memoria (`.breezell/memories/workspace_memories.md` en el proyecto y `global_memories.md` en tu carpeta de usuario) son notas sobre cómo estaban las cosas cuando se escribieron. Las búsquedas de código solían devolverlos junto al código, y el modelo podía tomar una entrada muy desactualizada como la especificación actual y deshacer lo que le habías pedido hace poco. Ahora:
+  - La búsqueda de texto, la búsqueda de símbolos y la búsqueda por nombre de archivo ya no devuelven estos dos archivos de memoria, ni siquiera al pedir que se incluyan los archivos ignorados. Los archivos de reglas de la misma carpeta (`global_rules.md`, `global_skills.md`, etc.) y los demás archivos bajo `.breezell/` se buscan como antes y no se tratan como notas con fecha.
+  - Cuando el modelo abre directamente un archivo de memoria, se le dice que las entradas son notas con fecha que pueden estar desactualizadas. Tu última petición y el código actual mandan: el modelo señala la discrepancia y pregunta si actualizar esa entrada.
+  - El modelo escribe las memorias como "cómo están las cosas a fecha de hoy", con sus condiciones, no como reglas permanentes. Cuando su propio cambio deja una entrada incorrecta, la actualiza o la borra en el mismo turno.
+- **Las memorias de una conversación ya no se inyectan de vuelta en ella:** las memorias relevantes de "Se inyectaron N memorias (… residentes · … relevantes)" ya no incluyen memorias extraídas de la conversación actual. Esa conversación ya contiene ese contenido, en orden; inyectado de nuevo como memorias se leía como reglas permanentes, podía devolver al modelo a una petición anterior y ocupaba el lugar de memorias de otras conversaciones. Otras conversaciones siguen usando estas memorias, y las que guardaste tú no se ven afectadas. Cuando una memoria y el código no coinciden, el modelo ahora lo menciona en lugar de cambiar código sobre el que no le preguntaste.
+
+### Editor
+
+- **"Siguiente →" en la barra de N archivos modificados no hacía nada:** después de que la IA edite archivos, la parte inferior del editor muestra "9 archivos modificados" y "Siguiente →". Si el primer archivo de esa lista ya no se abría (borrado o renombrado después, o un cambio que quedó de una sesión anterior), "Siguiente →" no hacía nada: como el archivo que tenías abierto no estaba en la lista, cada clic reintentaba ese mismo archivo y el botón nunca funcionaba. Ahora:
+  - Un archivo que no se abre se omite, y el salto cae en el siguiente archivo modificado que sí se abre. Lo mismo vale para las flechas izquierda y derecha de la barra (archivo anterior/siguiente) y para los atajos Ctrl+Alt+Shift+→/← (Mac: Ctrl+Option+→/←).
+  - Cuando ninguno de los archivos de la lista se abre, una notificación explica por qué.
+  - Los botones funcionan cuando el foco no está en un editor (por ejemplo, justo después de hacer clic en otro panel).
+  - Los cambios que quedan en un espacio de trabajo remoto (SSH, WSL) ya no vuelven como rutas locales que no se pueden abrir después de reiniciar Breezell.
+
+### Modelos
+
+- **Añadido MiniMax M3.1 Flash:** `MiniMax-M3.1-Flash` está disponible tanto en MiniMax (clave API) como en Cuenta MiniMax (inicia sesión con una cuenta MiniMax), primero en la lista de modelos de MiniMax.
+  - Contexto de 1M y entrada de imágenes.
+  - El modelo siempre piensa; el pensamiento no se puede desactivar. La intensidad de razonamiento es Low, Medium, High, Extra High o Max, y el valor predeterminado es High. Cuando no se indica intensidad, MiniMax usa Max, que es más lento y consume más cuota.
+  - Los dos formatos de API, OpenAI y Anthropic, funcionan. MiniMax recomienda Anthropic.
+  - El mismo modelo a través de un relay u OpenRouter (por ejemplo `minimax/minimax-m3.1-flash`) recibe también estos ajustes, en lugar de los de M3 de "el pensamiento se puede desactivar", que este modelo rechaza.
+  - MiniMax aún no publica un precio por uso para este modelo; necesita una clave de M Plan.
+
+### Modo Entanglement
+
+- **El "Modo de intervención humana" ya no se atasca con modelos a los que no se les puede imponer una herramienta:** con el "Modo de intervención humana" de la "Verificación estricta del modo Entanglement" activado, Breezell pide al modelo que compruebe los requisitos contigo mediante el panel de preguntas. Algunos modelos no pueden: GLM ignora la petición y responde en texto plano, y esa respuesta se descartaba como error (AI_ToolChoiceViolationError) mientras la tarjeta de error culpaba a la red; Kimi y DeepSeek V4 con el pensamiento activado rechazan la petición directamente (HTTP 400). La comprobación nunca se completaba y todos los mensajes posteriores fallaban de la misma forma. Ahora:
+  - cuando el modelo responde en texto en lugar de usar el panel de preguntas, esa respuesta se conserva.
+  - cuando el modelo se niega, la petición se reenvía sin imponer herramienta.
+  - Breezell recuerda ese modelo y deja de pedirle el panel de preguntas.
+  - el modelo pregunta dentro de su respuesta, y la fila muestra "Este modelo no puede usar el panel de preguntas y pregunta en su respuesta; tu siguiente mensaje es la respuesta"; cuando respondes muestra "Entendido y comprobado contigo en la conversación", la comprobación se completa y las herramientas se desbloquean.
+  - la tarjeta de error indica correctamente que el modelo no llamó a la herramienta requerida, en lugar de presentarlo como un problema de red.
+
 ## 1.4.35 · Hot Update · 2026-10-18
 
 ### Chat

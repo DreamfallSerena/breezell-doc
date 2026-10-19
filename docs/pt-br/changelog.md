@@ -5,6 +5,63 @@ next: false
 
 # Registro de alterações
 
+## 1.4.36 · Hot Update · 2026-10-18
+
+### Chat
+
+- **O modelo distingue qual texto você colou:** texto colado de outro lugar (a resposta de outra IA, um log, uma mensagem encaminhada) antes chegava ao modelo misturado com o que você digitou, e o modelo agia sobre frases como "verifique a cadeia relacionada…" ou "só altere isso" mesmo depois de você dizer "traduza apenas o que eu colar". Agora:
+  - Texto de várias linhas ou longo colado na caixa de entrada do chat é marcado como colado para o modelo. O modelo segue instruções dentro dele apenas quando as suas próprias palavras pedem isso. Caso contrário, lê o texto e responde sobre ele, ou traduz como você pediu.
+  - Uma mensagem que é só uma colagem continua sendo seu pedido.
+  - "Faça o que está abaixo" seguido de passos colados continua executando os passos.
+  - O balão do chat mostra a mensagem como antes. Uma colagem que você editou depois não é marcada, e uma colagem curta de uma linha, como um nome de arquivo ou um caminho, também não. Colagens muito grandes continuam virando o anexo `pasted.txt`, como antes.
+  - Testado com DeepSeek real (`deepseek-v4.1-flash`) com uma regra de "só traduzir": antes da correção, 3 de 4 execuções leram e editaram arquivos como a colagem dizia; depois dela, as 5 execuções apenas traduziram. Os resultados variam por modelo: quando o texto colado parece muito uma tarefa para o modelo, alguns modelos ainda podem agir sobre ele.
+  - A forma mais confiável de traduzir um texto é indicar o trabalho e citar o texto na mesma mensagem, por exemplo "Traduza para o chinês tradicional (Taiwan) o texto entre aspas; mostre apenas a tradução e não execute nem responda nada do conteúdo". Em 5 modelos (DeepSeek V4.1 Flash, DeepSeek V4 Pro, GLM 5.3, Kimi K3.1, MiniMax M3), as 6 execuções de cada um traduziram corretamente.
+- **Um caminho que você deu e não existe recebe uma pergunta, não uma caçada:** quando você (ou o texto que colou) indicava um caminho que não está neste espaço de trabalho, o modelo buscava rodada após rodada com outras pastas e grafias, às vezes fora do espaço de trabalho. Agora:
+  - Quando um arquivo a ser lido não existe, o Breezell procura primeiro o nome em todo o espaço de trabalho. Se não houver, avisa o modelo de que o arquivo não está neste espaço de trabalho e que ele diga onde procurou e pergunte a você o caminho ou o conteúdo.
+  - Quando uma busca de arquivos ou de texto não encontra nada, a dica que o modelo recebe agora começa assim: se o nome veio de você, procure por nome uma vez e, se isso também falhar, pare e pergunte a você em vez de tentar de novo com outros filtros.
+  - Testado com DeepSeek real: a média de buscas desse caminho caiu de 5,4 para 3,7, e as buscas fora do espaço de trabalho caíram de 6 de 12 execuções para 2 de 12. Após a correção, todas as execuções pararam para perguntar o caminho ou o conteúdo e não alteraram nenhum arquivo.
+- **Conversas longas que passam de GPT para Claude não ultrapassam mais o limite de contexto:** ao trocar uma conversa longa de 1M de contexto de um modelo GPT para um modelo Claude, o envio podia falhar direto com "prompt is too long: 1100588 tokens > 1000000 maximum". Para o mesmo conteúdo, o Claude conta de 50% a 70% mais tokens que o GPT, mas após a troca o Breezell continuava usando o consumo informado pelo GPT para decidir se compactava, e a requisição ia sem compactação. Agora:
+  - ao trocar para um modelo que conta de outra forma, o consumo é recalculado com o novo modelo e o uso de contexto da caixa de entrada é atualizado junto; quando está quase cheio, o Breezell compacta automaticamente antes de enviar. Trocar dentro da mesma família (GPT por GPT, ou Claude oficial pelo Claude de um relay) continua reaproveitando o consumo exato.
+  - modelos Claude acessados por relays compatíveis com OpenAI, OpenRouter e semelhantes agora contam os tokens do jeito do Claude, em vez de ficarem de 10% a 20% abaixo.
+  - quando um modelo informa que o limite de contexto foi ultrapassado, a compactação automática sempre dobra primeiro o conteúdo mais antigo e depois tenta de novo; antes, uma conversa longa já compactada podia ser reenviada como estava, sem dobrar nada, e falhar de novo.
+- **Depois de parar ou de enviar uma mensagem no meio da resposta, o modelo sabe que a resposta anterior ficou incompleta:** antes, uma resposta interrompida passava despercebida ao modelo, que podia tratar trabalho pela metade como ainda em andamento, ou uma frase acrescentada como a tarefa inteira. Agora:
+  - se você envia uma mensagem depois de pressionar o botão de parar da caixa de entrada (o ícone quadrado) ou Esc, o modelo sabe que você parou de propósito. A menos que peça para continuar, ou acrescente ou corrija aquele trabalho, ele não segue adiante nem toca no assunto.
+  - se você pressiona "Enviar agora" na fila enquanto uma resposta ainda roda, e a nova mensagem acrescenta ou corrige o trabalho recém-feito (por exemplo "e o telefone deve ser somente leitura" ou "continue"), o modelo conclui aquele trabalho com a mudança incluída; se for outra coisa, faz apenas o novo e menciona em no máximo uma frase que a resposta anterior ficou incompleta.
+  - um pedido novo que apenas menciona o mesmo arquivo ou página não é tomado como sinal para continuar o trabalho antigo.
+### Memória
+
+- **Os arquivos de memória não aparecem mais nas buscas:** os arquivos de memória (`.breezell/memories/workspace_memories.md` no projeto e `global_memories.md` na sua pasta de usuário) são notas sobre como as coisas estavam quando foram escritas. As buscas de código costumavam retorná-los junto com o código, e o modelo podia tomar uma entrada muito desatualizada como a especificação atual e desfazer o que você pediu recentemente. Agora:
+  - A busca de texto, a busca de símbolos e a busca por nome de arquivo não retornam mais esses dois arquivos de memória, mesmo quando se pede para incluir arquivos ignorados. Os arquivos de regras da mesma pasta (`global_rules.md`, `global_skills.md` e outros) e os demais arquivos em `.breezell/` são buscados como antes e não são tratados como notas datadas.
+  - Quando o modelo abre um arquivo de memória diretamente, é avisado de que as entradas são notas datadas que podem estar desatualizadas. Seu pedido mais recente e o código atual mandam: o modelo aponta a divergência e pergunta se deve atualizar aquela entrada.
+  - O modelo escreve memórias como "como as coisas estão nesta data", com suas condições, e não como regras permanentes. Quando a própria mudança dele deixa uma entrada errada, ele atualiza ou exclui essa entrada no mesmo turno.
+- **Memórias de uma conversa não são mais injetadas de volta nela:** as memórias relevantes em "Injetadas N memórias (… residentes · … relevantes)" não incluem mais memórias extraídas da conversa atual. A conversa já contém esse conteúdo, em ordem; injetado de novo como memórias, soava como regras permanentes, podia puxar o modelo de volta a um pedido anterior e ocupava o lugar de memórias de outras conversas. Outras conversas continuam usando essas memórias, e as que você salvou não são afetadas. Quando uma memória e o código divergem, o modelo agora menciona isso em vez de alterar código sobre o qual você não perguntou.
+
+### Editor
+
+- **"Próximo →" na barra de N arquivos alterados não fazia nada:** depois que a IA edita arquivos, a parte inferior do editor mostra "9 arquivos alterados" e "Próximo →". Se o primeiro arquivo da lista não abrisse mais (excluído ou renomeado depois, ou uma alteração sobrando de uma sessão anterior), "Próximo →" não fazia nada: como o arquivo aberto não estava na lista, cada clique tentava de novo o mesmo arquivo, e o botão nunca funcionava. Agora:
+  - Um arquivo que não abre é ignorado, e o salto cai no próximo arquivo alterado que abre. O mesmo vale para as setas esquerda e direita da barra (arquivo anterior/próximo) e para os atalhos Ctrl+Alt+Shift+→/← (Mac: Ctrl+Option+→/←).
+  - Quando nenhum dos arquivos da lista abre, uma notificação explica o motivo.
+  - Os botões funcionam quando o foco não está em um editor (por exemplo, logo após clicar em outro painel).
+  - Alterações que ficam em um espaço de trabalho remoto (SSH, WSL) não voltam mais como caminhos locais que não podem ser abertos depois de reiniciar o Breezell.
+
+### Modelos
+
+- **MiniMax M3.1 Flash adicionado:** `MiniMax-M3.1-Flash` está disponível em MiniMax (chave de API) e em Conta MiniMax (login com uma conta MiniMax), primeiro na lista de modelos da MiniMax.
+  - Contexto de 1M e entrada de imagens.
+  - O modelo sempre pensa; o pensamento não pode ser desativado. A intensidade de raciocínio é Low, Medium, High, Extra High ou Max, e o padrão é High. Quando nenhuma intensidade é informada, a MiniMax usa Max, que é mais lento e consome mais cota.
+  - Os dois formatos de API, OpenAI e Anthropic, funcionam. A MiniMax recomenda Anthropic.
+  - O mesmo modelo por um relay ou OpenRouter (por exemplo `minimax/minimax-m3.1-flash`) também recebe esses ajustes, em vez dos ajustes do M3 de "o pensamento pode ser desativado", que este modelo recusa.
+  - A MiniMax ainda não publica um preço por uso para este modelo; ele precisa de uma chave do M Plan.
+
+### Modo Entanglement
+
+- **O "Modo de interação humana" não trava mais em modelos que não aceitam ferramenta imposta:** com o "Modo de interação humana" da "Verificação estrita do modo Entanglement" ativado, o Breezell pede ao modelo que confira os requisitos com você pelo painel de perguntas. Alguns modelos não conseguem: o GLM ignora o pedido e responde em texto, e essa resposta era descartada como erro (AI_ToolChoiceViolationError) enquanto o cartão de erro culpa a rede; Kimi e DeepSeek V4 com o raciocínio ativado recusam o pedido de imediato (HTTP 400). A conferência nunca terminava e todas as mensagens seguintes falhavam do mesmo jeito. Agora:
+  - quando o modelo responde em texto em vez de usar o painel de perguntas, essa resposta é preservada.
+  - quando o modelo recusa, a requisição é reenviada sem impor ferramenta.
+  - o Breezell memoriza esse modelo e deixa de pedir o painel de perguntas para ele.
+  - o modelo pergunta dentro da própria resposta, e a linha exibe "Este modelo não pode usar o painel de perguntas e pergunta na resposta; sua próxima mensagem é a resposta"; depois que você responde, exibe "Entendido e conferido com você na conversa", a conferência é concluída e as ferramentas são liberadas.
+  - o cartão de erro indica corretamente que o modelo não chamou a ferramenta exigida, em vez de apresentar isso como problema de rede.
+
 ## 1.4.35 · Hot Update · 2026-10-18
 
 ### Chat
