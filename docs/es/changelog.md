@@ -5,6 +5,48 @@ next: false
 
 # Registro de cambios
 
+## 1.4.37 · Hot Update · 2026-10-21
+
+### Chat
+
+- **Nuevo modo DarkSelene:** Elige DarkSelene ("Descompone tu pregunta antes de construir nada") en el menú de modos bajo el cuadro de entrada. Antes de cambiar nada, piensa de principio a fin una pregunta difícil o fácil de malinterpretar. Usa una cantidad de tokens muy grande, así que úsalo con cuidado.
+  - Paso uno · entender antes de construir: descompone la pregunta, investiga el código, cuestiona, verifica y deduce posibilidades. Antes de investigar escribe una Previsión: cómo debería verse la respuesta o el cambio terminado, y qué demostraría que está mal. La investigación comprueba solo esos puntos. Cuando el código confirma la previsión de inmediato, se omiten Cuestionar y Verificar.
+  - Resolver con pruebas: toda pregunta que el código o tu petición puedan responder la responde DarkSelene por sí mismo. Solo lo que únicamente tú puedes decidir se pregunta en Tu opinión. Responde las preguntas una por una, o pulsa Ir con las recomendaciones.
+  - Paso dos · ejecutar y revisar: la tarea que preparó se envía como tu mensaje y la ejecuta el Agent. Cada lectura inesperada y cada edición del Agent las revisan revisores independientes contra las pruebas (Revisiones de lectura, Revisiones de código), y sus hallazgos vuelven al Agent antes de que continúe.
+  - El resumen final de DarkSelene conserva solo lo que las revisiones y comprobaciones confirmaron realmente.
+- **La IA ya se entera de cuándo termina un comando en segundo plano:** un comando que superaba la espera y pasaba a segundo plano no se informaba hasta que enviabas otro mensaje. Ahora:
+  - su tarjeta de terminal se actualiza con el resultado en cuanto termina el comando.
+  - mientras la IA sigue respondiendo, su siguiente paso recibe el resultado y lo resuelve en el mismo turno: corrige un fallo o continúa el trabajo que lo esperaba.
+  - cuando la IA ya terminó de responder, se inicia un turno nuevo por sí solo unos 1,5 segundos después de que termine el comando y reporta el resultado en una o dos frases. Varios comandos que terminan casi a la vez inician un solo turno.
+  - no se inicia ningún turno para un comando que detuviste tú (el punto de detención o Ctrl+C), mientras la IA espera tu aprobación o tu respuesta, ni justo después de pulsar Detener.
+- **Editar un mensaje enviado y volver a enviarlo ahora retira el original:** corregir una errata solo reemplazaba el texto. Los archivos que la IA había cambiado por la errata y las memorias tomadas de ese turno permanecían, así que la IA solía seguir en la dirección equivocada. Ahora, al editar y reenviar, primero se retira el mensaje original y todo lo posterior:
+  - los archivos que la IA cambió desde entonces vuelven a como estaban; los que creó se eliminan.
+  - las memorias tomadas de esa parte del chat, el registro causal y las aclaraciones de Entanglement, el archivo de plan y las notas de trabajo vuelven todos a como estaban antes del mensaje.
+  - la IA solo se entera de que retiraste un mensaje, nunca de lo que decía.
+  - normalmente el mensaje editado se envía de inmediato. La confirmación "¿Retirar y reenviar?" aparece solo en estos casos:
+    - también editaste archivos a mano después del mensaje. Elige Mantener mis archivos editados para conservarlos, o Revertir todo y reenviar.
+    - la IA ejecutó comandos cuyos efectos no se pueden deshacer automáticamente, como git commit o npm install. Los comandos se enumeran.
+    - el chat no tiene ningún punto de control al que volver. Reenviar de todos modos retira solo la conversación.
+  - un adjunto que no se puede enviar (por ejemplo un PDF que el modelo seleccionado no acepta) se detecta antes de retirar nada, así que nunca se retira un mensaje y luego falla el envío.
+- **Revertir hasta este punto conserva lo que editaste antes de enviar:** los archivos volvían a como estaban al final del turno anterior, así que las ediciones de ese turno y el envío de este mensaje también se perdían. Ahora cada archivo vuelve a como estaba justo antes de que la IA lo tocara. Si envías un mensaje después de revertir, también se le dice a la IA que el chat se retrocedió.
+- **El título temporal de un chat nuevo ya no incluye la segunda línea:** hasta que el modelo nombra el chat, el título temporal usa solo la primera línea de tu primer mensaje.
+
+### Modelos
+
+- **DeepSeek V4 Flash lee imágenes directamente:** el `deepseek-v4-flash` oficial y las instantáneas `-0731` en relays se trataban como solo texto, así que las imágenes pasaban por el proxy de visión (y no se podían enviar en absoluto sin uno). Ahora las imágenes van directas al modelo. Un nombre `deepseek-v4` sin "Flash" sigue tratándose como solo texto.
+- **Grok 4 con el pensamiento activado ya no falla:** `grok-4`, `grok-4-0709` y `grok-4-latest` mostraban un ajuste de razonamiento de Low a Max y lo enviaban con la solicitud, que xAI rechaza. Grok 4 siempre razona, así que el ajuste ya no se muestra y el parámetro ya no se envía.
+- **Sin opción de pensamiento para Gemini 2.0 Flash:** Gemini 2.0 Flash y Flash-Lite no pueden pensar, pero se trataban como modelos que sí pueden. La opción de pensamiento ahora solo aparece para Gemini 2.5 y posteriores (y el experimental 2.0 Flash Thinking).
+- **El enlace de confirmación de inicio de sesión de Google ya no se corta:** cuando Gemini mediante una cuenta de Google te pedía confirmar una vez en el navegador, el enlace de confirmación podía cortarse en su primer "&" y la página no abría.
+- **La API oficial de OpenAI ya no continúa una versión antigua del chat:** con una clave de API de OpenAI, después de editar o revertir un mensaje, o de que el chat se compactara, el servidor podía continuar desde la versión antigua y el modelo no veía lo que realmente enviaste. Ahora solo continúa mientras los mensajes anteriores no hayan cambiado, y en caso contrario vuelve a enviar toda la conversación.
+
+### Vista previa de versión
+
+- **Nueva telemetría en la nube:** está en Box ▸ Rendimiento ▸ Vista previa de versión. Solo está disponible para las suscripciones que un administrador habilita; las demás ven por qué no está disponible. Antes de activarse explica qué recopila Breezell, y solo surte efecto después de pulsar Aceptar y activarla.
+  - mientras está activa, las descripciones de herramientas y el prompt de sistema de cada modo vienen de la nube. Una versión nueva se aplica desde el turno siguiente.
+  - tu historial de chat (el texto de tus conversaciones con la IA) se sube para mejorar Breezell. Tu código no se recopila: los archivos del proyecto, lo que leen las herramientas, la salida de terminal y los bloques de código del chat se eliminan antes de subirlos.
+  - la tarjeta muestra la versión de los prompts en la nube, cuántos mensajes se han subido y un botón Subir ahora.
+  - puedes desactivarla en cualquier momento. Desde el turno siguiente se vuelven a usar los prompts integrados y no se sube nada más.
+
 ## 1.4.36 · Hot Update · 2026-10-18
 
 ### Chat

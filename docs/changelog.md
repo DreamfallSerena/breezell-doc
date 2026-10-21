@@ -5,6 +5,48 @@ next: false
 
 # Changelog
 
+## 1.4.37 · Hot Update · 2026-10-21
+
+### Chat
+
+- **New DarkSelene mode:** Pick DarkSelene ("Takes your question apart before anything is built") in the mode menu under the input box. Before anything is changed, it thinks a hard or easily misread question all the way through. It uses a very large number of tokens, so use it with care.
+  - Step one · understand before building: Take the question apart, Investigate the code, Challenge, Verify, Derive possibilities. Before investigating, it writes a Foresight: what the answer or the finished change should look like, and what would prove it wrong. The investigation checks only those points. When the code confirms the foresight right away, Challenge and Verify are skipped.
+  - Settle with evidence: every question the code or your request can answer is answered by DarkSelene itself. Only what you alone can decide is asked under Your view. Answer the questions one by one, or press Go with the recommendations.
+  - Step two · execute and review: the task it prepared is sent as your message and carried out by the Agent. Every unexpected read and every edit the Agent makes is checked against the evidence by independent reviewers (Read reviews, Code reviews), and their findings go back to the Agent before it continues.
+  - The final DarkSelene summary keeps only what the reviews and checks actually confirmed.
+- **The AI now hears when a background command finishes:** A command that ran longer than the wait and moved to the background used to stay unreported until you sent another message. Now:
+  - Its terminal card updates with the result as soon as the command ends.
+  - While the AI is still replying, its next step receives the result and deals with it in the same turn: it fixes a failure, or goes on with the work that was waiting for it.
+  - When the AI has already finished replying, a new turn starts by itself about 1.5 seconds after the command ends and reports the result in a sentence or two. Several commands that end close together start only one turn.
+  - No turn starts for a command you stopped yourself (the stop dot or Ctrl+C), while the AI is waiting for your approval or your answer, or right after you pressed Stop.
+- **Editing a sent message and sending it again now withdraws the original:** Fixing a typo used to replace only the text. The files the AI had changed because of the typo and the memories taken from that turn stayed, so the AI often kept going in the wrong direction. Now an edited resend first withdraws the original message and everything after it:
+  - Files the AI changed since then go back to how they were; files it created are deleted.
+  - Memories taken from that part of the chat, Entanglement's causal record and clarifications, the plan file and the working notes all return to how they were before the message.
+  - The AI only learns that you withdrew a message, never what it said.
+  - Usually the edited message is sent at once. A "Withdraw and resend?" confirmation appears only in these cases:
+    - You also edited files by hand after the message. Choose Keep my edited files to keep them, or Revert all and resend.
+    - The AI ran commands whose effects cannot be undone automatically, such as git commit or npm install. The commands are listed.
+    - The chat has no checkpoint to go back to. Resend anyway withdraws only the conversation.
+  - An attachment that cannot be sent (for example a PDF the selected model does not accept) is caught before anything is withdrawn, so a message is never withdrawn and then fails to send.
+- **Revert to this point keeps what you edited before sending:** Files used to go back to how they were at the end of the previous turn, so edits made that turn and sending this message were lost as well. Each file now goes back to how it was right before the AI touched it. If you send a message after a revert, the AI is also told that the chat was rolled back.
+- **A new chat's temporary title no longer includes the second line:** Until the model names the chat, the temporary title now uses only the first line of your first message.
+
+### Models
+
+- **DeepSeek V4 Flash reads images directly:** The official `deepseek-v4-flash` and the `-0731` snapshots on relays were treated as text-only, so images went through the vision proxy (and could not be sent at all without one). Images now go straight to the model. A plain `deepseek-v4` name without "Flash" is still treated as text-only.
+- **Grok 4 with thinking on no longer fails:** `grok-4`, `grok-4-0709` and `grok-4-latest` showed a Low-to-Max reasoning setting and sent it with the request, which xAI rejects. Grok 4 always reasons, so the setting is no longer shown and the parameter is no longer sent.
+- **No thinking option for Gemini 2.0 Flash:** Gemini 2.0 Flash and Flash-Lite cannot think, but were treated as models that can. The thinking option now appears only for Gemini 2.5 and later (and the experimental 2.0 Flash Thinking).
+- **Google sign-in confirmation link no longer cut short:** When Gemini through a Google account asked you to confirm once in the browser, the confirmation link could be cut off at its first "&", and the page would not open.
+- **The official OpenAI API no longer continues an old version of the chat:** With an OpenAI API key, after you edited or reverted a message, or the chat was compacted, the server could continue from the old version, so the model did not see what you actually sent. It now continues only while the earlier messages are unchanged, and otherwise sends the whole conversation again.
+
+### Version Preview
+
+- **New Cloud telemetry:** Found in Box ▸ Performance ▸ Version preview. It is available only to the subscriptions an administrator enables; other subscriptions see why it is unavailable. Before it turns on, it explains what Breezell collects, and it takes effect only after you press Agree and turn on.
+  - While it is on, the tool descriptions and each mode's system prompt come from the cloud. A new version applies from the next turn.
+  - Your chat history (the text of your conversations with the AI) is uploaded to improve Breezell. Your code is not collected: project files, what tools read, terminal output and code blocks in the chat are removed before upload.
+  - The card shows the Cloud prompts version, how many messages are uploaded, and an Upload now button.
+  - You can turn it off at any time. From the next turn the built-in prompts are used again and nothing more is uploaded.
+
 ## 1.4.36 · Hot Update · 2026-10-18
 
 ### Chat
