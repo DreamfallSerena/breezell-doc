@@ -243,7 +243,11 @@
   "general.ide.colorTheme": "Color Theme",
   "general.dataManagement.importChatsTitle": "Import chats backup",
   "general.dataManagement.importChatsMerge": "Merge",
-  "general.dataManagement.importChatsReplace": "Replace"
+  "general.dataManagement.importChatsReplace": "Replace",
+  "box.desc.featureOptions": "Decide which model each feature runs on and how far the agent may act on its own.",
+  "box.desc.mcp": "MCP servers, Skills & Memory panel.",
+  "box.desc.privacy": "What Breezell collects, what it never collects, and how the data is used.",
+  "box.desc.experimental": "Features still being shaped. Try them and tell us what breaks."
  },
  "zh-hans": {
   "box.title": "Breezell 设置",
@@ -489,7 +493,11 @@
   "general.ide.colorTheme": "颜色主题",
   "general.dataManagement.importChatsTitle": "导入对话备份",
   "general.dataManagement.importChatsMerge": "合并",
-  "general.dataManagement.importChatsReplace": "覆盖"
+  "general.dataManagement.importChatsReplace": "覆盖",
+  "box.desc.featureOptions": "决定每个功能用哪个模型，以及 Agent 可以自主执行到什么程度。",
+  "box.desc.mcp": "MCP服务器，Skills& Memory面板。",
+  "box.desc.privacy": "Breezell 收集什么、绝不收集什么，以及数据如何使用。",
+  "box.desc.experimental": "仍在打磨中的功能，欢迎试用并告诉我们哪里出了问题。"
  },
  "zh-hant": {
   "box.title": "Breezell 設定",
@@ -735,7 +743,11 @@
   "general.ide.colorTheme": "色彩佈景主題",
   "general.dataManagement.importChatsTitle": "匯入聊天備份",
   "general.dataManagement.importChatsMerge": "合併",
-  "general.dataManagement.importChatsReplace": "覆蓋"
+  "general.dataManagement.importChatsReplace": "覆蓋",
+  "box.desc.featureOptions": "決定每個功能使用哪個模型，以及 Agent 可以自主執行到什麼程度。",
+  "box.desc.mcp": "MCP伺服器，Skills& Memory面板。",
+  "box.desc.privacy": "Breezell 收集什麼、絕不收集什麼，以及資料如何使用。",
+  "box.desc.experimental": "仍在打磨中的功能，歡迎試用並告訴我們哪裡出了問題。"
  },
  "ja": {
   "box.title": "Breezell 設定",
@@ -981,7 +993,11 @@
   "general.ide.colorTheme": "カラーテーマ",
   "general.dataManagement.importChatsTitle": "チャットのバックアップをインポート",
   "general.dataManagement.importChatsMerge": "マージ",
-  "general.dataManagement.importChatsReplace": "置き換え"
+  "general.dataManagement.importChatsReplace": "置き換え",
+  "box.desc.featureOptions": "各機能がどのモデルで動くか、エージェントがどこまで自律的に動けるかを決めます。",
+  "box.desc.mcp": "MCPサーバー、Skills & Memoryパネル。",
+  "box.desc.privacy": "Breezell が収集するもの、決して収集しないもの、データの使い方。",
+  "box.desc.experimental": "まだ調整中の機能です。試して、問題があれば教えてください。"
  },
  "ko": {
   "box.title": "Breezell 설정",
@@ -1227,7 +1243,11 @@
   "general.ide.colorTheme": "색상 테마",
   "general.dataManagement.importChatsTitle": "채팅 백업 가져오기",
   "general.dataManagement.importChatsMerge": "병합",
-  "general.dataManagement.importChatsReplace": "덮어쓰기"
+  "general.dataManagement.importChatsReplace": "덮어쓰기",
+  "box.desc.featureOptions": "각 기능이 어떤 모델로 실행되는지, 에이전트가 어디까지 스스로 행동할 수 있는지 결정합니다.",
+  "box.desc.mcp": "MCP 서버, Skills & Memory 패널.",
+  "box.desc.privacy": "Breezell이 수집하는 것, 절대 수집하지 않는 것, 데이터 사용 방식.",
+  "box.desc.experimental": "아직 다듬는 중인 기능입니다. 사용해 보고 문제를 알려주세요."
  },
  "es": {
   "box.title": "Ajustes de Breezell",
@@ -1473,7 +1493,11 @@
   "general.ide.colorTheme": "Tema de color",
   "general.dataManagement.importChatsTitle": "Importar copia de seguridad de chats",
   "general.dataManagement.importChatsMerge": "Combinar",
-  "general.dataManagement.importChatsReplace": "Reemplazar"
+  "general.dataManagement.importChatsReplace": "Reemplazar",
+  "box.desc.featureOptions": "Decide qué modelo usa cada función y hasta dónde puede actuar el agente por sí solo.",
+  "box.desc.mcp": "Servidores MCP, panel Skills & Memory.",
+  "box.desc.privacy": "Qué recopila Breezell, qué nunca recopila y cómo se usan los datos.",
+  "box.desc.experimental": "Funciones aún en desarrollo. Pruébalas y cuéntanos qué falla."
  },
  "pt-br": {
   "box.title": "Configurações do Breezell",
@@ -1719,7 +1743,11 @@
   "general.ide.colorTheme": "Tema de Cores",
   "general.dataManagement.importChatsTitle": "Importar backup de chats",
   "general.dataManagement.importChatsMerge": "Mesclar",
-  "general.dataManagement.importChatsReplace": "Substituir"
+  "general.dataManagement.importChatsReplace": "Substituir",
+  "box.desc.featureOptions": "Decida qual modelo cada recurso usa e até onde o agente pode agir sozinho.",
+  "box.desc.mcp": "Servidores MCP, painel Skills & Memory.",
+  "box.desc.privacy": "O que o Breezell coleta, o que nunca coleta e como os dados são usados.",
+  "box.desc.experimental": "Recursos ainda em desenvolvimento. Experimente e conte o que quebrou."
  },
  "ru": {
   "box.title": "Настройки Breezell",
@@ -1965,6 +1993,10 @@
   "general.ide.colorTheme": "Цветовая тема",
   "general.dataManagement.importChatsTitle": "Импорт резервной копии чатов",
   "general.dataManagement.importChatsMerge": "Объединить",
-  "general.dataManagement.importChatsReplace": "Заменить"
+  "general.dataManagement.importChatsReplace": "Заменить",
+  "box.desc.featureOptions": "Решайте, на какой модели работает каждая функция и насколько самостоятельно может действовать агент.",
+  "box.desc.mcp": "Серверы MCP, панель Skills & Memory.",
+  "box.desc.privacy": "Что Breezell собирает, чего никогда не собирает и как используются данные.",
+  "box.desc.experimental": "Функции, которые ещё дорабатываются. Попробуйте и расскажите, что не так."
  }
 }

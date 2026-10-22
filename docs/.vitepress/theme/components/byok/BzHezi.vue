@@ -32,6 +32,15 @@ const shezhiye = [
 const zhuganx = 16;
 const banjing = 8;
 const zhongdianx = 30;
+// 各頁的說明文字（BoxSettingsPage.tsx SETTINGS_SECTIONS 的 descKey）。
+const yeshuoming: Record<string, string> = {
+  "tab.general": "box.desc.general",
+  "tab.featureOptions": "box.desc.featureOptions",
+  "tab.mcp": "box.desc.mcp",
+  "tab.privacy": "box.desc.privacy",
+  "tab.experimental": "box.desc.experimental",
+};
+
 const maodian = shezhiye.map((_, xuhao) => 6 + xuhao * (28 + 4) + 14);
 const xuanzhong = computed(() => Math.max(0, shezhiye.indexOf(props.ye as (typeof shezhiye)[number])));
 const shugao = 6 + shezhiye.length * 28 + (shezhiye.length - 1) * 4 + 2;
@@ -147,7 +156,11 @@ const gongzuoqu = [
         </header>
         <div class="bz-hz-neirong">
           <slot>
-            <BzYetou />
+            <BzYetou v-if="ye === 'tab.models'" />
+            <template v-else>
+              <div class="bz-hz-yebiaoti">{{ t(ye as never) }}</div>
+              <div v-if="yeshuoming[ye]" class="bz-hz-yeshuo">{{ t(yeshuoming[ye] as never) }}</div>
+            </template>
           </slot>
         </div>
       </main>
@@ -473,6 +486,22 @@ const gongzuoqu = [
   min-height: 0;
   overflow: hidden;
   padding: 4px 24px 24px;
+}
+
+.bz-hz-yebiaoti {
+  color: var(--bz-fg-1);
+  font-size: 22px;
+  font-weight: 650;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+}
+
+.bz-hz-yeshuo {
+  margin-top: 6px;
+  max-width: 760px;
+  color: var(--bz-fg-3);
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 @container (max-width: 560px) {

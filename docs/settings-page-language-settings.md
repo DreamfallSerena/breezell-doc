@@ -1,80 +1,72 @@
 ---
 title: Language Settings
-description: Learn how to change the Breezell interface language from the settings page.
+description: Change the language of the Breezell interface in Box, and the display language of the editor itself.
 ---
 
 # Language Settings
 
-If your native language is not English, you can install the corresponding VS Code language extension and then select the language that best fits your needs from the Breezell settings page.
+Breezell's interface is available in eight languages: <BzWenben jian="general.language.en" />, <BzWenben jian="general.language.ja" />, <BzWenben jian="general.language.ko" />, <BzWenben jian="general.language.es" />, <BzWenben jian="general.language.ptBR" />, <BzWenben jian="general.language.ru" />, <BzWenben jian="general.language.zh" /> and <BzWenben jian="general.language.zhTW" />. You can pick one while installing Breezell and change it at any time afterwards.
 
-Breezell currently supports the following interface languages:
+::: tip About the screens on this page
+The Breezell screens below are rebuilt in HTML from the Breezell source code. Their text follows the language of this page; the language menu on this page is interactive and switches the screen it belongs to, just like in Breezell.
+:::
 
-- English
-- Japanese
-- Korean
-- Spanish
-- Portuguese (Brazil)
-- Russian
-- Simplified Chinese
-- Traditional Chinese
+## Two kinds of language
 
-## Open the Breezell settings page
+A Breezell window has two layers, and each has its own language setting:
 
-To open the Breezell settings page, start from the main editor window.
+| Layer | What it covers | Where to change it |
+| --- | --- | --- |
+| **Breezell interface** | Box, the chat, the model and mode pickers, and the other Breezell panels | Box ▸ <BzWenben jian="box.title" /> ▸ <BzWenben jian="tab.general" /> |
+| **Editor display language** | The parts that come from Code – OSS: the menu bar, the Command Palette, the built-in settings and keyboard shortcut editors | `Configure Display Language` plus a language pack |
 
-In the top-right area of the editor, find the **settings icon**. It looks like a small gear icon and is located near the other toolbar icons.
+Most of what you use every day is the Breezell interface, so the first setting is usually all you need.
 
-Click the settings icon to open the settings menu.
+## Change the Breezell interface language
 
-At the top of this menu, you will see an option named **Breezell Settings**. Click **Breezell Settings**.
+### 1. Open Box
 
-![Breezell settings menu with Breezell Settings selected](/language-settings/settings-menu-current.png)
+Click **Box** in the switch at the left of the title bar. You can also choose <BzWenben jian="box.title" /> from the gear menu at the top right, or run `Breezell: Open Settings` from the Command Palette.
 
-Opening **Breezell Settings** takes you into **Box**. Settings open as **Breezell Console**, with **Breezell Settings** already selected in the left sidebar.
+<BzBiaotilan gaoliang="box" />
 
-![Breezell Settings page in Box](/language-settings/breezell-settings-current.png)
+### 2. Open General & Language
 
-## Find the language setting
+In the Box sidebar, open the <BzWenben jian="box.title" /> group and click <BzWenben jian="tab.general" />.
 
-Inside Box, look at the left sidebar under **Breezell Settings**.
+<BzHezi ye="tab.general" gaoliang="ye" biaoji="2" />
 
-The sidebar contains several sections, such as:
+### 3. Pick your language
 
-- Models
-- Feature Options
-- FIM
-- General & Language
-- Code Index
-- MCP
-- Privacy
-- Experimental
+The first card on the page is <BzWenben jian="general.language.title" />. Open the menu on the right of its row and choose a language. Try it here:
 
-Click **General & Language** in the left sidebar.
+<BzChangguiye gaoliang="yuyan" biaoji="3" />
 
-After entering the **General & Language** page, you will see the language setting near the top of the page.
+The card's description says what happens next: <BzWenben jian="general.language.desc" />
 
-The language option is shown as a dropdown selector. By default, it may display **English**.
+Each language appears under its own name, so you can always find yours even if the interface is currently in a language you cannot read.
 
-![Language dropdown on the General & Language page](/language-settings/language-dropdown-current.png)
+## Change the editor display language
 
-Click the dropdown and select the language you want to use.
+The menu bar, the Command Palette and the other parts that come from Code – OSS follow the editor's display language. To change it:
 
-## Apply the correct language
+1. Press `Ctrl+Shift+P` (`Cmd+Shift+P` on macOS) to open the Command Palette.
+2. Run `Configure Display Language`.
+3. Choose your language. If it is not installed yet, choose to install it; Breezell downloads the language pack from the extension marketplace.
+4. Restart Breezell when it asks you to.
 
-After selecting your preferred language, Breezell will use that language for the interface wherever localization is supported.
+The two settings are independent. You can, for example, keep the editor in English and use Breezell in <BzWenben jian="general.language.zhTW" />.
 
-If the interface does not fully switch to your selected language, make sure the corresponding VS Code language extension is installed and enabled.
+## More on the General & Language page
 
-For example, if you want to use Simplified Chinese, install the Simplified Chinese language extension for VS Code first, then return to Breezell settings and select Simplified Chinese from the language dropdown.
+The same page holds two more cards:
+
+- <BzWenben jian="general.dataManagement.title" />: import, export or reset your Breezell settings (<BzWenben jian="general.tabs.settings" />) and your chat history (<BzWenben jian="general.tabs.chats" />). Settings export as a `.json` file; chats export as a `.zip` that also carries the attachments and checkpoints of each conversation. When you import chats, Breezell asks whether to merge them with your current chats or replace them. Reset asks you to click a second time before it deletes anything.
+- <BzWenben jian="general.tabs.ide" />: shortcuts to the editor's own settings, keyboard shortcuts and color theme.
 
 ## Summary
 
-To change the Breezell language:
-
-1. Click the settings icon in the top-right corner of the editor.
-2. Click **Breezell Settings** from the menu.
-3. Box opens as **Breezell Console**. Open **General & Language** from the left sidebar.
-4. Find the language dropdown.
-5. Select the language you want to use.
-
-This allows users who are not native English speakers to configure Breezell with a more suitable interface language.
+1. Click **Box** in the title bar.
+2. Open <BzWenben jian="box.title" /> ▸ <BzWenben jian="tab.general" />.
+3. Choose a language in the <BzWenben jian="general.language.title" /> card. It applies at once.
+4. If you also want the menus and the Command Palette in that language, run `Configure Display Language` and restart.
