@@ -113,7 +113,7 @@ export default defineConfig({
           items: [
             { text: "Introduction", link: "/introduction" },
             { text: "Language Settings", link: "/settings-page-language-settings" },
-            { text: "Custom API", link: "/custom-api" },
+            { text: "Custom API (BYOK)", link: "/custom-api" },
             { text: "Custom Model Vision", link: "/custom-model-vision" },
             { text: "Prompt & Skill Settings", link: "/prompt-settings" },
             { text: "Feature Options Overview", link: "/feature-options-overview" },
@@ -152,7 +152,7 @@ export default defineConfig({
           items: [
             { text: "Introduction", link: "/introduction" },
             { text: "Language Settings", link: "/settings-page-language-settings" },
-            { text: "Custom API", link: "/custom-api" },
+            { text: "Custom API (BYOK)", link: "/custom-api" },
             { text: "Custom Model Vision", link: "/custom-model-vision" },
             { text: "Prompt & Skill Settings", link: "/prompt-settings" },
             { text: "Feature Options Overview", link: "/feature-options-overview" },
@@ -191,7 +191,7 @@ export default defineConfig({
           items: [
             { text: "Introduction", link: "/introduction" },
             { text: "Language Settings", link: "/settings-page-language-settings" },
-            { text: "Custom API", link: "/custom-api" },
+            { text: "Custom API (BYOK)", link: "/custom-api" },
             { text: "Custom Model Vision", link: "/custom-model-vision" },
             { text: "Prompt & Skill Settings", link: "/prompt-settings" },
             { text: "Feature Options Overview", link: "/feature-options-overview" },
@@ -226,7 +226,7 @@ export default defineConfig({
           items: [
             { text: "Introduction", link: "/introduction" },
             { text: "Language Settings", link: "/settings-page-language-settings" },
-            { text: "Custom API", link: "/custom-api" },
+            { text: "Custom API (BYOK)", link: "/custom-api" },
             { text: "Custom Model Vision", link: "/custom-model-vision" },
             { text: "Prompt & Skill Settings", link: "/prompt-settings" },
             { text: "Feature Options Overview", link: "/feature-options-overview" },

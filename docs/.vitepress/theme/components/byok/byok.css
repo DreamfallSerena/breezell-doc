@@ -1,0 +1,361 @@
+/*
+ * Breezell 界面復刻的共用樣式。
+ * 顏色取自 Breezell 內建主題 extensions/theme-breezell/themes/breezell-light.json 與 breezell-dark.json，
+ * 尺寸、圓角、字重取自 browser/react/src/breezell-settings-tsx 下的 Box 頁源碼。
+ * 網站切到深色時使用 Breezell Dark，淺色時使用 Breezell Light。
+ */
+
+.bz {
+  --bz-fg: #393a34;
+  --bz-editor-fg: #393a34;
+  --bz-input-fg: #393a34;
+  --bz-placeholder: #393a3490;
+  --bz-deemph: #8e8e90;
+  --bz-editor-bg: #ffffff;
+  --bz-sidebar-bg: #ffffff;
+  --bz-button-bg: #1e66f5;
+  --bz-button-fg: #ffffff;
+  --bz-link: #1e66f5;
+  --bz-input-bg: #ffffff;
+  --bz-error: #ab5959;
+  --bz-warn: #a65e2b;
+  --bz-yellow: #bf8803;
+  --bz-good: #3fb950;
+  --bz-border4: #f0f0f0;
+  --bz-titlebar-bg: #ffffff;
+  --bz-titlebar-fg: #4e4f47;
+  --bz-menu-bg: #ffffff;
+  --bz-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --bz-accent: #1f9d8b;
+  --bz-accent-fg: #ffffff;
+  --bz-spark: color-mix(in srgb, #a78bfa 75%, var(--bz-fg));
+  --bz-mark: #ff7340;
+
+  --bz-fg-1: var(--bz-editor-fg);
+  --bz-fg-2: var(--bz-input-fg);
+  --bz-fg-3: var(--bz-placeholder);
+  --bz-fg-4: var(--bz-deemph);
+  --bz-surface: color-mix(in srgb, var(--bz-sidebar-bg) 88%, var(--bz-editor-fg) 4%);
+  --bz-field-bg: color-mix(in srgb, var(--bz-fg) 8%, var(--bz-input-bg));
+  --bz-field-border: color-mix(in srgb, var(--bz-fg) 18%, transparent);
+  --bz-border3: color-mix(in srgb, var(--bz-fg) 14%, transparent);
+
+  position: relative;
+  margin: 20px 0;
+  color: var(--bz-fg-1);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", system-ui, "Ubuntu", "Droid Sans", sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: left;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+
+.dark .bz {
+  --bz-fg: #e4e4e4;
+  --bz-editor-fg: #cccccc;
+  --bz-input-fg: #e4e4e4;
+  --bz-placeholder: #dedcd590;
+  --bz-deemph: #8c8c8c;
+  --bz-editor-bg: #181818;
+  --bz-sidebar-bg: #141414;
+  --bz-button-bg: #89b4fa;
+  --bz-button-fg: #ffffff;
+  --bz-link: #89b4fa;
+  --bz-input-bg: #1c1c1c;
+  --bz-error: #cb7676;
+  --bz-warn: #d4976c;
+  --bz-yellow: #cca700;
+  --bz-border4: #e4e4e412;
+  --bz-titlebar-bg: #141414;
+  --bz-titlebar-fg: #bfbaaa;
+  --bz-menu-bg: #1e1e1e;
+  --bz-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  --bz-accent: #7fd3c6;
+  --bz-accent-fg: #0f1514;
+}
+
+.bz *,
+.bz *::before,
+.bz *::after {
+  box-sizing: border-box;
+}
+
+.bz button,
+.bz input {
+  font: inherit;
+  color: inherit;
+  margin: 0;
+  letter-spacing: inherit;
+}
+
+.bz button {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.bz input {
+  outline: none;
+}
+
+.bz input::placeholder {
+  color: var(--bz-fg-4);
+  opacity: 1;
+}
+
+.bz svg {
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.bz .bz-mono {
+  font-family: Consolas, "SF Mono", Menlo, "Courier New", monospace;
+}
+
+/* 外框：一個 Breezell 窗口片段 */
+.bz-chuangkou {
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--bz-editor-bg);
+  border: 1px solid color-mix(in srgb, var(--vp-c-divider) 80%, transparent);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02), 0 12px 32px -18px rgba(0, 0, 0, 0.35);
+}
+
+.bz-chuangkou.bz-cebian {
+  background: var(--bz-sidebar-bg);
+}
+
+.bz-chuangkou-nei {
+  padding: 16px;
+}
+
+.bz-shuoming {
+  margin-top: 8px;
+  color: var(--vp-c-text-2);
+  font-family: var(--vp-font-family-base);
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* 教學標註：橘色光圈，標出這一步要點擊的位置（不屬於 Breezell 界面本身） */
+.bz-gl {
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 0 0 2px var(--bz-mark), 0 0 0 6px color-mix(in srgb, var(--bz-mark) 28%, transparent) !important;
+  animation: bz-gl-maidong 1.8s ease-in-out infinite;
+  z-index: 2;
+}
+
+@keyframes bz-gl-maidong {
+  0%, 100% { box-shadow: 0 0 0 2px var(--bz-mark), 0 0 0 5px color-mix(in srgb, var(--bz-mark) 26%, transparent); }
+  50% { box-shadow: 0 0 0 2px var(--bz-mark), 0 0 0 9px color-mix(in srgb, var(--bz-mark) 10%, transparent); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bz-gl { animation: none; }
+}
+
+.bz-biaoji {
+  position: absolute;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 10px;
+  background: var(--bz-mark);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
+
+/* Box 卡片與通用小元件（boxWidgets.tsx） */
+.bz-kapian {
+  background: var(--bz-surface);
+  border: 1px solid color-mix(in srgb, var(--bz-fg) 9%, transparent);
+  border-radius: 14px;
+}
+
+.bz-anniu {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 11px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--bz-fg-2);
+  border: 1px solid color-mix(in srgb, var(--bz-fg) 10%, transparent) !important;
+  transition: background-color 120ms, border-color 120ms, color 120ms;
+}
+
+.bz-anniu:hover {
+  color: var(--bz-fg-1);
+}
+
+.bz-anniu.bz-zhu {
+  background: var(--bz-button-bg);
+  color: var(--bz-button-fg);
+  border-color: transparent !important;
+}
+
+.bz-anniu.bz-huoyue {
+  color: var(--bz-fg-1);
+  background: color-mix(in srgb, var(--bz-fg) 12%, transparent);
+  border-color: color-mix(in srgb, var(--bz-fg) 18%, transparent) !important;
+}
+
+.bz-anniu.bz-tubiaoanniu {
+  padding: 0 8px;
+}
+
+.bz-anniu[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.bz-sousuo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 1 240px;
+  min-width: 160px;
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 8px;
+  background: var(--bz-field-bg);
+  border: 1px solid var(--bz-field-border);
+  color: var(--bz-fg-3);
+}
+
+.bz-sousuo input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  font-size: 12.5px;
+  color: var(--bz-fg-1);
+}
+
+.bz-dian {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  background: color-mix(in srgb, var(--bz-fg) 25%, transparent);
+}
+
+.bz-dian.bz-hao {
+  background: var(--bz-good);
+}
+
+.bz-zhuangtai {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 18px;
+  padding: 0 7px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 650;
+  background: color-mix(in srgb, var(--bz-fg) 7%, transparent);
+  color: var(--bz-fg-3);
+  white-space: nowrap;
+}
+
+.bz-zhuangtai .bz-dian {
+  width: 5px;
+  height: 5px;
+}
+
+.bz-zhuangtai.bz-hao {
+  background: color-mix(in srgb, var(--bz-good) 13%, transparent);
+  color: var(--bz-good);
+}
+
+/* BreezellSwitch（util/inputs.tsx）：sm 42×22、xs 28×16，開啟時是按鈕色 20% 的淡底 */
+.bz-kaiguan {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 42px;
+  height: 22px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bz-fg) 20%, transparent);
+  transition: background-color 200ms ease;
+}
+
+.bz-kaiguan::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+  transition: transform 200ms ease;
+}
+
+.bz-kaiguan.bz-kai {
+  background: color-mix(in srgb, var(--bz-button-bg) 20%, transparent);
+}
+
+.bz-kaiguan.bz-kai::after {
+  transform: translateX(20px);
+}
+
+.bz-kaiguan.bz-xiao {
+  width: 28px;
+  height: 16px;
+}
+
+.bz-kaiguan.bz-xiao::after {
+  top: 1px;
+  width: 14px;
+  height: 14px;
+}
+
+.bz-kaiguan.bz-xiao.bz-kai::after {
+  transform: translateX(10px);
+}
+
+.bz-kaiguan.bz-jinyong {
+  opacity: 0.25;
+}
+
+/* 輸入框（OpenAI-Compatible 表單） */
+.bz-shurukuang {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 13px;
+  border-radius: 6px;
+  color: var(--bz-fg-1);
+  background: color-mix(in srgb, var(--bz-fg) 5%, transparent);
+  border: 1px solid color-mix(in srgb, var(--bz-fg) 12%, transparent);
+  transition: border-color 150ms;
+}
+
+.bz-shurukuang:focus {
+  border-color: color-mix(in srgb, var(--bz-link) 70%, transparent);
+}
+
+.bz-biaoqian {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--bz-fg-3);
+}

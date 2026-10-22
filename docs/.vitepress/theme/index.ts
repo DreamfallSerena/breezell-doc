@@ -3,6 +3,16 @@ import { getScrollOffset } from "vitepress";
 import "viewerjs/dist/viewer.css";
 import type kanqitushili from "viewerjs";
 import "./custom.css";
+import type { App } from "vue";
+import "./components/byok/byok.css";
+import BzBiaotilan from "./components/byok/BzBiaotilan.vue";
+import BzHezi from "./components/byok/BzHezi.vue";
+import BzMoxingye from "./components/byok/BzMoxingye.vue";
+import BzJianrongpeizhi from "./components/byok/BzJianrongpeizhi.vue";
+import BzMoxingxuanxiang from "./components/byok/BzMoxingxuanxiang.vue";
+import BzLiaotian from "./components/byok/BzLiaotian.vue";
+import BzGaoji from "./components/byok/BzGaoji.vue";
+import BzWenben from "./components/byok/BzWenben.vue";
 
 type shituguodu = {
   ready: Promise<void>;
@@ -18,6 +28,7 @@ type luyou = {
 
 type yingyongshangxiawen = {
   router?: luyou;
+  app?: App;
 };
 
 const mulugundongshichang = 900;
@@ -546,10 +557,27 @@ function qidongshouyefanyi() {
   window.requestAnimationFrame(gengxin);
 }
 
+// 自訂 API（BYOK）教學裡用 HTML/CSS 復刻的 Breezell 界面，取代截圖。
+function zhuceyuanjian(yingyong: App | undefined) {
+  if (!yingyong) {
+    return;
+  }
+
+  yingyong.component("BzBiaotilan", BzBiaotilan);
+  yingyong.component("BzHezi", BzHezi);
+  yingyong.component("BzMoxingye", BzMoxingye);
+  yingyong.component("BzJianrongpeizhi", BzJianrongpeizhi);
+  yingyong.component("BzMoxingxuanxiang", BzMoxingxuanxiang);
+  yingyong.component("BzLiaotian", BzLiaotian);
+  yingyong.component("BzGaoji", BzGaoji);
+  yingyong.component("BzWenben", BzWenben);
+}
+
 export default {
   ...DefaultTheme,
   enhanceApp(shangxiawen: unknown) {
     DefaultTheme.enhanceApp?.(shangxiawen as never);
+    zhuceyuanjian((shangxiawen as yingyongshangxiawen).app);
     qidongzhutiguodu();
     qidongsousuoxiaoguo();
     qidongmulugundong();

@@ -1,623 +1,329 @@
 ---
-title: API personalizada
-description: Aprende a configurar tu propio proveedor de API en Breezell en lugar de utilizar la cuota oficial.
+title: API personalizada (BYOK)
+description: Usa tu propia clave API en Breezell y ejecuta los modelos Claude a través de la API oficial de Anthropic o de cualquier relay compatible.
 ---
 
-# API personalizada
+# API personalizada (BYOK)
 
-Si no quieres utilizar la cuota oficial de Breezell o quieres usar tu propia clave de API, puedes configurar un proveedor de API personalizado en la página de configuración de Breezell.
+BYOK significa **Bring Your Own Key** («trae tu propia clave»). En lugar de usar la cuota oficial de Breezell, Breezell envía las solicitudes a un proveedor de modelos con tu propia clave API, y es ese proveedor quien te factura directamente.
 
-Esto te permite conectar Breezell con tu propio proveedor de modelos, puerta de enlace personalizada, clave de API y nombre de modelo.
+Esta guía recorre toda la configuración con modelos Claude: `claude-opus-5-5`, `claude-sonnet-5-5`, `claude-haiku-5-5` y `claude-fable-5-1`.
 
-## Abrir la página de configuración de Breezell
+::: tip Sobre las pantallas de esta página
+En esta página no hay capturas de pantalla. Todas las pantallas de Breezell que verás a continuación están recreadas en HTML a partir del código fuente de Breezell. El texto sigue el idioma de esta página y los colores siguen el selector claro / oscuro de este sitio (Breezell Light / Breezell Dark).
 
-Para empezar, busca el icono de configuración en la zona superior derecha del editor.
+Los anillos naranjas y las insignias numeradas indican dónde hacer clic; no forman parte de Breezell. Algunas pantallas son interactivas: puedes cambiar el protocolo, editar la URL base, pulsar **Claude 1M**, activar o desactivar el razonamiento y arrastrar el control deslizante de esfuerzo.
+:::
 
-El icono de configuración parece un pequeño engranaje y está situado cerca de los demás iconos de la barra de herramientas.
+## Antes de empezar
 
-Haz clic en el icono de configuración para abrir el menú de configuración.
+Necesitas tres cosas:
 
-En la parte superior del menú, haz clic en **Breezell Settings**.
+1. **Una cuenta de Breezell con el plan Custom API o superior.** Usar modelos de terceros con tu propia clave es una función de pago. Sin ese plan, la página del proveedor muestra <BzWenben jian="box.models.gate.planRequired" /> en lugar del formulario y, si no has iniciado sesión, muestra <BzWenben jian="box.models.gate.signIn" />.
+2. **Una clave.** Puede ser una clave API de Anthropic obtenida en la Anthropic Console (empieza por `sk-ant-`), o bien la URL base y la clave de un relay, una pasarela o un proxy autoalojado.
+3. **El protocolo que habla tu relay.** Pregunta a tu proveedor si ofrece la API Anthropic Messages (`/v1/messages`), la API OpenAI Chat Completions (`/v1/chat/completions`) o ambas.
 
-Después de hacer clic en **Breezell Settings**, se abrirá la página de configuración de Breezell.
+## Elegir la ruta
 
-![Menú de configuración de Breezell con Breezell Settings seleccionado](/custom-api/settings-menu.png)
+| Ruta | Úsala cuando | Dónde está en Breezell | Protocolo |
+| --- | --- | --- | --- |
+| **A. API de Anthropic** | Tienes una clave de la Anthropic Console | <BzWenben jian="box.models.group.api" /> › Anthropic | Anthropic Messages (integrado) |
+| **B. Ranura compatible + protocolo Anthropic** | Tu relay ofrece `/v1/messages` | <BzWenben jian="box.models.group.compat" /> › una ranura | Anthropic |
+| **C. Ranura compatible + protocolo OpenAI** | Tu relay solo ofrece `/v1/chat/completions` | <BzWenben jian="box.models.group.compat" /> › una ranura | OpenAI |
 
-## Ir a la página Models
+Para Claude, elige preferiblemente **A** o **B**. El propio Breezell lo recomienda en el formulario de la ranura: <BzWenben jian="settings.apiFormat.anthropicTip" />
 
-Después de abrir la configuración de Breezell, normalmente entrarás en la página **Models** de forma predeterminada.
+## Paso 1: Abrir Box (Ajustes de Breezell)
 
-Si no estás en esta página, mira la barra lateral izquierda y haz clic en **Models**.
+Los ajustes de Breezell están en la página **Box**. Mientras estás en Box, esta ocupa el lugar de la barra de actividad, la barra lateral, el área del editor y el panel; haz clic en **Agent** para volver a tu código.
 
-La página **Models** permite gestionar los modelos disponibles, los modelos oficiales, los proveedores externos y los proveedores de API personalizados.
+Hay tres formas de abrirla:
 
-En la parte superior de esta página verás varios modelos habilitados, como los modelos Claude, GPT, Gemini, Kimi y Grok.
+- Haz clic en **Box** en el conmutador situado a la izquierda de la barra de título.
+- Haz clic en el icono del engranaje, arriba a la derecha, y elige <BzWenben jian="box.title" />.
+- Abre la paleta de comandos y ejecuta `Breezell: Open Settings`.
 
-Debajo de la lista de modelos verás la sección **Providers**.
+<BzBiaotilan gaoliang="box" />
 
-![Página Models de Breezell con la sección Providers](/custom-api/models-page.png)
+<BzBiaotilan gaoliang="chilun" caidan />
 
-## Elegir un proveedor
+## Paso 2: Ir a la página de modelos
 
-Breezell admite muchos proveedores de modelos diferentes.
+En la barra lateral de Box, abre el grupo <BzWenben jian="box.title" /> y haz clic en <BzWenben jian="tab.models" />. Normalmente es la página con la que se abre Box.
 
-Por ejemplo, puedes encontrar proveedores como:
+<BzHezi gaoliang="moxing" />
 
-- OpenRouter
-- Anthropic
-- OpenAI
-- OpenAI Codex
-- Kimi Code
-- GitHub Copilot
-- DeepSeek
-- Gemini
-- Groq
-- Mistral
-- Qwen
-- Google Vertex AI
-- Microsoft Azure
-- NVIDIA NIM
-- Together AI
-- Cohere
-- Fireworks
-- DeepInfra
-- Cerebras
-- Perplexity
-- Moonshot AI
-- ByteDance
-- Hugging Face
-- Baseten
+En la parte superior de la página encontrarás cuatro vistas: <BzWenben jian="box.usage.tab.models" />, <BzWenben jian="box.usage.tab.cache" />, <BzWenben jian="box.usage.tab.tokens" /> y <BzWenben jian="box.usage.tab.breezell" />. Quédate en la primera.
 
-Cada proveedor puede tener métodos de configuración diferentes.
+Debajo, las categorías de proveedores reparten los proveedores en cuatro grupos:
 
-Por ejemplo, si utilizas **OpenAI Codex**, puedes elegir **OpenAI Codex** en la lista de proveedores e iniciar sesión directamente con tu cuenta de ChatGPT.
+| Categoría | Qué contiene |
+| --- | --- |
+| <BzWenben jian="box.models.group.breezell" /> | Los modelos oficiales de Breezell, con cargo a tu cuota de Breezell. No necesitas clave. |
+| <BzWenben jian="box.models.group.signin" /> | Proveedores en los que inicias sesión con una cuenta, como Codex o Copilot. |
+| <BzWenben jian="box.models.group.api" /> | APIs oficiales de los fabricantes con tu propia clave, Anthropic incluida. |
+| <BzWenben jian="box.models.group.compat" /> | Hasta 50 ranuras personalizadas para relays, pasarelas y proxies autoalojados. |
 
-Después de iniciar sesión, Breezell puede enrutar las solicitudes de Codex a través del backend oficial de Codex. Esta opción no requiere una clave de API independiente.
+## Ruta A: La API de Anthropic
 
-![Página del proveedor OpenAI Codex con inicio de sesión de la cuenta de ChatGPT y detalles de uso de Codex](/custom-api/openai-codex-provider.png)
+### A1. Seleccionar Anthropic
 
-## Usar OpenAI-Compatible para una API personalizada
+1. Haz clic en <BzWenben jian="box.models.group.api" />.
+2. Escribe `Anthropic` en el campo <BzWenben jian="box.models.searchProvidersPlaceholder" />.
+3. Haz clic en la tarjeta **Anthropic**. El proveedor seleccionado aparece debajo con el estado <BzWenben jian="box.models.notConfigured" />.
+4. Haz clic en <BzWenben jian="box.models.editConfig" /> para abrir su configuración.
 
-Si quieres utilizar una API de terceros o una puerta de enlace de API autoalojada, elige **OpenAI-Compatible**.
+<BzMoxingye fenlei="api" gaoliang="peizhi" biaoji="4" :peizhi="false" />
 
-Este es el proveedor de API personalizada predeterminado.
+### A2. Pegar tu clave de Anthropic
 
-A diferencia de los proveedores fijos, **OpenAI-Compatible** te permite configurar manualmente tus propios datos de conexión.
+La configuración tiene un único campo: la clave API.
 
-Puedes establecer información como:
+1. Haz clic en la tarjeta **Get your API Key**. Se abre la Anthropic Console (`console.anthropic.com/settings/keys`) en tu navegador.
+2. Crea una clave y cópiala. Tiene este aspecto: `sk-ant-api03-...`.
+3. Pégala en el campo. El icono del ojo la muestra u oculta.
 
-- Apodo del proveedor
-- Base URL
-- API key
-- Protocol
-- Endpoint preset
-- Model name
-- Custom headers
+<BzMoxingye fenlei="api" gaoliang="miyao" biaoji="1" :xuanzeqi="false" :yetou="false" />
 
-Esto resulta adecuado para puertas de enlace personalizadas, plataformas de API de terceros, servicios proxy o proveedores de modelos compatibles con OpenAI.
+Breezell limpia la clave antes de usarla: quita los espacios, las comillas que la rodean, un `Bearer ` inicial y los caracteres invisibles que suelen colarse al copiar. El proveedor Anthropic no tiene campo de URL base; Breezell siempre usa `https://api.anthropic.com`.
 
-![OpenAI-Compatible en la sección Providers](/custom-api/providers-section.png)
+### A3. Activar los modelos Claude que quieras
 
-## Abrir el panel de configuración de la API personalizada
+En cuanto se guarda la clave, el estado cambia a <BzWenben jian="box.models.configured" /> y la lista muestra los modelos Claude integrados en Breezell, del más reciente al más antiguo.
 
-En la sección **OpenAI-Compatible**, busca el slot predeterminado.
+Solo los cinco primeros vienen habilitados: `claude-fable-5-1`, `claude-fable-5`, `claude-opus-5`, `claude-opus-5-5` y `claude-opus-4-8`. Activa el interruptor al final de una fila para añadir un modelo al selector de modelos del chat; por ejemplo, `claude-sonnet-5-5` y `claude-haiku-5-5`.
 
-Puede aparecer como **OpenAI-Compatible 1**.
+<BzMoxingye fenlei="api" yipeizhi gaoliang="kaiguan" :xuanzeqi="false" :peizhi="false" :yetou="false" :dakai="['claude-sonnet-5-5', 'claude-haiku-5-5']" />
 
-Puedes hacer clic en el área del slot o en **Manage slots**, en la parte derecha.
+Cómo leer la tabla:
 
-![Entrada de slot de OpenAI-Compatible con el slot predeterminado y la acción Manage slots](/custom-api/open-slot-entry.png)
+| Columna | Significado |
+| --- | --- |
+| <BzWenben jian="box.usage.colModel" /> | El ID del modelo que se envía a la API. Un punto verde indica que el modelo está habilitado. |
+| <BzWenben jian="box.models.context" /> | La ventana de contexto completa del modelo. Todos los modelos Claude 5 tienen 1M. |
+| <BzWenben jian="box.models.capabilities" /> | Cuatro iconos: <BzWenben jian="box.models.filter.vision" />, <BzWenben jian="box.models.filter.tools" />, <BzWenben jian="box.models.filter.reasoning" />, <BzWenben jian="box.models.filter.web" />. Un icono iluminado indica que el modelo tiene esa capacidad. |
+| <BzWenben jian="models.pricing" /> | Precio de entrada / salida en USD <BzWenben jian="box.models.price" />, según el catálogo integrado de Breezell. La factura de Anthropic es la que manda. |
+| <BzWenben jian="box.mcp.colEnabled" /> | Muestra u oculta el modelo en el selector de modelos del chat. |
 
-Esto abrirá el panel de configuración de la API personalizada.
+Cuando la tabla se estrecha, Breezell oculta primero la columna <BzWenben jian="box.models.context" /> y después <BzWenben jian="box.models.capabilities" />; sus valores pasan a la información emergente del nombre del modelo.
 
-Dentro de este panel puedes configurar la conexión, la autenticación, el protocolo, el endpoint y los modelos disponibles de tu proveedor de API personalizada.
+Si Anthropic lanza un modelo que aún no está en la lista, haz clic en <BzWenben jian="box.models.fetch" />. Breezell consulta `https://api.anthropic.com/v1/models` con tu clave y te permite añadir los nuevos ID. También puedes escribir un ID en el campo <BzWenben jian="box.models.addModelPlaceholder" /> y hacer clic en <BzWenben jian="box.models.add" />.
 
-![Panel de configuración del proveedor OpenAI-Compatible con ajustes de conexión y modelos](/custom-api/custom-api-panel-current.png)
+La ruta A está lista. Continúa con [Usar Claude en el chat](#use-claude-in-chat).
 
-## Gestionar los slots del proveedor
+## Ruta B: Una ranura compatible con el protocolo Anthropic
 
-En la esquina superior izquierda del panel **OpenAI-Compatible Providers** verás un selector **Available**.
+Usa esta ruta con un relay, una pasarela de API o un proxy autoalojado que sirva Claude a través de la API Anthropic Messages.
 
-Este selector muestra los slots de API personalizada disponibles.
+### B1. Abrir una ranura compatible
 
-Breezell admite hasta **50 slots de proveedores OpenAI-Compatible**. Cada slot se puede configurar como un canal de API personalizada independiente.
+1. Haz clic en <BzWenben jian="box.models.group.compat" />.
+2. Haz clic en la tarjeta de la ranura. Slot 1 siempre está disponible; una ranura nueva muestra <BzWenben jian="settings.noEndpoint" /> bajo su nombre.
+3. Para mantener separados varios relays, haz clic en <BzWenben jian="box.models.addCompat" /> una vez por cada uno. Breezell tiene 50 ranuras, y cada una es un canal independiente con su propia dirección, clave, protocolo y modelos.
+4. Haz clic en <BzWenben jian="box.models.editConfig" />.
 
-Por ejemplo, puedes utilizar distintos slots para diferentes proveedores, puertas de enlace, claves de API o grupos de modelos.
+<BzMoxingye fenlei="compat" tigongshang="compat" nicheng="" moxing="kong" gaoliang="xinzeng" biaoji="3" :peizhi="false" />
 
-Haz clic en el selector **Available** para abrir la lista de slots.
+### B2. Rellenar la ranura
 
-![Selector Available que muestra slots de API personalizada del 1 al 50](/custom-api/provider-slots-current.png)
+El formulario es el mismo para todas las ranuras. Pruébalo aquí abajo: cambia la URL base o el protocolo y observa cómo se actualiza <BzWenben jian="settings.requestUrl" />, exactamente igual que en Breezell.
 
-Verás slots numerados del **1** al **50**.
+<BzJianrongpeizhi duli />
 
-Si estás configurando **Slot 1**, puedes seleccionar **Slot 2** para configurar otro canal de API personalizada.
+**<BzWenben jian="settings.sectionConnection" />**
 
-Después de seleccionar otro slot, el panel de configuración cambiará a ese slot. Entonces podrás introducir otro nombre de proveedor, Base URL, API key, protocolo, endpoint y lista de modelos para el nuevo canal.
+- <BzWenben jian="settings.nickname" />: un nombre de hasta 30 caracteres, como `Claude Relay`. Se usa como título de la tarjeta en la página de modelos y como nombre del grupo en el selector de modelos del chat.
+- <BzWenben jian="settings.baseUrl" />: la dirección que te da tu proveedor. Debe empezar por `http://` o `https://`; por ejemplo, `https://relay.example.com` o `http://127.0.0.1:8080`.
 
-## Configurar la conexión
+**<BzWenben jian="settings.sectionAuthentication" />**
 
-Vuelve al panel de configuración principal.
+- <BzWenben jian="settings.apiKey" />: la clave del relay. Aparece enmascarada; el icono del ojo la muestra.
 
-En la sección **Connection** puedes configurar la información básica de conexión de este proveedor de API personalizada.
+**<BzWenben jian="settings.sectionProtocol" />**
 
-![Sección Connection de un proveedor de API personalizada con apodo, Base URL, API key, protocolo y modelos](/custom-api/configure-connection-current.png)
+Elige **Anthropic**. Los tres botones determinan el formato de la solicitud:
 
-Puedes establecer:
+| Botón | Formato de la solicitud | ¿Para Claude? |
+| --- | --- | --- |
+| OpenAI | OpenAI Chat Completions | Solo si el relay no tiene `/v1/messages` (ruta C). |
+| Responses | OpenAI Responses | No. Está pensado para modelos GPT. |
+| **Anthropic** | Anthropic Messages | **Sí.** Breezell lo recomienda para Claude. |
 
-- Nickname
-- Base URL
-- API Key
-- Protocol
-- Endpoint preset
-- Custom headers
-- Model names
+Después revisa <BzWenben jian="settings.endpointPreset" />. Con el protocolo Anthropic hay dos preajustes:
 
-**Nickname** se utiliza para identificar este proveedor personalizado. Puedes introducir el nombre del proveedor, el nombre de la puerta de enlace o cualquier etiqueta que te ayude a reconocer este canal.
+| Preajuste | Ruta | Úsalo para |
+| --- | --- | --- |
+| <BzWenben jian="settings.endpointPreset.anthropicMessages" /> | `/v1/messages` | Casi todos los relays. Quédate con este. |
+| <BzWenben jian="settings.endpointPreset.volcengineAgentPlan" /> | `/api/plan/v1/messages` | Solo Volcengine Agent Plan. |
 
-**Base URL** es la dirección de la puerta de enlace de la API.
+### B3. Comprobar la URL de la solicitud
 
-La Base URL debe comenzar por una de estas opciones:
+<BzWenben jian="settings.requestUrl" />, debajo del preajuste, es la dirección exacta a la que llamará Breezell. Breezell une la URL base con la ruta del preajuste y elimina la parte duplicada, así que funcionan los dos estilos habituales de URL base:
 
-```text
-http://
-```
+| URL base que introduces | Preajuste | URL de la solicitud |
+| --- | --- | --- |
+| `https://relay.example.com` | `/v1/messages` | `https://relay.example.com/v1/messages` |
+| `https://relay.example.com/v1` | `/v1/messages` | `https://relay.example.com/v1/messages` |
+| `https://relay.example.com/v1/messages` | `/v1/messages` | `https://relay.example.com/v1/messages` |
+| `https://relay.example.com/claude` | `/v1/messages` | `https://relay.example.com/claude/v1/messages` |
 
-o:
+Compara el resultado con la documentación de tu proveedor. Si el proveedor ofrece su API en una ruta poco habitual, introduce la URL base de forma que la URL de la solicitud termine exactamente donde indica el proveedor.
 
-```text
-https://
-```
+### B4. Cabeceras personalizadas y Claude 1M (opcional)
 
-Por ejemplo:
+El campo <BzWenben jian="settings.customHeaders" /> añade cabeceras HTTP a todas las solicitudes de esta ranura. Déjalo en `{}` salvo que tu proveedor te pida algo.
 
-```text
-https://api.example.com/v1
-```
-
-o:
-
-```text
-http://127.0.0.1
-```
-
-Si la Base URL no comienza por `http://` o `https://`, la solicitud puede fallar.
-
-## Comprobar la URL de solicitud final
-
-Después de introducir la Base URL y seleccionar el preajuste del endpoint, comprueba la **Request URL** que aparece debajo de la sección del protocolo.
-
-Esta zona muestra la dirección final que utilizará Breezell para la solicitud.
-
-Por ejemplo, si tu Base URL es:
-
-```text
-http://127.0.0.1
-```
-
-y el preajuste del endpoint es **OpenAI Generic**, Breezell puede generar:
-
-```text
-http://127.0.0.1/v1/chat/completions
-```
-
-Debes confirmar cuidadosamente que la Request URL final sea correcta.
-
-Esto es importante porque distintos proveedores pueden definir sus URL de puerta de enlace de forma diferente.
-
-Algunos proveedores requieren que la Base URL incluya `/v1`, mientras que otros solo requieren el dominio raíz.
-
-Por ejemplo, un proveedor puede requerir:
-
-```text
-https://api.example.com/v1
-```
-
-mientras que otro puede requerir:
-
-```text
-https://api.example.com
-```
-
-Si el proveedor utiliza un formato de puerta de enlace no estándar, la finalización automática del endpoint puede no funcionar correctamente.
-
-Esto puede provocar que la ruta de solicitud final, como `/v1/chat/completions`, se duplique, falte o se combine de forma incorrecta.
-
-Antes de guardar o utilizar el proveedor, comprueba siempre la **Request URL** generada y asegúrate de que coincide con la documentación de API de tu proveedor.
-
-![Vista previa de Request URL bajo la sección del protocolo para un proveedor OpenAI-Compatible](/custom-api/request-url-current.png)
-
-## Seleccionar el protocolo de solicitud
-
-En la sección **Protocol**, elige el protocolo de solicitud que coincida con tu proveedor.
-
-Las opciones habituales incluyen:
-
-- OpenAI
-- Responses
-- Anthropic
-
-Para la mayoría de las API de terceros compatibles con OpenAI, selecciona **OpenAI**.
-
-Si tu proveedor utiliza la Responses API de OpenAI, selecciona **Responses**.
-
-Si tu proveedor o puerta de enlace espera solicitudes compatibles con Anthropic, selecciona **Anthropic**.
-
-Elige el protocolo según el formato de API que requiera tu proveedor. Si el protocolo no coincide con el proveedor, las solicitudes pueden fallar aunque la Base URL y la API key sean correctas.
-
-## Elegir el preajuste del endpoint
-
-La selección del protocolo es muy importante porque determina si el modelo se puede solicitar correctamente.
-
-Aunque un proveedor indique que es compatible con la API de OpenAI, la ruta de solicitud real puede ser diferente de la especificación oficial de la API de OpenAI.
-
-Algunos proveedores modifican la estructura estándar del endpoint. Breezell ha adaptado muchas de estas variantes específicas de cada proveedor.
-
-Haz clic en el menú desplegable del preajuste del endpoint para ver los preajustes disponibles.
-
-![Menú desplegable Endpoint preset con opciones de rutas de solicitud específicas del proveedor](/custom-api/endpoint-preset-current.png)
-
-Es posible que veas opciones como:
-
-- OpenAI Generic
-- Zhipu GLM
-- Volcengine Ark
-- Volcengine Coding
-- DashScope Qwen
-- DeepSeek
-- Images
-
-Cada preajuste representa una ruta de solicitud diferente.
-
-Por ejemplo, **OpenAI Generic** puede utilizar:
-
-```text
-/v1/chat/completions
-```
-
-Otros proveedores pueden utilizar rutas de endpoint diferentes, como:
-
-```text
-/api/paas/v4/chat/completions
-```
-
-```text
-/api/v3/chat/completions
-```
-
-```text
-/compatible-mode/v1/chat/completions
-```
-
-```text
-/chat/completions
-```
-
-Selecciona el preajuste de endpoint que coincida con tu proveedor.
-
-Si no sabes qué preajuste utilizar, consulta la documentación de API de tu proveedor y compara la **Request URL** final que se muestra en Breezell.
-
-Si tu proveedor utiliza un formato que Breezell todavía no ha adaptado, ponte en contacto con nosotros para que podamos añadir compatibilidad con él.
-
-## Configurar encabezados personalizados
-
-La sección **Custom Headers** es opcional.
-
-Utiliza esta sección solo cuando tu proveedor, puerta de enlace o servicio proxy requiera encabezados HTTP adicionales.
-
-Los encabezados personalizados se añaden a todas las solicitudes enviadas a través del slot de API personalizada actual.
-
-El valor debe ser JSON válido.
-
-![Campo Custom Headers con un ejemplo JSON y accesos directos de preajustes](/custom-api/custom-headers-current.png)
-
-Por ejemplo:
+El valor debe ser JSON válido: comillas dobles en claves y valores, sin comentarios y sin comas finales.
 
 ```json
 {
-  "X-Custom-Header": "value"
+  "anthropic-beta": "context-1m-2025-08-07"
 }
 ```
 
-Puedes utilizar encabezados personalizados para requisitos específicos del proveedor, como:
+El botón **Claude 1M** rellena exactamente esta cabecera. Úsalo cuando tu relay necesite la cabecera beta para aceptar prompts de más de 200K. Aun así, el chat de Breezell empieza cada modelo Claude en 200K; el cambio a 1M se hace por modelo en el selector de modelos del chat (consulta [Context, Reasoning y Fast](#context-reasoning-and-fast)).
 
-- Encabezados de enrutamiento especiales
-- Encabezados de organización o proyecto
-- Encabezados de autenticación del proxy
-- Encabezados de funciones beta
-- Encabezados de funciones de contexto largo
+Debajo de las cabeceras verás la tarjeta <BzWenben jian="settings.accountPool" />. Un grupo de cuentas va rotando varias claves o rutas en una misma ranura. No lo necesitas para una primera configuración.
 
-Si tu proveedor no requiere encabezados personalizados, puedes dejar esta sección vacía o mantenerla como un objeto JSON vacío.
+### B5. Añadir modelos Claude
 
-```json
-{}
-```
+Una ranura nueva no tiene modelos. Puedes añadirlos de dos formas.
 
-Asegúrate de que el formato JSON sea válido.
+**Obtener la lista.** Haz clic en <BzWenben jian="box.models.fetch" />. Breezell pregunta al relay qué modelos tiene y los muestra en una lista de casillas. Marca los modelos Claude y haz clic en <BzWenben jian="box.models.addSelected" />.
 
-Utiliza comillas dobles tanto para las claves como para los valores. No utilices comentarios, comas finales ni comillas simples.
+<BzMoxingye fenlei="compat" tigongshang="compat" yipeizhi moxing="kong" quede gaoliang="quedeliebiao" biaoji="2" :xuanzeqi="false" :peizhi="false" :yetou="false" />
 
-Ejemplo correcto:
+**Escribir el ID.** Escribe el ID del modelo en el campo <BzWenben jian="box.models.addModelPlaceholder" /> y haz clic en <BzWenben jian="box.models.add" />. Usa el ID exactamente como lo nombra el relay; por ejemplo, `claude-opus-5-5`. Es la opción adecuada cuando el relay no ofrece una lista de modelos.
 
-```json
-{
-  "X-Provider-Mode": "compatible"
-}
-```
+### B6. Comprobar la ranura
 
-Ejemplo incorrecto:
+Haz clic en <BzWenben jian="box.models.health.checkSlot" /> para enviar una solicitud corta a esta ranura. Un modelo que falla recibe la etiqueta <BzWenben jian="box.models.health.ribbonFail" /> y uno lento, <BzWenben jian="box.models.health.ribbonTimeout" />; una ranura a la que no se puede llegar en absoluto aparece marcada como <BzWenben jian="box.models.health.ribbonDown" /> en su tarjeta.
 
-```json
-{
-  'X-Provider-Mode': 'compatible',
-}
-```
+<BzMoxingye fenlei="compat" tigongshang="compat" yipeizhi moxing="jianrong" gaoliang="jiance" biaoji="1" :xuanzeqi="false" :peizhi="false" :yetou="false" />
 
-Debajo del campo de encabezados personalizados, Breezell puede ofrecer accesos directos de preajustes.
+Para un análisis más detallado, haz clic en <BzWenben jian="box.models.checkConnectivity" />, encima de las tarjetas de las ranuras. Comprueba varias ranuras y modelos a la vez, y <BzWenben jian="box.models.health.checkStreaming" /> te indica si un relay transmite las respuestas por partes (<BzWenben jian="box.models.health.stream.streaming" />), retiene el razonamiento (<BzWenben jian="box.models.health.stream.heldThinking" />) o lo envía todo al final (<BzWenben jian="box.models.health.stream.buffered" />).
 
-Por ejemplo, el preajuste **Claude 1M** puede rellenar automáticamente el encabezado necesario para activar la compatibilidad con el contexto de Claude 1M.
+## Ruta C: Una ranura compatible con el protocolo OpenAI
 
-Si la documentación de tu proveedor requiere un encabezado específico, cópialo en esta sección y confirma que sea JSON válido antes de enviar solicitudes.
+Algunos relays solo sirven Claude a través del formato OpenAI Chat Completions. Configura la ranura como en la ruta B, con estas diferencias:
 
-## Obtener y añadir modelos disponibles
+1. En <BzWenben jian="settings.sectionProtocol" />, elige **OpenAI**.
+2. Mantén el preajuste <BzWenben jian="settings.endpointPreset.openaiSiliconFlowChat" /> (`/v1/chat/completions`).
+3. Añade los modelos con los ID que usa el relay. Muchos relays usan `claude-opus-5-5`; algunos anteponen el nombre del fabricante, como `anthropic/claude-opus-5-5`.
 
-Cuando termines de configurar la información de conexión, haz clic en **Fetch Available Models**, en la parte derecha del panel.
+<BzJianrongpeizhi duli xieyi="openai" jichudizhi="https://relay.example.com/v1" :zhanshizhanghaochi="false" />
 
-Breezell intentará solicitar información al proveedor y cargar la lista de modelos disponibles.
+Breezell reconoce los modelos Claude por su nombre, así que `anthropic/claude-opus-5-5` o `claude-opus-5.5` reciben los mismos límites que `claude-opus-5-5`. Fíjate en lo que dice el propio formulario: <BzWenben jian="settings.apiFormat.openaiTip3" />. Además, con el protocolo OpenAI Breezell no puede ofrecer **Fast** para Claude Opus. Si tu relay también ofrece `/v1/messages`, cambia la ranura a **Anthropic**.
 
-Si la solicitud tiene éxito, los modelos disponibles aparecerán en la lista de selección de modelos.
+## Gestionar tus modelos Claude
 
-![Botón Fetch Available Models con modelos disponibles cargados en la lista de selección](/custom-api/fetch-available-models-current.png)
+### El menú de la fila
 
-Después de confirmar que la configuración del proveedor es correcta, puedes hacer clic en este botón para obtener y seleccionar tus propios modelos.
+Cada fila de modelo tiene un botón **⋯**. Para un modelo Claude en una ranura compatible, ofrece <BzWenben jian="box.models.pin" />, <BzWenben jian="box.models.advanced" /> y <BzWenben jian="box.models.remove" />. Pasa el cursor sobre una fila para que aparezca el icono de copiar junto al nombre del modelo.
 
-A continuación, selecciona los modelos que quieras utilizar y haz clic en **Add 1 Model**.
+<BzMoxingye fenlei="compat" tigongshang="compat" yipeizhi moxing="jianrong" caidan gaoliang="gengduo" biaoji="1" :xuanzeqi="false" :peizhi="false" :yetou="false" />
 
-Por ejemplo, puedes seleccionar un modelo como:
+### Definir el precio
 
-```text
-gpt-5.5
-```
+Breezell conoce los precios de lista de la propia API de Anthropic, pero no los de tu relay. En una ranura compatible, la columna de precio muestra <BzWenben jian="box.models.editPrice" />. Haz clic ahí e introduce los precios de tu relay en USD por 1M de tokens: entrada, salida, acierto de caché y las escrituras de caché de 5 minutos y de 1 hora que usa Claude. A partir de entonces, la vista <BzWenben jian="box.usage.tab.tokens" /> muestra los costes además de los tokens. Sin precio, Breezell sigue contando tokens, pero no dinero.
 
-Después haz clic en **Add 1 Model** para añadirlo al proveedor de API personalizada actual.
+### Ajustes avanzados
 
-Si el área izquierda sigue vacía en este paso, reinicia Breezell y vuelve a intentarlo.
+Breezell reconoce todos los ID de modelos Claude de esta guía y rellena sus límites por ti, así que la mayoría de la gente nunca abre este cuadro de diálogo. Ábrelo cuando el relay cambie el nombre de un modelo (por ejemplo, `my-claude`), cuando Breezell muestre el modelo como no reconocido o cuando el relay imponga límites más bajos.
 
-![Área izquierda aún vacía después de obtener los modelos disponibles](/custom-api/fetch-results-empty.png)
+Primero activa el interruptor <BzWenben jian="models.enableCustomSettings" />; hasta entonces, todas las tarjetas se quedan en gris y en solo lectura.
 
-También puedes utilizar **Check All** para comprobar si la conexión con la puerta de enlace está funcionando correctamente después de configurar el proveedor e intentar cargar los modelos.
+<BzGaoji />
 
-![Botón Check All para comprobar la salud del proveedor y de la puerta de enlace](/custom-api/check-gateway-health-button.png)
+Los valores que usa Breezell para los modelos Claude 5:
 
-Si la comprobación tiene éxito, la tarjeta de conexión puede mostrar un estado como **Healthy**. También puedes utilizar **Recheck** para volver a comprobar la puerta de enlace después de cambiar la configuración.
+| Ajuste | `claude-fable-5-1` | `claude-opus-5-5` | `claude-sonnet-5-5` | `claude-haiku-5-5` |
+| --- | --- | --- | --- | --- |
+| Ventana de contexto (corta / larga) | 200K / 1M | 200K / 1M | 200K / 1M | 200K / 1M |
+| <BzWenben jian="models.outputTokenSpace" /> | 16384 | 16384 | 16384 | 16384 |
+| <BzWenben jian="models.reasoningOutputReserve" /> | 64000 | 64000 | 64000 | 64000 |
+| <BzWenben jian="models.canTurnOff" /> | Desactivado | Desactivado | Desactivado | **Activado** |
+| <BzWenben jian="models.reasoningEffortDefault" /> | High | Medium | High | Medium |
+| <BzWenben jian="models.supportsFast" /> | Desactivado | **Activado** | Desactivado | Desactivado |
+| <BzWenben jian="models.systemMessage" /> | system-role | system-role | system-role | system-role |
+| <BzWenben jian="models.toolFormat" /> | Anthropic Style | Anthropic Style | Anthropic Style | Anthropic Style |
 
-![Tarjeta de conexión que muestra un estado saludable de la puerta de enlace tras una comprobación correcta](/custom-api/check-gateway-health-result.png)
+La tabla corresponde a una ranura compatible con el protocolo Anthropic. En el proveedor Anthropic (ruta A), el mensaje de sistema es `separated`; ambos funcionan con Claude. **Fast** solo se ofrece en el proveedor Anthropic y en las ranuras con el protocolo Anthropic.
 
-## Añadir un modelo manualmente
+Los campos que aceptan cantidades de tokens admiten el sufijo `k` o `m`: `128k` se convierte en `128000` y `1m`, en `1000000`. No pongas un tamaño de contexto o de salida mayor del que permite tu relay, o las solicitudes fallarán.
 
-También puedes añadir un modelo manualmente.
+En una ranura con el protocolo **OpenAI**, <BzWenben jian="models.systemMessage" /> ofrece `system-role` o `developer-role`, y <BzWenben jian="models.toolFormat" /> ofrece `OpenAI Style` o `None (XML)`. Mantén `OpenAI Style` para Claude para que funcionen las llamadas a herramientas.
 
-En el campo de entrada del modelo, introduce el nombre del modelo proporcionado por tu proveedor de API.
+## Usar Claude en el chat {#use-claude-in-chat}
 
-Después, haz clic en **Add**.
+### Elegir el modelo
 
-Esto resulta útil cuando el proveedor no expone un endpoint de lista de modelos o cuando el modelo que quieres utilizar no aparece en **Fetch Available Models**.
+El chat sigue abierto junto a Box; haz clic en **Agent** en la barra de título si también quieres recuperar el editor. Debajo del cuadro de entrada del chat, haz clic en el nombre del modelo para abrir el selector de modelos.
 
-Asegúrate de que el nombre del modelo sea exactamente igual al ID de modelo que requiere tu proveedor.
+- La pestaña <BzWenben jian="box.models.group.api" /> muestra los modelos Claude que habilitaste en el proveedor Anthropic (ruta A), con su precio de lista.
+- Cambia a **OpenAI-Compatible**, en la parte inferior del selector, para ver las ranuras compatibles (rutas B y C). Cada ranura es un grupo que lleva su alias como título.
 
-![Campo de entrada manual de modelo con el botón Add](/custom-api/manual-model-add-current.png)
+<BzLiaotian xuanzeqi="api" gaoliang="hang" moxing="claude-opus-5-5" />
 
-## Activar, desactivar o eliminar un modelo
+<BzLiaotian xuanzeqi="compat" gaoliang="fenye" biaoji="1" moxing="claude-opus-5-5" />
 
-Después de añadir modelos, aparecerán en la lista **Models**.
+### Context, Reasoning y Fast {#context-reasoning-and-fast}
 
-Cada elemento de modelo se puede gestionar individualmente.
+Pasa el cursor sobre un modelo del selector para abrir sus opciones. Este panel es interactivo: pruébalo.
 
-Puedes utilizar el interruptor situado a la derecha del modelo para activarlo o desactivarlo.
+<BzLiaotian xuanzeqi="compat" xuanxiang moxing="claude-opus-5-5" />
 
-Cuando un modelo está activado, Breezell puede utilizarlo para las solicitudes.
+- **Context**: `200K` (marcado como <BzWenben jian="inputToolbar.contextDefault" />) o `1M`. Breezell empieza todos los modelos Claude en 200K y solo envía el presupuesto mayor después de que elijas `1M`.
+- **Reasoning**: Claude Fable, Opus y Sonnet 5.x siempre razonan, así que el interruptor está bloqueado en activado. `claude-haiku-5-5` te permite desactivarlo para obtener respuestas rápidas.
+- **Effort**: `Low`, `Medium`, `High`, `Extra High` y `Max`, de **Faster** a **Smarter**. El control deslizante se vuelve morado en `Max`.
+- **Fast**: solo en `claude-opus-5-5` (y en Opus 5 / Opus 4.8). Cuesta 2× y responde unas 2.5× más rápido.
 
-Cuando un modelo está desactivado, Breezell conserva la configuración, pero no utiliza ese modelo.
+Tu elección aparece junto al nombre del modelo, debajo del cuadro de entrada; por ejemplo, `claude-opus-5-5 200K Medium` o `claude-opus-5-5 1M High Fast`. Se recuerda para cada modelo.
 
-Pasa el ratón sobre un elemento de modelo para mostrar más acciones.
+### Enviar un mensaje
 
-Puedes eliminar un modelo haciendo clic en el botón de eliminar.
+Escribe un mensaje y envíalo. Si todo está bien configurado, la respuesta llega a través de tu propia clave.
 
-Utiliza esta opción cuando ya no quieras que el modelo aparezca en el proveedor actual.
+<BzLiaotian moxing="claude-opus-5-5" wen="¡Hola! ¿Qué modelo eres?" da="¡Hola! Soy Claude Opus 5.5 y estoy funcionando en Breezell con tu propia clave API. ¿Qué vamos a construir hoy?" />
 
-![Lista de modelos con controles para activar, desactivar, configurar y eliminar](/custom-api/model-management-current.png)
+Ya has completado la configuración BYOK.
 
-## Abrir la configuración avanzada del modelo
+## Qué modelo Claude usar
 
-Si quieres configurar un comportamiento más detallado para un modelo, haz clic en el botón de configuración del elemento de modelo.
+| ID del modelo | Contexto | Precio entrada / salida (por 1M de tokens) | Intensidad predeterminada | Razonamiento desactivable | Fast | Ideal para |
+| --- | --- | --- | --- | --- | --- | --- |
+| `claude-fable-5-1` | 1M | $10 / $50 | High | No | No | Los problemas más difíciles y las refactorizaciones largas |
+| `claude-opus-5-5` | 1M | $4 / $20 | Medium | No | Sí (2×) | El trabajo diario con el agente: la opción por defecto |
+| `claude-sonnet-5-5` | 1M | $2 / $10 | High | No | No | Equilibrio entre velocidad y coste |
+| `claude-haiku-5-5` | 1M | $0.10 / $0.50 | Medium | Sí | No | Preguntas rápidas y pequeñas ediciones |
 
-Esto abre el panel **Advanced Settings**.
+Los precios son los de lista del catálogo integrado de Breezell para la API de Anthropic. Cada relay fija sus propios precios. Los prompts de `claude-haiku-5-5` de más de 100K tokens se facturan a 5× la tarifa.
 
-La configuración avanzada es opcional. La mayoría de los usuarios no necesitan cambiarla a menos que conozcan los límites del modelo y el formato de solicitud requerido por su proveedor.
+## Solución de problemas
 
-## Advanced Settings
+| Lo que ves | Qué significa | Qué hacer |
+| --- | --- | --- |
+| <BzWenben jian="box.models.gate.planRequired" /> | Tu plan no incluye proveedores personalizados. | Cambia al plan Custom API o superior. |
+| <BzWenben jian="box.models.fetchNeedsEndpoint" /> | La ranura aún no tiene URL base. | Rellena <BzWenben jian="settings.baseUrl" />. |
+| <BzWenben jian="box.models.fetchNeedsKey" /> | El campo de la clave está vacío. | Pega la clave. |
+| <BzWenben jian="box.models.fetchAuthFailed" /> | El proveedor devolvió 401 / 403. | Vuelve a copiar la clave, comprueba que corresponde a este proveedor y revisa su plan y su lista blanca de IP. |
+| <BzWenben jian="box.models.fetchFailed" /> … | El relay no tiene lista de modelos o la dirección es incorrecta. | Revisa <BzWenben jian="settings.requestUrl" /> o añade los ID de los modelos a mano. |
+| <BzWenben jian="box.models.fetchAlreadyHaveAll" /> | Todos los modelos que devolvió el relay ya están en la ranura. | No tienes que hacer nada. |
+| <BzWenben jian="box.models.health.errTimeout" /> | La solicitud agotó el tiempo de espera. | Revisa la dirección, tu proxy y la ruta de red. |
+| <BzWenben jian="box.models.health.errConnect" /> | No se pudo llegar al host. | Revisa la dirección, el DNS y el proxy. |
+| <BzWenben jian="box.models.health.errHttp" /> | El relay respondió con un error HTTP. | Casi siempre se debe a una ruta o un protocolo incorrectos: compara <BzWenben jian="settings.requestUrl" /> y el protocolo con la documentación del proveedor. |
+| La URL de la solicitud contiene `/v1/v1` o le falta `/v1` | La URL base y el preajuste no encajan. | Corrige la URL base hasta que <BzWenben jian="settings.requestUrl" /> sea correcta. |
+| La respuesta aparece de golpe tras una larga espera | El relay almacena el stream en búfer. | Ejecuta <BzWenben jian="box.models.health.checkStreaming" />. Si el resultado es <BzWenben jian="box.models.health.stream.heldThinking" />, un esfuerzo de razonamiento menor acorta la espera. |
+| Fallan las solicitudes de más de 200K | El relay necesita la cabecera beta de 1M o no tiene contexto de 1M. | Pulsa **Claude 1M** en <BzWenben jian="settings.customHeaders" /> o deja el modelo en `200K`. |
+| La lista de modelos sigue vacía después de obtenerla | La lista no se cargó. | Reinicia Breezell y vuelve a obtenerla, o añade los ID a mano. |
 
-En el panel de configuración avanzada puedes personalizar el comportamiento a nivel de modelo.
+## Preguntas frecuentes
 
-![Panel Advanced Settings de un modelo de API personalizada](/custom-api/advanced-settings-original.png)
+**¿Puedo usar la clave oficial de Anthropic y un relay a la vez?**
+Sí. La ruta A y cada ranura compatible son independientes. El selector de modelos del chat los muestra uno junto al otro y puedes cambiar de uno a otro en cada conversación.
 
-### Activar la configuración personalizada
+**¿Puedo guardar varios relays y claves?**
+Sí. Usa una ranura por relay (hasta 50). Para rotar varias claves en el mismo relay, usa el <BzWenben jian="settings.accountPool" /> de esa ranura. La sección <BzWenben jian="box.vault.group" /> de la barra lateral de Box guarda las direcciones y claves de tus relays en el llavero del sistema y puede rellenar una ranura por ti.
 
-El interruptor **Enable custom settings** controla si este modelo utiliza su propia configuración avanzada.
-
-Si el interruptor está desactivado, Breezell utilizará la configuración predeterminada reconocida para el modelo.
-
-Si el interruptor está activado, los valores del panel de configuración avanzada anularán el comportamiento predeterminado de este modelo.
-
-### Context Window
-
-**Context Window** define la longitud máxima de contexto que admite el modelo.
-
-Normalmente significa el número máximo de tokens que el modelo puede procesar en una solicitud, incluido el historial de conversación, los mensajes del sistema, los mensajes del usuario, los resultados de herramientas y otro contexto.
-
-Por ejemplo, un valor como:
-
-```text
-400000
-```
-
-significa que el modelo está configurado con una ventana de contexto de 400k.
-
-El campo admite la conversión automática del sufijo `k`.
-
-Por ejemplo:
-
-```text
-128k
-```
-
-se convertirá en:
-
-```text
-128000
-```
-
-Utiliza el valor proporcionado por tu proveedor de modelos. Establecer un valor demasiado alto puede provocar fallos si el modelo no lo admite realmente.
-
-### Output Token Space
-
-**Output Token Space** define el espacio máximo de tokens de salida reservado para las respuestas del modelo.
-
-Por ejemplo, un valor como:
-
-```text
-128000
-```
-
-significa que el modelo puede reservar hasta 128k tokens para la salida.
-
-También admite la conversión automática del sufijo `k`.
-
-Por ejemplo:
-
-```text
-8k
-```
-
-se convertirá en:
-
-```text
-8000
-```
-
-Utiliza un valor que coincida con el límite de salida real de tu proveedor.
-
-### System Message
-
-**System Message** controla cómo Breezell envía instrucciones de nivel de sistema al modelo.
-
-Algunos modelos esperan que el mensaje del sistema utilice el rol estándar `system`.
-
-Otros modelos pueden esperar un formato de rol diferente, como el rol `developer`.
-
-Si tu proveedor requiere un formato específico para el mensaje del sistema, selecciona aquí la opción correspondiente.
-
-Si no estás seguro, mantén la configuración predeterminada.
-
-### Tool Format
-
-**Tool Format** controla cómo se describen y se envían las herramientas al modelo.
-
-Para los modelos compatibles con OpenAI, utiliza **OpenAI Style**.
-
-Si el proveedor requiere un formato de llamada de herramientas diferente, selecciona el formato que coincida con su documentación.
-
-Una configuración incorrecta del formato de herramientas puede provocar que fallen las llamadas de herramientas.
-
-### Supports Thinking
-
-**Supports Thinking** indica si el modelo admite el modo de razonamiento o pensamiento.
-
-Actívalo solo cuando el proveedor del modelo admita esta función.
-
-### Can Disable Thinking
-
-**Can Disable Thinking** indica si Breezell puede desactivar el modo de pensamiento para este modelo.
-
-Resulta útil para modelos que admiten modos con y sin razonamiento.
-
-### Can Stream Reasoning
-
-**Can Stream Reasoning** indica si el modelo puede transmitir contenido de razonamiento durante la generación.
-
-Actívalo solo si el proveedor admite la salida de razonamiento en streaming.
-
-Si el proveedor no lo admite, activar esta opción puede provocar errores de solicitud o respuestas incompletas.
-
-## Guardar la configuración avanzada
-
-Después de cambiar la configuración avanzada, haz clic en **Save**.
-
-Si no quieres aplicar los cambios, haz clic en **Cancel** o cierra el panel.
-
-Cambia la configuración avanzada solo si conoces los valores correctos para tu modelo. Un tamaño de contexto, límite de tokens de salida, formato de mensajes, formato de herramientas o configuración de pensamiento incorrectos pueden hacer que el modelo se comporte de forma incorrecta o no responda.
-
-## Seleccionar tu modelo personalizado
-
-Después de añadir y activar tu modelo personalizado, vuelve a la interfaz de chat.
-
-Haz clic en el selector de modelos situado cerca del cuadro de entrada.
-
-En la lista de modelos verás los modelos integrados de Breezell, los modelos de Codex y tus modelos OpenAI-Compatible personalizados.
-
-Tu proveedor personalizado aparecerá en su propio grupo de proveedores. Por ejemplo, si el apodo de tu proveedor es **TEST**, los modelos que hayas añadido aparecerán en el grupo **TEST**.
-
-Selecciona el modelo que quieras utilizar.
-
-Si has añadido varios modelos, elige el que corresponda a tu tarea actual.
-
-![Selector de modelos que muestra modelos integrados y el grupo de proveedor personalizado TEST](/custom-api/select-custom-model-original.png)
-
-## Ajustar las opciones de contexto y razonamiento
-
-Después de seleccionar un modelo, puedes abrir el panel de opciones del modelo.
-
-En este panel pueden aparecer opciones como:
-
-- Context size
-- Reasoning mode
-- Reasoning strength
-- Fast mode
-
-La opción **Context** controla cuánta información del historial de conversación o del contexto de entrada puede utilizar el modelo.
-
-La opción **Reasoning** controla si está activado el modo de razonamiento.
-
-Si el razonamiento está activado, puedes elegir su intensidad, por ejemplo:
-
-- Low
-- Medium
-- High
-- Extra High
-
-Una intensidad de razonamiento mayor puede ser útil para tareas complejas de programación, planificación, depuración o análisis.
-
-Una intensidad menor puede ser mejor para preguntas sencillas o respuestas más rápidas.
-
-Si el modelo admite el modo **Fast**, puedes activarlo para priorizar la velocidad de respuesta.
-
-Las opciones disponibles pueden variar según el modelo y el proveedor seleccionados.
-
-![Panel de opciones del modelo con ajustes de contexto y razonamiento](/custom-api/model-options-original.png)
-
-## Iniciar una conversación
-
-Después de seleccionar el modelo y ajustar las opciones, escribe tu mensaje en el cuadro de entrada.
-
-Después, envía el mensaje para iniciar una conversación.
-
-Por ejemplo, puedes introducir:
-
-```text
-Hello
-```
-
-Si la API personalizada está configurada correctamente, Breezell enviará la solicitud a través de tu proveedor personalizado y devolverá la respuesta del modelo en el chat.
-
-Ya has completado la configuración de la API personalizada.
-
-![Vista del chat después de enviar un mensaje mediante el modelo personalizado](/custom-api/start-conversation-original.png)
+**¿Quién me cobra?**
+El proveedor cuya clave usas. Breezell no descuenta estas solicitudes de tu cuota de Breezell. La vista <BzWenben jian="box.usage.tab.tokens" /> muestra cuántos tokens has usado; define precios en las ranuras compatibles para ver también el coste.
