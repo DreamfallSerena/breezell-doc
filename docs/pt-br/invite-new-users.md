@@ -1,58 +1,81 @@
 ---
 title: Como convidar novos usuários
-description: Gere e compartilhe um link de convite do Breezell para desbloquear Entanglement e Teams.
+description: Desbloqueie Entanglement e Teams convidando cinco usuários do Breezell — gere o seu link de convite em breezell.com, compartilhe-o e acompanhe o seu progresso no editor.
 ---
 
 # Como convidar novos usuários
 
-O Breezell pode gerar um link de convite pessoal para você compartilhar com novos usuários. Quando os usuários convidados elegíveis concluírem o cadastro e aceitarem o convite, eles contarão para o progresso de desbloqueio de Entanglement e Teams.
+Entanglement e Teams estão incluídos em todos os planos pagos. No plano Free, você pode desbloqueá-los **permanentemente** quando cinco usuários do Breezell ajudarem você pelo seu link de convite pessoal.
 
-## Antes de começar
-
-Verifique se você tem uma conta do Breezell e se está conectado ao site oficial.
-
-## Abra o site e o menu do perfil
-
-1. Abra o site oficial do Breezell: [https://breezell.com](https://breezell.com).
-2. Se necessário, entre com sua conta do Breezell.
-3. Clique no avatar do seu perfil no canto superior direito.
-
-![Site do Breezell com o avatar do perfil destacado](/invitation-guide/open-profile-menu.png)
-
-## Abra a página Profile
-
-1. No menu da conta, encontre **Profile**.
-2. Clique em **Profile** para abrir sua página de perfil.
-
-![Menu da conta com Profile destacado](/invitation-guide/select-profile.png)
-
-## Gere um link de convite
-
-1. No lado esquerdo da página Profile, selecione **Account**.
-2. Encontre a seção **Unlock Entanglement and Teams Modes**.
-3. Clique em **Generate invite link**.
-
-![Página Account com o botão Generate invite link](/invitation-guide/generate-invite-link.png)
-
-::: tip Dica
-Se o status de desbloqueio não puder ser lido temporariamente, saia da conta, entre novamente e volte à página Account para verificar o status.
+::: tip Sobre as telas desta página
+As telas abaixo foram recriadas em HTML a partir do código-fonte do breezell.com e do Breezell. O site está disponível em chinês e inglês, por isso as telas dele aparecem em chinês nas páginas em chinês deste guia e em inglês em todas as outras, exatamente como no site real.
 :::
 
-## Envie o convite a um amigo
+## Antes de começar {#before}
 
-Depois que o link for gerado, o Breezell mostrará uma mensagem semelhante a esta:
+- Você precisa de uma conta Breezell. Entre em [breezell.com](https://breezell.com) com a mesma conta que você usa no editor.
+- Os amigos que ajudarem você precisam ter a própria conta Breezell. Eles podem se cadastrar ao aceitar o seu convite.
+
+## 1. Abra as configurações da sua conta {#open}
+
+Entre em [breezell.com](https://breezell.com), clique no seu avatar no canto superior direito e depois em **Profile**.
+
+<BzWangzhan ye="caidan" gaoliang="profile" biaoji="1" />
+
+Na sua conta, clique em **Settings** na barra lateral esquerda. Você também pode ir direto para lá pelo menu da conta, na parte inferior da barra lateral (**Account settings**).
+
+## 2. Gere o seu link de convite {#generate}
+
+Em Settings aparece o cartão de desbloqueio com o seu progresso. Clique no botão para gerar o seu link:
+
+<BzWangzhan ye="shezhi" :jindu="2" gaoliang="shengcheng" biaoji="2" />
+
+Assim que o link é criado, o cartão passa a exibi-lo, e os botões mudam para gerar um novo link e para copiá-lo. Experimente aqui:
+
+<BzWangzhan ye="shezhi" :jindu="2" lianjie gaoliang="fuzhi" biaoji="3" />
+
+Ao copiar, uma mensagem curta e o seu link vão para a área de transferência:
 
 ```text
-Can you help me unlock this? I'm waiting in the Breezell editor.
+"Can you help me unlock this? I'm waiting in the Breezell editor."
 https://breezell.com/mode-invite/entanglement?token=YOUR_INVITE_TOKEN
 ```
 
-O Token acima é apenas um marcador de posição. Copie a mensagem e o link completos gerados pela sua própria conta e envie-os ao seu amigo.
+O token acima é só um marcador de posição: envie o texto que a sua própria conta gerar.
 
-Seu amigo pode abrir o link, cadastrar-se ou entrar na conta e aceitar o convite. Novos usuários elegíveis contarão para o seu progresso de desbloqueio depois de concluir o fluxo de cadastro exigido.
+## 3. O seu amigo ajuda você {#assist}
 
-## Por que isso é necessário
+O seu amigo abre o link. Se ainda não tiver entrado na conta, ele primeiro entra ou se cadastra:
 
-Lamentamos que este ajuste possa causar uma experiência desagradável. O Breezell precisa de financiamento contínuo para cobrir infraestrutura, manutenção e desenvolvimento futuro.
+<BzWangzhan ye="yaoqing" zhuangtai="weidenglu" />
 
-Agradecemos seu apoio ao projeto e sua ajuda para que o Breezell continue operando de forma confiável no longo prazo.
+Depois, ele confirma com um clique:
+
+<BzWangzhan ye="yaoqing" gaoliang="zhuli" biaoji="1" />
+
+A página confirma a ajuda e mostra o seu novo progresso, por exemplo 3/5.
+
+<BzWangzhan ye="yaoqing" zhuangtai="chenggong" />
+
+### Regras da ajuda {#rules}
+
+- Cinco ajudas desbloqueiam Entanglement e Teams permanentemente na sua conta.
+- Cada conta só pode ajudar em um desbloqueio. Um amigo que já ajudou outra pessoa vê esta mensagem:
+
+<BzWangzhan ye="yaoqing" zhuangtai="yizhuli" />
+
+- Cada dispositivo só pode ser usado para uma ajuda.
+- Você não pode ajudar a si mesmo.
+- Qualquer plano pago inclui os dois modos, sem precisar de ajudas.
+
+## 4. Confira o seu progresso {#progress}
+
+O seu progresso aparece no cartão de desbloqueio em Settings e também no editor: abra o menu de modos abaixo da caixa de entrada e passe o mouse sobre Entanglement ou Teams.
+
+<BzLiaotian tanchu="moshi" moshi="agent" suoding />
+
+Quando chega a quinta ajuda, o cadeado desaparece e os dois modos podem ser escolhidos. Se o site não conseguir ler o seu status de desbloqueio, o cartão avisa e oferece um botão para tentar de novo; sair da conta e entrar novamente também ajuda.
+
+## Por que os convites {#why}
+
+O Breezell precisa de financiamento contínuo para infraestrutura, manutenção e desenvolvimento. Convidar amigos é uma forma de desbloquear os modos avançados sem um plano e, ao mesmo tempo, ajudar o Breezell a crescer. Obrigado pelo seu apoio. Para saber o que mudou na versão 1.2.8, veja [Atualização de acesso da versão 1.2.8](/version-1-2-8-access-update).
