@@ -107,13 +107,13 @@ Breezell はメモリーをルールではなくメモとして扱います。�
 
 スキルの一覧にファイルをドラッグします：<BzWenben jian="skills.dropZipPrompt" />。`.zip` には複数のスキルフォルダーをまとめて含めることができます。単一の `.md` は、ファイル名を名前とする 1 つのスキルになります。
 
-### チャットでスキルを使う
+### チャットでスキルを使う {#use-skills-in-a-chat}
 
 チャット入力欄の下の行にある **Skills** ボタン（レイヤーのアイコン）をクリックします。
 
 <BzLiaotian jinengpan gaoliang="jineng" biaoji="1" />
 
-- <BzWenben jian="skills.builtinTab" />：Breezell に付属するスキルです（`brainstorming` や `requesting-code-review` など）。これらは <BzWenben jian="box.title" /> ▸ <BzWenben jian="tab.featureOptions" /> の **Superpowers Skills** スイッチに従います。
+- <BzWenben jian="skills.builtinTab" />：Breezell に付属するスキルです（`brainstorming` や `requesting-code-review` など）。これらは <BzWenben jian="box.title" /> ▸ <BzWenben jian="tab.featureOptions" /> の **Superpowers Skills** スイッチに従います。組み込みスキルは最初はすべてオフなので、使いたいものをオンにしてください。自分で作成したスキルは最初からオンです。
 - <BzWenben jian="skills.myTab" />：ワークスペースとグローバルのスキルです。
 - スイッチでスキルのオン / オフを切り替えます。オフのスキルは AI に提示されません。
 - 矢印ボタン（<BzWenben jian="inputToolbar.referenceSkill" />）を押すとスキルがメッセージに追加され、AI はこのリクエストでそのスキルを使います。
@@ -122,7 +122,7 @@ Breezell はメモリーをルールではなくメモとして扱います。�
 
 スキルや MCP サーバーのオン / オフを切り替えるとプロンプトの先頭が変わるため、プロバイダーのプロンプトキャッシュが効かなくなることがあります。必要なものは、長い会話の途中ではなく、始める前に設定してください。
 
-## コミットメッセージ
+## コミットメッセージ {#commit-message}
 
 Commit では、Git のコミットメッセージを生成するときに、Breezell がどのように書くかを変更できます。
 

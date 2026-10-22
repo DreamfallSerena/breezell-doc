@@ -107,13 +107,13 @@ Breezell 把記憶當作筆記，而不是規則。當某條記憶與你最新�
 
 將檔案拖曳到技能清單上：<BzWenben jian="skills.dropZipPrompt" />。一個 `.zip` 可以一次包含多個技能資料夾；單個 `.md` 會成為一個以檔名命名的技能。
 
-### 在對話中使用技能
+### 在對話中使用技能 {#use-skills-in-a-chat}
 
 點選對話輸入框下方那一列中的 **Skills** 按鈕（圖層圖示）：
 
 <BzLiaotian jinengpan gaoliang="jineng" biaoji="1" />
 
-- <BzWenben jian="skills.builtinTab" />：Breezell 隨附的技能，例如 `brainstorming` 或 `requesting-code-review`。它們跟隨 <BzWenben jian="box.title" /> ▸ <BzWenben jian="tab.featureOptions" /> 中的 **Superpowers Skills** 開關。
+- <BzWenben jian="skills.builtinTab" />：Breezell 隨附的技能，例如 `brainstorming` 或 `requesting-code-review`。它們跟隨 <BzWenben jian="box.title" /> ▸ <BzWenben jian="tab.featureOptions" /> 中的 **Superpowers Skills** 開關。每個內建技能預設都是關閉的，請開啟你需要的；你自己的技能預設開啟。
 - <BzWenben jian="skills.myTab" />：你的工作區技能和全域技能。
 - 開關用來啟用或停用技能。停用的技能不會提供給 AI。
 - 箭頭按鈕（<BzWenben jian="inputToolbar.referenceSkill" />）會把技能加入你的訊息，讓 AI 在這次請求中使用它。
@@ -122,7 +122,7 @@ Breezell 把記憶當作筆記，而不是規則。當某條記憶與你最新�
 
 啟用或停用技能或 MCP 伺服器會改變提示詞的開頭，可能讓你失去提供者的提示詞快取。請在開始長對話之前設定好需要的項目，而不要在對話途中切換。
 
-## 提交訊息
+## 提交訊息 {#commit-message}
 
 Commit 會改變 Breezell 在你產生 Git 提交訊息時的寫法。
 

@@ -107,13 +107,13 @@ Breezell은 메모리를 규칙이 아닌 메모로 취급합니다. 메모리�
 
 스킬 목록에 파일을 끌어다 놓습니다: <BzWenben jian="skills.dropZipPrompt" />. `.zip` 하나에 여러 스킬 폴더를 한꺼번에 담을 수 있으며, 단일 `.md` 파일은 파일 이름을 딴 스킬 하나가 됩니다.
 
-### 채팅에서 스킬 사용하기
+### 채팅에서 스킬 사용하기 {#use-skills-in-a-chat}
 
 채팅 입력란 아래 줄에 있는 **Skills** 버튼(레이어 아이콘)을 클릭합니다.
 
 <BzLiaotian jinengpan gaoliang="jineng" biaoji="1" />
 
-- <BzWenben jian="skills.builtinTab" />: Breezell에 포함된 스킬로, `brainstorming`, `requesting-code-review` 등이 있습니다. 이 스킬들은 <BzWenben jian="box.title" /> ▸ <BzWenben jian="tab.featureOptions" />의 **Superpowers Skills** 스위치를 따릅니다.
+- <BzWenben jian="skills.builtinTab" />: Breezell에 포함된 스킬로, `brainstorming`, `requesting-code-review` 등이 있습니다. 이 스킬들은 <BzWenben jian="box.title" /> ▸ <BzWenben jian="tab.featureOptions" />의 **Superpowers Skills** 스위치를 따릅니다. 기본 제공 스킬은 처음에 모두 꺼져 있으므로 필요한 스킬을 켜세요. 직접 만든 스킬은 처음부터 켜져 있습니다.
 - <BzWenben jian="skills.myTab" />: 사용자의 워크스페이스 스킬과 전역 스킬입니다.
 - 스위치로 스킬을 켜거나 끕니다. 꺼진 스킬은 AI에 제공되지 않습니다.
 - 화살표 버튼(<BzWenben jian="inputToolbar.referenceSkill" />)은 스킬을 메시지에 추가하므로 AI가 이번 요청에 그 스킬을 사용합니다.
@@ -122,7 +122,7 @@ Breezell은 메모리를 규칙이 아닌 메모로 취급합니다. 메모리�
 
 스킬이나 MCP 서버를 켜고 끄면 프롬프트의 앞부분이 바뀌므로 공급자의 프롬프트 캐시를 잃을 수 있습니다. 대화 도중에 바꾸기보다는 긴 대화를 시작하기 전에 필요한 항목을 설정해 두세요.
 
-## 커밋 메시지
+## 커밋 메시지 {#commit-message}
 
 Commit에서는 커밋 메시지를 생성할 때 Breezell이 Git 커밋 메시지를 작성하는 방식을 바꿀 수 있습니다.
 

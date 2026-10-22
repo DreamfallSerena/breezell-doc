@@ -417,7 +417,19 @@
   "models.promptOptimizeModel.followChat": "Follow Chat model",
   "models.promptOptimizeModel.custom": "Dedicated model",
   "models.selectionAssistModel.followChat": "Follow Chat model",
-  "models.selectionAssistModel.custom": "Dedicated model"
+  "models.selectionAssistModel.custom": "Dedicated model",
+  "featureOptions.notifications.sound.bell": "Bell",
+  "featureOptions.notifications.sound.marimba": "Marimba",
+  "featureOptions.notifications.sound.success": "Success",
+  "featureOptions.notifications.sound.chord": "Chord",
+  "featureOptions.notifications.sound.chord2": "Short chord",
+  "featureOptions.notifications.sound.glisten": "Glisten",
+  "featureOptions.notifications.sound.calm": "Calm",
+  "featureOptions.notifications.sound.polite": "Polite",
+  "featureOptions.notifications.sound.whistleronic": "Whistle",
+  "featureOptions.notifications.sound.voice": "Conversation complete · Standard",
+  "featureOptions.notifications.sound.voiceUrge": "Conversation complete · Nudge",
+  "featureOptions.notifications.errorSound.voiceError": "Conversation error · Standard"
  },
  "zh-hans": {
   "box.title": "Breezell 设置",
@@ -837,7 +849,19 @@
   "models.promptOptimizeModel.followChat": "跟随对话模型",
   "models.promptOptimizeModel.custom": "专用模型",
   "models.selectionAssistModel.followChat": "跟随对话模型",
-  "models.selectionAssistModel.custom": "专用模型"
+  "models.selectionAssistModel.custom": "专用模型",
+  "featureOptions.notifications.sound.bell": "门铃",
+  "featureOptions.notifications.sound.marimba": "木琴",
+  "featureOptions.notifications.sound.success": "成功",
+  "featureOptions.notifications.sound.chord": "和弦",
+  "featureOptions.notifications.sound.chord2": "短和弦",
+  "featureOptions.notifications.sound.glisten": "微光",
+  "featureOptions.notifications.sound.calm": "柔和",
+  "featureOptions.notifications.sound.polite": "轻铃",
+  "featureOptions.notifications.sound.whistleronic": "哨音",
+  "featureOptions.notifications.sound.voice": "对话完成 · 标准",
+  "featureOptions.notifications.sound.voiceUrge": "对话完成 · 催促",
+  "featureOptions.notifications.errorSound.voiceError": "对话报错 · 标准"
  },
  "zh-hant": {
   "box.title": "Breezell 設定",
@@ -1257,7 +1281,19 @@
   "models.promptOptimizeModel.followChat": "跟隨對話模型",
   "models.promptOptimizeModel.custom": "專用模型",
   "models.selectionAssistModel.followChat": "跟隨對話模型",
-  "models.selectionAssistModel.custom": "專用模型"
+  "models.selectionAssistModel.custom": "專用模型",
+  "featureOptions.notifications.sound.bell": "門鈴",
+  "featureOptions.notifications.sound.marimba": "木琴",
+  "featureOptions.notifications.sound.success": "成功",
+  "featureOptions.notifications.sound.chord": "和弦",
+  "featureOptions.notifications.sound.chord2": "短和弦",
+  "featureOptions.notifications.sound.glisten": "微光",
+  "featureOptions.notifications.sound.calm": "柔和",
+  "featureOptions.notifications.sound.polite": "輕鈴",
+  "featureOptions.notifications.sound.whistleronic": "哨音",
+  "featureOptions.notifications.sound.voice": "對話完成 · 標準",
+  "featureOptions.notifications.sound.voiceUrge": "對話完成 · 催促",
+  "featureOptions.notifications.errorSound.voiceError": "對話報錯 · 標準"
  },
  "ja": {
   "box.title": "Breezell 設定",
@@ -1677,7 +1713,19 @@
   "models.promptOptimizeModel.followChat": "チャットのモデルに従う",
   "models.promptOptimizeModel.custom": "専用モデル",
   "models.selectionAssistModel.followChat": "チャットモデルに従う",
-  "models.selectionAssistModel.custom": "専用モデル"
+  "models.selectionAssistModel.custom": "専用モデル",
+  "featureOptions.notifications.sound.bell": "チャイム",
+  "featureOptions.notifications.sound.marimba": "マリンバ",
+  "featureOptions.notifications.sound.success": "成功",
+  "featureOptions.notifications.sound.chord": "コード",
+  "featureOptions.notifications.sound.chord2": "短いコード",
+  "featureOptions.notifications.sound.glisten": "きらめき",
+  "featureOptions.notifications.sound.calm": "穏やか",
+  "featureOptions.notifications.sound.polite": "丁寧",
+  "featureOptions.notifications.sound.whistleronic": "ホイッスル",
+  "featureOptions.notifications.sound.voice": "会話完了 · 標準",
+  "featureOptions.notifications.sound.voiceUrge": "会話完了 · 催促",
+  "featureOptions.notifications.errorSound.voiceError": "会話エラー · 標準"
  },
  "ko": {
   "box.title": "Breezell 설정",
@@ -2097,7 +2145,19 @@
   "models.promptOptimizeModel.followChat": "채팅 모델 따르기",
   "models.promptOptimizeModel.custom": "전용 모델",
   "models.selectionAssistModel.followChat": "채팅 모델 따르기",
-  "models.selectionAssistModel.custom": "전용 모델"
+  "models.selectionAssistModel.custom": "전용 모델",
+  "featureOptions.notifications.sound.bell": "초인종",
+  "featureOptions.notifications.sound.marimba": "마림바",
+  "featureOptions.notifications.sound.success": "성공",
+  "featureOptions.notifications.sound.chord": "화음",
+  "featureOptions.notifications.sound.chord2": "짧은 화음",
+  "featureOptions.notifications.sound.glisten": "반짝임",
+  "featureOptions.notifications.sound.calm": "차분",
+  "featureOptions.notifications.sound.polite": "가벼운 종",
+  "featureOptions.notifications.sound.whistleronic": "휘파람",
+  "featureOptions.notifications.sound.voice": "대화 완료 · 표준",
+  "featureOptions.notifications.sound.voiceUrge": "대화 완료 · 재촉",
+  "featureOptions.notifications.errorSound.voiceError": "대화 오류 · 표준"
  },
  "es": {
   "box.title": "Ajustes de Breezell",
@@ -2517,7 +2577,19 @@
   "models.promptOptimizeModel.followChat": "Seguir el modelo de Chat",
   "models.promptOptimizeModel.custom": "Modelo dedicado",
   "models.selectionAssistModel.followChat": "Seguir el modelo de Chat",
-  "models.selectionAssistModel.custom": "Modelo dedicado"
+  "models.selectionAssistModel.custom": "Modelo dedicado",
+  "featureOptions.notifications.sound.bell": "Timbre",
+  "featureOptions.notifications.sound.marimba": "Marimba",
+  "featureOptions.notifications.sound.success": "Éxito",
+  "featureOptions.notifications.sound.chord": "Acorde",
+  "featureOptions.notifications.sound.chord2": "Acorde corto",
+  "featureOptions.notifications.sound.glisten": "Destello",
+  "featureOptions.notifications.sound.calm": "Calma",
+  "featureOptions.notifications.sound.polite": "Cortés",
+  "featureOptions.notifications.sound.whistleronic": "Silbido",
+  "featureOptions.notifications.sound.voice": "Conversación completa · Estándar",
+  "featureOptions.notifications.sound.voiceUrge": "Conversación completa · Aviso",
+  "featureOptions.notifications.errorSound.voiceError": "Error de conversación · Estándar"
  },
  "pt-br": {
   "box.title": "Configurações do Breezell",
@@ -2937,7 +3009,19 @@
   "models.promptOptimizeModel.followChat": "Seguir o modelo do Chat",
   "models.promptOptimizeModel.custom": "Modelo dedicado",
   "models.selectionAssistModel.followChat": "Seguir o modelo de Chat",
-  "models.selectionAssistModel.custom": "Modelo dedicado"
+  "models.selectionAssistModel.custom": "Modelo dedicado",
+  "featureOptions.notifications.sound.bell": "Campainha",
+  "featureOptions.notifications.sound.marimba": "Marimba",
+  "featureOptions.notifications.sound.success": "Sucesso",
+  "featureOptions.notifications.sound.chord": "Acorde",
+  "featureOptions.notifications.sound.chord2": "Acorde curto",
+  "featureOptions.notifications.sound.glisten": "Brilho",
+  "featureOptions.notifications.sound.calm": "Calmo",
+  "featureOptions.notifications.sound.polite": "Educado",
+  "featureOptions.notifications.sound.whistleronic": "Assobio",
+  "featureOptions.notifications.sound.voice": "Conversa concluída · Padrão",
+  "featureOptions.notifications.sound.voiceUrge": "Conversa concluída · Cobrança",
+  "featureOptions.notifications.errorSound.voiceError": "Erro na conversa · Padrão"
  },
  "ru": {
   "box.title": "Настройки Breezell",
@@ -3357,6 +3441,18 @@
   "models.promptOptimizeModel.followChat": "Следовать модели чата",
   "models.promptOptimizeModel.custom": "Отдельная модель",
   "models.selectionAssistModel.followChat": "Как модель чата",
-  "models.selectionAssistModel.custom": "Отдельная модель"
+  "models.selectionAssistModel.custom": "Отдельная модель",
+  "featureOptions.notifications.sound.bell": "Звонок",
+  "featureOptions.notifications.sound.marimba": "Маримба",
+  "featureOptions.notifications.sound.success": "Успех",
+  "featureOptions.notifications.sound.chord": "Аккорд",
+  "featureOptions.notifications.sound.chord2": "Короткий аккорд",
+  "featureOptions.notifications.sound.glisten": "Блеск",
+  "featureOptions.notifications.sound.calm": "Спокойный",
+  "featureOptions.notifications.sound.polite": "Вежливый",
+  "featureOptions.notifications.sound.whistleronic": "Свист",
+  "featureOptions.notifications.sound.voice": "Разговор завершён · Стандарт",
+  "featureOptions.notifications.sound.voiceUrge": "Разговор завершён · Напоминание",
+  "featureOptions.notifications.errorSound.voiceError": "Ошибка разговора · Стандарт"
  }
 }

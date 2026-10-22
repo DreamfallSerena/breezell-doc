@@ -71,7 +71,8 @@ watch(
 // MCP 與快速短語在 Breezell 裡是 codicon，這裡用外形相近的 lucide 圖示代替。
 const tuopananniu = ["globe", "paperclip", "message-square-text", "wand-sparkles", "plug", "layers"];
 const neizhijineng = ["brainstorming", "breezell-design", "code-security-audit", "dispatching-parallel-agents", "receiving-code-review", "requesting-code-review"];
-const jinengkai = ref(new Set(neizhijineng.filter((ming) => ming !== "code-security-audit")));
+// 內建技能預設關閉（skillAvailability.ts skillToggleIsOn），這裡示意使用者已打開其中兩個。
+const jinengkai = ref(new Set(["brainstorming", "requesting-code-review"]));
 const qiehuanjineng = (ming: string) => {
   const xin = new Set(jinengkai.value);
   if (xin.has(ming)) xin.delete(ming);
@@ -255,7 +256,7 @@ const houzhuiwenzi = computed(() => {
                 <div v-for="ming in neizhijineng" :key="ming" class="bz-lt-jineng-hang" :class="{ 'bz-guan': !jinengkai.has(ming) }">
                   <BzTubiao ming="layers" :daxiao="13" />
                   <span class="bz-lt-jineng-ming">{{ ming }}</span>
-                  <span class="bz-lt-jineng-yin" :title="t('inputToolbar.referenceSkill')"><BzTubiao ming="send" :daxiao="13" /></span>
+                  <span v-if="jinengkai.has(ming)" class="bz-lt-jineng-yin" :title="t('inputToolbar.referenceSkill')"><BzTubiao ming="send" :daxiao="13" /></span>
                   <button type="button" class="bz-lt-jineng-kai" :class="{ 'bz-kai': jinengkai.has(ming) }" @click="qiehuanjineng(ming)" />
                 </div>
               </div>

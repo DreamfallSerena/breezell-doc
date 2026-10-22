@@ -107,13 +107,13 @@ Breezell 把记忆当作笔记，而不是规则。当某条记忆与你最新�
 
 把文件拖到技能列表上即可导入，列表中会显示 <BzWenben jian="skills.dropZipPrompt" />。一个 `.zip` 可以同时包含多个技能文件夹；单个 `.md` 文件会成为一个以文件名命名的技能。
 
-### 在对话中使用技能
+### 在对话中使用技能 {#use-skills-in-a-chat}
 
 点击对话输入框下方那一行中的 **Skills** 按钮（图层图标）：
 
 <BzLiaotian jinengpan gaoliang="jineng" biaoji="1" />
 
-- <BzWenben jian="skills.builtinTab" />：Breezell 自带的技能，例如 `brainstorming` 或 `requesting-code-review`。它们受 <BzWenben jian="box.title" /> ▸ <BzWenben jian="tab.featureOptions" /> 中的 **Superpowers Skills** 开关控制。
+- <BzWenben jian="skills.builtinTab" />：Breezell 自带的技能，例如 `brainstorming` 或 `requesting-code-review`。它们受 <BzWenben jian="box.title" /> ▸ <BzWenben jian="tab.featureOptions" /> 中的 **Superpowers Skills** 开关控制。每个内置技能默认都是关闭的，请打开你需要的；你自己的技能默认开启。
 - <BzWenben jian="skills.myTab" />：你的工作区技能和全局技能。
 - 开关用于开启或关闭某个技能。已关闭的技能不会提供给 AI。
 - 箭头按钮（<BzWenben jian="inputToolbar.referenceSkill" />）会把该技能添加到你的消息中，让 AI 在这次请求中使用它。
@@ -122,7 +122,7 @@ Breezell 把记忆当作笔记，而不是规则。当某条记忆与你最新�
 
 开启或关闭技能或 MCP 服务器会改变提示词的开头部分，可能导致提供商的提示词缓存失效。最好在开始长对话之前就设置好所需内容，而不是在对话进行到一半时再调整。
 
-## 提交信息
+## 提交信息 {#commit-message}
 
 Commit 页面决定了你生成 Git 提交信息时，Breezell 会怎样撰写它。
 

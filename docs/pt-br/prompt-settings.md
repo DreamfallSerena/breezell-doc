@@ -107,13 +107,13 @@ Uma skill pode incluir outros arquivos (referências, scripts) ao lado do `SKILL
 
 Arraste arquivos para a lista de skills: <BzWenben jian="skills.dropZipPrompt" />. Um `.zip` pode conter várias pastas de skills de uma vez; um único `.md` vira uma skill com o nome do arquivo.
 
-### Usar skills em um chat
+### Usar skills em um chat {#use-skills-in-a-chat}
 
 Clique no botão **Skills** (o ícone de camadas) na linha abaixo da caixa de entrada do chat:
 
 <BzLiaotian jinengpan gaoliang="jineng" biaoji="1" />
 
-- <BzWenben jian="skills.builtinTab" />: as skills que vêm com o Breezell, como `brainstorming` ou `requesting-code-review`. Elas seguem o interruptor **Superpowers Skills** em <BzWenben jian="box.title" /> ▸ <BzWenben jian="tab.featureOptions" />.
+- <BzWenben jian="skills.builtinTab" />: as skills que vêm com o Breezell, como `brainstorming` ou `requesting-code-review`. Elas seguem o interruptor **Superpowers Skills** em <BzWenben jian="box.title" /> ▸ <BzWenben jian="tab.featureOptions" />. Todas começam desativadas: ative as que você quiser usar. Suas próprias skills começam ativadas.
 - <BzWenben jian="skills.myTab" />: as suas skills do espaço de trabalho e globais.
 - O interruptor ativa ou desativa uma skill. Uma skill desativada não é oferecida à IA.
 - O botão de seta (<BzWenben jian="inputToolbar.referenceSkill" />) adiciona a skill à sua mensagem, para que a IA a use nesta solicitação.
@@ -122,7 +122,7 @@ Você também pode digitar `/` na caixa de entrada para abrir o menu de skills.
 
 Ativar ou desativar skills ou servidores MCP altera o início do prompt, o que pode fazer você perder o prompt cache do provedor. Configure o que precisa antes de uma conversa longa, e não no meio dela.
 
-## Mensagem de commit
+## Mensagem de commit {#commit-message}
 
 A página Commit altera a forma como o Breezell escreve mensagens de commit do Git quando você gera uma.
 

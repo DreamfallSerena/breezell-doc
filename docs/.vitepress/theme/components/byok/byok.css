@@ -285,7 +285,8 @@
 }
 
 /* BreezellSwitch（util/inputs.tsx）：sm 42×22、xs 28×16，開啟時是按鈕色 20% 的淡底 */
-.bz-kaiguan {
+.bz-kaiguan,
+.bz button.bz-kaiguan {
   position: relative;
   display: inline-flex;
   flex-shrink: 0;
@@ -309,7 +310,8 @@
   transition: transform 200ms ease;
 }
 
-.bz-kaiguan.bz-kai {
+.bz-kaiguan.bz-kai,
+.bz button.bz-kaiguan.bz-kai {
   background: color-mix(in srgb, var(--bz-button-bg) 20%, transparent);
 }
 

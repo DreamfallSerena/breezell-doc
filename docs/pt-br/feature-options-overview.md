@@ -1,102 +1,177 @@
 ---
 title: Visão geral das opções de recursos
-description: Visão geral das opções de recursos, permissões, comportamento do editor, configurações de inteligência e controles de acesso ao sistema do Breezell.
+description: Todos os interruptores da página Opções de Recursos do Breezell — modelos dedicados, sugestões de continuação, permissões de ferramentas, comportamento do editor, notificações, modo Plan, busca na web e acesso a arquivos — com o valor padrão de cada um e o que ele faz.
 ---
 
 # Visão geral das opções de recursos
 
-Esta página resume as principais opções de recursos disponíveis nas configurações do Breezell. Essas opções controlam conclusão automática, notificações, permissões de ferramentas, comportamento do editor, recursos inteligentes e acesso ao sistema.
+**Opções de Recursos** é a página do Box em que você decide em qual modelo cada recurso secundário roda e até onde o agente pode agir sozinho. Ela tem cinco grupos: <BzWenben jian="featureOptions.group.models" />, <BzWenben jian="featureOptions.group.execution" />, <BzWenben jian="featureOptions.group.editor" />, <BzWenben jian="featureOptions.group.intelligence" /> e <BzWenben jian="featureOptions.group.system" />.
 
-## Ajuda
+::: tip Sobre as telas desta página
+As telas do Breezell abaixo foram recriadas em HTML a partir do código-fonte do Breezell. O texto delas acompanha o idioma desta página. Todos os interruptores e menus começam no valor padrão do Breezell, e você pode clicar neles para ver como uma linha muda.
+:::
 
-### Conclusão automática e notificações
+## Abrir as Opções de Recursos
 
-| Recurso | Descrição |
+1. Abra o Box (o lado **Box** do alternador na barra de título, ou **Breezell: Open Settings** na Paleta de Comandos).
+2. No grupo <BzWenben jian="box.title" /> à esquerda, clique em <BzWenben jian="tab.featureOptions" />.
+
+<BzHezi ye="tab.featureOptions" gaoliang="ye" biaoji="1"><BzGongneng qianru yetou zu="models" /></BzHezi>
+
+Cada alteração é salva no momento em que você a faz e vale para todos os espaços de trabalho. Para ir direto a uma opção, digite parte do nome dela na caixa de pesquisa no topo da barra lateral do Box: o Breezell rola até a linha e a destaca.
+
+A conclusão automática não fica nesta página. O interruptor, o modelo e o protocolo dela têm uma página própria: <BzWenben jian="box.title" /> ▸ <BzWenben jian="tab.fim" />.
+
+## Modelos
+
+<BzWenben jian="featureOptions.dedicatedModels.desc" /> Todas as linhas de modelo deste grupo funcionam do mesmo jeito:
+
+- Interruptor **desligado** (padrão): a linha mostra <BzWenben jian="models.analysisModel.followChat" />, e o recurso usa o modelo selecionado abaixo da caixa de entrada do chat.
+- Interruptor **ligado**: a linha mostra <BzWenben jian="models.analysisModel.custom" />, e um seletor de modelos aparece abaixo dela. O recurso sempre usa o modelo que você escolher ali, seja qual for o modelo do chat.
+
+Se o modelo dedicado for removido ou desativado mais tarde em <BzWenben jian="tab.models" />, o recurso volta discretamente para o modelo do Chat.
+
+### Modelos dedicados
+
+<BzGongneng zu="models" zhuanyong="scmModel" gaoliang="scmModel" biaoji="1" />
+
+| Linha | Usado para |
 | --- | --- |
-| Conclusão automática | O BreezellTab oferece conclusão de código com IA. Pressione `Tab` para aceitar as sugestões. |
-| Notificações do sistema | Configure o comportamento das notificações do sistema. O Breezell pode mostrar notificações quando o editor é minimizado ou perde o foco. |
+| <BzWenben jian="models.analysisModel.title" /> | Os subagentes que o agente inicia para explorar e analisar o código no lugar dele |
+| <BzWenben jian="models.teamDesignModel.title" /> | Os membros da equipe que cuidam de UI, visual e acabamento de páginas no modo Teams |
+| <BzWenben jian="models.teamBugfixModel.title" /> | Os membros da equipe que localizam, reproduzem e corrigem bugs no modo Teams |
+| <BzWenben jian="models.scmModel.title" /> | A mensagem de commit gerada no Controle de código-fonte |
+
+Uma configuração comum: conversar com o `claude-opus-5` e dar às tarefas secundárias um modelo menor. No exemplo acima, <BzWenben jian="models.scmModel.title" /> foi trocado para <BzWenben jian="models.scmModel.custom" /> e roda no `claude-haiku-5-5`, que escreve mensagens de commit mais rápido e com custo menor. O estilo dessas mensagens vem da página Commit em [Configurações de prompt e habilidades](/prompt-settings#commit-message).
+
+### Sugestões de continuação
+
+<BzWenben jian="featureOptions.followUp.desc" /> Isso vem desativado por padrão.
+
+| Opção | Padrão | O que faz |
+| --- | --- | --- |
+| <BzWenben jian="featureOptions.followUp.enable" /> | Desativado | <BzWenben jian="featureOptions.followUp.enableDesc" /> |
+| <BzWenben jian="featureOptions.followUp.count" /> | 4 | 2, 3 ou 4 cartões de sugestão abaixo de cada resposta. |
+| <BzWenben jian="featureOptions.followUp.clickAction" /> | <BzWenben jian="featureOptions.followUp.clickSend" /> | <BzWenben jian="featureOptions.followUp.clickSend" />: a sugestão é enviada na hora; <BzWenben jian="featureOptions.followUp.clickInsert" />: você pode editá-la antes. <BzWenben jian="featureOptions.followUp.clickActionDesc" /> |
+| <BzWenben jian="models.followUpModel.title" /> | <BzWenben jian="models.followUpModel.followChat" /> | Um modelo pequeno e rápido, como o `claude-haiku-5-5`, já basta aqui. |
+
+### Otimizar o prompt
+
+<BzWenben jian="featureOptions.promptOptimize.desc" /> O cartão tem apenas a linha de modelo: <BzWenben jian="models.promptOptimizeModel.title" />.
+
+### Assistente de seleção
+
+Quando você destaca texto em uma resposta do chat, aparece uma pequena barra com Citar e Copiar. O assistente de seleção acrescenta Traduzir e Pesquisar a ela.
+
+| Opção | Padrão | O que faz |
+| --- | --- | --- |
+| <BzWenben jian="featureOptions.selectionAssist.pill" /> | Ativado | <BzWenben jian="featureOptions.selectionAssist.pillDesc" /> |
+| <BzWenben jian="featureOptions.selectionAssist.pillPlacement" /> | <BzWenben jian="featureOptions.selectionAssist.pillBelow" /> | <BzWenben jian="featureOptions.selectionAssist.pillBelow" /> ou <BzWenben jian="featureOptions.selectionAssist.pillAbove" /> da seleção. <BzWenben jian="featureOptions.selectionAssist.pillPlacementDesc" /> |
+| <BzWenben jian="featureOptions.selectionAssist.translate" /> | Ativado | <BzWenben jian="featureOptions.selectionAssist.translateDesc" /> |
+| <BzWenben jian="featureOptions.selectionAssist.reasoningTranslate" /> | Ativado | <BzWenben jian="featureOptions.selectionAssist.reasoningTranslateDesc" /> |
+| <BzWenben jian="featureOptions.selectionAssist.search" /> | Ativado | <BzWenben jian="featureOptions.selectionAssist.searchDesc" /> |
+| <BzWenben jian="models.selectionAssistModel.title" /> | <BzWenben jian="models.selectionAssistModel.followChat" /> | O modelo que faz a tradução. |
 
 ## Execução
 
-### Permissões de ferramentas
+<BzWenben jian="featureOptions.toolPermissions.desc" /> Quando um interruptor está desligado, o agente para antes desse tipo de ação e espera você aprová-la ou rejeitá-la no chat. Ferramentas que apenas leem, como ler arquivos, pesquisar no código ou a busca na web, nunca esperam aprovação.
 
-Estas opções controlam se operações específicas de ferramentas podem ser executadas automaticamente sem confirmação manual.
+<BzGongneng zu="execution" />
 
-| Recurso | Descrição |
-| --- | --- |
-| Aprovar edições automaticamente | Permite que operações de edição sejam executadas automaticamente sem confirmação. |
-| Aprovar terminal automaticamente | Permite que operações do terminal sejam executadas automaticamente sem confirmação. |
-| Aprovar operações de banco de dados automaticamente | Permite que operações de banco de dados sejam executadas automaticamente sem confirmação. |
-| Aprovar geração de mídia automaticamente | Permite que operações de geração de mídia sejam executadas automaticamente sem confirmação. |
-| Aprovar ferramentas MCP automaticamente | Permite que operações de ferramentas MCP sejam executadas automaticamente sem confirmação. |
-| Aprovar Teams automaticamente | Aprova automaticamente a criação de equipes sem confirmação manual. |
+| Interruptor | Padrão | Abrange |
+| --- | --- | --- |
+| <BzWenben jian="featureOptions.toolPermissions.edits" /> | Ativado | Editar, gravar, renomear e excluir arquivos e pastas |
+| <BzWenben jian="featureOptions.toolPermissions.terminal" /> | Desativado | Comandos de terminal e scripts que o agente escreve e executa |
+| <BzWenben jian="featureOptions.toolPermissions.database" /> | Ativado | Executar instruções e criar conexões ou bancos de dados com as ferramentas de banco de dados do Breezell |
+| <BzWenben jian="featureOptions.toolPermissions.media" /> | Desativado | Gerar imagens |
+| <BzWenben jian="featureOptions.toolPermissions.mcpTools" /> | Ativado | Ferramentas dos servidores MCP que você adicionou |
+| <BzWenben jian="featureOptions.toolPermissions.teams" /> | Desativado | <BzWenben jian="featureOptions.toolPermissions.teamsDesc" /> no modo Teams |
+
+::: warning Aprovar terminal automaticamente
+Com <BzWenben jian="featureOptions.toolPermissions.terminal" /> ligado, o agente executa qualquer comando que decidir, como instalações, builds ou exclusão de arquivos, sem perguntar. Ative-o apenas em projetos em que isso seja seguro, por exemplo com um estado limpo do Git ao qual você possa voltar.
+:::
+
+Mesmo com <BzWenben jian="featureOptions.toolPermissions.edits" /> ligado, as edições continuam aparecendo como alterações que você pode revisar, a menos que você também ative <BzWenben jian="featureOptions.codeBehavior.autoAcceptChanges" /> abaixo.
 
 ## Editor
 
-### Comportamento do código
+<BzGongneng zu="editor" />
 
-| Recurso | Descrição |
-| --- | --- |
-| Corrigir erros de Lint automaticamente | Corrige automaticamente erros de Lint quando houver suporte. |
-| Aceitar alterações de código automaticamente | Aceita automaticamente alterações de código geradas ou modificadas. |
-| Abrir arquivos automaticamente durante a edição | Abre arquivos automaticamente durante a edição. |
-| Mostrar sugestões em linha ao selecionar | Mostra sugestões em linha quando texto ou código é selecionado. |
+### Comportamento de Código
 
-### Mensagem de commit do Git
+| Interruptor | Padrão | O que faz |
+| --- | --- | --- |
+| <BzWenben jian="featureOptions.codeBehavior.autoFixLint" /> | Ativado | Depois de cada edição, os erros de lint que ela introduziu são enviados de volta à IA junto com o resultado, para que ela os corrija no mesmo turno. |
+| <BzWenben jian="featureOptions.codeBehavior.autoAcceptChanges" /> | Desativado | As edições da IA são mantidas na hora, sem a etapa de aceitar / rejeitar no editor. |
+| <BzWenben jian="featureOptions.codeBehavior.autoOpenFile" /> | Desativado | Abre cada arquivo no editor quando a IA o edita. |
+| <BzWenben jian="featureOptions.codeBehavior.browserHeadless" /> | Ativado | <BzWenben jian="featureOptions.codeBehavior.browserHeadlessDesc" /> |
+| <BzWenben jian="featureOptions.codeBehavior.expandEditOnComplete" /> | Desativado | <BzWenben jian="featureOptions.codeBehavior.expandEditOnCompleteDesc" /> |
+| <BzWenben jian="featureOptions.codeBehavior.showInlineSuggestions" /> | Ativado | Quando você seleciona código no editor, pequenos botões aparecem ao lado dele para adicionar o código ao chat ou editá-lo. |
 
-Use esta opção para permitir que o Breezell gere uma mensagem de commit do Git a partir das alterações de código atuais. Isso é útil quando você quer um resumo claro do commit sem escrevê-lo manualmente.
+### Notificações
 
-![Gerar mensagens de commit com o modelo de chat](/feature-options/git-commit-message.png)
+| Opção | Padrão | O que faz |
+| --- | --- | --- |
+| <BzWenben jian="featureOptions.notifications.systemNotifications" /> | Ativado | <BzWenben jian="featureOptions.notifications.systemNotificationsDesc" /> |
+| <BzWenben jian="featureOptions.notifications.sound" /> | <BzWenben jian="featureOptions.notifications.sound.glass" /> | <BzWenben jian="featureOptions.notifications.soundDesc" /> |
+| <BzWenben jian="featureOptions.notifications.soundBackground" /> | Desativado | <BzWenben jian="featureOptions.notifications.soundBackgroundDesc" /> |
+| <BzWenben jian="featureOptions.notifications.soundForeground" /> | Desativado | <BzWenben jian="featureOptions.notifications.soundForegroundDesc" /> |
+| <BzWenben jian="featureOptions.notifications.errorSound" /> | <BzWenben jian="featureOptions.notifications.errorSound.disconnect" /> | <BzWenben jian="featureOptions.notifications.errorSoundDesc" /> |
+| <BzWenben jian="featureOptions.notifications.errorSoundBackground" /> | Desativado | <BzWenben jian="featureOptions.notifications.errorSoundBackgroundDesc" /> |
+| <BzWenben jian="featureOptions.notifications.errorSoundForeground" /> | Desativado | <BzWenben jian="featureOptions.notifications.errorSoundForegroundDesc" /> |
 
-| Recurso | Descrição |
-| --- | --- |
-| Gerar mensagens de commit com o modelo de chat | Gera automaticamente mensagens de commit do Git com base nas alterações de código atuais. |
-
-Quando esta opção está habilitada, o Breezell pode revisar o conjunto de alterações atual e criar uma mensagem de commit com o modelo de chat selecionado. Revise a mensagem gerada antes de fazer o commit se o projeto exigir um formato específico.
+Ao escolher um som, ele toca uma vez; o mesmo acontece quando você ativa um dos interruptores de som. Nenhum som toca até você ativar pelo menos um dos interruptores de segundo plano ou de chat atual.
 
 ## Inteligência
 
-### Gerenciamento de contexto
+<BzGongneng zu="intelligence" />
 
-| Recurso | Descrição |
+### Gerenciamento de Contexto
+
+| Opção | Padrão | O que faz |
+| --- | --- | --- |
+| <BzWenben jian="featureOptions.contextManagement.autoPlanExecution" /> | Desativado | <BzWenben jian="featureOptions.contextManagement.autoPlanExecutionDesc" /> |
+| <BzWenben jian="featureOptions.contextManagement.planSwitchPref" /> | <BzWenben jian="planSwitch.alwaysAsk" /> | <BzWenben jian="featureOptions.contextManagement.planSwitchPrefDesc" /> |
+| <BzWenben jian="featureOptions.nativeWebSearch.title" /> | <BzWenben jian="featureOptions.nativeWebSearch.auto" /> | Permite que o modelo use a busca na web integrada do provedor dele. Veja abaixo. |
+
+<BzWenben jian="featureOptions.nativeWebSearch.title" /> decide quando a busca do próprio provedor é adicionada a uma solicitação. Normalmente o Breezell faz as buscas com as próprias ferramentas web, que exigem que você tenha feito login.
+
+| Escolha | O que acontece |
 | --- | --- |
-| Executar cartões de plano automaticamente | Quando habilitado, novos cartões de plano são executados automaticamente sem cliques manuais. |
+| <BzWenben jian="featureOptions.nativeWebSearch.auto" /> | As ferramentas de busca do Breezell são usadas. Só quando elas não podem ser executadas (por exemplo, quando você não fez login) o modelo faz a busca pelo provedor. |
+| <BzWenben jian="featureOptions.nativeWebSearch.always" /> | A busca do provedor é adicionada a todas as solicitações, junto com as ferramentas do Breezell. |
+| <BzWenben jian="featureOptions.nativeWebSearch.off" /> | A busca do provedor nunca é usada. |
 
-### Skills do Superpowers
+A busca integrada existe apenas em alguns provedores: Anthropic (Claude), OpenAI, Gemini com chave de API, xAI, Perplexity, OpenRouter, Qwen e Zhipu. Para outros modelos, esta opção não tem efeito.
 
-| Recurso | Descrição |
-| --- | --- |
-| Habilitar Skills do Superpowers | Permite que a IA use fluxos de desenvolvimento estruturados, como brainstorming, planejamento, TDD e revisão de código. O conteúdo completo é carregado sob demanda. |
+### Modos e habilidades
 
-### ~~Exploração avançada do Agent~~
-
-> **Obsoleto após a versão 1.2.5.** Esta opção foi removida. Quando uma solicitação exige uma pesquisa profunda em várias fontes, o Breezell invoca automaticamente os recursos relacionados e resume os resultados em um relatório de pesquisa com citações.
-
-| Recurso | Descrição |
-| --- | --- |
-| ~~Habilitar exploração avançada~~ | Obsoleto após a versão 1.2.5; os recursos de pesquisa relacionados são invocados automaticamente quando necessário. |
-
-### Painel do modo Entanglement
-
-| Recurso | Descrição |
-| --- | --- |
-| Mostrar painel no modo Entanglement | Exibe um painel estruturado em tempo real para o modo Entanglement, incluindo a etapa atual, o histórico de confiança, hipóteses ativas e resolvidas, registros de evidências avaliadas e grafos causais. |
+| Interruptor | Padrão | O que faz |
+| --- | --- | --- |
+| <BzWenben jian="featureOptions.superpowers.enable" /> | Ativado | <BzWenben jian="featureOptions.superpowers.desc" /> São as skills integradas listadas em [Configurações de prompt e habilidades](/prompt-settings#use-skills-in-a-chat). |
+| <BzWenben jian="featureOptions.entanglement.enable" /> | Ativado | <BzWenben jian="featureOptions.entanglement.enableDesc" /> Veja [Modo Entanglement](/entanglement-mode-overview). |
 
 ## Sistema
 
-### Configurações de rede
+<BzGongneng zu="system" />
 
-| Recurso | Descrição |
-| --- | --- |
-| Usar proxy do sistema | Usa o proxy do sistema para enviar solicitações de API. Se nenhum proxy for necessário ou o proxy estiver instável, recomenda-se desabilitar esta opção para melhorar a velocidade de resposta. |
+### Acesso a Arquivos Externos
 
-### Acesso a arquivos externos
+| Interruptor | Padrão | O que faz |
+| --- | --- | --- |
+| <BzWenben jian="featureOptions.externalFileAccess.allowRead" /> | Ativado | As ferramentas podem ler arquivos fora do espaço de trabalho aberto, por exemplo o código-fonte de uma biblioteca ou um arquivo de configuração na sua pasta pessoal. |
+| <BzWenben jian="featureOptions.externalFileAccess.allowWrite" /> | Ativado | As ferramentas podem alterar arquivos fora do espaço de trabalho aberto. Desative isto se o agente só deve mexer no projeto. |
 
-| Recurso | Descrição |
-| --- | --- |
-| Permitir acesso somente leitura a arquivos externos | Permite que as ferramentas leiam arquivos fora do workspace. |
-| Permitir acesso de gravação a arquivos externos | Permite que as ferramentas modifiquem arquivos fora do workspace. As duas opções de acesso a arquivos externos são habilitadas por padrão. |
+### Velocidade de rede do terminal
 
-## Observações
+| Interruptor | Padrão | O que faz |
+| --- | --- | --- |
+| <BzWenben jian="featureOptions.netActivity.enable" /> | Ativado | <BzWenben jian="featureOptions.netActivity.enableDesc" /> |
+| <BzWenben jian="featureOptions.netActivity.precise" /> | Desativado | Somente no Windows. <BzWenben jian="featureOptions.netActivity.preciseDesc" /> |
 
-As opções de aprovação automática e acesso externo podem melhorar a velocidade do fluxo de trabalho, mas também reduzem a revisão manual. Habilite-as somente quando estiverem de acordo com a política e o nível de confiança do seu workspace.
+## Resumo
+
+- Box ▸ <BzWenben jian="box.title" /> ▸ <BzWenben jian="tab.featureOptions" />; as alterações são salvas na hora.
+- <BzWenben jian="featureOptions.group.models" />: os recursos secundários seguem o modelo do Chat até você dar a eles um modelo dedicado.
+- <BzWenben jian="featureOptions.group.execution" />: o que o agente pode fazer sem perguntar. Comandos de terminal pedem confirmação por padrão.
+- <BzWenben jian="featureOptions.group.editor" />, <BzWenben jian="featureOptions.group.intelligence" />, <BzWenben jian="featureOptions.group.system" />: correções de lint, notificações, cartões de plano, busca na web, skills Superpowers e acesso a arquivos fora do espaço de trabalho.

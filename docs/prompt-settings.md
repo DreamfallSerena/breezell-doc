@@ -107,13 +107,13 @@ A skill can bundle more files (references, scripts) next to `SKILL.md`. Its deta
 
 Drag files onto the skills list: <BzWenben jian="skills.dropZipPrompt" />. A `.zip` can hold many skill folders at once; a single `.md` becomes one skill named after the file.
 
-### Use skills in a chat
+### Use skills in a chat {#use-skills-in-a-chat}
 
 Click the **Skills** button (the layers icon) in the row under the chat input:
 
 <BzLiaotian jinengpan gaoliang="jineng" biaoji="1" />
 
-- <BzWenben jian="skills.builtinTab" />: the skills that come with Breezell, such as `brainstorming` or `requesting-code-review`. They follow the **Superpowers Skills** switch in <BzWenben jian="box.title" /> ▸ <BzWenben jian="tab.featureOptions" />.
+- <BzWenben jian="skills.builtinTab" />: the skills that come with Breezell, such as `brainstorming` or `requesting-code-review`. They follow the **Superpowers Skills** switch in <BzWenben jian="box.title" /> ▸ <BzWenben jian="tab.featureOptions" />. Each one starts switched off; turn on the ones you want. Your own skills start switched on.
 - <BzWenben jian="skills.myTab" />: your workspace and global skills.
 - The switch turns a skill on or off. A skill that is off is not offered to the AI.
 - The arrow button (<BzWenben jian="inputToolbar.referenceSkill" />) adds the skill to your message, so the AI uses it for this request.
@@ -122,7 +122,7 @@ You can also type `/` in the input box to open the skills menu.
 
 Switching skills or MCP servers on or off changes the start of the prompt, which can cost you the provider's prompt cache. Set what you need before a long conversation rather than in the middle of it.
 
-## Commit message
+## Commit message {#commit-message}
 
 Commit changes how Breezell writes Git commit messages when you generate one.
 
