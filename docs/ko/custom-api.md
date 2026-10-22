@@ -49,7 +49,7 @@ Box를 여는 방법은 세 가지입니다.
 
 ## 2단계: 모델 페이지로 이동
 
-Box 사이드바에서 <BzWenben jian="box.title" /> 그룹을 열고 <BzWenben jian="tab.models" />를 클릭합니다. 보통 Box를 열면 처음 표시되는 페이지입니다.
+Box 사이드바에서 <BzWenben jian="box.title" /> 그룹을 열고 <BzWenben jian="tab.models" />을 클릭합니다. 보통 Box를 열면 처음 표시되는 페이지입니다.
 
 <BzHezi gaoliang="moxing" />
 

@@ -4,7 +4,7 @@ import BzTubiao from "./BzTubiao.vue";
 import BzPinpai from "./BzPinpai.vue";
 import BzYetou from "./BzYetou.vue";
 import BzJianrongpeizhi from "./BzJianrongpeizhi.vue";
-import { anthropicmoxing, geshijiage, geshitoken, jianrongmoxing, qudemoxing, shiyongwenben, type moxinghang, type xieyi } from "./shuju";
+import { anthropicmoxing, deepseekmoxing, geshijiage, geshitoken, jianrongmoxing, qudemoxing, shiyongwenben, type moxinghang, type xieyi } from "./shuju";
 
 // Box ▸ 模型（BoxModelsPage.tsx ModelsWorkspace）：分類切換、提供者卡片、選中提供者的標頭帶，
 // 下方是設定欄與模型表格。頁面窄於 1080px 時 Breezell 會把設定欄疊在表格上方，這裡同樣如此；
@@ -31,13 +31,15 @@ const props = withDefaults(
     fenlei?: "api" | "compat";
     yetou?: boolean;
     xuanzeqi?: boolean;
-    tigongshang?: "anthropic" | "compat";
+    tigongshang?: "anthropic" | "deepseek" | "compat";
     yipeizhi?: boolean;
     peizhi?: boolean;
-    moxing?: "anthropic" | "jianrong" | "kong";
+    moxing?: "anthropic" | "deepseek" | "jianrong" | "kong";
     dakai?: string[];
     quede?: boolean;
     caidan?: boolean;
+    caidanhang?: string;
+    caidangaoliang?: "gaoji" | "shijue";
     cuowu?: string;
     gaoliang?: gaoliangxiang;
     biaoji?: string;
@@ -58,6 +60,8 @@ const props = withDefaults(
     dakai: () => [],
     quede: false,
     caidan: false,
+    caidanhang: "",
+    caidangaoliang: "gaoji",
     cuowu: "",
     gaoliang: "",
     biaoji: "",
@@ -72,7 +76,11 @@ const props = withDefaults(
 const { t } = shiyongwenben();
 
 const jianrong = computed(() => props.tigongshang === "compat");
-const biaoti = computed(() => (jianrong.value ? props.nicheng || `Slot ${props.caowei}` : "Anthropic"));
+const biaoti = computed(() => (jianrong.value ? props.nicheng || `Slot ${props.caowei}` : props.tigongshang === "deepseek" ? "DeepSeek" : "Anthropic"));
+// 提供者標記與模型列圖示：相容槽位用 OpenAI 單色標記，模型列按模型名顯示品牌（ProviderIcon 的規則）。
+const tigongpinpai = computed(() => (jianrong.value ? "openai" : props.tigongshang === "deepseek" ? "deepseek" : "claude"));
+const moxingpinpai = computed(() => (props.tigongshang === "deepseek" ? "deepseek" : "claude"));
+const caidanzai = (xiang: moxinghang, xuhao: number) => props.caidan && (props.caidanhang ? xiang.mingcheng === props.caidanhang : xuhao === 0);
 const zhuji = computed(() => {
   try {
     return new URL(props.jichudizhi).host;
@@ -99,11 +107,11 @@ const jianrongka = computed(() =>
 
 const hang = computed<moxinghang[]>(() => {
   if (props.moxing === "kong") return [];
-  const yuan = props.moxing === "anthropic" ? anthropicmoxing : jianrongmoxing;
+  const yuan = props.moxing === "anthropic" ? anthropicmoxing : props.moxing === "deepseek" ? deepseekmoxing : jianrongmoxing;
   return yuan.map((xiang) => ({ ...xiang, qiyong: xiang.qiyong || props.dakai.includes(xiang.mingcheng) }));
 });
 const qiyongshu = computed(() => (props.yipeizhi ? hang.value.filter((xiang) => xiang.qiyong).length : 0));
-const zongshu = computed(() => (props.moxing === "anthropic" ? anthropicmoxing.length : hang.value.length));
+const zongshu = computed(() => hang.value.length);
 
 const nengli = [
   { ming: "eye", jian: "box.models.filter.vision" },
@@ -126,14 +134,14 @@ const gl = (xiang: gaoliangxiang) => props.gaoliang === xiang;
 <template>
   <div class="bz">
     <div class="bz-chuangkou bz-my-wai">
-      <div class="bz-my">
+      <div class="bz-my" :class="{ 'bz-my-caidankai': caidan }">
         <BzYetou v-if="yetou" :fenlei="fenlei" :shuliang="{ signin: 9, api: 40, compat: caowei }" />
 
         <div v-if="xuanzeqi" class="bz-kapian bz-my-xuan">
           <div class="bz-my-guolv">
             <label class="bz-sousuo" :class="{ 'bz-gl': gl('sousuo') }">
               <BzTubiao ming="search" />
-              <input :value="jianrong ? '' : 'Anthropic'" :placeholder="t('box.models.searchProvidersPlaceholder')" readonly />
+              <input :value="jianrong ? '' : biaoti" :placeholder="t('box.models.searchProvidersPlaceholder')" readonly />
               <span v-if="gl('sousuo') && biaoji" class="bz-biaoji" style="top: -10px; right: -8px">{{ biaoji }}</span>
             </label>
             <span class="bz-my-tian" />
@@ -147,8 +155,8 @@ const gl = (xiang: gaoliangxiang) => props.gaoliang === xiang;
           </div>
           <div class="bz-my-kawang">
             <span v-if="!jianrong" class="bz-my-ka bz-xuan" :class="{ 'bz-gl': gl('ka') }">
-              <span class="bz-my-biaoji"><BzPinpai pinpai="claude" :daxiao="16" /></span>
-              <span class="bz-my-kaming">Anthropic</span>
+              <span class="bz-my-biaoji"><BzPinpai :pinpai="tigongpinpai" :daxiao="16" /></span>
+              <span class="bz-my-kaming">{{ biaoti }}</span>
               <span class="bz-dian" :class="{ 'bz-hao': yipeizhi }" />
               <span v-if="gl('ka') && biaoji" class="bz-biaoji" style="top: -10px; right: -8px">{{ biaoji }}</span>
             </span>
@@ -175,7 +183,7 @@ const gl = (xiang: gaoliangxiang) => props.gaoliang === xiang;
 
         <section class="bz-kapian bz-my-xuanzhong">
           <div class="bz-my-daitou">
-            <span class="bz-my-biaoji bz-my-biaoji-da"><BzPinpai :pinpai="jianrong ? 'openai' : 'claude'" :daxiao="16" /></span>
+            <span class="bz-my-biaoji bz-my-biaoji-da"><BzPinpai :pinpai="tigongpinpai" :daxiao="16" /></span>
             <div class="bz-my-daitou-wen">
               <span class="bz-my-daitou-ming">{{ biaoti }}</span>
               <span class="bz-zhuangtai" :class="{ 'bz-hao': yipeizhi }"><span class="bz-dian" :class="{ 'bz-hao': yipeizhi }" />{{ yipeizhi ? t("box.models.configured") : t("box.models.notConfigured") }}</span>
@@ -292,28 +300,38 @@ const gl = (xiang: gaoliangxiang) => props.gaoliang === xiang;
                 >
                   <div class="bz-my-mingge bz-my-lie-ming">
                     <span class="bz-my-zhuangdian" :class="{ 'bz-hao': yipeizhi && xiang.qiyong }" />
-                    <BzPinpai pinpai="claude" :daxiao="16" />
+                    <BzPinpai :pinpai="moxingpinpai" :daxiao="16" />
                     <span class="bz-my-moxingming">{{ xiang.mingcheng }}</span>
                     <span v-if="xiang.shiyongzhong" class="bz-my-shiyong"><BzTubiao ming="check" :daxiao="10" :cuxi="3" />{{ t("box.models.inUse") }}</span>
                   </div>
                   <div class="bz-my-shuzi bz-you bz-my-lie-sx">{{ geshitoken(xiang.shangxiawen) }}</div>
                   <div class="bz-my-nengli bz-my-lie-nl">
-                    <span v-for="n in nengli" :key="n.ming" class="bz-my-nengli-ge" :title="t(n.jian)"><BzTubiao :ming="n.ming" :daxiao="11" :cuxi="2.3" /></span>
+                    <span
+                      v-for="n in nengli"
+                      :key="n.ming"
+                      class="bz-my-nengli-ge"
+                      :class="{ 'bz-guan': n.ming === 'eye' && xiang.shijue === false }"
+                      :title="t(n.jian)"
+                    ><BzTubiao :ming="n.ming" :daxiao="11" :cuxi="2.3" /></span>
                   </div>
                   <div class="bz-my-jiage" :class="{ 'bz-gl': gl('jiage') && xuhao === 0 }">
                     <span v-if="xiang.shuru !== undefined" class="bz-my-shuzi">{{ geshijiage(xiang.shuru) }} / {{ geshijiage(xiang.shuchu ?? 0) }}</span>
                     <span v-else class="bz-my-tianjia-jia"><BzTubiao ming="coins" :daxiao="11" /><span>{{ t("box.models.editPrice") }}</span></span>
                   </div>
                   <div class="bz-my-gengduo-ge">
-                    <span class="bz-my-gengduo" :class="{ 'bz-dakai': caidan && xuhao === 0, 'bz-gl': gl('gengduo') && xuhao === 0 }">
+                    <span class="bz-my-gengduo" :class="{ 'bz-dakai': caidanzai(xiang, xuhao), 'bz-gl': gl('gengduo') && caidanzai(xiang, xuhao) }">
                       <BzTubiao ming="ellipsis" :daxiao="15" />
-                      <span v-if="gl('gengduo') && xuhao === 0 && biaoji" class="bz-biaoji" style="top: -12px; right: -12px">{{ biaoji }}</span>
+                      <span v-if="gl('gengduo') && caidanzai(xiang, xuhao) && biaoji" class="bz-biaoji" style="top: -12px; right: -12px">{{ biaoji }}</span>
                     </span>
-                    <div v-if="caidan && xuhao === 0" class="bz-my-caidan">
+                    <div v-if="caidanzai(xiang, xuhao)" class="bz-my-caidan">
                       <span class="bz-my-caidan-xiang"><BzTubiao ming="pin" />{{ t("box.models.pin") }}</span>
-                      <span class="bz-my-caidan-xiang bz-gl"><BzTubiao ming="settings-2" />{{ t("box.models.advanced") }}</span>
-                      <span class="bz-my-caidan-fen" />
-                      <span class="bz-my-caidan-xiang"><BzTubiao ming="x" />{{ t("box.models.remove") }}</span>
+                      <span v-if="xiang.shijue === false" class="bz-my-caidan-xiang" :class="{ 'bz-gl': caidangaoliang === 'shijue' }"><BzTubiao ming="eye" />{{ t("models.visionProxy") }}</span>
+                      <span v-if="tigongshang === 'deepseek'" class="bz-my-caidan-xiang"><BzTubiao ming="plug" />{{ t("models.apiFormat") }}</span>
+                      <span class="bz-my-caidan-xiang" :class="{ 'bz-gl': caidangaoliang === 'gaoji' }"><BzTubiao ming="settings-2" />{{ t("box.models.advanced") }}</span>
+                      <template v-if="jianrong">
+                        <span class="bz-my-caidan-fen" />
+                        <span class="bz-my-caidan-xiang"><BzTubiao ming="x" />{{ t("box.models.remove") }}</span>
+                      </template>
                     </div>
                   </div>
                   <div class="bz-you bz-my-kaiguan-ge">
@@ -343,6 +361,11 @@ const gl = (xiang: gaoliangxiang) => props.gaoliang === xiang;
   gap: 16px;
   padding: 16px;
   container-type: inline-size;
+}
+
+/* 打開 ⋯ 選單時在底部留出空間，選單不會被外框裁掉 */
+.bz-my.bz-my-caidankai {
+  padding-bottom: 150px;
 }
 
 .bz-my-xuan {
@@ -870,6 +893,13 @@ const gl = (xiang: gaoliangxiang) => props.gaoliang === xiang;
   color: var(--bz-link);
   background: color-mix(in srgb, var(--bz-link) 13%, transparent);
   border: 1px solid color-mix(in srgb, var(--bz-link) 26%, transparent);
+}
+
+.bz-my-nengli-ge.bz-guan {
+  color: var(--bz-fg);
+  background: transparent;
+  border-color: color-mix(in srgb, var(--bz-fg) 10%, transparent);
+  opacity: 0.32;
 }
 
 .bz-my-jiage {

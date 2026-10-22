@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import { claudelujing, openailujing } from "./shuju";
+import { claudelujing, deepseeklujing, openailujing } from "./shuju";
 
 // 品牌標記：Claude（彩色）、OpenAI（單色，相容槽位的預設標記）、Breezell（產品圖示的深色方塊）。
-withDefaults(defineProps<{ pinpai: "claude" | "openai" | "breezell"; daxiao?: number }>(), { daxiao: 16 });
+withDefaults(defineProps<{ pinpai: "claude" | "openai" | "deepseek" | "breezell"; daxiao?: number }>(), { daxiao: 16 });
 </script>
 
 <template>
   <svg v-if="pinpai === 'claude'" :width="daxiao" :height="daxiao" viewBox="0 0 24 24" aria-hidden="true">
     <path :d="claudelujing" fill="#D97757" fill-rule="nonzero" />
+  </svg>
+  <svg v-else-if="pinpai === 'deepseek'" :width="daxiao" :height="daxiao" viewBox="0 0 24 24" aria-hidden="true">
+    <path :d="deepseeklujing" fill="#4D6BFE" />
   </svg>
   <svg v-else-if="pinpai === 'openai'" :width="daxiao" :height="daxiao" viewBox="0 0 24 24" aria-hidden="true">
     <path :d="openailujing" fill="currentColor" fill-rule="evenodd" />

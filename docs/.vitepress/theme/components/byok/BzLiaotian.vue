@@ -18,12 +18,17 @@ const props = withDefaults(
     caowei?: string;
     wen?: string;
     da?: string;
-    gaoliang?: "jiaonang" | "fenye" | "hang" | "moshi" | "";
+    gaoliang?: "jiaonang" | "fenye" | "hang" | "moshi" | "tishi" | "";
     biaoji?: string;
     moshi?: duihuamoshi;
     qianru?: boolean;
     moshibiaoji?: string;
     jiaonangbiaoji?: string;
+    tishi?: "" | "xuyao" | "wuxiao";
+    daili?: string;
+    tupian?: boolean;
+    wentupian?: boolean;
+    houzhui?: string;
   }>(),
   {
     xuanzeqi: "",
@@ -38,10 +43,17 @@ const props = withDefaults(
     qianru: false,
     moshibiaoji: "",
     jiaonangbiaoji: "",
+    tishi: "",
+    daili: "",
+    tupian: false,
+    wentupian: false,
+    houzhui: "",
   },
 );
 
-const { t } = shiyongwenben();
+const { t, tihuan } = shiyongwenben();
+// 模型列與回覆標頭的品牌圖示跟著模型名走（ProviderIcon 對聚合提供者的規則）。
+const pinpai = computed(() => (props.moxing.includes("deepseek") ? "deepseek" : "claude"));
 
 const dangqianfenye = ref<"api" | "compat">(props.xuanzeqi === "compat" ? "compat" : "api");
 watch(
@@ -66,7 +78,8 @@ const jianronghang = ["claude-opus-5-5", "claude-sonnet-5-5", "claude-haiku-5-5"
 const morenqiangdu = /opus-5-5|haiku-5-5/.test(props.moxing) ? "medium" : "high";
 const xuanxiangzhi = ref<moxingxuanxiang>({ shangxiawen: 200_000, tuili: true, qiangdu: morenqiangdu, kuaisu: false });
 const meihua = (zhi: string) => (zhi === "xhigh" ? "Extra High" : zhi.charAt(0).toUpperCase() + zhi.slice(1));
-const houzhui = computed(() => {
+const houzhuiwenzi = computed(() => {
+  if (props.houzhui) return props.houzhui;
   const bufen = [xuanxiangzhi.value.shangxiawen >= 900_000 ? "1M" : "200K"];
   if (xuanxiangzhi.value.tuili) bufen.push(meihua(xuanxiangzhi.value.qiangdu));
   if (xuanxiangzhi.value.kuaisu) bufen.push("Fast");
@@ -79,10 +92,13 @@ const houzhui = computed(() => {
     <div class="bz-lt" :class="{ 'bz-chuangkou bz-cebian': !qianru, 'bz-lt-kai': xuanzeqi, 'bz-lt-qianru': qianru }">
       <div class="bz-lt-duihua">
         <template v-if="wen">
-          <div class="bz-lt-yonghu">{{ wen }}</div>
+          <div class="bz-lt-yonghu">
+            <span v-if="wentupian" class="bz-lt-tu bz-lt-tu-wen" aria-hidden="true"><span class="bz-lt-tu-hua" /></span>
+            <span>{{ wen }}</span>
+          </div>
           <div class="bz-lt-huida">
             <div class="bz-lt-huida-tou">
-              <BzPinpai pinpai="claude" :daxiao="14" />
+              <BzPinpai :pinpai="pinpai" :daxiao="14" />
               <span>{{ moxing }}</span>
             </div>
             <div class="bz-lt-huida-wen">{{ da }}</div>
@@ -155,8 +171,20 @@ const houzhui = computed(() => {
           </div>
         </div>
 
+        <div v-if="tishi" class="bz-lt-tishi" role="status">
+          <svg class="bz-lt-tishi-tu" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.2" /><path d="M8 7v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" /><circle cx="8" cy="5" r=".8" fill="currentColor" /></svg>
+          <div class="bz-lt-tishi-wen">
+            <div class="bz-lt-tishi-biao">{{ t(tishi === "wuxiao" ? "chat.visionProxyHint.invalidTitle" : "chat.visionProxyHint.requiredTitle") }}</div>
+            <div class="bz-lt-tishi-shuo">{{ tishi === "wuxiao" ? tihuan("chat.visionProxyHint.invalidDescription", daili, moxing) : tihuan("chat.visionProxyHint.requiredDescription", moxing) }}</div>
+          </div>
+          <span class="bz-lt-tishi-an" :class="{ 'bz-gl': gaoliang === 'tishi' }">
+            {{ t("chat.visionProxyHint.configureAction") }}
+            <span v-if="gaoliang === 'tishi' && biaoji" class="bz-biaoji" style="top: -10px; right: -8px">{{ biaoji }}</span>
+          </span>
+        </div>
         <div class="bz-lt-tuopan">
           <div class="bz-lt-shuru">
+            <div v-if="tupian" class="bz-lt-fujian"><span class="bz-lt-tu" aria-hidden="true"><span class="bz-lt-tu-hua" /></span></div>
             <div class="bz-lt-zhanwei">{{ t("chat.input.placeholder") }}</div>
             <div class="bz-lt-gongju">
               <div class="bz-lt-gongju-zuo">
@@ -167,7 +195,7 @@ const houzhui = computed(() => {
                 </span>
                 <span class="bz-lt-jiaonang" :class="{ 'bz-gl': gaoliang === 'jiaonang', 'bz-dakai': xuanzeqi }">
                   <span class="bz-lt-jiaonang-ming">{{ moxing }}</span>
-                  <span class="bz-lt-jiaonang-hou">{{ houzhui }}</span>
+                  <span class="bz-lt-jiaonang-hou">{{ houzhuiwenzi }}</span>
                   <BzTubiao ming="chevron-down" :daxiao="12" />
                   <span v-if="gaoliang === 'jiaonang' && biaoji" class="bz-biaoji" style="top: -12px; right: -10px">{{ biaoji }}</span>
                   <span v-if="jiaonangbiaoji" class="bz-biaoji" style="top: -14px; left: -2px">{{ jiaonangbiaoji }}</span>
@@ -221,6 +249,94 @@ const houzhui = computed(() => {
   font-size: 13px;
   line-height: 1.5;
   background: color-mix(in srgb, var(--bz-input-bg) 90%, var(--bz-sidebar-bg));
+  border: 1px solid color-mix(in srgb, var(--bz-fg) 12%, transparent);
+}
+
+.bz-lt-yonghu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* 圖片附件縮圖（ChatInputArea.tsx ImageSelectionTag：32×32、紫色細框）；圖內是一張畫出來的報錯截圖示意。 */
+.bz-lt-tu {
+  position: relative;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+  border-radius: 2px;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  background: #1f2430;
+}
+
+.bz-lt-tu-wen {
+  width: 96px;
+  height: 60px;
+}
+
+.bz-lt-tu-hua {
+  position: absolute;
+  inset: 18% 12%;
+  border-radius: 2px;
+  background:
+    linear-gradient(#e5534b, #e5534b) 8% 22% / 18% 14% no-repeat,
+    linear-gradient(#c9d1d9, #c9d1d9) 34% 22% / 54% 10% no-repeat,
+    linear-gradient(#768390, #768390) 8% 58% / 80% 8% no-repeat,
+    linear-gradient(#768390, #768390) 8% 78% / 60% 8% no-repeat,
+    #2d333b;
+}
+
+.bz-lt-fujian {
+  display: flex;
+  gap: 4px;
+  margin-bottom: -10px;
+}
+
+.bz-lt-tishi {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-bottom: 6px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--bz-fg) 3.5%, transparent);
+  border: 1px solid color-mix(in srgb, var(--bz-fg) 12%, transparent);
+}
+
+.bz-lt-tishi-tu {
+  flex-shrink: 0;
+  color: var(--bz-placeholder);
+}
+
+.bz-lt-tishi-wen {
+  flex: 1;
+  min-width: 180px;
+}
+
+.bz-lt-tishi-biao {
+  color: var(--bz-fg-1);
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.375;
+}
+
+.bz-lt-tishi-shuo {
+  margin-top: 2px;
+  color: var(--bz-fg-3);
+  font-size: 11.5px;
+  line-height: 1.375;
+}
+
+.bz-lt-tishi-an {
+  position: relative;
+  flex-shrink: 0;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--bz-fg-2);
   border: 1px solid color-mix(in srgb, var(--bz-fg) 12%, transparent);
 }
 
