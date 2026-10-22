@@ -43,6 +43,7 @@ const props = withDefaults(
     youhuawen?: string;
     sou?: string;
     suoding?: boolean;
+    jiesuojindu?: number;
     tanchugaoliang?: string;
     duiliewen?: string;
     zhuru?: string;
@@ -91,6 +92,7 @@ const props = withDefaults(
     youhuawen: "",
     sou: "side",
     suoding: false,
+    jiesuojindu: 2,
     tanchugaoliang: "",
     duiliewen: "Also update the README|Then run the tests",
     zhuru: "",
@@ -433,11 +435,11 @@ const houzhuiwenzi = computed(() => {
         </div>
         <div class="bz-lt-tuopan">
           <div v-if="tanchuweizhi === 'fu' || tanchuweizhi === 'quan' || tanchuweizhi === 'tuopan'" class="bz-lt-tc" :class="`bz-lt-tc-${tanchuweizhi}`" :style="tanchuweizhi === 'tuopan' ? { left: tuopanzuo } : undefined">
-            <BzShuruTanchu :lei="tanchu" :moshi="moshi" :suoding="suoding" :gaoliang="tanchugaoliang" :biaoji="biaoji" :youhuawen="youhuawen" :sou="sou" />
+            <BzShuruTanchu :lei="tanchu" :moshi="moshi" :suoding="suoding" :jindu="jiesuojindu" :gaoliang="tanchugaoliang" :biaoji="biaoji" :youhuawen="youhuawen" :sou="sou" />
           </div>
           <div class="bz-lt-shuru">
             <div v-if="tanchuweizhi === 'moshi'" class="bz-lt-tc bz-lt-tc-moshi">
-              <BzShuruTanchu lei="moshi" :moshi="moshi" :suoding="suoding" />
+              <BzShuruTanchu lei="moshi" :moshi="moshi" :suoding="suoding" :jindu="jiesuojindu" />
             </div>
             <div v-if="tupian" class="bz-lt-fujian"><span class="bz-lt-tu" aria-hidden="true"><span class="bz-lt-tu-hua" /></span></div>
             <div v-if="shuru" class="bz-lt-shuruwen">{{ shuru }}<span class="bz-lt-guangbiao" aria-hidden="true" /></div>

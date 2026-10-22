@@ -771,7 +771,16 @@
   "experimental.entanglementStrict.title": "Entanglement Strict Verification",
   "experimental.humanLoop.desc": "Before a task runs, the model looks for gaps in your request, asks you about them, and checks its understanding with you in plain words. Work starts only after you confirm, and the confirmed understanding joins the task's context. Later messages keep that understanding: the model judges whether a message continues the task or asks for something new, and checks the new request with you first.",
   "experimental.humanLoop.needsStrict": "Turn on strict verification first.",
-  "experimental.humanLoop.title": "Human-in-the-loop mode"
+  "experimental.humanLoop.title": "Human-in-the-loop mode",
+  "box.account.notSignedIn": "Not signed in",
+  "box.account.signInHint": "Sign in to your Breezell account",
+  "box.account.signOut": "Sign out",
+  "box.account.managePlan": "Manage plan",
+  "box.account.plan": "Plan",
+  "box.account.balance": "Balance",
+  "box.account.freeHint": "Upgrade for more",
+  "box.account.lifetime": "Lifetime",
+  "box.account.daysLeft": "{0} days left"
  },
  "zh-hans": {
   "box.title": "Breezell 设置",
@@ -1545,7 +1554,16 @@
   "experimental.entanglementStrict.title": "纠缠模式严格验证",
   "experimental.humanLoop.desc": "执行任务前，模型会先检查你的需求有没有疏漏，针对不清楚的地方询问你，并用大白话跟你核对它的理解；你确认后才开始动手，确认过的理解会加入这次任务的上下文。之后的消息沿用这份理解：由模型判断是在延续任务还是新的需求，新需求会先跟你核对。",
   "experimental.humanLoop.needsStrict": "请先开启严格验证。",
-  "experimental.humanLoop.title": "人机互动模式"
+  "experimental.humanLoop.title": "人机互动模式",
+  "box.account.notSignedIn": "未登录",
+  "box.account.signInHint": "登录你的 Breezell 账号",
+  "box.account.signOut": "退出登录",
+  "box.account.managePlan": "管理套餐",
+  "box.account.plan": "套餐",
+  "box.account.balance": "余额",
+  "box.account.freeHint": "升级解锁更多额度",
+  "box.account.lifetime": "永久买断",
+  "box.account.daysLeft": "剩 {0} 天"
  },
  "zh-hant": {
   "box.title": "Breezell 設定",
@@ -2319,7 +2337,16 @@
   "experimental.entanglementStrict.title": "糾纏模式嚴格驗證",
   "experimental.humanLoop.desc": "執行任務前，模型會先檢查你的需求有沒有疏漏，針對不清楚的地方詢問你，並用大白話跟你核對它的理解；你確認後才開始動手，確認過的理解會加入這次任務的上下文。之後的訊息沿用這份理解：由模型判斷是在延續任務還是新的需求，新需求會先跟你核對。",
   "experimental.humanLoop.needsStrict": "請先開啟嚴格驗證。",
-  "experimental.humanLoop.title": "人機互動模式"
+  "experimental.humanLoop.title": "人機互動模式",
+  "box.account.notSignedIn": "未登入",
+  "box.account.signInHint": "登入你的 Breezell 帳號",
+  "box.account.signOut": "登出",
+  "box.account.managePlan": "管理方案",
+  "box.account.plan": "方案",
+  "box.account.balance": "餘額",
+  "box.account.freeHint": "升級解鎖更多額度",
+  "box.account.lifetime": "永久買斷",
+  "box.account.daysLeft": "剩 {0} 天"
  },
  "ja": {
   "box.title": "Breezell 設定",
@@ -3093,7 +3120,16 @@
   "experimental.entanglementStrict.title": "エンタングルメント厳格検証",
   "experimental.humanLoop.desc": "タスクを始める前に、モデルが依頼の抜けや曖昧な点を探して質問し、理解した内容を平易な言葉であなたと確認します。確認後に作業を開始し、確認した理解はこのタスクのコンテキストに加わります。以降のメッセージはその理解を引き継ぎ、タスクの続きか新しい依頼かをモデルが判断し、新しい依頼は先にあなたと確認します。",
   "experimental.humanLoop.needsStrict": "先に厳格検証をオンにしてください。",
-  "experimental.humanLoop.title": "ヒューマン・イン・ザ・ループ"
+  "experimental.humanLoop.title": "ヒューマン・イン・ザ・ループ",
+  "box.account.notSignedIn": "未ログイン",
+  "box.account.signInHint": "Breezell アカウントにログイン",
+  "box.account.signOut": "ログアウト",
+  "box.account.managePlan": "プランを管理",
+  "box.account.plan": "プラン",
+  "box.account.balance": "残高",
+  "box.account.freeHint": "アップグレードで拡張",
+  "box.account.lifetime": "買い切り",
+  "box.account.daysLeft": "残り {0} 日"
  },
  "ko": {
   "box.title": "Breezell 설정",
@@ -3867,7 +3903,16 @@
   "experimental.entanglementStrict.title": "얽힘 모드 엄격 검증",
   "experimental.humanLoop.desc": "작업을 시작하기 전에 모델이 요청에서 빠지거나 모호한 부분을 찾아 질문하고, 이해한 내용을 쉬운 말로 확인합니다. 확인한 뒤에만 작업을 시작하며, 확인된 이해는 이 작업의 컨텍스트에 추가됩니다. 이후 메시지는 그 이해를 이어 가며, 작업의 연속인지 새 요청인지 모델이 판단하고 새 요청은 먼저 확인합니다.",
   "experimental.humanLoop.needsStrict": "먼저 엄격 검증을 켜세요.",
-  "experimental.humanLoop.title": "휴먼 인 더 루프 모드"
+  "experimental.humanLoop.title": "휴먼 인 더 루프 모드",
+  "box.account.notSignedIn": "로그인되지 않음",
+  "box.account.signInHint": "Breezell 계정에 로그인",
+  "box.account.signOut": "로그아웃",
+  "box.account.managePlan": "플랜 관리",
+  "box.account.plan": "플랜",
+  "box.account.balance": "잔액",
+  "box.account.freeHint": "업그레이드하고 더 쓰기",
+  "box.account.lifetime": "평생 이용",
+  "box.account.daysLeft": "{0}일 남음"
  },
  "es": {
   "box.title": "Ajustes de Breezell",
@@ -4641,7 +4686,16 @@
   "experimental.entanglementStrict.title": "Verificación estricta de Entrelazamiento",
   "experimental.humanLoop.desc": "Antes de ejecutar una tarea, el modelo busca huecos en tu petición, te pregunta por ellos y comprueba contigo su comprensión en palabras sencillas. El trabajo empieza solo cuando confirmas, y la comprensión confirmada se añade al contexto de la tarea. Los mensajes siguientes conservan esa comprensión: el modelo juzga si un mensaje continúa la tarea o pide algo nuevo, y lo nuevo lo comprueba contigo primero.",
   "experimental.humanLoop.needsStrict": "Activa primero la verificación estricta.",
-  "experimental.humanLoop.title": "Modo humano en el bucle"
+  "experimental.humanLoop.title": "Modo humano en el bucle",
+  "box.account.notSignedIn": "Sin iniciar sesión",
+  "box.account.signInHint": "Inicia sesión en tu cuenta de Breezell",
+  "box.account.signOut": "Cerrar sesión",
+  "box.account.managePlan": "Gestionar plan",
+  "box.account.plan": "Plan",
+  "box.account.balance": "Saldo",
+  "box.account.freeHint": "Mejora para tener más",
+  "box.account.lifetime": "De por vida",
+  "box.account.daysLeft": "Quedan {0} días"
  },
  "pt-br": {
   "box.title": "Configurações do Breezell",
@@ -5415,7 +5469,16 @@
   "experimental.entanglementStrict.title": "Verificação estrita do Entrelaçamento",
   "experimental.humanLoop.desc": "Antes de executar uma tarefa, o modelo procura lacunas no seu pedido, pergunta sobre elas e confere com você o entendimento em palavras simples. O trabalho só começa depois que você confirma, e o entendimento confirmado entra no contexto da tarefa. As mensagens seguintes mantêm esse entendimento: o modelo julga se a mensagem continua a tarefa ou pede algo novo, e confere o novo pedido com você antes.",
   "experimental.humanLoop.needsStrict": "Ative a verificação estrita primeiro.",
-  "experimental.humanLoop.title": "Modo humano no circuito"
+  "experimental.humanLoop.title": "Modo humano no circuito",
+  "box.account.notSignedIn": "Não conectado",
+  "box.account.signInHint": "Entre na sua conta Breezell",
+  "box.account.signOut": "Sair",
+  "box.account.managePlan": "Gerenciar plano",
+  "box.account.plan": "Plano",
+  "box.account.balance": "Saldo",
+  "box.account.freeHint": "Faça upgrade para ter mais",
+  "box.account.lifetime": "Vitalício",
+  "box.account.daysLeft": "{0} dias restantes"
  },
  "ru": {
   "box.title": "Настройки Breezell",
@@ -6189,6 +6252,15 @@
   "experimental.entanglementStrict.title": "Строгая проверка режима «Запутанность»",
   "experimental.humanLoop.desc": "Перед выполнением задачи модель ищет пробелы в запросе, задаёт вам вопросы и простыми словами сверяет с вами своё понимание. Работа начинается только после вашего подтверждения, а подтверждённое понимание добавляется в контекст задачи. Следующие сообщения сохраняют это понимание: модель сама решает, продолжает ли сообщение задачу или просит новое, и новое сначала сверяет с вами.",
   "experimental.humanLoop.needsStrict": "Сначала включите строгую проверку.",
-  "experimental.humanLoop.title": "Режим «человек в цикле»"
+  "experimental.humanLoop.title": "Режим «человек в цикле»",
+  "box.account.notSignedIn": "Вы не вошли",
+  "box.account.signInHint": "Войдите в аккаунт Breezell",
+  "box.account.signOut": "Выйти",
+  "box.account.managePlan": "Управлять планом",
+  "box.account.plan": "План",
+  "box.account.balance": "Баланс",
+  "box.account.freeHint": "Больше на платном плане",
+  "box.account.lifetime": "Навсегда",
+  "box.account.daysLeft": "Осталось {0} дн."
  }
 }

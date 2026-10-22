@@ -14,8 +14,8 @@ import { moshishunxu, moshixinxi, shiyongwenben, type duihuamoshi } from "./shuj
 // liulanqi    Breezell Browser 面板（ChatInputArea.tsx，尚未開啟瀏覽器時的樣子）
 // mcp         MCP 開關面板（ChatInputArea.tsx）
 const props = withDefaults(
-  defineProps<{ lei: string; moshi?: duihuamoshi; suoding?: boolean; gaoliang?: string; biaoji?: string; youhuawen?: string; sou?: string }>(),
-  { moshi: "agent", suoding: false, gaoliang: "", biaoji: "", youhuawen: "", sou: "side" },
+  defineProps<{ lei: string; moshi?: duihuamoshi; suoding?: boolean; jindu?: number; gaoliang?: string; biaoji?: string; youhuawen?: string; sou?: string }>(),
+  { moshi: "agent", suoding: false, jindu: 2, gaoliang: "", biaoji: "", youhuawen: "", sou: "side" },
 );
 
 const { t } = shiyongwenben();
@@ -135,7 +135,7 @@ const mcpliebiao = ref([
       <span class="bz-st-xq-shuo" :class="{ 'bz-st-xq-xie': xuanting === 'dark_selene' }">{{ t(`chatMode.${moshijian[xuanting]}Explain` as never) }}</span>
       <span v-if="shouxian(xuanting)" class="bz-st-xq-fen">
         <span class="bz-st-xq-biao">{{ t("chatMode.entanglementUnlockTitle") }}</span>
-        <span class="bz-st-xq-zhu">{{ t("chatMode.entanglementUnlockProgress").replace("{0}", "2").replace("{1}", "5") }}</span>
+        <span class="bz-st-xq-zhu">{{ t("chatMode.entanglementUnlockProgress").replace("{0}", String(jindu)).replace("{1}", "5") }}</span>
         <span class="bz-st-xq-shuo">{{ t("chatMode.entanglementUnlockHint") }}</span>
       </span>
       <span v-if="xuanting === 'agent_teams'" class="bz-st-xq-fen"><span class="bz-st-xq-zhu">{{ t("chatMode.agentTeamsTokenWarning") }}</span></span>

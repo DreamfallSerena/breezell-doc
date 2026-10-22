@@ -8,8 +8,8 @@ const props = defineProps<{ jian: string; canshu?: string; canshujian?: string }
 const { t, tihuan } = shiyongwenben();
 const wenzi = computed(() => {
   const canshu = props.canshujian ? t(props.canshujian as never) : props.canshu;
-  // 多個參數用「|」分隔：canshu="1|12" 依序替換 {0}、{1}。
-  return canshu === undefined ? t(props.jian as never) : tihuan(props.jian as never, ...canshu.split("|"));
+  // 多個參數用「|」分隔：canshu="1|12" 依序替換 {0}、{1}。Markdown 表格裡「|」會切開儲存格，改用「;」。
+  return canshu === undefined ? t(props.jian as never) : tihuan(props.jian as never, ...canshu.split(/[|;]/));
 });
 </script>
 

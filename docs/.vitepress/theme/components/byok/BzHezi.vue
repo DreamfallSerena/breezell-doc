@@ -8,13 +8,32 @@ import { shiyongwenben } from "./shuju";
 // Box 頁（BoxSettingsPage.tsx）：左側 256px 側欄（空間切換、搜尋、Console / Workspace 導航、
 // 版本更新與帳號），右側是麵包屑和當前頁。ye 指定「Breezell 設定」群組裡選中的頁（預設「模型」），
 // gaoliang 非空時用橘色光圈標出該頁；預設插槽是模型頁頁首，其他頁由呼叫方傳入內容。
-// zu 指定展開哪一個群組：settings（Breezell 設定，預設）或 memory（超級記憶的四個頁面）。
-const props = withDefaults(defineProps<{ gaoliang?: string; ye?: string; biaoji?: string; zu?: "settings" | "memory" }>(), {
-  gaoliang: "",
-  ye: "tab.models",
-  biaoji: "2",
-  zu: "settings",
-});
+// zu 指定展開哪一個群組：settings（Breezell 設定，預設）、memory（超級記憶的四個頁面）或 none（全部收起）。
+// zhanghu 指定側欄底部帳號卡（NavUser）的狀態：weidenglu 未登入、yidenglu 已登入免費帳號；
+// 留空時沿用其他頁面的 Custom API 示例。zhanghukai 打開帳號卡向上彈出的帳號面板，
+// zhanghugaoliang 用橘色光圈標出 ka（帳號卡）或 denglu（面板裡的登入按鈕）。gao 是外框高度。
+const props = withDefaults(
+  defineProps<{
+    gaoliang?: string;
+    ye?: string;
+    biaoji?: string;
+    zu?: "settings" | "memory" | "none";
+    zhanghu?: "" | "weidenglu" | "yidenglu";
+    zhanghukai?: boolean;
+    zhanghugaoliang?: string;
+    gao?: number;
+  }>(),
+  {
+    gaoliang: "",
+    ye: "tab.models",
+    biaoji: "2",
+    zu: "settings",
+    zhanghu: "",
+    zhanghukai: false,
+    zhanghugaoliang: "",
+    gao: 620,
+  },
+);
 
 const { t } = shiyongwenben();
 
@@ -60,6 +79,8 @@ const miaobian = computed(() => {
   return `M ${zhuganx} 0 V ${y - banjing} A ${banjing} ${banjing} 0 0 0 ${zhuganx + banjing} ${y} H ${zhongdianx}`;
 });
 
+const denglu = computed(() => props.zhanghu === "yidenglu");
+
 const zhukongzhitai = [
   { id: "settings", jian: "box.title", ming: "settings-2" },
   { id: "review", jian: "box.review.group", ming: "git-compare" },
@@ -75,7 +96,7 @@ const gongzuoqu = [
 
 <template>
   <div class="bz">
-    <div class="bz-chuangkou bz-cebian bz-hezi">
+    <div class="bz-chuangkou bz-cebian bz-hezi" :style="{ height: `${gao}px` }">
       <aside class="bz-hz-ce">
         <div class="bz-hz-tou">
           <div class="bz-hz-ka">
@@ -138,7 +159,7 @@ const gongzuoqu = [
               <span class="bz-hz-ka-ci">v1.4.37</span>
             </span>
           </div>
-          <div class="bz-hz-ka">
+          <div v-if="!zhanghu" class="bz-hz-ka">
             <span class="bz-hz-touxiang">BZ</span>
             <span class="bz-hz-ka-wen">
               <span class="bz-hz-ka-hang">
@@ -148,6 +169,61 @@ const gongzuoqu = [
               <span class="bz-hz-ka-ci">you@example.com</span>
             </span>
             <span class="bz-hz-ka-jiantou"><BzTubiao ming="chevrons-up-down" :daxiao="16" :cuxi="2" /></span>
+          </div>
+          <div v-else class="bz-hz-zh">
+            <!-- 帳號面板：Popover side="top"，寬 272，離卡片 4px（PANEL_STYLE） -->
+            <div v-if="zhanghukai" class="bz-hz-mianban" role="menu">
+              <div class="bz-hz-mb-tou">
+                <span v-if="denglu" class="bz-hz-tx bz-hz-tx-da bz-hz-tx-yi">AL</span>
+                <span v-else class="bz-hz-tx bz-hz-tx-da bz-hz-tx-wei"><BzTubiao ming="user-round" :daxiao="22" :cuxi="2" /></span>
+                <span class="bz-hz-mb-ren">
+                  <span class="bz-hz-mb-ming">{{ denglu ? "Alex" : t("box.account.notSignedIn") }}</span>
+                  <span class="bz-hz-mb-ci">{{ denglu ? "alex@example.com" : t("box.account.signInHint") }}</span>
+                </span>
+              </div>
+              <template v-if="denglu">
+                <div class="bz-hz-mb-shu">
+                  <div class="bz-hz-mb-tongji">
+                    <span class="bz-hz-mb-biao">{{ t("box.account.plan") }}</span>
+                    <span class="bz-hz-mb-zhi">Free</span>
+                    <span class="bz-hz-mb-biao bz-hz-mb-zhu">{{ t("box.account.freeHint") }}</span>
+                  </div>
+                  <div class="bz-hz-mb-tongji">
+                    <span class="bz-hz-mb-biao">{{ t("box.account.balance") }}</span>
+                    <span class="bz-hz-mb-zhi">$0.00</span>
+                  </div>
+                </div>
+                <div class="bz-hz-mb-fenge" />
+                <div class="bz-hz-mb-dongzuo">
+                  <span class="bz-hz-mb-xiang" :class="{ 'bz-gl': zhanghugaoliang === 'guanli' }">
+                    <span class="bz-hz-mb-tu"><BzTubiao ming="credit-card" :daxiao="14" :cuxi="2" /></span>
+                    <span class="bz-hz-mb-wen">{{ t("box.account.managePlan") }}</span>
+                    <BzTubiao ming="arrow-up-right" :daxiao="14" :cuxi="2" class="bz-hz-mb-wei" />
+                  </span>
+                  <span class="bz-hz-mb-xiang">
+                    <span class="bz-hz-mb-tu"><BzTubiao ming="log-out" :daxiao="14" :cuxi="2" /></span>
+                    <span class="bz-hz-mb-wen">{{ t("box.account.signOut") }}</span>
+                  </span>
+                </div>
+              </template>
+              <span v-else class="bz-hz-mb-denglu" :class="{ 'bz-gl': zhanghugaoliang === 'denglu' }">
+                <BzTubiao ming="log-in" :daxiao="14" :cuxi="2.2" />{{ t("box.account.signIn") }}
+                <span v-if="zhanghugaoliang === 'denglu' && biaoji" class="bz-biaoji" style="top: -10px; right: -8px">{{ biaoji }}</span>
+              </span>
+            </div>
+            <div class="bz-hz-ka" :class="{ 'bz-kai': zhanghukai, 'bz-gl': zhanghugaoliang === 'ka' }">
+              <span v-if="denglu" class="bz-hz-tx bz-hz-tx-yi">AL</span>
+              <span v-else class="bz-hz-tx bz-hz-tx-wei"><BzTubiao ming="user-round" :daxiao="16" :cuxi="2" /></span>
+              <span class="bz-hz-ka-wen">
+                <span class="bz-hz-ka-hang">
+                  <span class="bz-hz-ka-ming">{{ denglu ? "Alex" : t("box.account.notSignedIn") }}</span>
+                  <span v-if="denglu" class="bz-hz-fangan bz-hz-fangan-mian">Free</span>
+                </span>
+                <span class="bz-hz-ka-ci">{{ denglu ? "alex@example.com" : t("box.account.signInHint") }}</span>
+              </span>
+              <span class="bz-hz-ka-jiantou"><BzTubiao ming="chevrons-up-down" :daxiao="16" :cuxi="2" /></span>
+              <span v-if="zhanghugaoliang === 'ka' && biaoji" class="bz-biaoji" style="top: -10px; right: -8px">{{ biaoji }}</span>
+            </div>
           </div>
         </div>
       </aside>
@@ -178,11 +254,12 @@ const gongzuoqu = [
 <style scoped>
 .bz-hezi {
   display: flex;
-  height: 620px;
   container-type: inline-size;
 }
 
 .bz-hz-ce {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   width: 256px;
@@ -421,6 +498,219 @@ const gongzuoqu = [
   font-weight: 650;
   color: var(--bz-fg-1);
   background: color-mix(in srgb, var(--bz-fg) 12%, transparent);
+}
+
+.bz-hz-zh {
+  position: relative;
+}
+
+.bz-hz-ka.bz-kai {
+  border-color: color-mix(in srgb, var(--bz-fg) 20%, transparent);
+  background: color-mix(in srgb, var(--bz-fg) 8%, transparent);
+}
+
+.bz-hz-ka.bz-kai .bz-hz-ka-jiantou {
+  border-radius: 7px;
+  color: var(--bz-fg-1);
+  background: color-mix(in srgb, var(--bz-fg) 8%, transparent);
+}
+
+.bz-hz-ka.bz-gl {
+  position: relative;
+}
+
+/* AccountAvatar：已登入是按鈕色底的縮寫加一圈方案色描邊，未登入是虛線圓裡的 UserRound */
+.bz-hz-tx {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.bz-hz-tx-da {
+  width: 44px;
+  height: 44px;
+  font-size: 15px;
+}
+
+.bz-hz-tx-yi {
+  color: var(--bz-button-fg);
+  background: var(--bz-button-bg);
+  outline: 1.5px solid color-mix(in srgb, var(--bz-fg) 26%, transparent);
+  outline-offset: 2px;
+}
+
+.bz-hz-tx-wei {
+  color: var(--bz-fg-3);
+  border: 1px dashed color-mix(in srgb, var(--bz-fg) 30%, transparent);
+  background: color-mix(in srgb, var(--bz-fg) 4%, transparent);
+}
+
+.bz-hz-mianban {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 0;
+  z-index: 5;
+  width: 272px;
+  padding: 6px;
+  border-radius: 14px;
+  color: var(--bz-fg);
+  background: var(--bz-menu-bg);
+  border: 1px solid color-mix(in srgb, var(--bz-fg) 12%, transparent);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+}
+
+.bz-hz-mb-tou {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 14px 12px 12px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--bz-fg) 7%, transparent) 0%, color-mix(in srgb, var(--bz-fg) 2%, transparent) 72%);
+  border: 1px solid color-mix(in srgb, var(--bz-fg) 9%, transparent);
+}
+
+.bz-hz-mb-ren {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.bz-hz-mb-ming {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--bz-fg-1);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px;
+}
+
+.bz-hz-mb-ci {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--bz-fg-3);
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 15px;
+}
+
+.bz-hz-mb-shu {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.bz-hz-mb-tongji {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  padding: 9px 10px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--bz-fg) 4%, transparent);
+  border: 1px solid color-mix(in srgb, var(--bz-fg) 8%, transparent);
+}
+
+.bz-hz-mb-biao {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--bz-fg-3);
+  font-size: 10.5px;
+  font-weight: 600;
+  line-height: 13px;
+}
+
+.bz-hz-mb-zhu {
+  font-weight: 500;
+}
+
+.bz-hz-mb-zhi {
+  min-height: 19px;
+  color: var(--bz-fg-1);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 19px;
+  font-variant-numeric: tabular-nums;
+}
+
+.bz-hz-mb-fenge {
+  height: 1px;
+  margin: 4px 0;
+  background: color-mix(in srgb, var(--bz-fg) 12%, transparent);
+}
+
+.bz-hz-mb-dongzuo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bz-hz-mb-xiang {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 34px;
+  padding: 0 8px 0 5px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.bz-hz-mb-tu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--bz-fg) 7%, transparent);
+}
+
+.bz-hz-mb-wen {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.bz-hz-mb-wei {
+  color: var(--bz-fg-3);
+}
+
+.bz-hz-mb-denglu {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 32px;
+  margin-top: 6px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--bz-button-fg);
+  background: var(--bz-button-bg);
+}
+
+.bz-hz-fangan.bz-hz-fangan-mian {
+  color: color-mix(in srgb, var(--bz-fg) 70%, transparent);
+  border-color: color-mix(in srgb, var(--bz-fg) 14%, transparent);
+  background: color-mix(in srgb, var(--bz-fg) 6%, transparent);
 }
 
 .bz-hz-fangan {
