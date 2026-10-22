@@ -1,75 +1,127 @@
 ---
 title: Seleção de modo
-description: Visão geral dos modos de trabalho do Breezell e de quando usar cada um.
+description: O que cada modo do Breezell — Chat, Plan, Analyze, Entanglement, Agent, Teams e DarkSelene — pode ler, alterar e executar, como funcionam os cartões do Plan e as trocas de modo, e qual modo escolher.
 ---
 
 # Seleção de modo
 
-O Breezell oferece vários modos de trabalho para diferentes níveis de autonomia, profundidade e controle do fluxo de trabalho. Agent é o modo padrão e o fluxo automático recomendado para a maioria das tarefas.
+O modo define como a IA trabalha na sua próxima mensagem: o que ela pode ler, o que pode alterar e o que pode executar. Escolha-o na cápsula de modo, no canto inferior esquerdo da caixa de entrada. **Agent** é o padrão e a escolha certa para a maior parte do trabalho.
 
-Use outro modo quando quiser um estilo de interação mais específico, como conversa rápida, análise somente leitura, planejamento antes de editar, raciocínio causal mais profundo ou colegas de IA em paralelo.
+::: tip Sobre as telas desta página
+As telas do Breezell abaixo foram recriadas em HTML a partir do código-fonte do Breezell. O texto delas acompanha o idioma desta página. Passe o mouse sobre os modos no menu para ler as descrições deles; os menus e os interruptores dos cartões podem ser clicados.
+:::
 
-## Chat
+<BzLiaotian tanchu="moshi" moshi="agent" />
 
-Chat é destinado a perguntas e respostas rápidas.
+O menu mostra os nomes dos modos em inglês em todos os idiomas. O modo escolhido vale a partir da sua próxima mensagem; quando você envia em outro modo, uma linha <BzWenben jian="chatMode.switchedTo" canshujian="chatMode.planLabel" /> marca a mudança na conversa. Para o menu em si, veja [Escolher um modo](/dialog-box-overview#mode).
 
-Use Chat quando quiser perguntar sobre código, explicar uma ideia, comparar opções ou obter uma resposta rápida sem pedir que o Breezell edite arquivos ou execute ferramentas de forma autônoma.
+## O que cada modo pode fazer {#compare}
 
-No modo Chat, o modelo não pode editar arquivos.
+| Modo | Lê o projeto | Altera arquivos | Executa comandos | Ferramentas MCP |
+| --- | --- | --- | --- | --- |
+| [Chat](#chat) | — | — | — | — |
+| [Plan](#plan) | ✓ | Só o próprio plano | — | — |
+| [Analyze](#analyze) | ✓ | — | — | ✓ |
+| [Entanglement](#entanglement) | ✓ | ✓ | ✓ | ✓ |
+| [Agent](#agent) | ✓ | ✓ | ✓ | ✓ |
+| [Teams](#teams) | ✓ | ✓ | ✓ | ✓ |
+| [DarkSelene](#darkselene) | ✓ | ✓ (segunda etapa, com revisão) | ✓ (segunda etapa) | segunda etapa |
 
-## Agent
+A IA pode usar as suas skills em todos os modos. Em Permissões de Ferramentas, nas [Opções de Recursos](/feature-options-overview), você define se as edições de arquivos e os comandos precisam da sua aprovação.
 
-Agent permite que o Breezell inspecione o projeto, edite arquivos, use ferramentas, execute comandos e conclua tarefas de programação.
+## Chat {#chat}
 
-Use Agent para a maior parte do trabalho de desenvolvimento. Ele é o modo padrão porque pode escolher automaticamente um fluxo de trabalho adequado, reunir o contexto necessário, fazer alterações e verificar o resultado antes da entrega.
+<BzWenben jian="chatMode.normalDetail" />: <BzWenben jian="chatMode.normalExplain" />.
 
-## Analyze
+Use Chat para perguntas, explicações, comparar ideias ou rascunhar textos. A IA responde com base na conversa e no contexto que você anexa; ela não abre arquivos do projeto por conta própria nem executa nada. Ainda assim, ela pode salvar uma memória quando você pede que ela se lembre de algo.
 
-Analyze é destinado à investigação somente leitura.
+<BzLiaotian moshi="normal" wen="Qual é a diferença entre debounce e throttle?" da="Os dois limitam a frequência com que uma função é executada. O debounce espera as chamadas pararem por um instante e então executa uma vez; o throttle executa no máximo uma vez por intervalo enquanto as chamadas continuam. Use debounce na pesquisa enquanto se digita e throttle em handlers de rolagem ou redimensionamento." />
 
-Use Analyze quando quiser que o Breezell inspecione código, diagnostique problemas, revise a arquitetura ou audite o comportamento sem alterar arquivos. É útil quando você precisa de uma conclusão técnica antes de decidir o que modificar.
+## Plan {#plan}
 
-## Plan
+<BzWenben jian="chatMode.planDetail" />. <BzWenben jian="chatMode.planExplain" />.
 
-Plan cria um caminho de implementação estruturado antes da edição.
+1. A IA lê o código de que precisa, mas não altera nada dele.
+2. Ela escreve o plano como um cartão no chat: um título, um breve resumo e uma lista de tarefas. O plano é um arquivo `.plan.md` que o Breezell mantém fora do seu projeto.
+3. Clique em <BzWenben jian="planCard.actions.viewPlan" /> para ler e editar o plano. Peça alterações no chat, e a IA revisa o mesmo plano.
+4. Clique em <BzWenben jian="planCard.actions.execute" /> (`Ctrl+Enter`) para executá-lo. O cartão passa a mostrar <BzWenben jian="planCard.actions.executed" />, e as tarefas vão sendo marcadas como concluídas à medida que o trabalho avança.
 
-Use Plan para recursos complexos, refatorações maiores, requisitos pouco claros ou trabalhos que exigem uma decisão de design antes do início das alterações no código.
+<BzLiaotian moshi="plan" gaoliang="jihua" biaoji="1" wen="Adicione um interruptor de modo escuro à página de configurações." da="Aqui está um plano. Ele mantém a lógica de tema atual e adiciona uma configuração." jihuabiaoti="Interruptor de modo escuro na página de configurações" jihuazhaiyao="Adicionar ao SettingsPage.vue um interruptor de modo escuro, salvar a escolha, aplicá-la com uma classe de tema no elemento raiz e seguir a configuração do sistema até que o usuário escolha um modo." />
 
-Dica: no modo Agent, o Breezell pode decidir mudar para Plan quando a tarefa exigir um caminho de implementação estruturado. Você pode permitir ou rejeitar a mudança. Se o modo totalmente automático estiver habilitado, o Breezell poderá confirmar a mudança automaticamente quando for apropriado.
+<BzWenben jian="planCard.actions.skip" /> descarta o plano. O interruptor <BzWenben jian="planCard.actions.auto" /> no cartão é a mesma configuração que <BzWenben jian="featureOptions.contextManagement.autoPlanExecution" /> nas Opções de Recursos: quando ele está ativado, os novos planos são executados sem nenhum clique.
 
-## Entanglement
+### Quando o Agent sugere o Plan {#plan-switch}
 
-Entanglement usa raciocínio causal e consciência de contexto para decisões mais profundas sobre produto e código.
+No modo Agent, a IA pode decidir que uma tarefa precisa de um plano primeiro. Nesse caso, ela para e mostra um cartão com o motivo:
 
-Entanglement é pesquisado e desenvolvido de forma independente pelo Breezell. É um modo exclusivo do Breezell e único na web.
+<BzLiaotian moshi="agent" gaoliang="qiehuanka" biaoji="1" wen="Reescreva a camada de armazenamento para que ela possa sincronizar com o servidor." da="Isso afeta o formato de armazenamento, todos os pontos que o chamam e o cache offline." qiehuanka="A mudança abrange vários módulos e o formato dos dados; combinar um plano antes evita uma reescrita arriscada." />
 
-Para uma visão técnica do rastreamento de estado causal e do ciclo de validação, consulte [Visão geral do modo Entanglement](/pt-br/entanglement-mode-overview).
+- <BzWenben jian="planSwitch.switch" /> (`Ctrl+Enter`) leva a conversa para o modo Plan; <BzWenben jian="planSwitch.skip" /> deixa a IA continuar no modo Agent.
+- O menu no canto inferior esquerdo define o que acontece da próxima vez: <BzWenben jian="planSwitch.alwaysAsk" />, <BzWenben jian="planSwitch.never" /> ou <BzWenben jian="planSwitch.alwaysRun" />. É a mesma configuração que <BzWenben jian="featureOptions.contextManagement.planSwitchPref" /> nas Opções de Recursos.
+- Com <BzWenben jian="planSwitch.alwaysAsk" />, a barra abaixo do cartão percorre duas rodadas de 30 segundos. Se você não responder, a troca é ignorada e a IA continua.
 
-Use Entanglement quando uma solicitação depender de intenção, trade-offs, causas ocultas, nuances emocionais ou raciocínio em várias etapas que exija mais do que uma resposta direta.
+No modo Plan, a IA pode oferecer a troca inversa com o mesmo tipo de cartão, de volta ao modo de onde você veio.
 
-Dica: esse modo pode melhorar muito a capacidade do modelo, mas consome mais recursos que os fluxos de trabalho padrão. Seus efeitos colaterais são desconhecidos.
+## Analyze {#analyze}
 
-Dica: como o contexto do Entanglement já foi injetado, mudar de Entanglement para Agent na mesma conversa não desabilitará completamente o comportamento do Entanglement. A conversa continuará mantendo os recursos do Entanglement e consumindo recursos. Inicie uma nova conversa se quiser voltar a um fluxo normal de Agent.
+<BzWenben jian="chatMode.analyzeDetail" />. <BzWenben jian="chatMode.analyzeExplain" />.
 
-## Teams
+Use Analyze para encontrar a causa de um bug, revisar um design ou entender um código desconhecido antes de decidir o que alterar. A IA pesquisa e lê até conseguir responder e então para; ela pode usar ferramentas MCP para obter informações. Se algo precisar de correção, ela descreve a correção na resposta em vez de aplicá-la.
 
-Teams coordena vários colegas de IA para recursos grandes e fluxos de trabalho paralelos.
+<BzLiaotian moshi="analyze" wen="Por que o contador de tarefas mostra o número errado depois que uma tarefa é excluída?" da="deleteTask() remove o item de uma cópia do array, mas renderCounters() lê o array tasks original, então a contagem nunca diminui. Correção: faça deleteTask() atualizar o array tasks compartilhado e chame renderCounters() em seguida." />
 
-Use Teams quando uma tarefa puder ser dividida em fluxos de trabalho independentes, como pesquisar várias áreas, comparar implementações ou avançar simultaneamente em várias partes de um projeto maior.
+## Agent {#agent}
 
-Dica: esse modo pode melhorar muito a capacidade do modelo, mas consome mais recursos que os fluxos de trabalho padrão.
+<BzWenben jian="chatMode.agentDetail" />. <BzWenben jian="chatMode.agentExplain" />.
 
-Limitação: o Teams ainda pode ser limitado por conflitos de leitura e gravação entre colegas paralelos. O Breezell trabalha para reduzir esses conflitos, mas tarefas paralelas grandes ainda podem ser mais difíceis de coordenar e causar confusão se vários colegas alterarem áreas sobrepostas.
+Agent é o padrão. Ele reúne o contexto de que precisa, edita arquivos, executa comandos e verifica o resultado antes de responder. Ele pode sugerir uma [troca para o Plan](#plan-switch) quando uma tarefa é grande e pode usar ferramentas MCP, o navegador e as suas skills.
 
-## Escolher um modo
+No Windows e no macOS, quando o controle da área de trabalho está ativado, Agent e Entanglement são os únicos modos que podem operar aplicativos no seu computador.
 
-Para a maioria das tarefas, mantenha o modo Agent padrão. Troque de modo apenas quando a tarefa claramente exigir um fluxo de trabalho diferente.
+## Entanglement {#entanglement}
 
-| Modo | Melhor para |
+<BzWenben jian="chatMode.breezellOriginalMode" />. <BzWenben jian="chatMode.entanglementDetail" />: <BzWenben jian="chatMode.entanglementExplain" />
+
+Entanglement tem todas as capacidades do Agent e acrescenta um raciocínio causal explícito e estruturado. A IA acompanha as próprias hipóteses, usa cada chamada de ferramenta para confirmar ou descartar uma delas e pode parar para confirmar uma etapa com você antes de continuar. Um painel acima do chat mostra esse estado à medida que ele evolui (<BzWenben jian="featureOptions.entanglement.enable" /> nas Opções de Recursos).
+
+Use-o para bugs difíceis, decisões de arquitetura, refatorações e trabalhos de desempenho ou segurança. Ele usa mais tokens que o Agent. Como ele funciona em detalhes: [Modo Entanglement](/entanglement-mode-overview).
+
+## Teams {#teams}
+
+<BzWenben jian="chatMode.agentTeamsDetail" />. <BzWenben jian="chatMode.agentTeamsExplain" />.
+
+- O líder decide se vale a pena montar uma equipe. Solicitações simples são respondidas diretamente.
+- Em trabalhos grandes, o líder divide a tarefa e inicia colegas que trabalham em paralelo; depois, reúne e confere os resultados deles.
+- Antes de uma equipe começar, o Breezell pede a sua aprovação, a menos que <BzWenben jian="featureOptions.toolPermissions.teams" /> esteja ativado nas Opções de Recursos. Os colegas de design e de correção de bugs podem rodar em modelos próprios (<BzWenben jian="models.teamDesignModel.title" />, <BzWenben jian="models.teamBugfixModel.title" />).
+- <BzWenben jian="chatMode.agentTeamsTokenWarning" />. Colegas em paralelo também podem atrapalhar uns aos outros quando trabalham nos mesmos arquivos, então dê a eles partes claramente separadas.
+
+## DarkSelene {#darkselene}
+
+<BzWenben jian="chatMode.breezellOriginalMode" />. <BzWenben jian="chatMode.darkSeleneDetail" />.
+
+DarkSelene trabalha em duas etapas:
+
+1. **Desmontar a pergunta.** Somente leitura, como no Analyze: a IA estuda a solicitação e o código e escreve um briefing do que precisa ser feito e do que esperar.
+2. **Executar sob revisão.** O briefing vai para o Agent. Enquanto ele trabalha, chamadas independentes de modelo revisam as leituras dele fora dos arquivos esperados e cada edição, e as conclusões delas voltam para ele como evidências. Edições arriscadas são verificadas por três revisores em paralelo.
+
+Durante a segunda etapa, a IA não troca de modo, não escreve cartões de plano nem interrompe o trabalho para fazer perguntas. <BzWenben jian="chatMode.darkSeleneTokenWarning" />
+
+## Modos bloqueados {#locked}
+
+Entanglement e Teams ficam disponíveis depois que cinco amigos ajudam você a desbloqueá-los, ou com qualquer plano. Até lá, eles mostram um cadeado no menu, e passar o mouse sobre eles mostra o seu progresso, por exemplo <BzWenben jian="chatMode.entanglementUnlockProgress" canshu="2|5" />. <BzWenben jian="chatMode.entanglementUnlockHint" /> Veja [Como convidar novos usuários](/invite-new-users).
+
+<BzLiaotian tanchu="moshi" moshi="agent" suoding />
+
+## Escolher um modo {#choosing}
+
+| Você quer… | Modo |
 | --- | --- |
-| Chat | Conversas rápidas e explicações breves |
-| Agent | Fluxo de programação padrão, edição de arquivos, ferramentas e verificação |
-| Analyze | Diagnóstico, revisões e investigação de arquitetura somente leitura |
-| Plan | Planejamento estruturado da implementação antes das alterações |
-| Entanglement | Raciocínio causal profundo e decisões conscientes do contexto |
-| Teams | Colegas de IA em paralelo para fluxos grandes ou independentes |
+| Fazer uma pergunta ou refletir sobre algo | Chat |
+| Combinar a abordagem antes de qualquer alteração | Plan |
+| Entender o código ou encontrar uma causa, sem alterações | Analyze |
+| Concluir uma tarefa: editar, executar, verificar | Agent |
+| Resolver um problema difícil passo a passo, com evidências | Entanglement |
+| Avançar ao mesmo tempo várias partes independentes de um trabalho grande | Teams |
+| Ter a solicitação desmontada primeiro e cada alteração revisada | DarkSelene |
+
+Na dúvida, fique no Agent: ele passa para o Plan por conta própria quando uma tarefa precisa disso.
