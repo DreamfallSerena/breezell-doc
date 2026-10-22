@@ -1,80 +1,26 @@
 ---
 title: Problemas conocidos
-description: Problemas conocidos de Breezell versión 1.2.8 y su estado de corrección.
+description: Problemas detectados en Breezell 1.2.8 y su estado. Todos están solucionados.
 ---
 
 # Problemas conocidos
 
-Hemos identificado los siguientes problemas en Breezell versión 1.2.8. Estamos trabajando para resolverlos y compartiremos actualizaciones a medida que haya novedades.
+Estos problemas se detectaron en la versión 1.2.8 de Breezell. Todos están solucionados; si todavía ves alguno de ellos, actualiza a la versión más reciente.
 
-## Algunas conversaciones pueden no cargar
+| Problema | Estado | Detalles |
+| --- | --- | --- |
+| Algunas conversaciones no cargaban | Solucionado | No se perdió ningún dato: las conversaciones y su contenido están a salvo. |
+| La salida de Entanglement tenía un formato incorrecto | Solucionado | Consulta [Modo Entanglement](/entanglement-mode-overview). |
+| Cierres inesperados | Solucionado | |
+| El navegador integrado mostraba una página en blanco | Solucionado | Consulta [Breezell Browser](/dialog-box-overview#browser). |
+| El modo Analyze podía mostrar etiquetas residuales al final de una respuesta | Solucionado | Consulta [Analyze](/mode-selection#analyze). |
+| Una ventana de contexto personalizada no se aplicaba a los modelos Codex | Solucionado | Después de configurar `gpt-5.6-sol` en 512K, las conversaciones nuevas seguían mostrando un máximo de 272K. Ahora Breezell aplica y muestra la ventana configurada. Consulta [Context, Reasoning y Fast](/custom-api#context-reasoning-and-fast). |
+| El inicio de sesión de Grok mostraba una cuota incorrecta | Solucionado | |
+| La compresión automática no se ejecutaba después de cambiar la ventana de contexto | Solucionado | Las conversaciones vuelven a comprimirse como se espera. Consulta [Uso y compresión del contexto](/dialog-box-overview#context). |
+| Los menús desplegables mostraban estilos nativos y bordes estrechos | Solucionado | |
+| Los ajustes de nivel de razonamiento de los modelos Kimi no funcionaban | Solucionado | |
+| El chat podía trabarse al enviar mensajes | Solucionado | |
 
-> **Estado: solucionado**
+Si algo no funciona como se describe en esta guía, consulta [Solución de problemas](/troubleshooting) o contáctanos indicando tu versión de Breezell y lo que ves.
 
-Este problema se ha solucionado. Tus datos y el contenido de las conversaciones permanecen seguros y no se perderán.
-
-## Formato de salida del modo Entanglement
-
-> **Estado: solucionado**
-
-Este problema se ha solucionado.
-
-## Cierres inesperados
-
-> **Estado: solucionado**
-
-Este problema se ha solucionado.
-
-## El navegador integrado muestra una página en blanco
-
-> **Estado: solucionado**
-
-Este problema se ha solucionado.
-
-## El modo Analyze puede mostrar etiquetas residuales
-
-> **Estado: solucionado**
-
-Este problema se ha solucionado.
-
-## La configuración de ventana de contexto personalizada no se aplicaba a los modelos Codex
-
-> **Estado: solucionado**
-
-Después de configurar la ventana de contexto de gpt-5.6-sol en 512K (512.000 tokens), Breezell seguía mostrando un límite máximo de contexto de 272K en las conversaciones nuevas. Reiniciar el cliente o crear una conversación nueva no aplicaba la configuración.
-
-Este problema se ha solucionado. Breezell ahora aplica y muestra correctamente la ventana de contexto personalizada configurada.
-
-## La cuota del inicio de sesión directo de Grok se muestra incorrectamente
-
-> **Estado: solucionado**
-
-Este problema se ha solucionado.
-
-## La compresión automática no se activaba al cambiar de ventana de contexto
-
-> **Estado: solucionado**
-
-Al cambiar de ventana de contexto, la compresión automática podía no activarse, por lo que las conversaciones no se comprimían como se esperaba. Este problema se ha solucionado.
-
-## Los menús desplegables muestran estilos nativos y bordes demasiado estrechos
-
-> **Estado: solucionado**
-
-Este problema se ha solucionado.
-
-## Problema con los niveles de razonamiento de los modelos de la serie Kimi
-
-> **Estado: solucionado**
-
-Este problema se ha solucionado.
-
-## La interfaz de chat puede bloquearse brevemente al enviar mensajes
-
-> **Estado: solucionado**
-
-Este problema se ha solucionado.
-
-## Gracias por tu paciencia
-
-Estamos trabajando para resolver estos problemas lo antes posible. Gracias por tu comprensión y paciencia.
+Gracias por tu paciencia y por avisarnos de los problemas.

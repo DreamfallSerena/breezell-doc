@@ -1,80 +1,26 @@
 ---
 title: Problemas conhecidos
-description: Problemas conhecidos do Breezell versão 1.2.8 e seu status de correção.
+description: Problemas encontrados no Breezell 1.2.8 e o status de cada um. Todos já foram corrigidos.
 ---
 
 # Problemas conhecidos
 
-Identificamos os seguintes problemas no Breezell versão 1.2.8. Estamos trabalhando para resolvê-los e compartilharemos atualizações assim que houver novidades.
+Estes problemas foram encontrados na versão 1.2.8 do Breezell. Todos já foram corrigidos; atualize para a versão mais recente se você ainda encontrar algum deles.
 
-## Algumas conversas podem não carregar
+| Problema | Status | Detalhes |
+| --- | --- | --- |
+| Algumas conversas não carregavam | Corrigido | Nenhum dado foi perdido: as conversas e o conteúdo delas estão seguros. |
+| A saída do Entanglement era formatada incorretamente | Corrigido | Veja [Modo Entanglement](/entanglement-mode-overview). |
+| Falhas inesperadas | Corrigido | |
+| O navegador integrado mostrava uma página em branco | Corrigido | Veja [Breezell Browser](/dialog-box-overview#browser). |
+| O modo Analyze podia mostrar tags residuais no fim de uma resposta | Corrigido | Veja [Analyze](/mode-selection#analyze). |
+| Uma janela de contexto personalizada não era aplicada aos modelos Codex | Corrigido | Depois de definir o `gpt-5.6-sol` como 512K, as novas conversas ainda mostravam um máximo de 272K. Agora o Breezell aplica e mostra a janela configurada. Veja [Context, Reasoning e Fast](/custom-api#context-reasoning-and-fast). |
+| O login do Grok mostrava a cota errada | Corrigido | |
+| A compressão automática não era executada depois da troca da janela de contexto | Corrigido | As conversas voltaram a ser comprimidas como esperado. Veja [Uso do contexto e compressão](/dialog-box-overview#context). |
+| Os menus suspensos mostravam o estilo nativo e bordas estreitas | Corrigido | |
+| As configurações de nível de raciocínio dos modelos Kimi não funcionavam | Corrigido | |
+| O chat podia travar brevemente ao enviar mensagens | Corrigido | |
 
-> **Status: corrigido**
+Se algo não funcionar como descrito neste guia, veja [Solução de problemas](/troubleshooting) ou fale conosco informando a versão do Breezell e o que você está vendo.
 
-Este problema foi corrigido. Seus dados e o conteúdo das conversas permanecem seguros e não serão perdidos.
-
-## Formatação da saída no modo Entanglement
-
-> **Status: corrigido**
-
-Este problema foi corrigido.
-
-## Falhas inesperadas
-
-> **Status: corrigido**
-
-Este problema foi corrigido.
-
-## Navegador integrado exibe uma página em branco
-
-> **Status: corrigido**
-
-Este problema foi corrigido.
-
-## O modo Analyze pode exibir tags residuais
-
-> **Status: corrigido**
-
-Este problema foi corrigido.
-
-## A configuração de janela de contexto personalizada não era aplicada aos modelos Codex
-
-> **Status: corrigido**
-
-Após configurar a janela de contexto do gpt-5.6-sol para 512K (512.000 tokens), o Breezell continuava exibindo um limite máximo de contexto de 272K em novas conversas. Reiniciar o cliente ou criar uma nova conversa não aplicava a configuração.
-
-Este problema foi corrigido. O Breezell agora aplica e exibe corretamente a janela de contexto personalizada configurada.
-
-## A cota do login direto do Grok é exibida incorretamente
-
-> **Status: corrigido**
-
-Este problema foi corrigido.
-
-## A compactação automática não era acionada após a troca de janela de contexto
-
-> **Status: corrigido**
-
-Após trocar a janela de contexto, a compactação automática podia não ser acionada, fazendo com que as conversas não fossem compactadas conforme o esperado. Este problema foi corrigido.
-
-## Menus suspensos exibem estilos nativos e bordas muito estreitas
-
-> **Status: corrigido**
-
-Este problema foi corrigido.
-
-## Problema nas configurações de nível de raciocínio dos modelos da série Kimi
-
-> **Status: corrigido**
-
-Este problema foi corrigido.
-
-## O chat pode travar brevemente ao enviar mensagens
-
-> **Status: corrigido**
-
-Este problema foi corrigido.
-
-## Agradecemos a sua paciência
-
-Estamos trabalhando para resolver esses problemas o mais rápido possível. Agradecemos a sua compreensão e paciência.
+Agradecemos a sua paciência e os seus relatos.
