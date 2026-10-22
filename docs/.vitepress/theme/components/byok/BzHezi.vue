@@ -6,8 +6,13 @@ import BzYetou from "./BzYetou.vue";
 import { shiyongwenben } from "./shuju";
 
 // Box 頁（BoxSettingsPage.tsx）：左側 256px 側欄（空間切換、搜尋、Console / Workspace 導航、
-// 版本更新與帳號），右側是麵包屑和當前頁。這裡固定停在「Breezell 設定 › 模型」。
-withDefaults(defineProps<{ gaoliang?: "moxing" | "" }>(), { gaoliang: "" });
+// 版本更新與帳號），右側是麵包屑和當前頁。ye 指定「Breezell 設定」群組裡選中的頁（預設「模型」），
+// gaoliang 非空時用橘色光圈標出該頁；預設插槽是模型頁頁首，其他頁由呼叫方傳入內容。
+const props = withDefaults(defineProps<{ gaoliang?: string; ye?: string; biaoji?: string }>(), {
+  gaoliang: "",
+  ye: "tab.models",
+  biaoji: "2",
+});
 
 const { t } = shiyongwenben();
 
@@ -28,10 +33,14 @@ const zhuganx = 16;
 const banjing = 8;
 const zhongdianx = 30;
 const maodian = shezhiye.map((_, xuhao) => 6 + xuhao * (28 + 4) + 14);
+const xuanzhong = computed(() => Math.max(0, shezhiye.indexOf(props.ye as (typeof shezhiye)[number])));
 const shugao = 6 + shezhiye.length * 28 + (shezhiye.length - 1) * 4 + 2;
 const fenzhi = (y: number) => `M ${zhuganx} ${y - banjing} A ${banjing} ${banjing} 0 0 0 ${zhuganx + banjing} ${y} H ${zhongdianx}`;
 const zhugan = computed(() => `M ${zhuganx} 0 V ${maodian[maodian.length - 1] - banjing}`);
-const miaobian = `M ${zhuganx} 0 V ${maodian[0] - banjing} A ${banjing} ${banjing} 0 0 0 ${zhuganx + banjing} ${maodian[0]} H ${zhongdianx}`;
+const miaobian = computed(() => {
+  const y = maodian[xuanzhong.value];
+  return `M ${zhuganx} 0 V ${y - banjing} A ${banjing} ${banjing} 0 0 0 ${zhuganx + banjing} ${y} H ${zhongdianx}`;
+});
 
 const zhukongzhitai = [
   { jian: "box.review.group", ming: "git-compare" },
@@ -82,10 +91,10 @@ const gongzuoqu = [
                   v-for="(jian, xuhao) in shezhiye"
                   :key="jian"
                   class="bz-hz-hang"
-                  :class="{ 'bz-xuan': xuhao === 0, 'bz-gl': xuhao === 0 && gaoliang === 'moxing' }"
+                  :class="{ 'bz-xuan': xuhao === xuanzhong, 'bz-gl': xuhao === xuanzhong && gaoliang }"
                 >
                   {{ t(jian) }}
-                  <span v-if="xuhao === 0 && gaoliang === 'moxing'" class="bz-biaoji" style="top: 4px; right: 6px">2</span>
+                  <span v-if="xuhao === xuanzhong && gaoliang && biaoji" class="bz-biaoji" style="top: 4px; right: 6px">{{ biaoji }}</span>
                 </span>
               </div>
             </div>
@@ -110,7 +119,7 @@ const gongzuoqu = [
             <span class="bz-hz-gengxin"><BzTubiao ming="circle-arrow-up" :daxiao="17" /></span>
             <span class="bz-hz-ka-wen">
               <span class="bz-hz-ka-ming">{{ t("box.updates.title") }}</span>
-              <span class="bz-hz-ka-ci">v1.4.35</span>
+              <span class="bz-hz-ka-ci">v1.4.37</span>
             </span>
           </div>
           <div class="bz-hz-ka">
@@ -133,7 +142,7 @@ const gongzuoqu = [
           <span class="bz-hz-mianbao">
             <span class="bz-hz-mianbao-zu">{{ t("box.title") }}</span>
             <BzTubiao ming="chevron-right" :daxiao="14" />
-            <span class="bz-hz-mianbao-ye">{{ t("tab.models") }}</span>
+            <span class="bz-hz-mianbao-ye">{{ t(ye as never) }}</span>
           </span>
         </header>
         <div class="bz-hz-neirong">

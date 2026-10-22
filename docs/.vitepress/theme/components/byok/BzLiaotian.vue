@@ -3,7 +3,8 @@ import { computed, ref, watch } from "vue";
 import BzTubiao from "./BzTubiao.vue";
 import BzPinpai from "./BzPinpai.vue";
 import BzMoxingxuanxiang from "./BzMoxingxuanxiang.vue";
-import { shiyongwenben, type moxingxuanxiang } from "./shuju";
+import BzMoshi from "./BzMoshi.vue";
+import { shiyongwenben, type duihuamoshi, type moxingxuanxiang } from "./shuju";
 
 // Agent 頁的聊天輸入框（ChatInputArea.tsx 經典樣式，Modern UI 預設關閉）與模型選擇器
 // （ModelDropdown.tsx ModelSelectBox → inputs.tsx BreezellCustomDropdownBox，listStyle='menu'）。
@@ -17,8 +18,12 @@ const props = withDefaults(
     caowei?: string;
     wen?: string;
     da?: string;
-    gaoliang?: "jiaonang" | "fenye" | "hang" | "";
+    gaoliang?: "jiaonang" | "fenye" | "hang" | "moshi" | "";
     biaoji?: string;
+    moshi?: duihuamoshi;
+    qianru?: boolean;
+    moshibiaoji?: string;
+    jiaonangbiaoji?: string;
   }>(),
   {
     xuanzeqi: "",
@@ -29,6 +34,10 @@ const props = withDefaults(
     da: "",
     gaoliang: "",
     biaoji: "",
+    moshi: "agent",
+    qianru: false,
+    moshibiaoji: "",
+    jiaonangbiaoji: "",
   },
 );
 
@@ -66,8 +75,8 @@ const houzhui = computed(() => {
 </script>
 
 <template>
-  <div class="bz">
-    <div class="bz-chuangkou bz-cebian bz-lt" :class="{ 'bz-lt-kai': xuanzeqi }">
+  <div :class="{ bz: !qianru }">
+    <div class="bz-lt" :class="{ 'bz-chuangkou bz-cebian': !qianru, 'bz-lt-kai': xuanzeqi, 'bz-lt-qianru': qianru }">
       <div class="bz-lt-duihua">
         <template v-if="wen">
           <div class="bz-lt-yonghu">{{ wen }}</div>
@@ -151,12 +160,17 @@ const houzhui = computed(() => {
             <div class="bz-lt-zhanwei">{{ t("chat.input.placeholder") }}</div>
             <div class="bz-lt-gongju">
               <div class="bz-lt-gongju-zuo">
-                <span class="bz-lt-moshi">Agent <BzTubiao ming="chevron-down" :daxiao="12" /></span>
+                <span class="bz-lt-moshi-wai" :class="{ 'bz-gl': gaoliang === 'moshi' }">
+                  <BzMoshi :moshi="moshi" xingshi="jiaonang" />
+                  <span v-if="gaoliang === 'moshi' && biaoji" class="bz-biaoji" style="top: -12px; right: -10px">{{ biaoji }}</span>
+                  <span v-if="moshibiaoji" class="bz-biaoji" style="top: -14px; left: -6px">{{ moshibiaoji }}</span>
+                </span>
                 <span class="bz-lt-jiaonang" :class="{ 'bz-gl': gaoliang === 'jiaonang', 'bz-dakai': xuanzeqi }">
                   <span class="bz-lt-jiaonang-ming">{{ moxing }}</span>
                   <span class="bz-lt-jiaonang-hou">{{ houzhui }}</span>
                   <BzTubiao ming="chevron-down" :daxiao="12" />
                   <span v-if="gaoliang === 'jiaonang' && biaoji" class="bz-biaoji" style="top: -12px; right: -10px">{{ biaoji }}</span>
+                  <span v-if="jiaonangbiaoji" class="bz-biaoji" style="top: -14px; left: -2px">{{ jiaonangbiaoji }}</span>
                 </span>
               </div>
               <div class="bz-lt-gongju-you">
@@ -476,18 +490,18 @@ const houzhui = computed(() => {
   min-width: 0;
 }
 
-.bz-lt-moshi {
+.bz-lt-moshi-wai {
+  position: relative;
   display: inline-flex;
-  align-items: center;
-  gap: 4px;
   flex-shrink: 0;
-  height: 22px;
-  padding: 0 8px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--bz-fg-2);
-  background: color-mix(in srgb, var(--bz-fg) 8%, transparent);
+  border-radius: 9999px;
+}
+
+.bz-lt.bz-lt-qianru {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  background: var(--bz-sidebar-bg);
 }
 
 .bz-lt-jiaonang {
@@ -508,13 +522,17 @@ const houzhui = computed(() => {
 }
 
 .bz-lt-jiaonang-ming {
+  min-width: 56px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
 .bz-lt-jiaonang-hou {
-  flex-shrink: 0;
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin-left: 2px;
   font-weight: 500;
   white-space: nowrap;

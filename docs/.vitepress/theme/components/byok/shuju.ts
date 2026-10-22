@@ -1,4 +1,4 @@
-import { computed } from "vue";
+import { computed, type Ref } from "vue";
 import { useData } from "vitepress";
 import wenbenbiao from "./wenben.json";
 import tubiaobiao from "./tubiao.json";
@@ -9,9 +9,10 @@ import tubiaobiao from "./tubiao.json";
 
 type wenbenjian = keyof (typeof wenbenbiao)["en"];
 
-export function shiyongwenben() {
+// fugai：可選的語言覆寫（例如復刻畫面裡的語言下拉選單切換後，畫面自身改用該語言）。
+export function shiyongwenben(fugai?: Ref<string | undefined>) {
   const { localeIndex } = useData();
-  const yuyan = computed(() => (localeIndex.value === "root" ? "en" : localeIndex.value) as keyof typeof wenbenbiao);
+  const yuyan = computed(() => (fugai?.value ?? (localeIndex.value === "root" ? "en" : localeIndex.value)) as keyof typeof wenbenbiao);
   const t = (jian: wenbenjian) => {
     const dangqian = wenbenbiao[yuyan.value] as Record<string, string> | undefined;
     return dangqian?.[jian] ?? (wenbenbiao.en as Record<string, string>)[jian] ?? jian;
@@ -123,4 +124,59 @@ export const jiekouyushe: Record<xieyi, { zhi: string; mingcheng: string; shuomi
     { zhi: "/v1/messages", mingcheng: "settings.endpointPreset.anthropicMessages", shuoming: "settings.endpointPreset.anthropicMessagesDesc" },
     { zhi: "/api/plan/v1/messages", mingcheng: "settings.endpointPreset.volcengineAgentPlan", shuoming: "settings.endpointPreset.volcengineAgentPlanDesc" },
   ],
+};
+
+// 對話模式（sidebar-tsx/ChatComposerChrome.tsx）：選單順序、名稱、漸層文字與圖示。
+// 名稱本身不翻譯（nameOfChatMode 是寫死的英文）；Agent 的圖示是動態光球（.breezell-siri-orb）。
+export type duihuamoshi = "normal" | "plan" | "analyze" | "entanglement" | "agent" | "agent_teams" | "dark_selene";
+
+export const moshishunxu: duihuamoshi[] = ["normal", "plan", "analyze", "entanglement", "agent", "agent_teams", "dark_selene"];
+
+export const moshixinxi: Record<duihuamoshi, { mingcheng: string; jianbian?: string; shitu?: string; lujing?: string; miaobian?: boolean }> = {
+  normal: {
+    mingcheng: "Chat",
+    shitu: "0 0 24 24",
+    miaobian: true,
+    lujing:
+      "m5.6 19.92l1.524-1.219l.01-.008c.318-.255.479-.383.658-.474q.241-.123.508-.178C8.499 18 8.706 18 9.122 18h8.681c1.118 0 1.678 0 2.105-.218a2 2 0 0 0 .874-.874C21 16.48 21 15.92 21 14.804V7.197c0-1.118 0-1.678-.218-2.105a2 2 0 0 0-.875-.874C19.48 4 18.92 4 17.8 4H6.2c-1.12 0-1.68 0-2.108.218a2 2 0 0 0-.874.874C3 5.52 3 6.08 3 7.2v11.471c0 1.066 0 1.599.218 1.872a1 1 0 0 0 .783.377c.35 0 .766-.334 1.599-1",
+  },
+  plan: {
+    mingcheng: "Plan",
+    jianbian: "linear-gradient(to right, #34d399, #38bdf8, #a78bfa)",
+    shitu: "0 0 24 24",
+    lujing:
+      "M12 2c3.31 0 6 2.66 6 5.95C18 12.41 12 19 12 19S6 12.41 6 7.95C6 4.66 8.69 2 12 2m0 4a2 2 0 0 0-2 2a2 2 0 0 0 2 2a2 2 0 0 0 2-2a2 2 0 0 0-2-2m8 13c0 2.21-3.58 4-8 4s-8-1.79-8-4c0-1.29 1.22-2.44 3.11-3.17l.64.91C6.67 17.19 6 17.81 6 18.5c0 1.38 2.69 2.5 6 2.5s6-1.12 6-2.5c0-.69-.67-1.31-1.75-1.76l.64-.91C18.78 16.56 20 17.71 20 19",
+  },
+  analyze: {
+    mingcheng: "Analyze",
+    jianbian: "linear-gradient(to right, var(--bz-magenta), var(--bz-blue), var(--bz-magenta))",
+    shitu: "0 0 24 24",
+    lujing:
+      "M16.5 11c1.93 0 3.5-1.57 3.5-3.5S18.43 4 16.5 4S13 5.57 13 7.5V9h-2V7.5C11 5.57 9.43 4 7.5 4S4 5.57 4 7.5S5.57 11 7.5 11H9v2H7.5C5.57 13 4 14.57 4 16.5S5.57 20 7.5 20s3.5-1.57 3.5-3.5V15h2v1.5c0 1.93 1.57 3.5 3.5 3.5s3.5-1.57 3.5-3.5s-1.57-3.5-3.5-3.5H15v-2zM15 7.5a1.501 1.501 0 0 1 3 0c0 .826-.673 1.5-1.5 1.5H15zm-6 9c0 .826-.673 1.5-1.5 1.5S6 17.326 6 16.5c0-.828.673-1.5 1.5-1.5H9zM9 9H7.5A1.501 1.501 0 1 1 9 7.5zm4 4h-2v-2h2zm3.5 2a1.501 1.501 0 0 1 0 3c-.827 0-1.5-.674-1.5-1.5V15z",
+  },
+  entanglement: {
+    mingcheng: "Entanglement",
+    jianbian: "linear-gradient(to right, #22d3ee, #a78bfa, #f472b6)",
+    shitu: "0 0 32 32",
+    lujing:
+      "M16.604 1.914a1.04 1.04 0 1 0-2.082 0v1.04h2.082zm0 20.803h-2.082v3.207c0 .574-4.225 4.03-4.225 4.03l2.468-.002l2.807-2.673l3.013 2.692l2.272-.04l-4.254-4.01zM28.566 7.113a1.56 1.56 0 0 0 0-3.12H2.56a1.56 1.56 0 0 0 0 3.12h1.584v12.505l-.932-.022c-.86 0-1.213.467-1.213 1.04c0 .576.35 1.04 1.212 1.04H27.81c.86 0 1.298-.464 1.298-1.04c0-1.094-1.3-1.04-1.3-1.04l-.803.11V7.112h1.56zm-17.13 10.403c-3.772 0-4.195-4.19-4.195-4.19c0-4.097 4.163-4.162 4.163-4.162v4.16h4.193c0 4.192-4.16 4.192-4.16 4.192zm7.28-4.128h-1.07v-1.073h1.07zm0-3.12h-1.07V9.193h1.07v1.073zm4.598 3.12H20.26a.536.536 0 0 1 0-1.073h3.057a.537.537 0 0 1-.003 1.073m0-3.12H20.26a.536.536 0 0 1 0-1.073h3.057a.535.535 0 1 1-.003 1.072z",
+  },
+  agent: {
+    mingcheng: "Agent",
+    jianbian: "linear-gradient(to right, #60a5fa, #fb923c)",
+  },
+  agent_teams: {
+    mingcheng: "Teams",
+    jianbian: "linear-gradient(to right, #f59e0b, #ef4444, #ec4899)",
+    shitu: "0 0 24 24",
+    lujing:
+      "M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z",
+  },
+  dark_selene: {
+    mingcheng: "DarkSelene",
+    jianbian: "linear-gradient(to right, #94a3b8, #8b9cf7, #c4b5fd)",
+    shitu: "0 0 24 24",
+    lujing:
+      "M12.1 2.05a1 1 0 0 1 .23 1.1A7.5 7.5 0 0 0 20.85 11.67a1 1 0 0 1 1.1.23a1 1 0 0 1 .2 1.05A10 10 0 1 1 11.05 1.85a1 1 0 0 1 1.05.2",
+  },
 };

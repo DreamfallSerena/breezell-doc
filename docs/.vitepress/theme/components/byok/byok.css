@@ -359,3 +359,75 @@
   font-weight: 500;
   color: var(--bz-fg-3);
 }
+
+/* Agent 模式的動態光球（react/src/styles.css .breezell-siri-orb） */
+.bz-qiu {
+  --bz-qiu-c1: oklch(75% 0.15 350);
+  --bz-qiu-c2: oklch(80% 0.12 200);
+  --bz-qiu-c3: oklch(78% 0.14 280);
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.03) 30%, transparent 70%);
+}
+
+.dark .bz-qiu {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 30%, transparent 70%);
+}
+
+.bz-qiu::before,
+.bz-qiu::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  filter: blur(1.5px) contrast(1.4) saturate(1.2);
+}
+
+.bz-qiu::before {
+  background:
+    conic-gradient(from 0deg at 30% 65%, var(--bz-qiu-c3) 0deg, transparent 45deg 315deg, var(--bz-qiu-c3) 360deg),
+    conic-gradient(from 60deg at 70% 35%, var(--bz-qiu-c2) 0deg, transparent 60deg 300deg, var(--bz-qiu-c2) 360deg),
+    radial-gradient(ellipse 120% 80% at 40% 60%, var(--bz-qiu-c3) 0%, transparent 50%);
+  animation: bz-qiu-shun 20s linear infinite;
+}
+
+.bz-qiu::after {
+  background:
+    conic-gradient(from 120deg at 65% 75%, var(--bz-qiu-c1) 0deg, transparent 90deg 270deg, var(--bz-qiu-c1) 360deg),
+    conic-gradient(from 30deg at 25% 25%, var(--bz-qiu-c2) 0deg, transparent 30deg 330deg, var(--bz-qiu-c2) 360deg),
+    conic-gradient(from 180deg at 80% 80%, var(--bz-qiu-c1) 0deg, transparent 45deg 315deg, var(--bz-qiu-c1) 360deg);
+  mix-blend-mode: screen;
+  animation: bz-qiu-ni 13.2s linear infinite;
+}
+
+@keyframes bz-qiu-shun {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes bz-qiu-ni {
+  to { transform: rotate(-360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bz-qiu::before,
+  .bz-qiu::after {
+    animation: none;
+  }
+}
+
+/* Analyze 模式漸層用到的終端機顏色（Breezell Light / Dark 的 terminal.ansiMagenta / ansiBlue）。
+   放在根上，正文裡單獨引用模式名稱時也能取到。 */
+:root {
+  --bz-magenta: #a13865;
+  --bz-blue: #296aa3;
+}
+
+.dark {
+  --bz-magenta: #d9739f;
+  --bz-blue: #6394bf;
+}
