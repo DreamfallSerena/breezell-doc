@@ -8,7 +8,8 @@ const props = defineProps<{ jian: string; canshu?: string; canshujian?: string }
 const { t, tihuan } = shiyongwenben();
 const wenzi = computed(() => {
   const canshu = props.canshujian ? t(props.canshujian as never) : props.canshu;
-  return canshu === undefined ? t(props.jian as never) : tihuan(props.jian as never, canshu);
+  // 多個參數用「|」分隔：canshu="1|12" 依序替換 {0}、{1}。
+  return canshu === undefined ? t(props.jian as never) : tihuan(props.jian as never, ...canshu.split("|"));
 });
 </script>
 

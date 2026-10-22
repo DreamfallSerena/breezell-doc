@@ -8,10 +8,12 @@ import { shiyongwenben } from "./shuju";
 // Box 頁（BoxSettingsPage.tsx）：左側 256px 側欄（空間切換、搜尋、Console / Workspace 導航、
 // 版本更新與帳號），右側是麵包屑和當前頁。ye 指定「Breezell 設定」群組裡選中的頁（預設「模型」），
 // gaoliang 非空時用橘色光圈標出該頁；預設插槽是模型頁頁首，其他頁由呼叫方傳入內容。
-const props = withDefaults(defineProps<{ gaoliang?: string; ye?: string; biaoji?: string }>(), {
+// zu 指定展開哪一個群組：settings（Breezell 設定，預設）或 memory（超級記憶的四個頁面）。
+const props = withDefaults(defineProps<{ gaoliang?: string; ye?: string; biaoji?: string; zu?: "settings" | "memory" }>(), {
   gaoliang: "",
   ye: "tab.models",
   biaoji: "2",
+  zu: "settings",
 });
 
 const { t } = shiyongwenben();
@@ -28,6 +30,9 @@ const shezhiye = [
   "tab.experimental",
 ] as const;
 
+const jiyiye = ["box.memory.overview", "box.memory.library", "box.memory.context", "box.memory.maintenance"] as const;
+const dangqianye = computed<readonly string[]>(() => (props.zu === "memory" ? jiyiye : shezhiye));
+
 // 分支線幾何：與 NavMain 的 BRANCH_* 常量一致。
 const zhuganx = 16;
 const banjing = 8;
@@ -39,23 +44,28 @@ const yeshuoming: Record<string, string> = {
   "tab.mcp": "box.desc.mcp",
   "tab.privacy": "box.desc.privacy",
   "tab.experimental": "box.desc.experimental",
+  "box.memory.overview": "box.memory.overviewDesc",
+  "box.memory.library": "box.memory.libraryDesc",
+  "box.memory.context": "box.memory.contextDesc",
+  "box.memory.maintenance": "box.memory.maintenanceDesc",
 };
 
-const maodian = shezhiye.map((_, xuhao) => 6 + xuhao * (28 + 4) + 14);
-const xuanzhong = computed(() => Math.max(0, shezhiye.indexOf(props.ye as (typeof shezhiye)[number])));
-const shugao = 6 + shezhiye.length * 28 + (shezhiye.length - 1) * 4 + 2;
+const maodian = computed(() => dangqianye.value.map((_, xuhao) => 6 + xuhao * (28 + 4) + 14));
+const xuanzhong = computed(() => Math.max(0, dangqianye.value.indexOf(props.ye)));
+const shugao = computed(() => 6 + dangqianye.value.length * 28 + (dangqianye.value.length - 1) * 4 + 2);
 const fenzhi = (y: number) => `M ${zhuganx} ${y - banjing} A ${banjing} ${banjing} 0 0 0 ${zhuganx + banjing} ${y} H ${zhongdianx}`;
-const zhugan = computed(() => `M ${zhuganx} 0 V ${maodian[maodian.length - 1] - banjing}`);
+const zhugan = computed(() => `M ${zhuganx} 0 V ${maodian.value[maodian.value.length - 1] - banjing}`);
 const miaobian = computed(() => {
-  const y = maodian[xuanzhong.value];
+  const y = maodian.value[xuanzhong.value];
   return `M ${zhuganx} 0 V ${y - banjing} A ${banjing} ${banjing} 0 0 0 ${zhuganx + banjing} ${y} H ${zhongdianx}`;
 });
 
 const zhukongzhitai = [
-  { jian: "box.review.group", ming: "git-compare" },
-  { jian: "box.memory.group", ming: "brain" },
-  { jian: "box.storage.group", ming: "database-zap" },
-  { jian: "box.perf.group", ming: "gauge" },
+  { id: "settings", jian: "box.title", ming: "settings-2" },
+  { id: "review", jian: "box.review.group", ming: "git-compare" },
+  { id: "memory", jian: "box.memory.group", ming: "brain" },
+  { id: "storage", jian: "box.storage.group", ming: "database-zap" },
+  { id: "perf", jian: "box.perf.group", ming: "gauge" },
 ] as const;
 const gongzuoqu = [
   { jian: "box.database.group", ming: "database" },
@@ -84,12 +94,13 @@ const gongzuoqu = [
         <div class="bz-hz-dao">
           <div class="bz-hz-qu bz-hz-qu-zhu">
             <div class="bz-hz-qubiao">Console</div>
+            <template v-for="xiang in zhukongzhitai" :key="xiang.id">
             <div class="bz-hz-zu">
-              <span class="bz-hz-tubiao"><BzTubiao ming="settings-2" :daxiao="16" :cuxi="2" /></span>
-              <span class="bz-hz-zuming">{{ t("box.title") }}</span>
-              <span class="bz-hz-zhankai bz-kai"><BzTubiao ming="chevron-right" :daxiao="16" :cuxi="2" /></span>
+              <span class="bz-hz-tubiao"><BzTubiao :ming="xiang.ming" :daxiao="16" :cuxi="2" /></span>
+              <span class="bz-hz-zuming">{{ t(xiang.jian) }}</span>
+              <span class="bz-hz-zhankai" :class="{ 'bz-kai': xiang.id === zu }"><BzTubiao ming="chevron-right" :daxiao="16" :cuxi="2" /></span>
             </div>
-            <div class="bz-hz-shu" :style="{ height: `${shugao}px` }">
+            <div v-if="xiang.id === zu" class="bz-hz-shu" :style="{ height: `${shugao}px` }">
               <svg class="bz-hz-xian" :width="zhongdianx + 2" :height="shugao" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path :d="zhugan" class="bz-hz-xian-dan" />
                 <path v-for="y in maodian" :key="y" :d="fenzhi(y)" class="bz-hz-xian-dan" />
@@ -97,21 +108,17 @@ const gongzuoqu = [
               </svg>
               <div class="bz-hz-hang-zu">
                 <span
-                  v-for="(jian, xuhao) in shezhiye"
+                  v-for="(jian, xuhao) in dangqianye"
                   :key="jian"
                   class="bz-hz-hang"
                   :class="{ 'bz-xuan': xuhao === xuanzhong, 'bz-gl': xuhao === xuanzhong && gaoliang }"
                 >
-                  {{ t(jian) }}
+                  {{ t(jian as never) }}
                   <span v-if="xuhao === xuanzhong && gaoliang && biaoji" class="bz-biaoji" style="top: 4px; right: 6px">{{ biaoji }}</span>
                 </span>
               </div>
             </div>
-            <div v-for="xiang in zhukongzhitai" :key="xiang.jian" class="bz-hz-zu">
-              <span class="bz-hz-tubiao"><BzTubiao :ming="xiang.ming" :daxiao="16" :cuxi="2" /></span>
-              <span class="bz-hz-zuming">{{ t(xiang.jian) }}</span>
-              <span class="bz-hz-zhankai"><BzTubiao ming="chevron-right" :daxiao="16" :cuxi="2" /></span>
-            </div>
+            </template>
           </div>
           <div class="bz-hz-fenge" />
           <div class="bz-hz-qu">
@@ -149,7 +156,7 @@ const gongzuoqu = [
           <span class="bz-hz-zhedie"><BzTubiao ming="panel-left" :daxiao="16" :cuxi="2" /></span>
           <span class="bz-hz-shuxian" />
           <span class="bz-hz-mianbao">
-            <span class="bz-hz-mianbao-zu">{{ t("box.title") }}</span>
+            <span class="bz-hz-mianbao-zu">{{ t(zu === "memory" ? "box.memory.group" : "box.title") }}</span>
             <BzTubiao ming="chevron-right" :daxiao="14" />
             <span class="bz-hz-mianbao-ye">{{ t(ye as never) }}</span>
           </span>

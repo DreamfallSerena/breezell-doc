@@ -1,281 +1,148 @@
 ---
-title: Super Memory
-description: 설정한 모델의 토큰을 사용하지 않고 Breezell이 재사용 가능한 메모리를 추출, 정리 및 관리하는 방법을 알아봅니다.
+title: 슈퍼 메모리
+description: Breezell의 슈퍼 메모리가 대화를 메모리, 스킬, 경험, 궤적, 리소스로 정제하고 이후 요청에 다시 불러오는 방식과, Box에서 이를 정리하는 방법을 설명합니다.
 ---
 
-# Super Memory
+# 슈퍼 메모리
 
-**Super Memory**는 Breezell이 독자적으로 개발한 메모리 시스템입니다. Breezell에 내장된 두 개의 모델을 사용하여 대화에서 유용한 정보를 추출합니다. 두 모델의 정확한 이름은 공개되지 않습니다.
+**슈퍼 메모리**는 Breezell 자체의 장기 메모리입니다. 작업하는 동안 대화에서 남겨 둘 만한 내용(결정 사항, 선호, 작업 방식, 문제를 해결하며 얻은 교훈, 변경된 파일)을 정제하고, 그중 관련된 부분을 이후 요청에 다시 불러옵니다. 새 대화에서도 마찬가지입니다.
 
-메모리 추출은 Breezell 내부 모델 파이프라인에서 처리되므로 사용자가 설정한 모델의 토큰이나 토큰 할당량을 사용하지 않습니다.
+- 추출은 Breezell에 내장된 두 모델이 처리합니다. 사용자가 설정한 모델을 사용하지 않으며, 그 모델의 토큰도 소비하지 않습니다. 다만 요청에 불러온 메모리는 해당 요청의 컨텍스트에 포함됩니다.
+- 슈퍼 메모리를 사용하려면 슈퍼 메모리가 포함된 요금제의 Breezell 계정이 필요합니다.
+- 저장된 모든 내용은 Box ▸ <BzWenben jian="box.memory.group" />에서 살펴보고, 고치고, 삭제할 수 있습니다.
 
-## Super Memory가 추출할 수 있는 정보
+::: tip 이 페이지의 화면 안내
+아래의 Breezell 화면은 Breezell 소스 코드를 바탕으로 HTML로 다시 만든 것입니다. 화면의 텍스트는 이 페이지의 언어를 따르며, 화면 속 메모리는 예시입니다. 메모리 라이브러리에서는 행을 펼치고, 우선순위를 바꾸고, 항목을 상주로 고정해 볼 수 있습니다.
+:::
 
-추출된 정보는 다음 유형으로 정리됩니다.
+## 작동 방식 {#how-it-works}
 
-- **Memory:** 나중에 유용할 수 있는 안정적인 사실, 환경설정, 지속적인 지침 및 결정 사항.
-- **Skill:** 작업 과정에서 발견한 재사용 가능한 방법이나 워크플로.
-- **Experience:** 이전 작업에서 얻은 결과, 교훈 및 실용적인 지식.
-- **Trajectory:** 시간에 따른 작업, 결정 또는 목표의 진행 과정.
-- **Resource:** 작업과 관련된 유용한 파일, 링크, 도구 또는 참고 자료.
+Box를 열고 왼쪽 Console 그룹에서 <BzWenben jian="box.memory.group" />를 펼칩니다. 여기에는 <BzWenben jian="box.memory.overview" />, <BzWenben jian="box.memory.library" />, <BzWenben jian="box.memory.context" />, <BzWenben jian="box.memory.maintenance" />의 네 페이지가 있습니다.
 
-이 항목들은 대화에서 자동으로 추출되고 분류되며, 이후 상호작용에서 관련 컨텍스트로 다시 불러올 수 있습니다.
+<BzHezi zu="memory" ye="box.memory.overview" gaoliang="ye" biaoji="1" />
 
-## 메모리 탐색 및 필터링
+<BzWenben jian="box.memory.overview" />는 순환 과정을 나타내는 다이어그램으로 시작하며, 실시간 수치가 함께 표시됩니다.
 
-![Super Memory 패널](/super-memory/super-memory-panel.png)
+<BzJiyi ye="zonglan" />
 
-패널에서는 다음 보기와 기능을 제공합니다.
+1. **<BzWenben jian="box.memory.flow.conversation" />**: 사용자와 모델이 주고받는 모든 턴입니다.
+2. **<BzWenben jian="box.memory.flow.extract" />**: <BzWenben jian="box.memory.flow.extractSub1" />. <BzWenben jian="box.memory.flow.extractSub2" />.
+3. **<BzWenben jian="box.memory.flow.store" />**: 항목이 활성 또는 휴면 상태로 저장되는 곳입니다.
+4. **<BzWenben jian="box.memory.flow.project" />**: 진입점, 명령, 의존성처럼 코드베이스에서 컴파일한 지식입니다.
+5. 다시 대화로: 상주 항목은 모든 요청에 주입되고, 요청에 필요하면 관련 항목을 불러옵니다.
 
-- **Memories, Context 및 Insights:** 추출된 메모리, 구성된 컨텍스트 및 메모리에서 도출된 상위 수준 분석을 전환합니다.
-- **검색:** 텍스트로 저장된 항목을 찾습니다.
-- **우선순위:** **P0**, **P1**, **P2** 또는 모든 우선순위로 필터링합니다.
-- **유형:** Memory, Skill, Experience, Trajectory 또는 Resource로 필터링합니다.
-- **상태:** **Active** 항목과 **Dormant** 항목을 구분합니다.
-- **용량 카운터:** 전체 항목 수와 상주 항목, 메모리, 스킬 및 경험이 사용하는 현재 용량을 확인합니다.
-- **Select:** 선택 모드에서 관리할 특정 항목을 선택합니다.
+다이어그램 아래의 카드에는 항목 수, 상주 항목 수, 모든 항목을 전체 내용으로 불러올 때와 비교해 간결한 인덱스로 절약되는 양, 마지막으로 주입된 내용이 표시됩니다. 그 아래로는 종류별 구성, 우선순위, 항목의 최신성, 컴파일된 프로젝트 지식의 상태, 가장 많이 사용된 항목과 곧 만료될 항목이 이어집니다.
 
-아직 항목이 없으면 대화에서 메모리가 자동 추출된다는 안내가 표시됩니다. 대화를 계속하면 사용자가 직접 작성하지 않아도 유용한 항목이 여기에 추가될 수 있습니다.
+## 다섯 가지 메모리 종류 {#kinds}
 
-## 주요 장점
+슈퍼 메모리는 각 항목을 나중에 쓰일 방식에 맞는 종류로 분류합니다.
 
-Super Memory는 강력한 자동 추출과 효율적이고 높은 통제력을 갖춘 검색 기능을 결합합니다.
+| 종류 | 담는 내용 | 예시 |
+| --- | --- | --- |
+| <BzWenben jian="superMemory.catMemory" /> | 오래 유지되는 사실, 선호, 상시 지침, 결정 사항 | "번체 중국어로 답변하고 코드는 영어로 유지" |
+| <BzWenben jian="superMemory.catSkill" /> | 같은 종류의 문제를 다시 해결할 수 있는 재사용 가능한 방법 | 손상된 localStorage 데이터를 안전하게 복구하는 방법 |
+| <BzWenben jian="superMemory.catExperience" /> | 교훈: 근본 원인에 대한 추론과 검증 방법 | "여러 기능이 함께 고장 나면 공유 상태부터 수정" |
+| <BzWenben jian="superMemory.catTrajectory" /> | 작업이 실제로 진행된 과정: 목표, 도구 호출, 오류와 복구 | 한 번의 수정 작업을 이룬 14단계 |
+| <BzWenben jian="superMemory.catResource" /> | 변경된 구체적인 파일과 위치 | <BzWenben jian="superMemory.editAction.edit" /> test.html |
 
-- **강력한 추출:** Breezell 내부의 두 모델이 대화를 분석하고 유용한 정보를 Memory, Skill, Experience, Trajectory 및 Resource 형식의 구조화된 항목으로 변환하므로 직접 입력할 필요가 없습니다.
-- **효율적인 검색:** 유형, 우선순위, 상태, 최신성 및 컴파일된 메모리 인덱스를 사용하여 현재 작업과 관련된 정보로 검색 범위를 좁힙니다.
-- **제어 가능한 컨텍스트 주입:** Context 화면에서 현재 턴에 주입된 스냅샷, 다음 턴의 메모리 인덱스 미리보기 및 예상 토큰 크기를 확인할 수 있습니다.
-- **명확한 수명 주기 제어:** P0 영구, P1 30일, P2 7일 우선순위와 Active 및 Dormant 상태를 조합하여 중요한 지식을 유지하고 일시적인 정보에는 더 짧은 수명 주기를 적용할 수 있습니다.
-- **관찰 가능한 지식 상태:** 컴파일 상태, 소스 및 컴파일러 버전, 오래된 리소스, 실패, 검증, 수정, 최신성 및 동기화되지 않은 항목 수를 확인할 수 있습니다.
-- **토큰 사용 가시성:** 추출은 사용자가 설정한 모델의 토큰을 사용하지 않습니다. 검색된 메모리가 요청에 주입되면 해당 요청의 컨텍스트에 포함되며, 미리보기와 절감 통계에서 사용량을 확인할 수 있습니다.
+모든 대화에서 모든 종류가 만들어지지는 않습니다. 버그 수정에서는 보통 스킬, 경험, 궤적, 리소스가 생기지만 일반 메모리는 생기지 않습니다. 그 안에 오래 유지할 개인 선호가 없기 때문입니다. 덕분에 불러오기가 정확해집니다. 이후 작업에서는 방법, 교훈, 이력, 파일 기록을 각각 따로 불러올 수 있습니다.
 
-## Context 및 검색 제어
+## 우선순위와 수명 주기 {#priorities}
 
-![Super Memory Context 화면](/super-memory/super-memory-context.png)
+| 우선순위 | 수명 |
+| --- | --- |
+| <BzWenben jian="superMemory.p0Permanent" /> | 만료되지 않습니다. 상주 항목은 항상 P0입니다. |
+| <BzWenben jian="superMemory.p190Days" /> | 다시 확인되지 않으면 30일 후에 만료됩니다. |
+| <BzWenben jian="superMemory.p230Days" /> | 다시 확인되지 않으면 7일 후에 만료됩니다. 파일 편집처럼 수명이 짧은 세부 정보는 여기서 시작합니다. |
 
-**Context** 화면에서는 메모리가 대화에 어떻게 사용되는지 확인할 수 있습니다.
+만료된 항목은 삭제되지 않고 **<BzWenben jian="superMemory.dormant" />** 상태가 됩니다. 휴면 항목은 계속 검색할 수 있고 복원할 수도 있습니다. P1 항목이 유용하다고 입증되면 Breezell은 해당 행의 **↑P0** 버튼으로 영구 항목으로 바꾸도록 제안합니다.
 
-- **Current Turn Injection:** 현재 대화 턴에 주입된 메모리 스냅샷을 표시합니다. 스냅샷이 없으면 빈 상태를 명확하게 표시합니다.
-- **Memory Index Preview:** 다음 턴에 준비된 인덱스와 예상 토큰 크기를 미리 보여 줍니다.
-- **Conversation Turns:** 현재 스레드의 턴 수를 표시하고 턴별 메모리 활동을 확인할 수 있습니다.
+## 메모리 라이브러리 {#library}
 
-이를 통해 메모리 주입 여부, 다음 턴에 준비되는 내용 및 대략적인 컨텍스트 비용을 확인할 수 있습니다.
+<BzWenben jian="box.memory.library" />: <BzWenben jian="box.memory.libraryDesc" />
 
-## Insights 및 시스템 상태
+<BzJiyi ye="ku" yetou gaoliang="pchip" biaoji="1" />
 
-![Super Memory Insights 화면](/super-memory/super-memory-insights.png)
+- **필터**: 검색한 다음 우선순위(P0 / P1 / P2), 종류, <BzWenben jian="superMemory.active" /> 또는 <BzWenben jian="superMemory.dormant" /> 상태로 범위를 좁힙니다.
+- **개수 표시줄**: 불러온 항목 수, 상주 할당량, 종류별 활성 예산을 보여 줍니다. <BzWenben jian="superMemory.batchSelect" />을 누르면 여러 항목을 체크해 한꺼번에 삭제할 수 있습니다.
+- **행**: 색이 있는 점은 종류를 나타냅니다. 제목 뒤에는 우선순위 칩이 오고, 상주 항목에는 **<BzWenben jian="superMemory.residentBadge" />**, 최근 24시간 안에 생긴 항목에는 **NEW**가 붙습니다. 두 번째 줄에는 마지막 업데이트 시점, 종류, 태그 수, 출처가 표시됩니다.
+- **행을 펼치면** 태그, <BzWenben jian="superMemory.l1Overview" />, <BzWenben jian="superMemory.whyRemembered" />, 확인 및 사용 횟수, 만료 시점을 볼 수 있습니다. <BzWenben jian="box.memory.showFull" />를 누르면 <BzWenben jian="superMemory.l2Full" />이 추가로 표시됩니다.
+- **우선순위 칩**(1): 클릭해 <BzWenben jian="superMemory.p0Permanent" />, <BzWenben jian="superMemory.p190Days" />, <BzWenben jian="superMemory.p230Days" /> 중에서 고릅니다.
+- 핀을 누르면 항목이 상주로 설정되고, 휴지통을 누르면 삭제됩니다.
 
-**Insights** 화면에서는 메모리 시스템의 상태와 효과를 요약합니다.
+Breezell은 AI에 항목마다 짧은 한 줄(L0)을 보내고, 개요나 전체 내용은 필요할 때만 불러옵니다. 개요 페이지의 <BzWenben jian="superMemory.tokenSavings" />은 여기서 나옵니다.
 
-- **Project Knowledge Health:** 마지막 컴파일, 컴파일러 및 소스 버전, 오래된 리소스, 실패한 컴파일, 검증 또는 수정된 수를 표시합니다.
-- **Token Savings:** 충분한 활동이 기록되면 토큰 절감량을 표시합니다.
-- **Viking Filesystem:** Memories, Skills, Experiences, Trajectories, Resources 및 Unsynced 항목 수를 표시합니다.
-- **Priority Distribution:** P0 영구, P1 30일, P2 7일 항목의 분포를 표시합니다.
-- **Freshness Pulse:** 24시간 이내, 7일 이내, 30일 이내 및 그 이전에 업데이트된 지식을 구분합니다.
+## 상주 메모리 {#resident}
 
-Context와 Insights를 통해 Super Memory가 무엇을 추출하고 어떤 정보를 검색할 수 있는지, 저장된 지식이 얼마나 최신이고 정상적인지 투명하게 확인할 수 있습니다.
+상주 항목은 요청이 그 내용과 관련이 있든 없든 **모든** 요청에 주입됩니다. 아키텍처 규칙, 반드시 따라야 하는 워크플로, 확고한 선호처럼 AI가 항상 염두에 두어야 하는 내용에 사용하세요.
 
-## Active 및 Dormant 메모리
+1. <BzWenben jian="box.memory.library" />를 열고 항목을 찾습니다.
+2. 해당 행의 핀을 클릭합니다(<BzWenben jian="superMemory.residentOn" />).
 
-Active 메모리는 관련 정보 회상에 사용할 수 있는 상태로 유지됩니다. Dormant 메모리는 보관되지만 활성 집합과 분리되어, 나중에 필요할 수 있는 정보를 유지하면서 현재 컨텍스트를 집중된 상태로 관리할 수 있습니다.
+<BzJiyi ye="ku" zhankai="m1" gaoliang="pin" biaoji="1" />
 
-## 데모: 수리 작업을 재사용 가능한 메모리로 전환하기
+- 항목은 P0 우선순위가 되고 <BzWenben jian="superMemory.residentBadge" /> 배지가 붙으며, 개수 표시줄에 새 합계가 표시됩니다(예: <BzWenben jian="superMemory.residentCapacity" canshu="1|12" />).
+- 최대 12개 항목을 상주로 설정할 수 있습니다. 한도에 도달하면 Breezell에 다음 안내가 표시됩니다. <BzWenben jian="superMemory.residentLimitReached" />
+- 상주 항목의 우선순위를 낮추려면 먼저 핀을 다시 클릭하세요(<BzWenben jian="superMemory.residentOff" />). 항목은 이전 우선순위로 돌아갑니다.
 
-이 예제에서는 의도적으로 오류를 넣은 HTML 작업 관리자를 사용하여 짧은 수정 세션을 Super Memory가 재사용 가능한 지식으로 바꾸는 과정을 보여 줍니다.
+상주 항목은 짧고 정말로 어디에나 적용되는 내용으로 유지하세요. 임시 파일 위치나 일회성 작업의 세부 정보는 여기에 두지 마세요. 모든 요청에 추가되기 때문입니다.
 
-요청은 기존 UI와 기능을 변경하지 않으면서 전체 코드를 검사하고 작업 생성, 삭제, 완료 상태, 필터, 카운터, localStorage 저장, 키보드 입력 및 완료된 작업 지우기 문제를 모두 찾아 수정하도록 AI에 지시합니다.
+## 채팅 속 메모리 {#in-chat}
 
-### 1. 작업 관리자 검사 및 수정
+슈퍼 메모리가 요청에 항목을 주입하면 메시지 아래에 한 줄이 나타납니다. 클릭하면 어떤 항목이 사용되었는지 볼 수 있습니다.
 
-Breezell은 표시되는 증상을 각각 별개의 오류로 처리하지 않고 코드를 검사하여 공통 근본 원인을 찾고, 구현을 수정한 뒤 전체 워크플로를 검증합니다.
+<BzLiaotian zhuru="1|1|0" zhurukai zhuruwen="번체 중국어로 답변하고 코드와 식별자는 영어로 유지" gaoliang="zhuru" biaoji="1" wen="안녕하세요" da="안녕하세요! 오늘은 어떤 작업을 도와드릴까요?" />
 
-![작업 관리자를 수정하는 Breezell](/super-memory/task-manager-repair.png)
+이 예에서는 새 대화에 "안녕하세요"만 있는데도 항목 하나가 주입되었습니다. 바로 상주 메모리입니다. 관련 항목은 요청에 필요할 때 추가됩니다.
 
-수정 범위에는 직렬화와 파싱, 중복 로딩, 손상된 저장 데이터, 빈 작업 검증, 안정적인 작업 ID, 키보드 처리, 완료 상태 전환, 대상 삭제, 필터, 카운터 및 완료된 작업 지우기가 포함됩니다.
+<BzLiaotian zhuru="3|1|2" zhuruwen="번체 중국어로 답변하고 코드와 식별자는 영어로 유지|안전한 JSON 파싱으로 손상된 localStorage 상태 복구|작업, 필터, 카운터가 함께 고장 나면 공유 상태부터 수정" zhurukai wen="test2.html의 독서 목록에서 새로 고침하면 책이 사라집니다. 고쳐 주세요." da="작업 관리자와 같은 문제입니다. 목록이 JSON.stringify가 아니라 String()으로 저장되고 있습니다. 파싱을 안전하게 처리하고, 손상된 값은 버리고, 모든 책에 안정적인 id를 부여하겠습니다." />
 
-### 2. 초기 P2 Resource 기록
+이 줄은 주입된 내용이 있을 때만 나타납니다. 검색을 끝내지 못한 경우에는 사용할 수 있는 내용으로 턴이 계속 진행되고, 이 줄에 그 사실이 표시됩니다.
 
-작은 테스트이고 첫 결과가 구체적인 파일 편집을 주로 보여 주므로 Super Memory는 **test.html**의 편집된 두 구간을 먼저 **P2 Resource** 항목으로 기록합니다.
+## 컨텍스트 주입 {#context}
 
-![수정 과정에서 생성된 P2 Resource 기록](/super-memory/p2-resource-records.png)
+<BzWenben jian="box.memory.context" />: <BzWenben jian="box.memory.contextDesc" />
 
-이 항목은 무엇을 어디에서 변경했는지 보존합니다. 짧게 사용되는 구현 세부 정보에는 낮은 P2 우선순위를 적용하면서도 수정 기록은 유지하므로, 나중에 AI가 변경된 파일 영역을 다시 확인할 수 있습니다.
+<BzJiyi ye="shangxiawen" />
 
-### 3. 더 깊은 회고 유도
+| 카드 | 표시 내용 |
+| --- | --- |
+| <BzWenben jian="superMemory.currentTurnInjectionTitle" /> | 선택한 턴의 상태, 주입된 상주 항목과 관련 항목의 수, 그 종류와 범위, 그리고 각 항목의 세부 수준(L0 / L1 / L2)과 점수입니다. |
+| <BzWenben jian="superMemory.memoryIndexPreview" /> | 다음 요청이 받게 될 간결한 인덱스입니다. 종류별로 묶여 있으며 예상 토큰 수가 함께 표시됩니다. |
+| <BzWenben jian="superMemory.convTurns" /> | 현재 대화의 턴입니다. 턴을 클릭하면 그 턴의 주입 내용을 확인하고 채팅의 해당 위치로 이동합니다. |
 
-이 작은 데모에서는 사용자가 다음과 같이 질문합니다.
+## 예산 및 유지 관리 {#maintenance}
 
-> 이 문제를 해결하면서 어떤 교훈을 얻었나요?
+<BzWenben jian="box.memory.maintenance" />: <BzWenben jian="box.memory.maintenanceDesc" />
 
-![수정 과정의 교훈을 요약하는 AI](/super-memory/repair-lessons.png)
+<BzJiyi ye="weihu" />
 
-답변은 공유 상태의 소유자를 수정할 것, 컬렉션 항목을 안정적인 ID로 처리할 것, 모든 렌더링 경로에서 파생 상태를 다시 계산할 것, 저장 계층을 검증된 데이터 경계로 다룰 것, 불리언 조건을 신중히 검토할 것, 잘못된 입력 경로를 종료할 것, 타임스탬프만으로 ID를 만들지 말 것, 실제와 유사한 전체 워크플로로 기능을 검증할 것과 같은 재사용 가능한 교훈을 식별합니다.
+- <BzWenben jian="box.memory.budgetTitle" />: <BzWenben jian="box.memory.budgetDesc" />
+- <BzWenben jian="box.memory.runLifecycle" />: <BzWenben jian="box.memory.runLifecycleDesc" />
+- <BzWenben jian="box.memory.purge" />: <BzWenben jian="box.memory.purgeDesc" />
+- <BzWenben jian="box.memory.archiveExport" /> / <BzWenben jian="box.memory.archiveImport" />: 메모리 뱅크 전체를 `.zip` 파일로 다른 컴퓨터에 옮깁니다. <BzWenben jian="box.memory.archiveImportDesc" />
 
-### 4. 구조화된 수정 지식 추출
+## 예시: 한 번의 수정을 다른 앱에서 재사용하기 {#example}
 
-수정을 더 깊게 검토한 뒤 Super Memory는 가치가 높은 구조화 항목을 추가합니다.
+위 화면의 항목은 다음과 같이 만들어졌습니다.
 
-- 공유 작업 상태와 안정적인 ID 수정에 관한 **P1 Experience**.
-- 보호된 직렬화와 파싱으로 손상된 localStorage 저장을 복구하는 **P1 Skill**.
-- 여러 오류와 해결 과정을 요약한 **P2 Trajectory**.
-- 편집된 파일 위치를 보존하는 기존 **P2 Resource** 기록.
+1. **수정 작업.** `test.html`의 작은 작업 관리자에서는 작업 추가, 삭제, 완료, 필터링, 저장이 제대로 동작하지 않았습니다. Breezell은 이 오류들의 원인을 하나의 공유 상태 모델에서 찾아 수정하고, 브라우저에서 전체 워크플로를 확인했습니다. 슈퍼 메모리는 먼저 `test.html`의 편집된 부분을 **P2 리소스**로, 수정 과정을 **P2 궤적**으로 기록했습니다.
+2. **교훈.** "이번 작업에서 무엇을 배웠나요?"라는 질문에 AI는 재사용할 수 있는 교훈을 꼽았습니다. 증상을 하나씩 고치는 대신 공유 상태의 소유자를 수정할 것, 항목은 안정적인 id로 다룰 것, 저장된 데이터는 검증해야 하는 경계로 취급할 것입니다. 슈퍼 메모리는 **P1 스킬**(localStorage 데이터를 안전하게 저장하고 불러오는 방법)과 **P1 경험**(공유 상태를 먼저 진단한 다음 처음부터 끝까지 검증)을 저장했습니다. 더 길거나 가치가 큰 수정에서는 묻지 않아도 이런 교훈을 기록합니다.
+3. **재사용.** 첫 번째 대화는 삭제되었습니다. 새 대화에서 다른 앱인 `test2.html`의 독서 목록에 같은 계열의 버그가 있었습니다. Breezell은 스킬과 리소스 기록을 불러와, 이전 패치를 복사하는 대신 새 `books` 데이터에 그 방법을 적용하고 결과를 검증했습니다.
 
-![회고 후 생성된 구조화된 수정 메모리](/super-memory/structured-repair-memories.png)
+대화를 삭제해도 슈퍼 메모리가 그 대화에서 추출한 내용은 삭제되지 않으며, 한 앱에서 배운 방법이 다른 앱에서도 그대로 쓰였습니다.
 
-### 이 데모가 보여 주는 점
+## 일일 사용량을 모두 쓴 경우 {#quota}
 
-- **추출 깊이는 가치에 따라 달라집니다:** 작은 편집은 P2 Resource로 시작할 수 있고 재사용 가능한 근본 원인 지식은 P1 Skill과 Experience로 기록될 수 있습니다.
-- **메모리 유형마다 역할이 다릅니다:** Resource와 Trajectory는 어떤 일이 있었는지를, Skill과 Experience는 문제를 어떻게, 왜 해결했는지를 보존합니다.
-- **우선순위를 제어할 수 있습니다:** P1은 재사용 가능성이 높은 지식을 더 오래 유지하고, P2는 일시적인 세부 정보에 영구적인 가중치를 주지 않으면서 사용할 수 있게 합니다.
-- **향후 AI 작업에 활용됩니다:** 이후 작업에서 원래 대화에만 의존하지 않고 관련 파일 이력, 수정 방법 또는 엔지니어링 교훈을 검색할 수 있습니다.
-- **일반적으로 수동 질문은 필요하지 않습니다:** 이 질문은 작은 테스트에서 분명한 결과를 보여 주기 위해 사용되었습니다. 장기간 지속되거나 중요한 오류에서는 사용자가 질문하지 않아도 Super Memory가 지속적으로 유용한 수정 경험을 자동으로 식별하고 기록할 수 있습니다.
+슈퍼 메모리에는 일일 사용량이 있습니다. 사용량을 모두 쓰면 모든 슈퍼 메모리 페이지에 <BzWenben jian="box.memory.quotaPausedTitle" />라는 안내가 표시됩니다. 사용량이 갱신될 때까지 채팅에서 새 항목이 자동으로 생성되지 않습니다. 기존 항목은 계속 보고 삭제할 수 있으며, [Rules, Memories & Skills](/prompt-settings)에서 직접 작성하는 규칙과 메모리는 영향을 받지 않습니다.
 
-## 심층 분석: Memory가 비어 있는 이유
+슈퍼 메모리가 포함된 요금제가 없으면 페이지에 다음과 같이 표시됩니다.
 
-이 예제를 **Memory**로 필터링하면 **0개 항목**이 표시되지만, Super Memory는 유용한 지식을 정상적으로 추출했습니다.
+<BzJiyi ye="suoding" />
 
-![수정 후 비어 있는 Memory 범주](/super-memory/empty-memory-category.png)
+## 요약
 
-이는 추출 실패가 아니라 의도적인 분류입니다. 이번 수정에서는 일반 Memory에 저장할 장기적인 사용자 선호, 안정적인 사용자 사실 또는 지속적인 지침이 생성되지 않았습니다. 모든 결과를 일반 메모리로 중복 저장하는 대신 Super Memory는 향후 용도에 맞게 Skill, Experience, Trajectory 및 Resource로 분류했습니다.
-
-## Skill: 재사용 가능한 localStorage 복구 패턴
-
-**P1 Skill** 항목은 특정 수정 작업을 클라이언트 상태 저장에 재사용할 수 있는 절차로 바꿉니다.
-
-![확장된 localStorage 수정 Skill](/super-memory/localstorage-skill-detail.png)
-
-카드에는 다음 정보가 표시됩니다.
-
-- **태그:** localStorage, JSON, 상태 복원 및 데이터 복구 태그를 통해 관련 문제에서 쉽게 검색할 수 있습니다.
-- **L1 Overview:** 작업 배열을 JSON.stringify로 저장하고 보호된 JSON.parse로 로드하며, 정상 로드 후 초기 데이터를 추가하지 않고, 복구 불가능한 이전 값을 버린 뒤 깨끗한 기본값을 복원합니다.
-- **Why Remembered:** 상태 기반 클라이언트 앱에 재사용할 수 있는 검증된 저장 및 복구 패턴으로 기억한 이유를 설명합니다.
-- **L2 Full Content:** 자세한 실패 원인과 전체 복구 절차를 보존합니다.
-- **메타데이터:** P1 우선순위, 유형, 상태, 확인 횟수, 접근 횟수, 마지막 업데이트 및 수명 주기를 보여 줍니다.
-
-localStorage를 수정했다는 모호한 메모보다 향후 AI가 다시 적용할 수 있는 구체적인 절차를 제공합니다.
-
-## Experience: 공유 상태 및 안정적인 ID 진단
-
-**P1 Experience** 항목은 여러 UI 오류의 기반이 된 더 넓은 엔지니어링 교훈을 보존합니다.
-
-![확장된 공유 상태 수정 Experience](/super-memory/repair-experience-detail.png)
-
-작업, 필터, 카운터 및 저장 기능이 함께 실패하면 공유 작업 배열과 상태 전환에서 조사를 시작해야 한다는 내용을 담습니다. 또한 충돌 없는 안정적인 ID와 입력 검증, 키보드 제출, 필터, 카운터, 지우기 및 다시 로드한 뒤 저장 상태를 하나의 흐름으로 재검사하는 방법을 기록합니다.
-
-태그에는 상태 관리, 디버깅, UI, 안정적인 ID, 불변 조건, 테스트 및 localStorage가 포함됩니다. **Why Remembered**는 하나의 상태 모델에 의존하는 기능을 검증하는 재사용 가능한 체크리스트인 이유를 설명합니다.
-
-Skill은 반복 가능한 수정 방법을 저장하고, Experience는 진단 논리, 불변 조건 및 검증 전략을 저장합니다.
-
-## Trajectory: 실제 수정 경로 보존
-
-**P2 Trajectory** 항목은 최종 교훈뿐만 아니라 작업이 진행된 과정을 보존합니다.
-
-![확장된 Task Manager 수정 Trajectory](/super-memory/repair-trajectory-detail.png)
-
-원래 목표, 복구된 결과, 도구 순서, 복구 가능한 오류 1건, 이후의 성공 단계 및 최종 결과가 포함됩니다. 이 예제에서는 코드 읽기, 디렉터리 확인, 할 일 관리, 파일 편집, 브라우저 탐색 및 평가에 걸친 14회의 도구 호출을 기록합니다.
-
-P2 및 unverified 레이블은 이 단기 실행 기록을 재사용성이 높은 P1 Skill과 Experience에서 분리합니다. 정확한 수정 경로가 필요할 때 사용할 수 있으며, 중요한 결론은 더 오래 유지되는 형식으로 저장됩니다.
-
-## 이 분류가 중요한 이유
-
-- **Memory**는 지속적인 사실, 선호 및 상시 정보를 저장하지만 이번 테스트에서는 생성되지 않았습니다.
-- **Skill**은 재사용 가능한 해결 방법을 저장합니다.
-- **Experience**는 근본 원인에 대한 추론과 검증 체크리스트를 저장합니다.
-- **Trajectory**는 작업, 오류 및 복구 순서를 저장합니다.
-- **Resource**는 구체적인 파일과 편집 위치를 저장합니다.
-
-이 분리는 검색의 정확성과 통제력을 유지합니다. 향후 작업에서는 하나의 큰 일반 메모리를 불러오지 않고 방법, 교훈, 실행 기록 또는 수정된 리소스를 각각 검색할 수 있습니다.
-
-## 검증: 새 대화와 다른 앱에서 재사용하기
-
-두 번째 테스트에서는 추출된 지식이 기존 Task Manager 대화를 벗어나서도 유용한지 확인합니다.
-
-기존 대화를 삭제한 뒤 다른 HTML 앱인 **test2.html**의 Reading Library를 위한 새 대화를 만듭니다. 이 앱은 작업 대신 책을 사용하지만 상태, ID, 필터, 카운터, 키보드, 삭제 및 localStorage에 같은 유형의 오류를 의도적으로 포함합니다.
-
-### 1. 별도의 대화에서 시작
-
-![별도 대화에서 시작한 Reading Library 테스트](/super-memory/reading-library-new-session.png)
-
-데모에서는 변경 전에 관련 메모리, 이전 교훈 및 학습된 패턴을 검토하도록 Breezell에 명시적으로 요청합니다. 이를 통해 검색 과정을 확인할 수 있습니다. 일반적인 사용에서는 이러한 지시가 없어도 Super Memory가 관련 지식을 자동으로 불러올 수 있습니다.
-
-### 2. 삭제된 대화에서 지식 불러오기
-
-**test2.html**을 편집하기 전에 Breezell은 보호된 JSON 로딩에 관한 기존 **P1 Skill**과 이전 **test.html** 파일의 편집 위치를 가리키는 **P2 Resource** 기록을 불러옵니다.
-
-![Skill 및 Resource 항목을 불러오는 Breezell](/super-memory/reading-library-memory-recall.png)
-
-두 가지 형태의 검색을 확인할 수 있습니다.
-
-- **Skill:** 보호된 JSON.stringify와 JSON.parse, 손상된 이전 데이터의 안전한 제거, 깨끗한 기본 상태 복원이라는 재사용 가능한 저장 패턴을 제공합니다.
-- **Resource:** 이전 파일에서 변경된 영역을 보여 주어 학습된 패턴의 구체적인 출처를 보존합니다.
-
-이번 테스트에서는 기존 대화를 삭제해도 그 대화에서 추출된 구조화된 Super Memory 항목이 삭제되지 않았으며, 이후 대화에서 계속 사용할 수 있었습니다.
-
-### 3. 기존 패치를 복사하지 않고 방법 전이
-
-Breezell은 이전 **tasks** 배열용 코드를 복사하지 않고 기존 교훈을 Reading Library의 공유 **books** 상태에 적용합니다.
-
-![불러온 지식으로 수정한 Reading Library](/super-memory/reading-library-repair-result.png)
-
-새 수정에는 다음이 포함됩니다.
-
-- 보호된 JSON 직렬화 및 파싱.
-- 복구할 수 없는 이전 값의 안전한 제거.
-- 예제 책을 중복 추가하지 않고 유효한 빈 라이브러리 로드.
-- 충돌하기 쉬운 타임스탬프 대신 결정적이고 고유한 책 ID.
-- 올바른 읽음·읽지 않음 카운터, 필터 및 빈 필터 상태.
-- 상태 전환, 대상 삭제 및 읽은 책 지우기.
-- 입력 검증과 Enter 키만을 통한 제출.
-- 각 책의 안정적인 ID를 사용하는 이벤트 처리.
-
-Breezell은 14개 항목의 브라우저 워크플로로 결과를 검증하고 테스트 후 기존 localStorage 값을 복원합니다.
-
-### 두 번째 테스트가 증명하는 점
-
-- **구조화된 지식은 기존 대화를 벗어나서도 유지됩니다:** 이전 대화를 삭제해도 이 테스트에서 Skill과 Resource를 불러올 수 있었습니다.
-- **서로 다른 구현으로 일반화됩니다:** 상태와 저장 오류의 구조가 관련되어 있으므로 Task Manager에서 학습한 패턴을 Reading Library에 적용할 수 있습니다.
-- **Skill은 패치 기록 이상입니다:** P1 Skill은 재사용 가능한 방법을 제공하고 P2 Resource는 구체적인 구현 이력을 보존합니다.
-- **AI는 근본 원인을 수정합니다:** 기존 코드를 그대로 복사하지 않고 공유 상태, 안정적인 ID, 검증된 저장 경계 및 전체 워크플로 검증 원칙을 전이합니다.
-- **명시적 검색 요청은 선택 사항입니다:** 데모를 쉽게 관찰하기 위해 메모리 검토를 요청했습니다. 일반 대화에서는 관련 Super Memory 항목이 자동으로 호출될 수 있습니다.
-
-## 상주 메모리(P0)
-
-현재 요청과 의미적으로 일치하지 않더라도 매번 메모리를 검색할 때 사용할 Super Memory 항목은 **Resident**로 설정할 수 있습니다.
-
-### 항목을 상주로 설정
-
-메모리 카드의 핀 아이콘에 마우스를 올리거나 선택합니다. **Set resident** 도구 설명이 이 기능을 나타냅니다.
-
-![메모리 카드의 상주 설정 기능](/super-memory/set-resident-action.png)
-
-설정하면 다음과 같이 변경됩니다.
-
-- 우선순위가 **P0**로 올라갑니다.
-- 카드에 **Resident** 배지가 표시됩니다.
-- 상주 상태를 나타내는 핀이 강조됩니다.
-- 상주 용량 카운터가 증가합니다. 예제에서는 **Resident 1/12**로 변경됩니다.
-- P0 필터에 항목이 표시됩니다.
-
-![P0 Resident로 설정된 메모리](/super-memory/p0-resident-memory.png)
-
-P0는 영구 우선순위입니다. 기간 기반 수명 주기가 있는 P1 및 P2와 달리 사용자가 상주 상태를 해제할 때까지 계속 사용할 수 있습니다.
-
-### 새 대화에 상주 메모리 주입
-
-Super Memory가 검색을 실행하면 상주 항목은 의미적 관련성과 별도로 주입됩니다.
-
-![새 대화에 주입된 상주 메모리](/super-memory/resident-memory-injection.png)
-
-예제에서는 새 채팅에 “Hello”만 입력했지만 상태는 다음과 같이 표시됩니다.
-
-> Injected 1 memories (1 resident · 0 relevant)
-
-관련성으로 일치한 추가 메모리가 없어도 P0 Resident 항목 하나가 주입되었다는 의미입니다. 따라서 중요한 지식을 모든 검색 주기에서 안정적으로 사용할 수 있습니다.
-
-### P0를 사용해야 하는 경우
-
-중요한 아키텍처 불변 조건, 필수 워크플로, 장기 복구 규칙 또는 핵심 환경설정처럼 AI를 항상 안내해야 하는 정보에 Resident를 사용하세요.
-
-임시 파일 위치, 일회성 작업 세부 정보 또는 크고 가치가 낮은 기록은 상주로 설정하지 않는 것이 좋습니다. 상주 항목은 요청 컨텍스트에 주입되어 모든 응답에 영향을 줄 수 있으므로 간결하고 보편적인 내용이어야 합니다. 현재 화면에는 최대 12개의 상주 항목 용량이 표시됩니다.
-
-항상 불러올 필요가 없어지면 강조된 핀을 다시 선택하여 Resident 상태를 해제합니다.
-
+- 슈퍼 메모리는 사용자 모델의 토큰을 쓰지 않고 대화를 메모리, 스킬, 경험, 궤적, 리소스로 정제합니다.
+- 관련 항목은 이후 요청에 불러오고, 상주 항목(최대 12개, 항상 P0)은 모든 요청에 들어갑니다.
+- P1은 30일, P2는 7일 동안 유지되며 그 안에 다시 확인되지 않으면 만료됩니다. 만료된 항목은 휴면 상태가 되며 복원할 수 있습니다.
+- Box ▸ <BzWenben jian="box.memory.group" />에는 개요, 라이브러리, 컨텍스트 주입 화면, 유지 관리가 있습니다.

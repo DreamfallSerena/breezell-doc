@@ -1,0 +1,1754 @@
+{
+ "en": {
+  "jiyi": [
+   {
+    "id": "m1",
+    "lei": "memory",
+    "youxian": "P0",
+    "changzhu": true,
+    "biaoti": "Answer in Traditional Chinese; keep code and identifiers in English",
+    "biaoqian": [
+     "language",
+     "preference"
+    ],
+    "l1": "The user reads answers in Traditional Chinese. Code, file names, identifiers and commands stay in English.",
+    "yuanyin": "A standing preference that applies to every conversation.",
+    "l2": "Preference recorded from the user's request: write explanations in Traditional Chinese (Taiwan wording), keep code blocks, identifiers, file paths and terminal commands in English.",
+    "laiyuan": "chat",
+    "shijian": "3d",
+    "queren": 4,
+    "fangwen": 26
+   },
+   {
+    "id": "m2",
+    "lei": "skill",
+    "youxian": "P1",
+    "xin": true,
+    "biaoti": "Restore corrupted localStorage state with guarded JSON parsing",
+    "biaoqian": [
+     "localStorage",
+     "json",
+     "state-hydration",
+     "data-recovery"
+    ],
+    "l1": "Save the task array with JSON.stringify and load it with a guarded JSON.parse. After a valid load, do not add the seed data again. Discard values that cannot be recovered, such as \"[object Object]\", and fall back to a clean default.",
+    "yuanyin": "A verified persistence and recovery pattern that applies to any stateful client app.",
+    "l2": "Failure: tasks were written with String(array), so reloads produced \"[object Object]\" and the seed task was appended on every load.\nProcedure:\n1. Write: localStorage.setItem(key, JSON.stringify(tasks)).\n2. Read: try JSON.parse; accept only an array of objects with id, text and done.\n3. On a parse error or an invalid shape, remove the key and start from an empty list.\n4. Add seed data only when the key does not exist yet.",
+    "laiyuan": "chat",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 3,
+    "guoqi": 30
+   },
+   {
+    "id": "m3",
+    "lei": "experience",
+    "youxian": "P1",
+    "xin": true,
+    "tisheng": true,
+    "biaoti": "When tasks, filters and counters break together, fix the shared state first",
+    "biaoqian": [
+     "state-management",
+     "debugging",
+     "stable-identity",
+     "testing"
+    ],
+    "l1": "Start at the shared tasks array and its state transitions instead of patching each symptom. Give every item a collision-safe stable id, re-render counters and filters from the same state, and retest input, filters, clearing and reload together.",
+    "yuanyin": "A reusable checklist for features whose handlers, rendering, counters and persistence depend on one state model.",
+    "l2": "Root cause: handlers mutated copies of the array and addressed items by index, so deleting or completing one task affected another. Counters and filters read stale copies.\nVerification: add, complete, delete, filter, clear completed, reload — in one pass.",
+    "laiyuan": "chat",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 2,
+    "guoqi": 30
+   },
+   {
+    "id": "m4",
+    "lei": "trajectory",
+    "youxian": "P2",
+    "biaoti": "Task Manager repair: 14 tool calls, 1 recovered error",
+    "biaoqian": [
+     "task-manager",
+     "repair"
+    ],
+    "l1": "Goal: fix adding, deleting, completing, filtering and saving tasks in test.html. Read the code, edited the script, hit one failed edit and retried, then verified the workflow in the browser.",
+    "yuanyin": "Keeps the actual repair path available if the same problem comes back.",
+    "l2": "read test.html → list folder → plan to-dos → edit_file (failed: stale range) → read → edit_file → edit_file → open browser → evaluate add/complete/delete → evaluate filters → evaluate reload → done.",
+    "laiyuan": "chat",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 0,
+    "guoqi": 7
+   },
+   {
+    "id": "m5",
+    "lei": "resource",
+    "youxian": "P2",
+    "bianji": "edit",
+    "biaoti": "test.html",
+    "biaoqian": [
+     "code-edit"
+    ],
+    "l1": "Rewrote loadTasks/saveTasks and the event handlers in test.html (lines 88–164).",
+    "yuanyin": "Records where the repair changed the code.",
+    "l2": "test.html: loadTasks, saveTasks, addTask, toggleTask, deleteTask, renderCounters.",
+    "laiyuan": "code-edit",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 1,
+    "guoqi": 7
+   },
+   {
+    "id": "m6",
+    "lei": "memory",
+    "youxian": "P1",
+    "biaoti": "The project uses pnpm and runs tests with Vitest",
+    "biaoqian": [
+     "tooling"
+    ],
+    "l1": "Install with pnpm install; run tests with pnpm test (Vitest).",
+    "yuanyin": "Needed whenever the agent installs packages or runs tests.",
+    "l2": "Detected from package.json and pnpm-lock.yaml; confirmed when the user asked to run the tests.",
+    "laiyuan": "chat",
+    "shijian": "5d",
+    "queren": 2,
+    "fangwen": 9,
+    "guoqi": 25
+   },
+   {
+    "id": "m7",
+    "lei": "memory",
+    "youxian": "P2",
+    "xiumian": true,
+    "biaoti": "Use npm for installs",
+    "biaoqian": [
+     "tooling"
+    ],
+    "l1": "Older note from before the project moved to pnpm.",
+    "yuanyin": "Replaced by a newer memory; kept dormant in case it is needed again.",
+    "l2": "Superseded on the day the lockfile changed to pnpm-lock.yaml.",
+    "laiyuan": "chat",
+    "shijian": "40d",
+    "queren": 1,
+    "fangwen": 4
+   }
+  ],
+  "lunci": [
+   {
+    "xuhao": 3,
+    "yulan": "Add a dark mode toggle to the settings page.",
+    "zhuangtai": "complete",
+    "shijian": "5m",
+    "huifu": 2,
+    "wenjian": 1
+   },
+   {
+    "xuhao": 2,
+    "yulan": "Why does the counter show the wrong number?",
+    "zhuangtai": "complete",
+    "shijian": "40m",
+    "huifu": 1,
+    "wenjian": 0
+   },
+   {
+    "xuhao": 1,
+    "yulan": "Fix the task manager in test.html.",
+    "zhuangtai": "partial",
+    "shijian": "2h",
+    "huifu": 3,
+    "wenjian": 2
+   }
+  ],
+  "suoyin": [
+   {
+    "fenlei": "memories",
+    "tiao": [
+     {
+      "youxian": "P0",
+      "wen": "Answer in Traditional Chinese; keep code and identifiers in English",
+      "biaoqian": [
+       "language"
+      ],
+      "shijian": "3d"
+     },
+     {
+      "youxian": "P1",
+      "wen": "The project uses pnpm and runs tests with Vitest",
+      "biaoqian": [
+       "tooling"
+      ],
+      "shijian": "5d"
+     }
+    ]
+   },
+   {
+    "fenlei": "skills",
+    "tiao": [
+     {
+      "youxian": "P1",
+      "wen": "Restore corrupted localStorage state with guarded JSON parsing",
+      "biaoqian": [
+       "localStorage",
+       "json"
+      ],
+      "shijian": "2h"
+     },
+     {
+      "youxian": "P1",
+      "wen": "When tasks, filters and counters break together, fix the shared state first",
+      "biaoqian": [
+       "debugging"
+      ],
+      "shijian": "2h"
+     }
+    ]
+   },
+   {
+    "fenlei": "resources",
+    "tiao": [
+     {
+      "youxian": "P2",
+      "wen": "Edited test.html",
+      "biaoqian": [
+       "code-edit"
+      ],
+      "shijian": "2h"
+     }
+    ]
+   }
+  ]
+ },
+ "zh-hans": {
+  "jiyi": [
+   {
+    "id": "m1",
+    "lei": "memory",
+    "youxian": "P0",
+    "changzhu": true,
+    "biaoti": "用繁体中文回答；代码和标识符保留英文",
+    "biaoqian": [
+     "language",
+     "preference"
+    ],
+    "l1": "用户阅读繁体中文的回答。代码、文件名、标识符和命令保留英文。",
+    "yuanyin": "适用于每段对话的长期偏好。",
+    "l2": "根据用户的要求记录的偏好：说明文字使用繁体中文（台湾用语），代码块、标识符、文件路径和终端命令保留英文。",
+    "laiyuan": "chat",
+    "shijian": "3d",
+    "queren": 4,
+    "fangwen": 26
+   },
+   {
+    "id": "m2",
+    "lei": "skill",
+    "youxian": "P1",
+    "xin": true,
+    "biaoti": "通过带防护的 JSON 解析恢复损坏的 localStorage 状态",
+    "biaoqian": [
+     "localStorage",
+     "json",
+     "state-hydration",
+     "data-recovery"
+    ],
+    "l1": "用 JSON.stringify 保存任务数组，用带防护的 JSON.parse 加载。成功加载有效数据后，不要再次添加种子数据。丢弃无法恢复的值（例如 \"[object Object]\"），并回退到干净的默认值。",
+    "yuanyin": "经过验证的持久化与恢复模式，适用于任何有状态的客户端应用。",
+    "l2": "故障：任务是用 String(array) 写入的，因此重新加载后得到 \"[object Object]\"，而且每次加载都会再追加一次种子任务。\n步骤：\n1. 写入：localStorage.setItem(key, JSON.stringify(tasks))。\n2. 读取：尝试 JSON.parse；只接受由包含 id、text 和 done 的对象组成的数组。\n3. 解析出错或结构无效时，删除该键，从空列表开始。\n4. 只有在该键尚不存在时才添加种子数据。",
+    "laiyuan": "chat",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 3,
+    "guoqi": 30
+   },
+   {
+    "id": "m3",
+    "lei": "experience",
+    "youxian": "P1",
+    "xin": true,
+    "tisheng": true,
+    "biaoti": "任务、筛选和计数器同时出错时，先修复共享状态",
+    "biaoqian": [
+     "state-management",
+     "debugging",
+     "stable-identity",
+     "testing"
+    ],
+    "l1": "从共享的 tasks 数组及其状态转换入手，而不是逐个修补症状。为每一项分配不会冲突的稳定 id，让计数器和筛选基于同一份状态重新渲染，并把输入、筛选、清除和重新加载放在一起重新测试。",
+    "yuanyin": "一份可复用的检查清单，适用于处理函数、渲染、计数器和持久化都依赖同一个状态模型的功能。",
+    "l2": "根本原因：处理函数修改的是数组的副本，并按索引定位列表项，因此删除或完成一个任务会影响到另一个任务。计数器和筛选读取的是过期的副本。\n验证：在一次流程中完成添加、完成、删除、筛选、清除已完成、重新加载。",
+    "laiyuan": "chat",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 2,
+    "guoqi": 30
+   },
+   {
+    "id": "m4",
+    "lei": "trajectory",
+    "youxian": "P2",
+    "biaoti": "任务管理器修复：14 次工具调用，1 次错误已恢复",
+    "biaoqian": [
+     "task-manager",
+     "repair"
+    ],
+    "l1": "目标：修复 test.html 中任务的添加、删除、完成、筛选和保存。读取了代码，修改了脚本，遇到一次编辑失败后重试，然后在浏览器中验证了整个流程。",
+    "yuanyin": "保留实际的修复路径，以防同样的问题再次出现。",
+    "l2": "读取 test.html → 列出文件夹 → 规划待办事项 → edit_file（失败：范围已过期）→ 读取 → edit_file → edit_file → 打开浏览器 → 检验添加/完成/删除 → 检验筛选 → 检验重新加载 → 完成。",
+    "laiyuan": "chat",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 0,
+    "guoqi": 7
+   },
+   {
+    "id": "m5",
+    "lei": "resource",
+    "youxian": "P2",
+    "bianji": "edit",
+    "biaoti": "test.html",
+    "biaoqian": [
+     "code-edit"
+    ],
+    "l1": "重写了 test.html 中的 loadTasks/saveTasks 和事件处理函数（第 88–164 行）。",
+    "yuanyin": "记录这次修复改动了代码的哪些位置。",
+    "l2": "test.html：loadTasks、saveTasks、addTask、toggleTask、deleteTask、renderCounters。",
+    "laiyuan": "code-edit",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 1,
+    "guoqi": 7
+   },
+   {
+    "id": "m6",
+    "lei": "memory",
+    "youxian": "P1",
+    "biaoti": "项目使用 pnpm，并用 Vitest 运行测试",
+    "biaoqian": [
+     "tooling"
+    ],
+    "l1": "使用 pnpm install 安装；使用 pnpm test（Vitest）运行测试。",
+    "yuanyin": "每当 Agent 安装软件包或运行测试时都需要用到。",
+    "l2": "从 package.json 和 pnpm-lock.yaml 中检测到；在用户要求运行测试时得到确认。",
+    "laiyuan": "chat",
+    "shijian": "5d",
+    "queren": 2,
+    "fangwen": 9,
+    "guoqi": 25
+   },
+   {
+    "id": "m7",
+    "lei": "memory",
+    "youxian": "P2",
+    "xiumian": true,
+    "biaoti": "使用 npm 安装依赖",
+    "biaoqian": [
+     "tooling"
+    ],
+    "l1": "项目迁移到 pnpm 之前的旧笔记。",
+    "yuanyin": "已被一条更新的记忆取代；以休眠状态保留，以备再次需要。",
+    "l2": "在锁文件变更为 pnpm-lock.yaml 的当天被取代。",
+    "laiyuan": "chat",
+    "shijian": "40d",
+    "queren": 1,
+    "fangwen": 4
+   }
+  ],
+  "lunci": [
+   {
+    "xuhao": 3,
+    "yulan": "为设置页面添加一个深色模式开关。",
+    "zhuangtai": "complete",
+    "shijian": "5m",
+    "huifu": 2,
+    "wenjian": 1
+   },
+   {
+    "xuhao": 2,
+    "yulan": "为什么计数器显示的数字不对？",
+    "zhuangtai": "complete",
+    "shijian": "40m",
+    "huifu": 1,
+    "wenjian": 0
+   },
+   {
+    "xuhao": 1,
+    "yulan": "修复 test.html 中的任务管理器。",
+    "zhuangtai": "partial",
+    "shijian": "2h",
+    "huifu": 3,
+    "wenjian": 2
+   }
+  ],
+  "suoyin": [
+   {
+    "fenlei": "memories",
+    "tiao": [
+     {
+      "youxian": "P0",
+      "wen": "用繁体中文回答；代码和标识符保留英文",
+      "biaoqian": [
+       "language"
+      ],
+      "shijian": "3d"
+     },
+     {
+      "youxian": "P1",
+      "wen": "项目使用 pnpm，并用 Vitest 运行测试",
+      "biaoqian": [
+       "tooling"
+      ],
+      "shijian": "5d"
+     }
+    ]
+   },
+   {
+    "fenlei": "skills",
+    "tiao": [
+     {
+      "youxian": "P1",
+      "wen": "通过带防护的 JSON 解析恢复损坏的 localStorage 状态",
+      "biaoqian": [
+       "localStorage",
+       "json"
+      ],
+      "shijian": "2h"
+     },
+     {
+      "youxian": "P1",
+      "wen": "任务、筛选和计数器同时出错时，先修复共享状态",
+      "biaoqian": [
+       "debugging"
+      ],
+      "shijian": "2h"
+     }
+    ]
+   },
+   {
+    "fenlei": "resources",
+    "tiao": [
+     {
+      "youxian": "P2",
+      "wen": "修改 test.html",
+      "biaoqian": [
+       "code-edit"
+      ],
+      "shijian": "2h"
+     }
+    ]
+   }
+  ]
+ },
+ "zh-hant": {
+  "jiyi": [
+   {
+    "id": "m1",
+    "lei": "memory",
+    "youxian": "P0",
+    "changzhu": true,
+    "biaoti": "用繁體中文回答；程式碼和識別碼保持英文",
+    "biaoqian": [
+     "language",
+     "preference"
+    ],
+    "l1": "使用者以繁體中文閱讀回答。程式碼、檔名、識別碼和命令維持英文。",
+    "yuanyin": "適用於每一段對話的長期偏好。",
+    "l2": "依使用者的要求記錄的偏好：以繁體中文（台灣用語）撰寫說明，程式碼區塊、識別碼、檔案路徑和終端機命令維持英文。",
+    "laiyuan": "chat",
+    "shijian": "3d",
+    "queren": 4,
+    "fangwen": 26
+   },
+   {
+    "id": "m2",
+    "lei": "skill",
+    "youxian": "P1",
+    "xin": true,
+    "biaoti": "用加上防護的 JSON 解析還原損壞的 localStorage 狀態",
+    "biaoqian": [
+     "localStorage",
+     "json",
+     "state-hydration",
+     "data-recovery"
+    ],
+    "l1": "以 JSON.stringify 儲存任務陣列，並以加上防護的 JSON.parse 載入。成功載入後，不要再次加入種子資料。捨棄無法復原的值（例如 \"[object Object]\"），改用乾淨的預設值。",
+    "yuanyin": "經過驗證的持久化與復原模式，適用於任何具有狀態的用戶端應用程式。",
+    "l2": "故障：任務是以 String(array) 寫入的，因此重新載入時會得到 \"[object Object]\"，而且每次載入都會再附加一次種子任務。\n步驟：\n1. 寫入：localStorage.setItem(key, JSON.stringify(tasks))。\n2. 讀取：嘗試 JSON.parse；只接受由具有 id、text 和 done 的物件組成的陣列。\n3. 發生解析錯誤或結構無效時，移除該鍵並從空清單開始。\n4. 只有在該鍵尚不存在時，才加入種子資料。",
+    "laiyuan": "chat",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 3,
+    "guoqi": 30
+   },
+   {
+    "id": "m3",
+    "lei": "experience",
+    "youxian": "P1",
+    "xin": true,
+    "tisheng": true,
+    "biaoti": "任務、篩選和計數器同時壞掉時，先修正共用狀態",
+    "biaoqian": [
+     "state-management",
+     "debugging",
+     "stable-identity",
+     "testing"
+    ],
+    "l1": "從共用的 tasks 陣列及其狀態轉換著手，而不是逐一修補每個症狀。給每個項目一個不會衝突的穩定 id，讓計數器和篩選都從同一份狀態重新繪製，並一起重新測試輸入、篩選、清除和重新載入。",
+    "yuanyin": "一份可重複使用的檢查清單，適用於事件處理常式、繪製、計數器和持久化都依賴同一個狀態模型的功能。",
+    "l2": "根本原因：處理常式修改的是陣列的副本，並以索引定位項目，因此刪除或完成一個任務時會影響到另一個任務。計數器和篩選讀取的是過時的副本。\n驗證：新增、完成、刪除、篩選、清除已完成、重新載入，一次全部跑完。",
+    "laiyuan": "chat",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 2,
+    "guoqi": 30
+   },
+   {
+    "id": "m4",
+    "lei": "trajectory",
+    "youxian": "P2",
+    "biaoti": "任務管理工具修復：14 次工具呼叫，1 次錯誤已恢復",
+    "biaoqian": [
+     "task-manager",
+     "repair"
+    ],
+    "l1": "目標：修正 test.html 中新增、刪除、完成、篩選和儲存任務的功能。讀取程式碼、編輯指令碼，遇到一次編輯失敗後重試，最後在瀏覽器中驗證工作流程。",
+    "yuanyin": "保留實際的修復路徑，以便同樣的問題再次出現時使用。",
+    "l2": "讀取 test.html → 列出資料夾 → 規劃待辦事項 → edit_file（失敗：範圍已過時）→ 讀取 → edit_file → edit_file → 開啟瀏覽器 → 驗證新增/完成/刪除 → 驗證篩選 → 驗證重新載入 → 完成。",
+    "laiyuan": "chat",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 0,
+    "guoqi": 7
+   },
+   {
+    "id": "m5",
+    "lei": "resource",
+    "youxian": "P2",
+    "bianji": "edit",
+    "biaoti": "test.html",
+    "biaoqian": [
+     "code-edit"
+    ],
+    "l1": "改寫了 test.html 中的 loadTasks/saveTasks 和事件處理常式（第 88–164 行）。",
+    "yuanyin": "記錄這次修復改動了程式碼的哪些地方。",
+    "l2": "test.html：loadTasks、saveTasks、addTask、toggleTask、deleteTask、renderCounters。",
+    "laiyuan": "code-edit",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 1,
+    "guoqi": 7
+   },
+   {
+    "id": "m6",
+    "lei": "memory",
+    "youxian": "P1",
+    "biaoti": "專案使用 pnpm，並以 Vitest 執行測試",
+    "biaoqian": [
+     "tooling"
+    ],
+    "l1": "以 pnpm install 安裝；以 pnpm test（Vitest）執行測試。",
+    "yuanyin": "AI 安裝套件或執行測試時都需要這項資訊。",
+    "l2": "從 package.json 和 pnpm-lock.yaml 偵測到；在使用者要求執行測試時獲得確認。",
+    "laiyuan": "chat",
+    "shijian": "5d",
+    "queren": 2,
+    "fangwen": 9,
+    "guoqi": 25
+   },
+   {
+    "id": "m7",
+    "lei": "memory",
+    "youxian": "P2",
+    "xiumian": true,
+    "biaoti": "使用 npm 安裝套件",
+    "biaoqian": [
+     "tooling"
+    ],
+    "l1": "專案改用 pnpm 之前的舊筆記。",
+    "yuanyin": "已被較新的記憶取代；保持休眠，以備日後需要。",
+    "l2": "在鎖定檔改為 pnpm-lock.yaml 的當天被取代。",
+    "laiyuan": "chat",
+    "shijian": "40d",
+    "queren": 1,
+    "fangwen": 4
+   }
+  ],
+  "lunci": [
+   {
+    "xuhao": 3,
+    "yulan": "在設定頁面加入深色模式切換開關。",
+    "zhuangtai": "complete",
+    "shijian": "5m",
+    "huifu": 2,
+    "wenjian": 1
+   },
+   {
+    "xuhao": 2,
+    "yulan": "為什麼計數器顯示的數字不對？",
+    "zhuangtai": "complete",
+    "shijian": "40m",
+    "huifu": 1,
+    "wenjian": 0
+   },
+   {
+    "xuhao": 1,
+    "yulan": "修正 test.html 中的任務管理工具。",
+    "zhuangtai": "partial",
+    "shijian": "2h",
+    "huifu": 3,
+    "wenjian": 2
+   }
+  ],
+  "suoyin": [
+   {
+    "fenlei": "memories",
+    "tiao": [
+     {
+      "youxian": "P0",
+      "wen": "用繁體中文回答；程式碼和識別碼保持英文",
+      "biaoqian": [
+       "language"
+      ],
+      "shijian": "3d"
+     },
+     {
+      "youxian": "P1",
+      "wen": "專案使用 pnpm，並以 Vitest 執行測試",
+      "biaoqian": [
+       "tooling"
+      ],
+      "shijian": "5d"
+     }
+    ]
+   },
+   {
+    "fenlei": "skills",
+    "tiao": [
+     {
+      "youxian": "P1",
+      "wen": "用加上防護的 JSON 解析還原損壞的 localStorage 狀態",
+      "biaoqian": [
+       "localStorage",
+       "json"
+      ],
+      "shijian": "2h"
+     },
+     {
+      "youxian": "P1",
+      "wen": "任務、篩選和計數器同時壞掉時，先修正共用狀態",
+      "biaoqian": [
+       "debugging"
+      ],
+      "shijian": "2h"
+     }
+    ]
+   },
+   {
+    "fenlei": "resources",
+    "tiao": [
+     {
+      "youxian": "P2",
+      "wen": "修改 test.html",
+      "biaoqian": [
+       "code-edit"
+      ],
+      "shijian": "2h"
+     }
+    ]
+   }
+  ]
+ },
+ "ja": {
+  "jiyi": [
+   {
+    "id": "m1",
+    "lei": "memory",
+    "youxian": "P0",
+    "changzhu": true,
+    "biaoti": "繁体字中国語で回答し、コードと識別子は英語のままにする",
+    "biaoqian": [
+     "language",
+     "preference"
+    ],
+    "l1": "ユーザーは回答を繁体字中国語で読みます。コード、ファイル名、識別子、コマンドは英語のままにします。",
+    "yuanyin": "すべての会話に適用される、継続的な好みです。",
+    "l2": "ユーザーの依頼から記録した好みです。説明は繁体字中国語（台湾の用語）で書き、コードブロック、識別子、ファイルパス、ターミナルコマンドは英語のままにします。",
+    "laiyuan": "chat",
+    "shijian": "3d",
+    "queren": 4,
+    "fangwen": 26
+   },
+   {
+    "id": "m2",
+    "lei": "skill",
+    "youxian": "P1",
+    "xin": true,
+    "biaoti": "破損した localStorage の状態をガード付きの JSON 解析で復元する",
+    "biaoqian": [
+     "localStorage",
+     "json",
+     "state-hydration",
+     "data-recovery"
+    ],
+    "l1": "タスク配列は JSON.stringify で保存し、ガード付きの JSON.parse で読み込みます。正しく読み込めた後は、初期データを再び追加しません。\"[object Object]\" のように復元できない値は破棄し、クリーンな既定値に戻します。",
+    "yuanyin": "状態を持つあらゆるクライアントアプリに使える、検証済みの保存と復元のパターンです。",
+    "l2": "不具合：タスクが String(array) で書き込まれていたため、再読み込みすると \"[object Object]\" になり、読み込むたびに初期タスクが追加されていました。\n手順：\n1. 書き込み：localStorage.setItem(key, JSON.stringify(tasks))。\n2. 読み込み：JSON.parse を試し、id、text、done を持つオブジェクトの配列だけを受け入れます。\n3. 解析エラーや不正な形の場合は、キーを削除して空のリストから始めます。\n4. 初期データは、キーがまだ存在しないときだけ追加します。",
+    "laiyuan": "chat",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 3,
+    "guoqi": 30
+   },
+   {
+    "id": "m3",
+    "lei": "experience",
+    "youxian": "P1",
+    "xin": true,
+    "tisheng": true,
+    "biaoti": "タスク、フィルター、カウンターが同時に壊れたら、まず共有状態を直す",
+    "biaoqian": [
+     "state-management",
+     "debugging",
+     "stable-identity",
+     "testing"
+    ],
+    "l1": "症状を一つずつ直すのではなく、共有のタスク配列とその状態遷移から調べます。すべての項目に衝突しない安定した ID を付け、カウンターとフィルターを同じ状態から再描画し、入力、フィルター、消去、再読み込みをまとめて再テストします。",
+    "yuanyin": "ハンドラー、描画、カウンター、保存が 1 つの状態モデルに依存する機能で再利用できるチェックリストです。",
+    "l2": "根本原因：ハンドラーが配列のコピーを変更し、項目をインデックスで指定していたため、あるタスクを削除または完了すると別のタスクに影響していました。カウンターとフィルターは古いコピーを読んでいました。\n検証：追加、完了、削除、フィルター、完了済みの消去、再読み込みを 1 回の通しで確認します。",
+    "laiyuan": "chat",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 2,
+    "guoqi": 30
+   },
+   {
+    "id": "m4",
+    "lei": "trajectory",
+    "youxian": "P2",
+    "biaoti": "タスクマネージャーの修復：ツール呼び出し 14 回、回復したエラー 1 件",
+    "biaoqian": [
+     "task-manager",
+     "repair"
+    ],
+    "l1": "目標：test.html でのタスクの追加、削除、完了、絞り込み、保存を直すこと。コードを読み、スクリプトを編集し、失敗した 1 回の編集をやり直してから、ブラウザーでワークフローを検証しました。",
+    "yuanyin": "同じ問題が再発したときのために、実際の修復経路を残しておきます。",
+    "l2": "test.html を読む → フォルダーを一覧表示 → ToDo を計画 → edit_file（失敗：範囲が古い）→ 読む → edit_file → edit_file → ブラウザーを開く → 追加/完了/削除を評価 → フィルターを評価 → 再読み込みを評価 → 完了。",
+    "laiyuan": "chat",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 0,
+    "guoqi": 7
+   },
+   {
+    "id": "m5",
+    "lei": "resource",
+    "youxian": "P2",
+    "bianji": "edit",
+    "biaoti": "test.html",
+    "biaoqian": [
+     "code-edit"
+    ],
+    "l1": "test.html の loadTasks/saveTasks とイベントハンドラーを書き直しました（88–164 行目）。",
+    "yuanyin": "修復でコードのどこが変わったかを記録します。",
+    "l2": "test.html: loadTasks, saveTasks, addTask, toggleTask, deleteTask, renderCounters.",
+    "laiyuan": "code-edit",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 1,
+    "guoqi": 7
+   },
+   {
+    "id": "m6",
+    "lei": "memory",
+    "youxian": "P1",
+    "biaoti": "このプロジェクトは pnpm を使い、テストは Vitest で実行する",
+    "biaoqian": [
+     "tooling"
+    ],
+    "l1": "インストールは pnpm install、テストは pnpm test（Vitest）で実行します。",
+    "yuanyin": "エージェントがパッケージをインストールしたり、テストを実行したりするときに必要です。",
+    "l2": "package.json と pnpm-lock.yaml から検出し、ユーザーがテストの実行を依頼したときに確認されました。",
+    "laiyuan": "chat",
+    "shijian": "5d",
+    "queren": 2,
+    "fangwen": 9,
+    "guoqi": 25
+   },
+   {
+    "id": "m7",
+    "lei": "memory",
+    "youxian": "P2",
+    "xiumian": true,
+    "biaoti": "インストールには npm を使う",
+    "biaoqian": [
+     "tooling"
+    ],
+    "l1": "プロジェクトが pnpm に移行する前の古いメモです。",
+    "yuanyin": "新しい記憶に置き換えられました。再び必要になる場合に備えて、休止中のまま残しています。",
+    "l2": "ロックファイルが pnpm-lock.yaml に変わった日に置き換えられました。",
+    "laiyuan": "chat",
+    "shijian": "40d",
+    "queren": 1,
+    "fangwen": 4
+   }
+  ],
+  "lunci": [
+   {
+    "xuhao": 3,
+    "yulan": "設定ページにダークモードの切り替えスイッチを追加してください。",
+    "zhuangtai": "complete",
+    "shijian": "5m",
+    "huifu": 2,
+    "wenjian": 1
+   },
+   {
+    "xuhao": 2,
+    "yulan": "カウンターに間違った数が表示されるのはなぜですか？",
+    "zhuangtai": "complete",
+    "shijian": "40m",
+    "huifu": 1,
+    "wenjian": 0
+   },
+   {
+    "xuhao": 1,
+    "yulan": "test.html のタスクマネージャーを修正してください。",
+    "zhuangtai": "partial",
+    "shijian": "2h",
+    "huifu": 3,
+    "wenjian": 2
+   }
+  ],
+  "suoyin": [
+   {
+    "fenlei": "memories",
+    "tiao": [
+     {
+      "youxian": "P0",
+      "wen": "繁体字中国語で回答し、コードと識別子は英語のままにする",
+      "biaoqian": [
+       "language"
+      ],
+      "shijian": "3d"
+     },
+     {
+      "youxian": "P1",
+      "wen": "このプロジェクトは pnpm を使い、テストは Vitest で実行する",
+      "biaoqian": [
+       "tooling"
+      ],
+      "shijian": "5d"
+     }
+    ]
+   },
+   {
+    "fenlei": "skills",
+    "tiao": [
+     {
+      "youxian": "P1",
+      "wen": "破損した localStorage の状態をガード付きの JSON 解析で復元する",
+      "biaoqian": [
+       "localStorage",
+       "json"
+      ],
+      "shijian": "2h"
+     },
+     {
+      "youxian": "P1",
+      "wen": "タスク、フィルター、カウンターが同時に壊れたら、まず共有状態を直す",
+      "biaoqian": [
+       "debugging"
+      ],
+      "shijian": "2h"
+     }
+    ]
+   },
+   {
+    "fenlei": "resources",
+    "tiao": [
+     {
+      "youxian": "P2",
+      "wen": "編集 test.html",
+      "biaoqian": [
+       "code-edit"
+      ],
+      "shijian": "2h"
+     }
+    ]
+   }
+  ]
+ },
+ "ko": {
+  "jiyi": [
+   {
+    "id": "m1",
+    "lei": "memory",
+    "youxian": "P0",
+    "changzhu": true,
+    "biaoti": "번체 중국어로 답변하고 코드와 식별자는 영어로 유지",
+    "biaoqian": [
+     "language",
+     "preference"
+    ],
+    "l1": "사용자는 답변을 번체 중국어로 읽습니다. 코드, 파일 이름, 식별자, 명령은 영어로 유지합니다.",
+    "yuanyin": "모든 대화에 적용되는 상시 선호입니다.",
+    "l2": "사용자의 요청에서 기록한 선호: 설명은 번체 중국어(대만식 표현)로 작성하고, 코드 블록, 식별자, 파일 경로, 터미널 명령은 영어로 유지합니다.",
+    "laiyuan": "chat",
+    "shijian": "3d",
+    "queren": 4,
+    "fangwen": 26
+   },
+   {
+    "id": "m2",
+    "lei": "skill",
+    "youxian": "P1",
+    "xin": true,
+    "biaoti": "안전한 JSON 파싱으로 손상된 localStorage 상태 복구",
+    "biaoqian": [
+     "localStorage",
+     "json",
+     "state-hydration",
+     "data-recovery"
+    ],
+    "l1": "작업 배열은 JSON.stringify로 저장하고, 예외 처리를 넣은 JSON.parse로 불러옵니다. 정상적으로 불러온 뒤에는 초기 데이터를 다시 추가하지 않습니다. \"[object Object]\" 같은 복구할 수 없는 값은 버리고 깨끗한 기본값으로 돌아갑니다.",
+    "yuanyin": "상태를 가진 모든 클라이언트 앱에 적용할 수 있는 검증된 저장 및 복구 패턴입니다.",
+    "l2": "실패 원인: 작업이 String(array)로 기록되어 새로 고침할 때마다 \"[object Object]\" 값이 생겼고, 불러올 때마다 초기 작업이 덧붙었습니다.\n절차:\n1. 쓰기: localStorage.setItem(key, JSON.stringify(tasks)).\n2. 읽기: JSON.parse를 try로 감싸 실행하고, id, text, done을 가진 객체의 배열만 받아들입니다.\n3. 파싱 오류가 나거나 형태가 올바르지 않으면 키를 제거하고 빈 목록에서 시작합니다.\n4. 초기 데이터는 키가 아직 없을 때만 추가합니다.",
+    "laiyuan": "chat",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 3,
+    "guoqi": 30
+   },
+   {
+    "id": "m3",
+    "lei": "experience",
+    "youxian": "P1",
+    "xin": true,
+    "tisheng": true,
+    "biaoti": "작업, 필터, 카운터가 함께 고장 나면 공유 상태부터 수정",
+    "biaoqian": [
+     "state-management",
+     "debugging",
+     "stable-identity",
+     "testing"
+    ],
+    "l1": "증상을 하나씩 고치지 말고 공유 작업 배열과 그 상태 전환부터 살펴봅니다. 모든 항목에 충돌하지 않는 안정적인 id를 부여하고, 카운터와 필터를 같은 상태에서 다시 렌더링하며, 입력, 필터, 지우기, 새로 고침을 함께 다시 테스트합니다.",
+    "yuanyin": "핸들러, 렌더링, 카운터, 저장이 하나의 상태 모델에 의존하는 기능에 재사용할 수 있는 체크리스트입니다.",
+    "l2": "근본 원인: 핸들러가 배열의 복사본을 변경하고 항목을 인덱스로 지정했기 때문에, 작업 하나를 삭제하거나 완료하면 다른 작업이 영향을 받았습니다. 카운터와 필터는 오래된 복사본을 읽었습니다.\n검증: 추가, 완료, 삭제, 필터, 완료 항목 지우기, 새로 고침을 한 번에 진행합니다.",
+    "laiyuan": "chat",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 2,
+    "guoqi": 30
+   },
+   {
+    "id": "m4",
+    "lei": "trajectory",
+    "youxian": "P2",
+    "biaoti": "작업 관리자 수정: 도구 호출 14회, 오류 1건 복구",
+    "biaoqian": [
+     "task-manager",
+     "repair"
+    ],
+    "l1": "목표: test.html에서 작업 추가, 삭제, 완료, 필터링, 저장을 고칩니다. 코드를 읽고 스크립트를 편집했으며, 편집 한 번이 실패해 다시 시도한 뒤 브라우저에서 워크플로를 검증했습니다.",
+    "yuanyin": "같은 문제가 다시 생길 경우를 대비해 실제 수정 경로를 남겨 둡니다.",
+    "l2": "test.html 읽기 → 폴더 목록 보기 → 할 일 계획 → edit_file (실패: 오래된 범위) → 읽기 → edit_file → edit_file → 브라우저 열기 → 추가/완료/삭제 평가 → 필터 평가 → 새로 고침 평가 → 완료.",
+    "laiyuan": "chat",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 0,
+    "guoqi": 7
+   },
+   {
+    "id": "m5",
+    "lei": "resource",
+    "youxian": "P2",
+    "bianji": "edit",
+    "biaoti": "test.html",
+    "biaoqian": [
+     "code-edit"
+    ],
+    "l1": "test.html의 loadTasks/saveTasks와 이벤트 핸들러를 다시 작성했습니다(88–164행).",
+    "yuanyin": "수정 작업이 코드의 어느 부분을 바꿨는지 기록합니다.",
+    "l2": "test.html: loadTasks, saveTasks, addTask, toggleTask, deleteTask, renderCounters.",
+    "laiyuan": "code-edit",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 1,
+    "guoqi": 7
+   },
+   {
+    "id": "m6",
+    "lei": "memory",
+    "youxian": "P1",
+    "biaoti": "프로젝트는 pnpm을 사용하고 Vitest로 테스트를 실행",
+    "biaoqian": [
+     "tooling"
+    ],
+    "l1": "pnpm install로 설치하고, pnpm test(Vitest)로 테스트를 실행합니다.",
+    "yuanyin": "에이전트가 패키지를 설치하거나 테스트를 실행할 때마다 필요합니다.",
+    "l2": "package.json과 pnpm-lock.yaml에서 감지했으며, 사용자가 테스트 실행을 요청했을 때 확인되었습니다.",
+    "laiyuan": "chat",
+    "shijian": "5d",
+    "queren": 2,
+    "fangwen": 9,
+    "guoqi": 25
+   },
+   {
+    "id": "m7",
+    "lei": "memory",
+    "youxian": "P2",
+    "xiumian": true,
+    "biaoti": "설치에는 npm 사용",
+    "biaoqian": [
+     "tooling"
+    ],
+    "l1": "프로젝트가 pnpm으로 바뀌기 전의 오래된 메모입니다.",
+    "yuanyin": "더 새로운 메모리로 대체되었습니다. 다시 필요할 경우를 대비해 휴면 상태로 보관합니다.",
+    "l2": "잠금 파일이 pnpm-lock.yaml로 바뀐 날 대체되었습니다.",
+    "laiyuan": "chat",
+    "shijian": "40d",
+    "queren": 1,
+    "fangwen": 4
+   }
+  ],
+  "lunci": [
+   {
+    "xuhao": 3,
+    "yulan": "설정 페이지에 다크 모드 토글을 추가해 주세요.",
+    "zhuangtai": "complete",
+    "shijian": "5m",
+    "huifu": 2,
+    "wenjian": 1
+   },
+   {
+    "xuhao": 2,
+    "yulan": "카운터에 왜 잘못된 숫자가 표시되나요?",
+    "zhuangtai": "complete",
+    "shijian": "40m",
+    "huifu": 1,
+    "wenjian": 0
+   },
+   {
+    "xuhao": 1,
+    "yulan": "test.html의 작업 관리자를 고쳐 주세요.",
+    "zhuangtai": "partial",
+    "shijian": "2h",
+    "huifu": 3,
+    "wenjian": 2
+   }
+  ],
+  "suoyin": [
+   {
+    "fenlei": "memories",
+    "tiao": [
+     {
+      "youxian": "P0",
+      "wen": "번체 중국어로 답변하고 코드와 식별자는 영어로 유지",
+      "biaoqian": [
+       "language"
+      ],
+      "shijian": "3d"
+     },
+     {
+      "youxian": "P1",
+      "wen": "프로젝트는 pnpm을 사용하고 Vitest로 테스트를 실행",
+      "biaoqian": [
+       "tooling"
+      ],
+      "shijian": "5d"
+     }
+    ]
+   },
+   {
+    "fenlei": "skills",
+    "tiao": [
+     {
+      "youxian": "P1",
+      "wen": "안전한 JSON 파싱으로 손상된 localStorage 상태 복구",
+      "biaoqian": [
+       "localStorage",
+       "json"
+      ],
+      "shijian": "2h"
+     },
+     {
+      "youxian": "P1",
+      "wen": "작업, 필터, 카운터가 함께 고장 나면 공유 상태부터 수정",
+      "biaoqian": [
+       "debugging"
+      ],
+      "shijian": "2h"
+     }
+    ]
+   },
+   {
+    "fenlei": "resources",
+    "tiao": [
+     {
+      "youxian": "P2",
+      "wen": "수정 test.html",
+      "biaoqian": [
+       "code-edit"
+      ],
+      "shijian": "2h"
+     }
+    ]
+   }
+  ]
+ },
+ "es": {
+  "jiyi": [
+   {
+    "id": "m1",
+    "lei": "memory",
+    "youxian": "P0",
+    "changzhu": true,
+    "biaoti": "Responde en chino tradicional; mantén el código y los identificadores en inglés",
+    "biaoqian": [
+     "language",
+     "preference"
+    ],
+    "l1": "El usuario lee las respuestas en chino tradicional. El código, los nombres de archivo, los identificadores y los comandos se mantienen en inglés.",
+    "yuanyin": "Una preferencia permanente que se aplica a todas las conversaciones.",
+    "l2": "Preferencia registrada a partir de la solicitud del usuario: escribir las explicaciones en chino tradicional (con el vocabulario de Taiwán) y mantener en inglés los bloques de código, los identificadores, las rutas de archivo y los comandos de terminal.",
+    "laiyuan": "chat",
+    "shijian": "3d",
+    "queren": 4,
+    "fangwen": 26
+   },
+   {
+    "id": "m2",
+    "lei": "skill",
+    "youxian": "P1",
+    "xin": true,
+    "biaoti": "Restaurar el estado dañado de localStorage con un análisis JSON protegido",
+    "biaoqian": [
+     "localStorage",
+     "json",
+     "state-hydration",
+     "data-recovery"
+    ],
+    "l1": "Guarda el array de tareas con JSON.stringify y cárgalo con un JSON.parse protegido. Tras una carga válida, no vuelvas a añadir los datos iniciales. Descarta los valores que no se pueden recuperar, como \"[object Object]\", y vuelve a un valor predeterminado limpio.",
+    "yuanyin": "Un patrón verificado de persistencia y recuperación que sirve para cualquier aplicación cliente con estado.",
+    "l2": "Fallo: las tareas se escribían con String(array), así que al recargar aparecía \"[object Object]\" y la tarea inicial se añadía en cada carga.\nProcedimiento:\n1. Escritura: localStorage.setItem(key, JSON.stringify(tasks)).\n2. Lectura: intenta JSON.parse; acepta solo un array de objetos con id, text y done.\n3. Ante un error de análisis o una forma no válida, elimina la clave y empieza con una lista vacía.\n4. Añade los datos iniciales solo cuando la clave todavía no existe.",
+    "laiyuan": "chat",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 3,
+    "guoqi": 30
+   },
+   {
+    "id": "m3",
+    "lei": "experience",
+    "youxian": "P1",
+    "xin": true,
+    "tisheng": true,
+    "biaoti": "Cuando tareas, filtros y contadores fallan a la vez, arregla primero el estado compartido",
+    "biaoqian": [
+     "state-management",
+     "debugging",
+     "stable-identity",
+     "testing"
+    ],
+    "l1": "Empieza por el array compartido de tareas y sus transiciones de estado en lugar de parchear cada síntoma. Da a cada elemento un id estable sin riesgo de colisión, vuelve a renderizar contadores y filtros a partir del mismo estado, y prueba de nuevo, en conjunto, la entrada, los filtros, la limpieza y la recarga.",
+    "yuanyin": "Una lista de comprobación reutilizable para funciones cuyos manejadores, renderizado, contadores y persistencia dependen de un mismo modelo de estado.",
+    "l2": "Causa raíz: los manejadores modificaban copias del array y localizaban los elementos por índice, así que eliminar o completar una tarea afectaba a otra. Los contadores y los filtros leían copias obsoletas.\nVerificación: añadir, completar, eliminar, filtrar, borrar completadas, recargar, todo en una sola pasada.",
+    "laiyuan": "chat",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 2,
+    "guoqi": 30
+   },
+   {
+    "id": "m4",
+    "lei": "trajectory",
+    "youxian": "P2",
+    "biaoti": "Reparación del gestor de tareas: 14 llamadas a herramientas, 1 error recuperado",
+    "biaoqian": [
+     "task-manager",
+     "repair"
+    ],
+    "l1": "Objetivo: arreglar las acciones de añadir, eliminar, completar, filtrar y guardar tareas en test.html. Leyó el código, editó el script, una edición falló y la reintentó, y después verificó el flujo en el navegador.",
+    "yuanyin": "Mantiene disponible el camino real de la reparación por si vuelve el mismo problema.",
+    "l2": "leer test.html → listar carpeta → planificar tareas pendientes → edit_file (falló: rango obsoleto) → leer → edit_file → edit_file → abrir navegador → evaluar añadir/completar/eliminar → evaluar filtros → evaluar recarga → listo.",
+    "laiyuan": "chat",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 0,
+    "guoqi": 7
+   },
+   {
+    "id": "m5",
+    "lei": "resource",
+    "youxian": "P2",
+    "bianji": "edit",
+    "biaoti": "test.html",
+    "biaoqian": [
+     "code-edit"
+    ],
+    "l1": "Se reescribieron loadTasks/saveTasks y los manejadores de eventos de test.html (líneas 88–164).",
+    "yuanyin": "Registra dónde cambió el código la reparación.",
+    "l2": "test.html: loadTasks, saveTasks, addTask, toggleTask, deleteTask, renderCounters.",
+    "laiyuan": "code-edit",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 1,
+    "guoqi": 7
+   },
+   {
+    "id": "m6",
+    "lei": "memory",
+    "youxian": "P1",
+    "biaoti": "El proyecto usa pnpm y ejecuta las pruebas con Vitest",
+    "biaoqian": [
+     "tooling"
+    ],
+    "l1": "Instala con pnpm install; ejecuta las pruebas con pnpm test (Vitest).",
+    "yuanyin": "Hace falta cada vez que el agente instala paquetes o ejecuta pruebas.",
+    "l2": "Detectado a partir de package.json y pnpm-lock.yaml; confirmado cuando el usuario pidió ejecutar las pruebas.",
+    "laiyuan": "chat",
+    "shijian": "5d",
+    "queren": 2,
+    "fangwen": 9,
+    "guoqi": 25
+   },
+   {
+    "id": "m7",
+    "lei": "memory",
+    "youxian": "P2",
+    "xiumian": true,
+    "biaoti": "Usar npm para las instalaciones",
+    "biaoqian": [
+     "tooling"
+    ],
+    "l1": "Nota antigua de antes de que el proyecto pasara a pnpm.",
+    "yuanyin": "Sustituida por una memoria más reciente; se conserva dormida por si vuelve a hacer falta.",
+    "l2": "Reemplazada el día en que el archivo de bloqueo pasó a ser pnpm-lock.yaml.",
+    "laiyuan": "chat",
+    "shijian": "40d",
+    "queren": 1,
+    "fangwen": 4
+   }
+  ],
+  "lunci": [
+   {
+    "xuhao": 3,
+    "yulan": "Añade un interruptor de modo oscuro a la página de configuración.",
+    "zhuangtai": "complete",
+    "shijian": "5m",
+    "huifu": 2,
+    "wenjian": 1
+   },
+   {
+    "xuhao": 2,
+    "yulan": "¿Por qué el contador muestra un número incorrecto?",
+    "zhuangtai": "complete",
+    "shijian": "40m",
+    "huifu": 1,
+    "wenjian": 0
+   },
+   {
+    "xuhao": 1,
+    "yulan": "Arregla el gestor de tareas de test.html.",
+    "zhuangtai": "partial",
+    "shijian": "2h",
+    "huifu": 3,
+    "wenjian": 2
+   }
+  ],
+  "suoyin": [
+   {
+    "fenlei": "memories",
+    "tiao": [
+     {
+      "youxian": "P0",
+      "wen": "Responde en chino tradicional; mantén el código y los identificadores en inglés",
+      "biaoqian": [
+       "language"
+      ],
+      "shijian": "3d"
+     },
+     {
+      "youxian": "P1",
+      "wen": "El proyecto usa pnpm y ejecuta las pruebas con Vitest",
+      "biaoqian": [
+       "tooling"
+      ],
+      "shijian": "5d"
+     }
+    ]
+   },
+   {
+    "fenlei": "skills",
+    "tiao": [
+     {
+      "youxian": "P1",
+      "wen": "Restaurar el estado dañado de localStorage con un análisis JSON protegido",
+      "biaoqian": [
+       "localStorage",
+       "json"
+      ],
+      "shijian": "2h"
+     },
+     {
+      "youxian": "P1",
+      "wen": "Cuando tareas, filtros y contadores fallan a la vez, arregla primero el estado compartido",
+      "biaoqian": [
+       "debugging"
+      ],
+      "shijian": "2h"
+     }
+    ]
+   },
+   {
+    "fenlei": "resources",
+    "tiao": [
+     {
+      "youxian": "P2",
+      "wen": "Editado test.html",
+      "biaoqian": [
+       "code-edit"
+      ],
+      "shijian": "2h"
+     }
+    ]
+   }
+  ]
+ },
+ "pt-br": {
+  "jiyi": [
+   {
+    "id": "m1",
+    "lei": "memory",
+    "youxian": "P0",
+    "changzhu": true,
+    "biaoti": "Responda em chinês tradicional; mantenha código e identificadores em inglês",
+    "biaoqian": [
+     "language",
+     "preference"
+    ],
+    "l1": "O usuário lê as respostas em chinês tradicional. Código, nomes de arquivo, identificadores e comandos ficam em inglês.",
+    "yuanyin": "Uma preferência permanente que vale para todas as conversas.",
+    "l2": "Preferência registrada a partir de um pedido do usuário: escrever as explicações em chinês tradicional (com os termos usados em Taiwan) e manter em inglês os blocos de código, identificadores, caminhos de arquivo e comandos de terminal.",
+    "laiyuan": "chat",
+    "shijian": "3d",
+    "queren": 4,
+    "fangwen": 26
+   },
+   {
+    "id": "m2",
+    "lei": "skill",
+    "youxian": "P1",
+    "xin": true,
+    "biaoti": "Restaurar o estado corrompido do localStorage com parsing de JSON protegido",
+    "biaoqian": [
+     "localStorage",
+     "json",
+     "state-hydration",
+     "data-recovery"
+    ],
+    "l1": "Salve o array de tarefas com JSON.stringify e carregue-o com um JSON.parse protegido. Depois de um carregamento válido, não adicione os dados iniciais de novo. Descarte valores que não podem ser recuperados, como \"[object Object]\", e volte a um padrão limpo.",
+    "yuanyin": "Um padrão verificado de persistência e recuperação que vale para qualquer app cliente com estado.",
+    "l2": "Falha: as tarefas eram gravadas com String(array), então cada recarga produzia \"[object Object]\" e a tarefa inicial era adicionada de novo a cada carregamento.\nProcedimento:\n1. Gravar: localStorage.setItem(key, JSON.stringify(tasks)).\n2. Ler: tentar JSON.parse; aceitar apenas um array de objetos com id, text e done.\n3. Em caso de erro de parsing ou formato inválido, remover a chave e começar com uma lista vazia.\n4. Adicionar os dados iniciais apenas quando a chave ainda não existir.",
+    "laiyuan": "chat",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 3,
+    "guoqi": 30
+   },
+   {
+    "id": "m3",
+    "lei": "experience",
+    "youxian": "P1",
+    "xin": true,
+    "tisheng": true,
+    "biaoti": "Quando tarefas, filtros e contadores falham juntos, corrija primeiro o estado compartilhado",
+    "biaoqian": [
+     "state-management",
+     "debugging",
+     "stable-identity",
+     "testing"
+    ],
+    "l1": "Comece pelo array compartilhado de tarefas e pelas transições de estado dele, em vez de remendar cada sintoma. Dê a cada item um id estável e sem risco de colisão, renderize contadores e filtros a partir do mesmo estado e teste de novo, em conjunto, a entrada, os filtros, a limpeza e a recarga.",
+    "yuanyin": "Uma lista de verificação reutilizável para funcionalidades cujos manipuladores, renderização, contadores e persistência dependem de um único modelo de estado.",
+    "l2": "Causa raiz: os manipuladores alteravam cópias do array e localizavam os itens pelo índice, então excluir ou concluir uma tarefa afetava outra. Contadores e filtros liam cópias desatualizadas.\nVerificação: adicionar, concluir, excluir, filtrar, limpar concluídas, recarregar — tudo em uma única passada.",
+    "laiyuan": "chat",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 2,
+    "guoqi": 30
+   },
+   {
+    "id": "m4",
+    "lei": "trajectory",
+    "youxian": "P2",
+    "biaoti": "Correção do gerenciador de tarefas: 14 chamadas de ferramenta, 1 erro recuperado",
+    "biaoqian": [
+     "task-manager",
+     "repair"
+    ],
+    "l1": "Objetivo: corrigir a adição, a exclusão, a conclusão, a filtragem e o salvamento de tarefas em test.html. Leu o código, editou o script, teve uma edição com falha e tentou de novo, depois verificou o fluxo no navegador.",
+    "yuanyin": "Mantém disponível o caminho real da correção, caso o mesmo problema volte.",
+    "l2": "ler test.html → listar pasta → planejar etapas → edit_file (falhou: intervalo desatualizado) → ler → edit_file → edit_file → abrir navegador → avaliar adicionar/concluir/excluir → avaliar filtros → avaliar recarga → concluído.",
+    "laiyuan": "chat",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 0,
+    "guoqi": 7
+   },
+   {
+    "id": "m5",
+    "lei": "resource",
+    "youxian": "P2",
+    "bianji": "edit",
+    "biaoti": "test.html",
+    "biaoqian": [
+     "code-edit"
+    ],
+    "l1": "Reescreveu loadTasks/saveTasks e os manipuladores de eventos em test.html (linhas 88–164).",
+    "yuanyin": "Registra onde a correção alterou o código.",
+    "l2": "test.html: loadTasks, saveTasks, addTask, toggleTask, deleteTask, renderCounters.",
+    "laiyuan": "code-edit",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 1,
+    "guoqi": 7
+   },
+   {
+    "id": "m6",
+    "lei": "memory",
+    "youxian": "P1",
+    "biaoti": "O projeto usa pnpm e roda os testes com Vitest",
+    "biaoqian": [
+     "tooling"
+    ],
+    "l1": "Instale com pnpm install; rode os testes com pnpm test (Vitest).",
+    "yuanyin": "Necessária sempre que o agente instala pacotes ou roda testes.",
+    "l2": "Detectado a partir de package.json e pnpm-lock.yaml; confirmado quando o usuário pediu para rodar os testes.",
+    "laiyuan": "chat",
+    "shijian": "5d",
+    "queren": 2,
+    "fangwen": 9,
+    "guoqi": 25
+   },
+   {
+    "id": "m7",
+    "lei": "memory",
+    "youxian": "P2",
+    "xiumian": true,
+    "biaoti": "Usar npm para instalar pacotes",
+    "biaoqian": [
+     "tooling"
+    ],
+    "l1": "Nota antiga, de antes de o projeto migrar para o pnpm.",
+    "yuanyin": "Substituída por uma memória mais recente; mantida inativa caso volte a ser necessária.",
+    "l2": "Substituída no dia em que o lockfile mudou para pnpm-lock.yaml.",
+    "laiyuan": "chat",
+    "shijian": "40d",
+    "queren": 1,
+    "fangwen": 4
+   }
+  ],
+  "lunci": [
+   {
+    "xuhao": 3,
+    "yulan": "Adicione um interruptor de modo escuro à página de configurações.",
+    "zhuangtai": "complete",
+    "shijian": "5m",
+    "huifu": 2,
+    "wenjian": 1
+   },
+   {
+    "xuhao": 2,
+    "yulan": "Por que o contador mostra o número errado?",
+    "zhuangtai": "complete",
+    "shijian": "40m",
+    "huifu": 1,
+    "wenjian": 0
+   },
+   {
+    "xuhao": 1,
+    "yulan": "Corrija o gerenciador de tarefas em test.html.",
+    "zhuangtai": "partial",
+    "shijian": "2h",
+    "huifu": 3,
+    "wenjian": 2
+   }
+  ],
+  "suoyin": [
+   {
+    "fenlei": "memories",
+    "tiao": [
+     {
+      "youxian": "P0",
+      "wen": "Responda em chinês tradicional; mantenha código e identificadores em inglês",
+      "biaoqian": [
+       "language"
+      ],
+      "shijian": "3d"
+     },
+     {
+      "youxian": "P1",
+      "wen": "O projeto usa pnpm e roda os testes com Vitest",
+      "biaoqian": [
+       "tooling"
+      ],
+      "shijian": "5d"
+     }
+    ]
+   },
+   {
+    "fenlei": "skills",
+    "tiao": [
+     {
+      "youxian": "P1",
+      "wen": "Restaurar o estado corrompido do localStorage com parsing de JSON protegido",
+      "biaoqian": [
+       "localStorage",
+       "json"
+      ],
+      "shijian": "2h"
+     },
+     {
+      "youxian": "P1",
+      "wen": "Quando tarefas, filtros e contadores falham juntos, corrija primeiro o estado compartilhado",
+      "biaoqian": [
+       "debugging"
+      ],
+      "shijian": "2h"
+     }
+    ]
+   },
+   {
+    "fenlei": "resources",
+    "tiao": [
+     {
+      "youxian": "P2",
+      "wen": "Editado test.html",
+      "biaoqian": [
+       "code-edit"
+      ],
+      "shijian": "2h"
+     }
+    ]
+   }
+  ]
+ },
+ "ru": {
+  "jiyi": [
+   {
+    "id": "m1",
+    "lei": "memory",
+    "youxian": "P0",
+    "changzhu": true,
+    "biaoti": "Отвечать на традиционном китайском; код и идентификаторы оставлять на английском",
+    "biaoqian": [
+     "language",
+     "preference"
+    ],
+    "l1": "Пользователь читает ответы на традиционном китайском. Код, имена файлов, идентификаторы и команды остаются на английском.",
+    "yuanyin": "Постоянное предпочтение, которое действует в каждом диалоге.",
+    "l2": "Предпочтение записано по просьбе пользователя: пояснения писать на традиционном китайском (тайваньская лексика), блоки кода, идентификаторы, пути к файлам и команды терминала оставлять на английском.",
+    "laiyuan": "chat",
+    "shijian": "3d",
+    "queren": 4,
+    "fangwen": 26
+   },
+   {
+    "id": "m2",
+    "lei": "skill",
+    "youxian": "P1",
+    "xin": true,
+    "biaoti": "Восстановление повреждённого состояния localStorage с защищённым разбором JSON",
+    "biaoqian": [
+     "localStorage",
+     "json",
+     "state-hydration",
+     "data-recovery"
+    ],
+    "l1": "Сохранять массив задач через JSON.stringify и загружать его через защищённый JSON.parse. После успешной загрузки не добавлять начальные данные повторно. Отбрасывать значения, которые нельзя восстановить, например \"[object Object]\", и возвращаться к чистому значению по умолчанию.",
+    "yuanyin": "Проверенный приём сохранения и восстановления данных, подходящий для любого клиентского приложения с состоянием.",
+    "l2": "Сбой: задачи записывались через String(array), поэтому после перезагрузки получалось \"[object Object]\", а начальная задача добавлялась при каждой загрузке.\nПорядок действий:\n1. Запись: localStorage.setItem(key, JSON.stringify(tasks)).\n2. Чтение: попробовать JSON.parse; принимать только массив объектов с id, text и done.\n3. При ошибке разбора или неверной структуре удалить ключ и начать с пустого списка.\n4. Добавлять начальные данные, только если ключа ещё нет.",
+    "laiyuan": "chat",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 3,
+    "guoqi": 30
+   },
+   {
+    "id": "m3",
+    "lei": "experience",
+    "youxian": "P1",
+    "xin": true,
+    "tisheng": true,
+    "biaoti": "Если задачи, фильтры и счётчики ломаются вместе, сначала исправлять общее состояние",
+    "biaoqian": [
+     "state-management",
+     "debugging",
+     "stable-identity",
+     "testing"
+    ],
+    "l1": "Начинать с общего массива задач и переходов его состояния, а не латать каждый симптом по отдельности. Дать каждому элементу стабильный id без риска коллизий, перерисовывать счётчики и фильтры из одного и того же состояния и заново проверять ввод, фильтры, очистку и перезагрузку вместе.",
+    "yuanyin": "Повторно применимый чек-лист для функций, у которых обработчики, отрисовка, счётчики и сохранение зависят от одной модели состояния.",
+    "l2": "Первопричина: обработчики изменяли копии массива и обращались к элементам по индексу, поэтому удаление или завершение одной задачи затрагивало другую. Счётчики и фильтры читали устаревшие копии.\nПроверка: добавить, завершить, удалить, отфильтровать, очистить завершённые, перезагрузить — за один проход.",
+    "laiyuan": "chat",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 2,
+    "guoqi": 30
+   },
+   {
+    "id": "m4",
+    "lei": "trajectory",
+    "youxian": "P2",
+    "biaoti": "Исправление менеджера задач: 14 вызовов инструментов, 1 восстановление после ошибки",
+    "biaoqian": [
+     "task-manager",
+     "repair"
+    ],
+    "l1": "Цель: исправить добавление, удаление, завершение, фильтрацию и сохранение задач в test.html. Прочитан код, отредактирован скрипт, одна правка не удалась и была повторена, затем рабочий процесс проверен в браузере.",
+    "yuanyin": "Сохраняет фактический ход исправления на случай, если та же проблема вернётся.",
+    "l2": "чтение test.html → список папки → план дел → edit_file (сбой: устаревший диапазон) → чтение → edit_file → edit_file → открытие браузера → проверка добавления/завершения/удаления → проверка фильтров → проверка перезагрузки → готово.",
+    "laiyuan": "chat",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 0,
+    "guoqi": 7
+   },
+   {
+    "id": "m5",
+    "lei": "resource",
+    "youxian": "P2",
+    "bianji": "edit",
+    "biaoti": "test.html",
+    "biaoqian": [
+     "code-edit"
+    ],
+    "l1": "Переписаны loadTasks/saveTasks и обработчики событий в test.html (строки 88–164).",
+    "yuanyin": "Фиксирует, где исправление изменило код.",
+    "l2": "test.html: loadTasks, saveTasks, addTask, toggleTask, deleteTask, renderCounters.",
+    "laiyuan": "code-edit",
+    "shijian": "2h",
+    "queren": 1,
+    "fangwen": 1,
+    "guoqi": 7
+   },
+   {
+    "id": "m6",
+    "lei": "memory",
+    "youxian": "P1",
+    "biaoti": "В проекте используется pnpm, тесты запускаются через Vitest",
+    "biaoqian": [
+     "tooling"
+    ],
+    "l1": "Установка: pnpm install; запуск тестов: pnpm test (Vitest).",
+    "yuanyin": "Нужно каждый раз, когда агент устанавливает пакеты или запускает тесты.",
+    "l2": "Определено по package.json и pnpm-lock.yaml; подтверждено, когда пользователь попросил запустить тесты.",
+    "laiyuan": "chat",
+    "shijian": "5d",
+    "queren": 2,
+    "fangwen": 9,
+    "guoqi": 25
+   },
+   {
+    "id": "m7",
+    "lei": "memory",
+    "youxian": "P2",
+    "xiumian": true,
+    "biaoti": "Устанавливать пакеты через npm",
+    "biaoqian": [
+     "tooling"
+    ],
+    "l1": "Старая заметка из времени, когда проект ещё не перешёл на pnpm.",
+    "yuanyin": "Заменено более новым воспоминанием; хранится в спящем состоянии на случай, если снова понадобится.",
+    "l2": "Утратило силу в день, когда lock-файл сменился на pnpm-lock.yaml.",
+    "laiyuan": "chat",
+    "shijian": "40d",
+    "queren": 1,
+    "fangwen": 4
+   }
+  ],
+  "lunci": [
+   {
+    "xuhao": 3,
+    "yulan": "Добавь на страницу настроек переключатель тёмной темы.",
+    "zhuangtai": "complete",
+    "shijian": "5m",
+    "huifu": 2,
+    "wenjian": 1
+   },
+   {
+    "xuhao": 2,
+    "yulan": "Почему счётчик показывает неверное число?",
+    "zhuangtai": "complete",
+    "shijian": "40m",
+    "huifu": 1,
+    "wenjian": 0
+   },
+   {
+    "xuhao": 1,
+    "yulan": "Исправь менеджер задач в test.html.",
+    "zhuangtai": "partial",
+    "shijian": "2h",
+    "huifu": 3,
+    "wenjian": 2
+   }
+  ],
+  "suoyin": [
+   {
+    "fenlei": "memories",
+    "tiao": [
+     {
+      "youxian": "P0",
+      "wen": "Отвечать на традиционном китайском; код и идентификаторы оставлять на английском",
+      "biaoqian": [
+       "language"
+      ],
+      "shijian": "3d"
+     },
+     {
+      "youxian": "P1",
+      "wen": "В проекте используется pnpm, тесты запускаются через Vitest",
+      "biaoqian": [
+       "tooling"
+      ],
+      "shijian": "5d"
+     }
+    ]
+   },
+   {
+    "fenlei": "skills",
+    "tiao": [
+     {
+      "youxian": "P1",
+      "wen": "Восстановление повреждённого состояния localStorage с защищённым разбором JSON",
+      "biaoqian": [
+       "localStorage",
+       "json"
+      ],
+      "shijian": "2h"
+     },
+     {
+      "youxian": "P1",
+      "wen": "Если задачи, фильтры и счётчики ломаются вместе, сначала исправлять общее состояние",
+      "biaoqian": [
+       "debugging"
+      ],
+      "shijian": "2h"
+     }
+    ]
+   },
+   {
+    "fenlei": "resources",
+    "tiao": [
+     {
+      "youxian": "P2",
+      "wen": "Изменено test.html",
+      "biaoqian": [
+       "code-edit"
+      ],
+      "shijian": "2h"
+     }
+    ]
+   }
+  ]
+ }
+}

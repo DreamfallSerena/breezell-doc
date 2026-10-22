@@ -319,7 +319,8 @@
   transform: translateX(20px);
 }
 
-.bz-kaiguan.bz-xiao {
+.bz-kaiguan.bz-xiao,
+.bz button.bz-kaiguan.bz-xiao {
   width: 28px;
   height: 16px;
 }

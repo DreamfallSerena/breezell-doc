@@ -1,282 +1,148 @@
 ---
 title: 超級記憶
-description: 了解 Breezell 如何在不消耗使用者設定模型 Token 的情況下提取、整理和管理可重複使用的記憶。
+description: 介紹 Breezell 的超級記憶如何把對話提煉成記憶、技能、經驗、軌跡和資源，如何在之後的請求中召回它們，以及如何在 Box 中整理這些內容。
 ---
 
-# Super Memory
+# 超級記憶
 
-**Super Memory（超級記憶）** 是 Breezell 獨立研發的記憶系統。它使用 Breezell 內建的兩個模型從對話中提取有價值的資訊，具體模型名稱暫不公開。
+**超級記憶**是 Breezell 自有的長期記憶。你工作時，它會從對話中提煉值得保留的內容，例如決定、偏好、工作方法、修正問題時學到的教訓，以及被修改過的檔案，並把相關的部分召回到之後的請求中，新對話也不例外。
 
-記憶提取由 Breezell 內部模型管線完成，不會消耗使用者所設定模型的 Token，也不會佔用使用者的模型 Token 額度。
+- 提煉由 Breezell 內建的兩個模型執行，不會使用你設定的模型，也不會消耗它的 token。不過，被召回到請求中的記憶會成為該請求上下文的一部分。
+- 使用超級記憶需要 Breezell 帳號，以及包含超級記憶的方案。
+- 它儲存的所有內容，都可以在 Box ▸ <BzWenben jian="box.memory.group" /> 中瀏覽、修正和刪除。
 
-## 可以提取的內容
+::: tip 關於本頁的畫面
+下方的 Breezell 畫面是根據 Breezell 原始碼以 HTML 重新繪製而成，文字會跟著本頁的語言顯示；畫面中的記憶只是範例。在記憶庫中，你可以展開各列、變更優先級，以及設定常駐記憶。
+:::
 
-超級記憶會將提取到的資訊整理為以下類型：
+## 運作方式 {#how-it-works}
 
-- **Memory（記憶）：** 可能在後續任務中繼續使用的穩定事實、個人偏好、長期指令和重要決定。
-- **Skill（技能）：** 在任務過程中發現的可重複使用方法或工作流程。
-- **Experience（經驗）：** 從過往工作中獲得的結果、教訓和實務知識。
-- **Trajectory（軌跡）：** 一項任務、決定或目標隨時間推進的過程。
-- **Resource（資源）：** 與工作有關的檔案、連結、工具或參考資料。
+開啟 Box，在左側的 Console 群組中展開 <BzWenben jian="box.memory.group" />。它包含四個頁面：<BzWenben jian="box.memory.overview" />、<BzWenben jian="box.memory.library" />、<BzWenben jian="box.memory.context" /> 和 <BzWenben jian="box.memory.maintenance" />。
 
-系統會自動從對話中提取和分類這些內容，以便在後續對話中將相關資訊重新作為上下文使用。
+<BzHezi zu="memory" ye="box.memory.overview" gaoliang="ye" biaoji="1" />
 
-## 瀏覽和篩選記憶
+<BzWenben jian="box.memory.overview" /> 一開頭是這個循環的流程圖，上面的數字都是即時的：
 
-![超級記憶面板](/super-memory/super-memory-panel.png)
+<BzJiyi ye="zonglan" />
 
-面板提供以下檢視和操作：
+1. **<BzWenben jian="box.memory.flow.conversation" />**：你和模型之間來回的每一輪。
+2. **<BzWenben jian="box.memory.flow.extract" />**：<BzWenben jian="box.memory.flow.extractSub1" />；<BzWenben jian="box.memory.flow.extractSub2" />。
+3. **<BzWenben jian="box.memory.flow.store" />**：條目存放的地方，包括啟用中和休眠中的條目。
+4. **<BzWenben jian="box.memory.flow.project" />**：從你的程式碼庫編譯出來的知識，例如進入點、命令和相依套件。
+5. 回到對話：常駐條目會注入每一次請求，相關條目則會在請求需要時被召回。
 
-- **Memories、Context 和 Insights：** 分別檢視已提取的記憶、組合後的上下文，以及根據記憶產生的整體洞察。
-- **搜尋：** 透過文字尋找已儲存的內容。
-- **優先順序：** 按 **P0**、**P1** 或 **P2** 篩選，也可以檢視全部優先順序。
-- **類型：** 按 Memory、Skill、Experience、Trajectory 或 Resource 篩選。
-- **狀態：** 分別檢視 **Active（活躍）** 和 **Dormant（休眠）** 內容。
-- **容量統計：** 檢視總項目數，以及常駐項目、記憶、技能和經驗的目前容量用量。
-- **Select（選擇）：** 進入選擇模式，對指定項目進行管理。
+流程圖下方的卡片會顯示條目總數、常駐條目數、精簡索引相較於完整載入每個條目省下了多少，以及最近一次注入了什麼。再往下則是各類型的構成、優先級分佈、條目的新鮮度、已編譯專案知識的健康度、最常使用的條目，以及即將過期的條目。
 
-沒有任何項目時，面板會提示記憶將從對話中自動提取。隨著對話繼續，有價值的內容會自動出現在這裡，不需要使用者逐項手動撰寫。
+## 五種記憶 {#kinds}
 
-## 核心優勢
+超級記憶會依照每個條目日後的使用方式，把它歸入合適的類型：
 
-Super Memory 將強大的自動提取能力與高效、可控的記憶檢索結合在一起：
+| 類型 | 存放的內容 | 範例 |
+| --- | --- | --- |
+| <BzWenben jian="superMemory.catMemory" /> | 長期有效的事實、偏好、常設指令和決定 | 「用繁體中文回答；程式碼保持英文」 |
+| <BzWenben jian="superMemory.catSkill" /> | 可重複使用的方法，用來再次解決同一類問題 | 如何安全地還原損壞的 localStorage 資料 |
+| <BzWenben jian="superMemory.catExperience" /> | 一個教訓：對根本原因的推理，以及如何驗證 | 「多個功能同時出錯時，先修正共用狀態」 |
+| <BzWenben jian="superMemory.catTrajectory" /> | 任務實際的進行過程：目標、工具呼叫、錯誤和恢復 | 一次修復的 14 個步驟 |
+| <BzWenben jian="superMemory.catResource" /> | 被修改的具體檔案和位置 | <BzWenben jian="superMemory.editAction.edit" /> test.html |
 
-- **強大的記憶提取：** Breezell 內部的兩個模型會分析對話，並將有價值的資訊自動整理為 Memory、Skill、Experience、Trajectory 和 Resource 等結構化項目，不需要使用者手動輸入。
-- **高效的記憶檢索：** 系統會結合類型、優先順序、狀態、新鮮度和已編譯的記憶索引，將檢索範圍集中到與目前任務有關的資訊，而不是無差別處理所有記憶。
-- **可控的上下文注入：** Context 頁面會顯示目前輪次實際注入的記憶快照、下一輪記憶索引預覽及其估算 Token 數量。
-- **明確的生命週期管理：** P0 永久、P1 30 天和 P2 7 天優先順序可配合 Active 與 Dormant 狀態使用，在長期保留重要知識的同時，縮短暫時資訊的生命週期。
-- **可觀察的知識健康狀態：** 可以檢查編譯狀態、來源版本與編譯器版本、過期資源、編譯失敗、驗證與修正、內容新鮮度和未同步數量。
-- **清楚的 Token 使用情況：** 記憶提取不會消耗使用者設定模型的 Token。被檢索到的記憶注入請求後，會成為該請求上下文的一部分；索引預覽和節省統計可以讓這部分用量保持可見。
+並不是每段對話都會產生所有類型。一次錯誤修正通常會產生技能、經驗、軌跡和資源，但不會產生一般記憶，因為其中沒有任何長期的個人偏好。這能讓召回保持精準：之後的任務可以單獨取用其中的方法、教訓、歷程或檔案紀錄。
 
-## 上下文與檢索控制
+## 優先級與生命週期 {#priorities}
 
-![超級記憶 Context 頁面](/super-memory/super-memory-context.png)
+| 優先級 | 存續期間 |
+| --- | --- |
+| <BzWenben jian="superMemory.p0Permanent" /> | 永不過期。常駐條目一律為 P0。 |
+| <BzWenben jian="superMemory.p190Days" /> | 除非再次被確認，否則 30 天後過期。 |
+| <BzWenben jian="superMemory.p230Days" /> | 除非再次被確認，否則 7 天後過期。檔案編輯之類的短期細節會從這裡開始。 |
 
-**Context** 頁面用於檢視記憶如何參與對話：
+過期的條目不會被刪除，而是轉為 **<BzWenben jian="superMemory.dormant" />** 狀態。休眠的條目仍可搜尋，也可以恢復。當某個 P1 條目證明了自己的價值時，Breezell 會在它那一列上顯示 **↑P0** 按鈕，建議你把它設為永久。
 
-- **Current Turn Injection（目前輪次注入）：** 顯示實際注入目前對話輪次的記憶快照。尚未產生快照時，頁面會明確顯示空狀態。
-- **Memory Index Preview（記憶索引預覽）：** 預覽為下一輪準備的記憶索引，並估算其 Token 數量，方便判斷檢索規模。
-- **Conversation Turns（對話輪次）：** 顯示目前對話執行緒的輪次數量，並用於檢查每輪對話的記憶活動。
+## 記憶庫 {#library}
 
-這些資訊讓記憶檢索過程保持可見和可控：使用者可以確認本輪是否注入了記憶、下一輪將準備什麼內容，以及大致會佔用多少上下文。
+<BzWenben jian="box.memory.library" />：<BzWenben jian="box.memory.libraryDesc" />
 
-## 洞察與系統健康狀態
+<BzJiyi ye="ku" yetou gaoliang="pchip" biaoji="1" />
 
-![超級記憶 Insights 頁面](/super-memory/super-memory-insights.png)
+- **篩選**：先搜尋，再依優先級（P0 / P1 / P2）、類型，以及 <BzWenben jian="superMemory.active" /> 或 <BzWenben jian="superMemory.dormant" /> 縮小範圍。
+- **計數列**：已載入的條目數、常駐配額，以及每種類型的活躍預算。<BzWenben jian="superMemory.batchSelect" /> 可讓你勾選多個條目並一次刪除。
+- **列**：彩色圓點代表類型。標題後面接著優先級膠囊；常駐條目會顯示 **<BzWenben jian="superMemory.residentBadge" />**，過去 24 小時內的條目則會顯示 **NEW**。第二行顯示最後更新時間、類型、標籤數量和來源。
+- **展開某一列**，即可查看它的標籤、<BzWenben jian="superMemory.l1Overview" />、<BzWenben jian="superMemory.whyRemembered" />、被確認和使用的次數，以及到期時間。<BzWenben jian="box.memory.showFull" /> 會再加上 <BzWenben jian="superMemory.l2Full" />。
+- **優先級膠囊**（1）：點選它即可選擇 <BzWenben jian="superMemory.p0Permanent" />、<BzWenben jian="superMemory.p190Days" /> 或 <BzWenben jian="superMemory.p230Days" />。
+- 圖釘用來把條目設為常駐；垃圾桶則會刪除它。
 
-**Insights** 頁面用於彙整記憶系統的狀態和執行效果：
+Breezell 只會為每個條目傳給 AI 一行簡短的文字（L0），需要時才載入概覽或完整內容。總覽頁面上的 <BzWenben jian="superMemory.tokenSavings" /> 就是這樣來的。
 
-- **Project Knowledge Health（專案知識健康狀態）：** 顯示最近編譯時間、編譯器與來源版本、過期資源、編譯失敗次數，以及已驗證或修正數量。
-- **Token Savings（Token 節省）：** 在累積足夠的使用資料後顯示 Token 節省情況。
-- **Viking Filesystem：** 分別統計 Memories、Skills、Experiences、Trajectories、Resources 和 Unsynced 項目的數量。
-- **Priority Distribution（優先順序分布）：** 顯示 P0 永久、P1 30 天和 P2 7 天項目的分布。
-- **Freshness Pulse（新鮮度脈衝）：** 按 24 小時內、7 天內、30 天內和更早時間劃分知識更新時間。
+## 常駐記憶 {#resident}
 
-Context 和 Insights 讓使用者能夠清楚了解 Super Memory 提取了什麼、可能檢索什麼，以及已儲存知識是否保持新鮮和健康。
+常駐條目會注入**每一次**請求，不論該請求是否與它有關。請用它來存放 AI 必須隨時記住的事項，例如架構規則、必須遵循的工作流程，或明確的偏好。
 
-## 活躍與休眠記憶
+1. 開啟 <BzWenben jian="box.memory.library" />，找到該條目。
+2. 點選該列上的圖釘（<BzWenben jian="superMemory.residentOn" />）。
 
-活躍記憶可以繼續參與相關資訊召回。休眠記憶仍然會被保留，但會與活躍集合分開，從而在保留可能有用資訊的同時，讓目前上下文保持聚焦。
+<BzJiyi ye="ku" zhankai="m1" gaoliang="pin" biaoji="1" />
 
-## 實測示範：將一次修復轉化為可重複使用的記憶
+- 該條目會變成 P0 並加上 <BzWenben jian="superMemory.residentBadge" /> 徽章，計數列也會顯示新的總數，例如 <BzWenben jian="superMemory.residentCapacity" canshu="1|12" />。
+- 最多可以有 12 個常駐條目。達到上限時，Breezell 會顯示 <BzWenben jian="superMemory.residentLimitReached" />
+- 若要降低常駐條目的優先級，請先再次點選圖釘（<BzWenben jian="superMemory.residentOff" />）；該條目會回到原本的優先級。
 
-本範例使用一套刻意寫錯的 HTML Task Manager，展示 Super Memory 如何將一次短暫的修復過程轉化為後續可重複使用的知識。
+常駐條目請保持簡短，而且要真正適用於所有情況。暫時的檔案位置或一次性的任務細節不應放在這裡，因為它們會被加入每一次請求。
 
-測試要求 AI 在不改變預期 UI 和功能的情況下，檢查整個程式碼庫，並修復任務建立、刪除、完成狀態、篩選、計數、localStorage 持久化、鍵盤輸入和清除已完成任務等問題。
+## 對話中的記憶 {#in-chat}
 
-### 1. 檢查並修復 Task Manager
+當超級記憶將條目注入請求時，你的訊息下方會出現一行文字。點選它即可查看使用了哪些條目：
 
-Breezell 會檢查程式碼、識別多個問題背後的共同根因、修復實作並驗證完整操作流程，而不是將每個介面症狀都視為互不相關的獨立錯誤。
+<BzLiaotian zhuru="1|1|0" zhurukai zhuruwen="用繁體中文回答；程式碼和識別碼保持英文" gaoliang="zhuru" biaoji="1" wen="你好" da="你好！今天想處理什麼呢？" />
 
-![Breezell 修復 Task Manager](/super-memory/task-manager-repair.png)
+在這個範例中，全新的對話裡只有一句「你好」，卻注入了一個條目，也就是那條常駐記憶。相關條目則會在請求需要時加入：
 
-本次修復涵蓋序列化與解析、重複載入、損壞的儲存資料、空任務驗證、穩定任務識別、鍵盤處理、完成狀態切換、指定刪除、篩選、計數器以及清除已完成任務。
+<BzLiaotian zhuru="3|1|2" zhuruwen="用繁體中文回答；程式碼和識別碼保持英文|用加上防護的 JSON 解析還原損壞的 localStorage 狀態|任務、篩選和計數器同時壞掉時，先修正共用狀態" zhurukai wen="test2.html 中的閱讀清單在重新載入後書目就不見了，請修正。" da="這和任務管理工具的問題相同：清單是用 String() 而不是 JSON.stringify 儲存的。我會為解析加上防護、捨棄已損壞的值，並給每本書一個穩定的 id。" />
 
-### 2. 初步記錄為 P2 Resource
+只有在注入了內容時，才會出現這一行。如果檢索無法完成，這一輪會以可用的內容繼續進行，這一行也會註明這一點。
 
-由於這是一個規模較小的測試，而且第一階段主要產生具體的檔案修改，Super Memory 最初只將 **test.html** 的兩個編輯區域記錄為 **P2 Resource（資源）**。
+## 上下文注入 {#context}
 
-![修復後產生的 P2 資源記錄](/super-memory/p2-resource-records.png)
+<BzWenben jian="box.memory.context" />：<BzWenben jian="box.memory.contextDesc" />
 
-這些記錄用於保存「修改了什麼」和「修改發生在哪裡」。P2 會給予這類短期實作細節較低優先順序，但不會遺失修復軌跡；AI 日後仍然可以檢索修改過的檔案區域。
+<BzJiyi ye="shangxiawen" />
 
-### 3. 主動觸發更深層的經驗總結
+| 卡片 | 顯示的內容 |
+| --- | --- |
+| <BzWenben jian="superMemory.currentTurnInjectionTitle" /> | 所選輪次的狀態、注入了多少常駐條目和相關條目、它們的類型和範圍，以及每個條目的詳細程度（L0 / L1 / L2）和分數。 |
+| <BzWenben jian="superMemory.memoryIndexPreview" /> | 下一次請求會收到的精簡索引，依類型分組，並附上估算的 token 數。 |
+| <BzWenben jian="superMemory.convTurns" /> | 目前對話的各個輪次。點選其中一輪，即可檢查它的注入內容，並跳到對話中的該處。 |
 
-為了讓這個小型測試更明顯地展示記憶提取效果，使用者再次詢問：
+## 預算與維護 {#maintenance}
 
-> What lessons did you learn from solving this issue?  
-> 解決這個問題後，你學到了哪些經驗？
+<BzWenben jian="box.memory.maintenance" />：<BzWenben jian="box.memory.maintenanceDesc" />
 
-![AI 總結本次修復經驗](/super-memory/repair-lessons.png)
+<BzJiyi ye="weihu" />
 
-AI 從修復過程提煉出可重複使用的工程經驗：應修復共享狀態的來源，而不是逐一處理症狀；集合項目必須透過穩定識別操作；所有轉譯路徑都應重新計算衍生狀態；持久化層應作為需要驗證的資料邊界；布林條件需要仔細檢查；無效輸入必須立即終止；時間戳記不能單獨作為可靠識別；完整的實際操作流程比孤立檢查更容易發現互動問題。
+- <BzWenben jian="box.memory.budgetTitle" />：<BzWenben jian="box.memory.budgetDesc" />
+- <BzWenben jian="box.memory.runLifecycle" />：<BzWenben jian="box.memory.runLifecycleDesc" />
+- <BzWenben jian="box.memory.purge" />：<BzWenben jian="box.memory.purgeDesc" />
+- <BzWenben jian="box.memory.archiveExport" /> / <BzWenben jian="box.memory.archiveImport" />：以 `.zip` 將整個記憶庫搬到另一台電腦。<BzWenben jian="box.memory.archiveImportDesc" />
 
-### 4. 產生結構化修復記憶
+## 範例：一次修復，在另一個應用程式中再次派上用場 {#example}
 
-修復過程得到進一步重視後，Super Memory 會增加更有價值的結構化項目：
+以下說明上方畫面中的條目是怎麼來的。
 
-- 一項關於修復共享任務狀態和穩定識別的 **P1 Experience（經驗）**。
-- 一項關於透過受保護的序列化與解析修復損壞 localStorage 持久化的 **P1 Skill（技能）**。
-- 一項概括 Task Manager 多個問題及其解決過程的 **P2 Trajectory（軌跡）**。
-- 原有的 **P2 Resource（資源）**，繼續保留具體檔案修改位置。
+1. **修復**：在 `test.html` 中，一個小型的任務管理工具無法穩定地新增、刪除、完成、篩選或儲存任務。Breezell 追查出這些故障都源自同一個共用的狀態模型，修正它之後，在瀏覽器中檢查了整個工作流程。超級記憶先把 `test.html` 中被編輯的部分記錄為 **P2 資源**，並把修復的過程記錄為 **P2 軌跡**。
+2. **教訓**：被問到「你從這次修復中學到了什麼？」時，AI 列出了可重複使用的教訓：修正共用狀態的擁有者，而不是逐一處理每個症狀；以穩定的 id 定位項目；把儲存的資料視為必須驗證的邊界。超級記憶儲存了一項 **P1 技能**（加上防護地儲存和載入 localStorage 資料）和一項 **P1 經驗**（先診斷共用狀態，再進行端對端驗證）。在較長或較有價值的修復中，即使沒有人要求，它也會記錄這類教訓。
+3. **重複使用**：第一段對話已被刪除。在新的對話中，另一個應用程式（`test2.html` 中的閱讀清單）出現了同一類錯誤。Breezell 召回了這項技能和資源紀錄，把方法套用到新的 `books` 資料上，而不是照抄舊的修補，並驗證了結果。
 
-![經驗總結後產生的結構化修復記憶](/super-memory/structured-repair-memories.png)
+刪除對話並不會刪除超級記憶從中提煉出的內容，而在一個應用程式中學到的方法，也延續到了另一個應用程式。
 
-### 這次示範說明了什麼
+## 每日額度用完時 {#quota}
 
-- **記憶提取深度會隨價值變化：** 小型檔案修改可能先記錄為 P2 資源，而可重複使用的根因知識會進一步轉化為 P1 技能和經驗。
-- **不同記憶類型承擔不同作用：** Resource 和 Trajectory 保存發生了什麼；Skill 和 Experience 保存問題為什麼發生以及應該如何解決。
-- **記憶優先順序保持可控：** P1 會更長時間保留可重複使用的修復知識；P2 則保留短期實作細節，但不會讓其獲得永久權重。
-- **未來的 AI 任務可以直接受益：** 後續任務可以檢索相關檔案歷史、修復方法或工程經驗，不必只依賴原始對話記錄。
-- **正常情況下不需要手動追問：** 本次追問只是為了讓一個規模很小的測試快速產生明顯結果。如果遇到長週期或具有長期價值的問題，Super Memory 會更智慧地自動識別並記錄修復經驗，不需要使用者再次詢問。
+超級記憶有每日額度。額度用完時，每個超級記憶頁面都會顯示 <BzWenben jian="box.memory.quotaPausedTitle" />。在額度恢復之前，對話不會再自動建立新條目；既有的條目仍可檢視和刪除，而你在 [Rules, Memories & Skills](/prompt-settings) 中自行撰寫的規則和記憶也不受影響。
 
-## 深入分析：為什麼 Memory 中沒有任何內容
+沒有包含超級記憶的方案時，頁面會顯示：
 
-在本次測試中篩選 **Memory（記憶）** 後，可以看到項目數量為 **0**，但這不代表 Super Memory 沒有成功提取內容。
+<BzJiyi ye="suoding" />
 
-![修復後仍為空的 Memory 分類](/super-memory/empty-memory-category.png)
+## 總結
 
-這是系統主動進行語意分類的結果，而不是記憶提取失敗。本次修復沒有產生適合長期儲存為一般 Memory 的個人偏好、穩定使用者事實或長期指令。Super Memory 不會把所有內容重複塞進一般記憶，而是根據未來用途，將修復結果分別歸類為 Skill、Experience、Trajectory 和 Resource。
-
-## Skill：可重複使用的 localStorage 修復方法
-
-系統將這次具體修復總結為一項 **P1 Skill（技能）**，使其成為日後可以再次呼叫的用戶端狀態持久化處理方法。
-
-![展開後的 localStorage 修復技能](/super-memory/localstorage-skill-detail.png)
-
-技能卡片包含：
-
-- **標籤：** localStorage、JSON、狀態恢復和資料恢復等標籤，方便日後遇到相關問題時準確檢索。
-- **L1 Overview（一級概覽）：** 使用 JSON.stringify 儲存任務陣列，透過受保護的 JSON.parse 載入資料；成功載入後不再附加範例資料；遇到無法恢復的舊版錯誤值時，將其捨棄並恢復乾淨的預設狀態。
-- **Why Remembered（記憶原因）：** 系統認為這是一套經過驗證、可在用戶端有狀態應用程式中重複使用的持久化與恢復模式。
-- **L2 Full Content（二級完整內容）：** 儲存具體故障原因以及完整恢復過程，在需要深入檢索時提供更詳細的資訊。
-- **狀態資訊：** 顯示 P1 優先順序、類型、活躍狀態、確認次數、存取次數、最近更新時間和生命週期。
-
-這比簡單記錄「修復了 localStorage」更有價值，因為未來的 AI 可以直接取得一套能夠再次套用的具體處理方法。
-
-## Experience：共享狀態與穩定識別的除錯經驗
-
-系統還產生了一項 **P1 Experience（經驗）**，儲存多個介面問題背後的系統性工程經驗。
-
-![展開後的共享狀態修復經驗](/super-memory/repair-experience-detail.png)
-
-一級概覽指出：當任務、篩選、計數器和持久化同時發生問題時，應從它們共同依賴的 tasks 陣列和狀態轉換著手，而不是分別修補介面症狀。同時應使用不會發生衝突的穩定識別，並將輸入驗證、鍵盤提交、篩選、計數、清除以及重新載入後的持久化作為一個完整流程重新測試。
-
-標籤涵蓋狀態管理、除錯、UI、穩定識別、不變量、測試和 localStorage。**Why Remembered** 說明這是一套可以重複使用的端對端檢查清單，適用於事件處理、介面轉譯、計數器、篩選和持久化共同依賴同一狀態模型的功能。
-
-Skill 儲存的是可以重複執行的修復方法；Experience 儲存的則是根因判斷、系統不變量和驗證策略。
-
-## Trajectory：保留真實的修復軌跡
-
-系統提取的 **P2 Trajectory（軌跡）** 不只儲存最終結論，還記錄任務實際如何推進。
-
-![展開後的 Task Manager 修復軌跡](/super-memory/repair-trajectory-detail.png)
-
-其中包含原始目標、恢復後的結果、工具呼叫順序、一次可恢復錯誤、後續成功步驟和最終結果。本次軌跡共記錄 14 次工具呼叫，涉及讀取程式碼、檢查目錄、管理工作清單、編輯檔案、瀏覽器導覽和瀏覽器驗證。
-
-P2 和 unverified 標籤將這類短期執行軌跡與更具重複使用價值的 P1 Skill、Experience 分開。AI 需要檢查準確修復過程時仍可以檢索該軌跡，而更重要的結論則以生命週期更長的形式儲存。
-
-## 為什麼這種分類很重要
-
-- **Memory：** 儲存長期事實、個人偏好和持續有效的資訊；本次測試沒有產生這類內容。
-- **Skill：** 儲存日後可以再次呼叫的具體解決方法。
-- **Experience：** 儲存根因判斷、工程不變量和驗證清單。
-- **Trajectory：** 儲存操作步驟、錯誤以及恢復過程。
-- **Resource：** 儲存具體檔案及修改位置。
-
-這種分離讓記憶檢索更加精準、更加可控。未來任務可以分別提取修復方法、工程經驗、執行歷史或修改資源，而不需要載入一項內容龐雜的通用記憶。
-
-## 二次驗證：在新對話和不同應用程式中重複使用記憶
-
-第二次測試用於驗證：已經提取的知識是否能夠脫離原本的 Task Manager 對話，在新的任務中繼續發揮作用。
-
-測試時先刪除舊對話，再建立一個全新的對話，並使用結構不同的 HTML Reading Library——**test2.html**。它處理的是圖書而不是任務，但刻意保留相同類型的狀態管理、穩定識別、篩選、計數、鍵盤操作、刪除和 localStorage 持久化問題。
-
-### 1. 從獨立的新對話開始
-
-![在新對話中測試 Reading Library](/super-memory/reading-library-new-session.png)
-
-為了讓示範過程更加直觀，本次提示詞明確要求 Breezell 在修改前檢視相關記憶、歷史經驗和已經學到的解決模式。正常使用時不需要寫出這項要求，Super Memory 會根據目前問題自動召回相關內容。
-
-### 2. 從已刪除的舊對話中召回知識
-
-在編輯 **test2.html** 之前，Breezell 成功召回先前產生的 **P1 Skill（技能）**，以及指向舊檔案 **test.html** 修改區域的 **P2 Resource（資源）**。
-
-![Breezell 召回技能和資源記憶](/super-memory/reading-library-memory-recall.png)
-
-這次召回包含兩類不同價值的資訊：
-
-- **Skill 召回：** 提供可以重複使用的持久化修復方法，包括受保護的 JSON.stringify 與 JSON.parse、損壞舊資料的安全捨棄以及乾淨預設狀態的恢復。
-- **Resource 召回：** 保留該解決模式最初來自哪裡，顯示先前修改過的舊檔案區域。
-
-在本次測試中，刪除原始對話並沒有刪除從中提取出的結構化 Super Memory 項目。真正有價值的知識仍然可以被後續的新對話使用。
-
-### 3. 遷移解決方法，而不是複製舊修補程式
-
-Breezell 沒有將舊 **tasks** 陣列的程式碼直接複製到新專案，而是把先前學到的原則套用到 Reading Library 共同依賴的 **books** 狀態模型中。
-
-![使用召回記憶修復 Reading Library](/super-memory/reading-library-repair-result.png)
-
-本次新修復包括：
-
-- 受保護的 JSON 序列化與解析。
-- 安全捨棄無法恢復的舊版錯誤資料。
-- 正確載入空圖書庫，不重複加入範例圖書。
-- 使用確定且唯一的圖書識別，取代可能衝突的時間戳記。
-- 修復已讀與未讀計數、篩選和空篩選狀態。
-- 修復狀態切換、指定刪除和清除已讀圖書。
-- 修復輸入驗證以及僅由 Enter 鍵提交。
-- 讓事件處理器透過每本書的穩定識別進行操作。
-
-完成修改後，Breezell 使用包含 14 項檢查的瀏覽器工作流程進行驗證，並在測試結束後恢復原本的 localStorage 資料。
-
-### 第二次測試證明了什麼
-
-- **結構化記憶可以脫離原始對話繼續存在：** 刪除舊對話後，本次測試仍然成功召回先前的 Skill 和 Resource。
-- **記憶可以跨實作遷移：** 從 Task Manager 學到的模式能夠套用於完全不同的 Reading Library，因為兩者底層的狀態與持久化故障具有相同結構。
-- **Skill 不只是修補歷史：** P1 Skill 提供的是可以再次使用的解決方法；P2 Resource 則保留具體實作歷史作為輔助依據。
-- **AI 修復的是根因：** 系統遷移了共享狀態所有權、穩定識別、持久化資料邊界和端對端驗證原則，而不是逐行複製舊程式碼。
-- **不需要明確要求召回：** 本次提示詞要求使用記憶，只是為了讓測試過程更容易觀察。正常對話中，相關 Super Memory 項目會根據問題自動召回。
-
-## 常駐記憶（P0）
-
-任何 Super Memory 項目都可以設定為 **Resident（常駐）**。適合那些無論目前問題是否與其語意相關，都需要在每次記憶召回時保持可用的內容。
-
-### 將項目設定為常駐
-
-將滑鼠移動到記憶卡片的圖釘圖示上，或直接點擊該圖示。浮動提示 **Set resident（設為常駐）** 表示這項操作。
-
-![將記憶設定為常駐](/super-memory/set-resident-action.png)
-
-設定完成後：
-
-- 項目優先順序會提升為 **P0**。
-- 卡片上會出現 **Resident（常駐）** 標記。
-- 圖釘會醒目顯示，表示該項目處於常駐狀態。
-- 常駐容量計數會增加。本範例中變為 **Resident 1/12**。
-- 使用 P0 篩選時可以看到該項目。
-
-![已提升為 P0 的常駐記憶](/super-memory/p0-resident-memory.png)
-
-P0 是永久優先順序。與具有時間生命週期的 P1 和 P2 不同，常駐項目會持續保持可用，直到使用者主動取消其常駐狀態。
-
-### 在新對話中注入常駐記憶
-
-Super Memory 執行召回時，常駐項目不會受到目前問題語意相關性的限制，而是獨立注入。
-
-![在新對話中注入常駐記憶](/super-memory/resident-memory-injection.png)
-
-範例中的新對話只輸入了「Hello」，但狀態仍然顯示：
-
-> Injected 1 memories (1 resident · 0 relevant)
-
-這表示即使沒有找到額外的相關記憶，系統仍然注入了一項 P0 常駐記憶。因此，常駐功能可以確保關鍵知識在每次記憶召回中穩定參與。
-
-### 什麼內容適合設定為 P0
-
-適合常駐的內容包括關鍵架構不變量、必須遵守的工作流程、長期有效的恢復規則，以及始終需要的核心偏好。
-
-不建議將暫時檔案位置、一次性任務細節或體積較大的低價值記錄設為常駐。常駐項目會被注入請求上下文，並可能影響每次回答，因此內容應保持簡潔且真正具有通用性。目前介面顯示最多可設定 12 項常駐記憶。
-
-當某項內容不再需要每次召回時，再次點擊醒目顯示的圖釘即可取消 Resident 狀態。
-
+- 超級記憶會把對話提煉成記憶、技能、經驗、軌跡和資源，而且不會使用你模型的 token。
+- 相關條目會被召回到之後的請求中；常駐條目（最多 12 個，一律為 P0）則會進入每一次請求。
+- 除非再次被確認，P1 會保留 30 天、P2 保留 7 天；過期的條目會轉為休眠，並且可以恢復。
+- Box ▸ <BzWenben jian="box.memory.group" /> 包含總覽、記憶庫、上下文注入檢視和維護。

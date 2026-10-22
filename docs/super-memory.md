@@ -1,281 +1,148 @@
 ---
 title: Super Memory
-description: Learn how Breezell extracts, organizes, and manages reusable memories without consuming your configured model tokens.
+description: How Breezell's Super Memory distills conversations into memories, skills, experiences, trajectories and resources, recalls them into later requests, and how to curate them in Box.
 ---
 
 # Super Memory
 
-**Super Memory** is an independently developed Breezell memory system. It uses two built-in Breezell models to extract useful information from conversations. The exact model names are not disclosed.
+**Super Memory** is Breezell's own long-term memory. While you work, it distills what is worth keeping from your conversations — decisions, preferences, working methods, lessons from fixing problems, the files that were changed — and recalls the relevant parts into later requests, also in new conversations.
 
-Memory extraction is handled by Breezell's internal model pipeline and does not consume tokens from the model configured by the user or reduce the user's model token quota.
+- Extraction runs on two built-in Breezell models. It does not use your configured model and does not spend its tokens. Memories that are recalled into a request do become part of that request's context.
+- Super Memory needs a Breezell account with a plan that includes it.
+- Everything it stores can be browsed, corrected and deleted in Box ▸ <BzWenben jian="box.memory.group" />.
 
-## What Super Memory can extract
+::: tip About the screens on this page
+The Breezell screens below are rebuilt in HTML from the Breezell source code. Their text follows the language of this page; the memories in them are examples. In the memory library you can open rows, change priorities and pin residents.
+:::
 
-Super Memory can organize extracted information into several types:
+## How it works {#how-it-works}
 
-- **Memory:** Stable facts, preferences, standing instructions, and decisions that may be useful later.
-- **Skill:** Reusable methods or workflows discovered during a task.
-- **Experience:** Outcomes, lessons, and practical knowledge from previous work.
-- **Trajectory:** The progression of a task, decision, or goal over time.
-- **Resource:** Useful files, links, tools, or reference material associated with the work.
+Open Box and expand <BzWenben jian="box.memory.group" /> in the Console group on the left. It has four pages: <BzWenben jian="box.memory.overview" />, <BzWenben jian="box.memory.library" />, <BzWenben jian="box.memory.context" /> and <BzWenben jian="box.memory.maintenance" />.
 
-The system extracts and classifies these items automatically from conversations so they can be recalled as relevant context in later interactions.
+<BzHezi zu="memory" ye="box.memory.overview" gaoliang="ye" biaoji="1" />
 
-## Browse and filter memories
+<BzWenben jian="box.memory.overview" /> starts with a diagram of the loop, with live numbers:
 
-![Super Memory panel](/super-memory/super-memory-panel.png)
+<BzJiyi ye="zonglan" />
 
-The panel provides the following views and controls:
+1. **<BzWenben jian="box.memory.flow.conversation" />**: every turn you and the model exchange.
+2. **<BzWenben jian="box.memory.flow.extract" />**: <BzWenben jian="box.memory.flow.extractSub1" />; <BzWenben jian="box.memory.flow.extractSub2" />.
+3. **<BzWenben jian="box.memory.flow.store" />**: where the entries live, active or dormant.
+4. **<BzWenben jian="box.memory.flow.project" />**: knowledge compiled from your codebase, such as entry points, commands and dependencies.
+5. Back into the conversation: resident entries are injected into every request, and relevant ones are recalled when a request needs them.
 
-- **Memories, Context, and Insights:** Switch between extracted memory entries, assembled context, and higher-level memory insights.
-- **Search:** Find stored entries using text.
-- **Priority:** Filter by **P0**, **P1**, or **P2**, or show all priorities.
-- **Type:** Filter by Memory, Skill, Experience, Trajectory, or Resource.
-- **State:** Separate **Active** entries from **Dormant** entries.
-- **Capacity counters:** Review the total item count and the current capacity used by resident entries, memories, skills, and experiences.
-- **Select:** Enter selection mode to choose specific entries for management.
+Below the diagram, the cards show how many entries there are, how many are resident, how much the compact index saves compared with loading every entry in full, and what was injected last. Further down: the mix of kinds, the priorities, how fresh the entries are, the health of the compiled project knowledge, the most used entries and those about to expire.
 
-When no entries exist, the panel shows that memories will be extracted automatically from conversations. As conversations continue, useful items can appear here without requiring the user to write them manually.
+## Five kinds of memory {#kinds}
 
-## Key advantages
+Super Memory files each entry under the kind that fits how it will be used later:
 
-Super Memory combines automatic extraction with efficient and highly controllable retrieval:
+| Kind | Holds | Example |
+| --- | --- | --- |
+| <BzWenben jian="superMemory.catMemory" /> | Lasting facts, preferences, standing instructions and decisions | "Answer in Traditional Chinese; keep code in English" |
+| <BzWenben jian="superMemory.catSkill" /> | A reusable method for solving a kind of problem again | How to restore corrupted localStorage data safely |
+| <BzWenben jian="superMemory.catExperience" /> | A lesson: the root-cause reasoning and how to verify it | "When several features fail together, fix the shared state first" |
+| <BzWenben jian="superMemory.catTrajectory" /> | How a task actually went: goal, tool calls, errors and recovery | The 14 steps of a repair |
+| <BzWenben jian="superMemory.catResource" /> | The concrete files and places that were changed | <BzWenben jian="superMemory.editAction.edit" /> test.html |
 
-- **Powerful extraction:** Two internal Breezell models analyze conversations and convert useful information into structured Memory, Skill, Experience, Trajectory, and Resource entries without requiring manual entry.
-- **Efficient retrieval:** Type, priority, state, freshness, and the compiled memory index help narrow recall to information relevant to the current task instead of treating every stored item equally.
-- **Controllable context injection:** The Context view exposes the current-turn injection snapshot, the next-turn memory index preview, and its estimated token size.
-- **Explicit lifecycle control:** P0 permanent, P1 30-day, and P2 7-day priorities work with Active and Dormant states so important knowledge can remain available while temporary information naturally receives a shorter lifecycle.
-- **Observable knowledge health:** Compilation status, source and compiler versions, stale resources, failures, verification, correction, freshness, and unsynced counts make the memory system inspectable.
-- **Token awareness:** Extraction does not consume the user's configured model tokens. Recalled memory that is injected into a request becomes part of that request's context; the preview and savings statistics help make this usage visible.
+Not every conversation produces every kind. A bug fix usually yields a skill, an experience, a trajectory and resources, but no general memory, because nothing in it is a lasting personal preference. That keeps recall precise: a later task can pull in the method, the lesson, the history or the file record on its own.
 
-## Context and retrieval control
+## Priorities and lifecycle {#priorities}
 
-![Super Memory Context view](/super-memory/super-memory-context.png)
+| Priority | Lifetime |
+| --- | --- |
+| <BzWenben jian="superMemory.p0Permanent" /> | Never expires. Resident entries are always P0. |
+| <BzWenben jian="superMemory.p190Days" /> | Expires after 30 days unless it is confirmed again. |
+| <BzWenben jian="superMemory.p230Days" /> | Expires after 7 days unless it is confirmed again. Short-lived details such as file edits start here. |
 
-The **Context** view shows how memory participates in conversations:
+An expired entry is not deleted: it becomes **<BzWenben jian="superMemory.dormant" />**. Dormant entries stay searchable and can be restored. When a P1 entry proves itself, Breezell suggests making it permanent with a **↑P0** button on its row.
 
-- **Current Turn Injection:** Displays the memory snapshot injected into the current conversation turn. Before a snapshot exists, the panel clearly shows an empty state.
-- **Memory Index Preview:** Previews the index prepared for the next turn and estimates its token size, making retrieval volume easier to review.
-- **Conversation Turns:** Shows the number of turns in the current thread and provides a place to inspect turn-level memory activity.
+## The memory library {#library}
 
-These controls make retrieval observable and manageable: users can see whether memory was injected, what is being prepared next, and the approximate context cost.
+<BzWenben jian="box.memory.library" />: <BzWenben jian="box.memory.libraryDesc" />
 
-## Insights and system health
+<BzJiyi ye="ku" yetou gaoliang="pchip" biaoji="1" />
 
-![Super Memory Insights view](/super-memory/super-memory-insights.png)
+- **Filters**: search, then narrow by priority (P0 / P1 / P2), by kind, and by <BzWenben jian="superMemory.active" /> or <BzWenben jian="superMemory.dormant" />.
+- **Count bar**: how many entries are loaded, the resident quota and the active budget per kind. <BzWenben jian="superMemory.batchSelect" /> lets you tick several entries and delete them together.
+- **Rows**: the colored dot is the kind. After the title come the priority chip, **<BzWenben jian="superMemory.residentBadge" />** for residents and **NEW** for entries from the last 24 hours. The second line shows when it was last updated, the kind, the number of tags and where it came from.
+- **Open a row** to see its tags, the <BzWenben jian="superMemory.l1Overview" />, <BzWenben jian="superMemory.whyRemembered" />, how often it was confirmed and used, and when it expires. <BzWenben jian="box.memory.showFull" /> adds the <BzWenben jian="superMemory.l2Full" />.
+- **Priority chip** (1): click it to choose <BzWenben jian="superMemory.p0Permanent" />, <BzWenben jian="superMemory.p190Days" /> or <BzWenben jian="superMemory.p230Days" />.
+- The pin sets an entry resident; the bin deletes it.
 
-The **Insights** view summarizes the state and effectiveness of the memory system:
+Breezell sends the AI a short line per entry (L0) and loads the overview or the full content only when it is needed. That is where the <BzWenben jian="superMemory.tokenSavings" /> on the overview page comes from.
 
-- **Project Knowledge Health:** Shows the last compilation, compiler and source versions, stale resources, failed compilations, and verified or corrected totals.
-- **Token Savings:** Reports token savings when enough activity has been recorded.
-- **Viking Filesystem:** Displays counts for Memories, Skills, Experiences, Trajectories, Resources, and Unsynced items.
-- **Priority Distribution:** Shows the balance of P0 permanent, P1 30-day, and P2 7-day entries.
-- **Freshness Pulse:** Groups knowledge updated within 24 hours, 7 days, 30 days, or an older period.
+## Resident memories {#resident}
 
-Together, Context and Insights provide a transparent view of what Super Memory extracts, what it may retrieve, and how healthy and current the stored knowledge remains.
+A resident entry is injected into **every** request, whether or not the request is about it. Use it for things the AI must always keep in mind, such as an architecture rule, a mandatory workflow or a firm preference.
 
-## Active and dormant memories
+1. Open <BzWenben jian="box.memory.library" /> and find the entry.
+2. Click the pin on its row (<BzWenben jian="superMemory.residentOn" />).
 
-Active memories remain available for relevant recall. Dormant memories are retained but separated from the active set, helping keep current context focused while preserving information that may still be useful later.
+<BzJiyi ye="ku" zhankai="m1" gaoliang="pin" biaoji="1" />
 
-## Demonstration: turning a repair into reusable memory
+- The entry becomes P0, gets the <BzWenben jian="superMemory.residentBadge" /> badge, and the count bar shows the new total, for example <BzWenben jian="superMemory.residentCapacity" canshu="1|12" />.
+- Up to 12 entries can be resident. At the limit, Breezell shows <BzWenben jian="superMemory.residentLimitReached" />
+- To lower a resident entry's priority, click the pin again first (<BzWenben jian="superMemory.residentOff" />); the entry returns to the priority it had before.
 
-This example uses an intentionally broken HTML Task Manager to demonstrate how Super Memory changes a short repair session into reusable knowledge.
+Keep residents short and truly universal. Temporary file locations or one-off task details do not belong here: they would be added to every request.
 
-The repair request asks the AI to inspect the entire codebase and fix task creation, deletion, completion, filtering, counters, localStorage persistence, keyboard input, and clearing completed tasks without changing the intended interface or behavior.
+## Memories in the chat {#in-chat}
 
-### 1. Inspect and repair the Task Manager
+When Super Memory injects entries into a request, a line appears under your message. Click it to see which entries were used:
 
-Breezell inspects the code, identifies the shared root causes, repairs the implementation, and verifies the complete workflow rather than treating each visible symptom as an independent bug.
+<BzLiaotian zhuru="1|1|0" zhurukai zhuruwen="Answer in Traditional Chinese; keep code and identifiers in English" gaoliang="zhuru" biaoji="1" wen="Hello" da="Hello! What would you like to work on today?" />
 
-![Breezell repairing the Task Manager](/super-memory/task-manager-repair.png)
+In this example a brand-new conversation contains only "Hello", yet one entry was injected: the resident memory. Relevant entries are added when a request needs them:
 
-The repair covers serialization and parsing, duplicate loading, malformed saved data, empty-task validation, stable task identities, keyboard handling, completion toggling, targeted deletion, filters, counters, and clearing completed tasks.
+<BzLiaotian zhuru="3|1|2" zhuruwen="Answer in Traditional Chinese; keep code and identifiers in English|Restore corrupted localStorage state with guarded JSON parsing|When tasks, filters and counters break together, fix the shared state first" zhurukai wen="The reading list in test2.html loses its books after a reload. Fix it." da="This is the same failure as in the task manager: the list is saved with String() instead of JSON.stringify. I'll guard the parsing, drop the corrupted value, and give every book a stable id." />
 
-### 2. Initial P2 resource records
+The line only appears when something was injected. If retrieval could not finish, the turn continues with what is available and the line says so.
 
-Because this is a small test and the first result mainly describes concrete file edits, Super Memory initially records two edited sections of **test.html** as **P2 Resource** entries.
+## Context injection {#context}
 
-![P2 resource records created from the repair](/super-memory/p2-resource-records.png)
+<BzWenben jian="box.memory.context" />: <BzWenben jian="box.memory.contextDesc" />
 
-These entries preserve what changed and where it changed. P2 gives this short-lived implementation detail a lower priority without discarding the repair trace, making it available if the AI later needs to recall which file regions were modified.
+<BzJiyi ye="shangxiawen" />
 
-### 3. Prompt deeper reflection
+| Card | What it shows |
+| --- | --- |
+| <BzWenben jian="superMemory.currentTurnInjectionTitle" /> | For the selected turn: the status, how many resident and relevant entries were injected, their kinds and scopes, and each entry with its detail level (L0 / L1 / L2) and score. |
+| <BzWenben jian="superMemory.memoryIndexPreview" /> | The compact index the next request will receive, grouped by kind, with an estimated token count. |
+| <BzWenben jian="superMemory.convTurns" /> | The turns of the current conversation. Click one to inspect its injection and jump to it in the chat. |
 
-For this compact demonstration, the user asks:
+## Budget & maintenance {#maintenance}
 
-> What lessons did you learn from solving this issue?
+<BzWenben jian="box.memory.maintenance" />: <BzWenben jian="box.memory.maintenanceDesc" />
 
-![AI summarizing lessons from the repair](/super-memory/repair-lessons.png)
+<BzJiyi ye="weihu" />
 
-The answer identifies reusable engineering lessons: repair the owner of shared state rather than every symptom, address collection items by stable identity, recompute derived state on every render path, treat persistence as a validated data boundary, review Boolean predicates carefully, terminate invalid input paths, avoid timestamp-only identities, and verify features through a realistic end-to-end workflow.
+- <BzWenben jian="box.memory.budgetTitle" />: <BzWenben jian="box.memory.budgetDesc" />
+- <BzWenben jian="box.memory.runLifecycle" />: <BzWenben jian="box.memory.runLifecycleDesc" />
+- <BzWenben jian="box.memory.purge" />: <BzWenben jian="box.memory.purgeDesc" />
+- <BzWenben jian="box.memory.archiveExport" /> / <BzWenben jian="box.memory.archiveImport" />: move your whole memory bank to another computer as a `.zip`. <BzWenben jian="box.memory.archiveImportDesc" />
 
-### 4. Extract structured repair knowledge
+## Example: one repair, reused in another app {#example}
 
-After the repair is examined at a deeper level, Super Memory adds higher-value structured entries:
+This is how the entries in the screens above came about.
 
-- A **P1 Experience** about repairing shared task state and stable identity.
-- A **P1 Skill** for repairing corrupted localStorage persistence with guarded serialization and parsing.
-- A **P2 Trajectory** that summarizes the multi-bug Task Manager problem and its resolution path.
-- The original **P2 Resource** records that preserve the edited file locations.
+1. **The repair.** In `test.html`, a small task manager could not add, delete, complete, filter or save tasks reliably. Breezell traced the failures to one shared state model, fixed it and checked the whole workflow in the browser. Super Memory first recorded the edited parts of `test.html` as **P2 resources** and the course of the repair as a **P2 trajectory**.
+2. **The lessons.** Asked "What did you learn from this?", the AI named the reusable lessons: repair the owner of shared state instead of each symptom, address items by a stable id, treat saved data as a boundary that must be validated. Super Memory stored a **P1 skill** (guarded saving and loading of localStorage data) and a **P1 experience** (diagnose shared state first, then verify end to end). In longer or more valuable fixes it records such lessons without being asked.
+3. **The reuse.** The first conversation was deleted. In a new conversation, a different app — a reading list in `test2.html` — had the same family of bugs. Breezell recalled the skill and the resource records, applied the method to the new `books` data instead of copying the old patch, and verified the result.
 
-![Structured repair memories after reflection](/super-memory/structured-repair-memories.png)
+Deleting a conversation does not delete what Super Memory extracted from it, and a method learned in one app carried over to another.
 
-### What this demonstrates
+## When the daily allowance is used up {#quota}
 
-- **Extraction depth adapts to value:** Small edits may begin as P2 resources, while reusable root-cause knowledge can be promoted into P1 skills and experiences.
-- **Different memory types have different jobs:** Resource and Trajectory preserve what happened; Skill and Experience preserve how and why the problem was solved.
-- **Priority remains controllable:** P1 retains the more reusable repair knowledge longer, while P2 keeps short-term implementation details available without giving them permanent weight.
-- **Memory becomes useful to future AI work:** Later tasks can retrieve the relevant file history, repair method, or engineering lesson instead of relying only on the original conversation transcript.
-- **Manual reflection is not normally required:** The follow-up question is used here to make a very small test produce an obvious result. For longer-running or high-value bugs, Super Memory can automatically identify and record durable repair experience without requiring the user to ask this question.
+Super Memory has a daily allowance. When it is used up, every Super Memory page shows <BzWenben jian="box.memory.quotaPausedTitle" />. Until it renews, chats stop creating new entries on their own; existing entries can still be viewed and deleted, and the rules and memories you write yourself in [Rules, Memories & Skills](/prompt-settings) are not affected.
 
-## Deep dive: why the Memory category is empty
+Without a plan that includes Super Memory, the pages show:
 
-Filtering this example by **Memory** shows **0 items**, even though Super Memory successfully extracted useful knowledge.
+<BzJiyi ye="suoding" />
 
-![Empty Memory category after the repair](/super-memory/empty-memory-category.png)
+## Summary
 
-This is intentional classification, not an extraction failure. The repair did not produce a durable personal preference, stable user fact, or standing instruction that belonged in general Memory. Instead of duplicating everything as generic memory, Super Memory placed each result in the type that best describes its future use: Skill, Experience, Trajectory, and Resource.
-
-## Skill: a reusable localStorage recovery pattern
-
-The **P1 Skill** entry turns one specific repair into a reusable procedure for client-side state persistence.
-
-![Expanded localStorage repair Skill](/super-memory/localstorage-skill-detail.png)
-
-The card shows:
-
-- **Tags:** localStorage, JSON, state hydration, and data recovery make the skill easier to retrieve for related problems.
-- **L1 Overview:** Store task arrays with JSON.stringify, load them using guarded JSON.parse, avoid adding seed data after a valid load, and discard unrecoverable legacy values such as object-to-string corruption before restoring a clean default.
-- **Why Remembered:** The system identifies this as a verified persistence and recovery pattern reusable in stateful client applications.
-- **L2 Full Content:** Preserves the detailed failure mode and the complete recovery procedure for deeper retrieval when needed.
-- **Metadata:** The card exposes its P1 priority, type, activity state, confirmation count, access count, last update, and lifecycle information.
-
-This is more useful than a vague note saying that localStorage was fixed: it gives a future AI a concrete procedure it can apply again.
-
-## Experience: diagnosing shared state and stable identity
-
-The **P1 Experience** entry preserves the broader engineering lesson behind the group of UI failures.
-
-![Expanded shared-state repair Experience](/super-memory/repair-experience-detail.png)
-
-Its overview explains that when tasks, filters, counters, and persistence fail together, the investigation should begin at their shared tasks array and state transitions. It also records the need for collision-safe stable identifiers and an end-to-end workflow that retests input validation, keyboard submission, filters, counters, clearing, and reload persistence together.
-
-The tags cover state management, debugging, UI, stable identity, invariants, testing, and localStorage. **Why Remembered** identifies the entry as a reusable checklist for features whose handlers, rendering, counters, filters, and persistence depend on one state model.
-
-The distinction is important: the Skill records a repeatable repair method, while the Experience records the diagnostic reasoning, invariants, and verification strategy.
-
-## Trajectory: preserving the actual repair path
-
-The **P2 Trajectory** entry retains how the task unfolded, not only the final lesson.
-
-![Expanded Task Manager repair Trajectory](/super-memory/repair-trajectory-detail.png)
-
-It contains the original goal, recovered outcome, tool sequence, one recoverable error, subsequent successful steps, and final result. In this example, the trajectory records 14 tool calls across code reading, directory inspection, to-do tracking, file editing, browser navigation, and browser evaluation.
-
-The P2 and unverified labels keep this short-lived execution trace separate from the more reusable P1 Skill and Experience. It remains available when the AI needs to inspect the exact repair path, while the higher-value conclusions are stored in more durable forms.
-
-## Why this classification matters
-
-- **Memory** stores durable facts, preferences, and standing information; none were created in this test.
-- **Skill** stores a reusable method for solving the problem again.
-- **Experience** stores the root-cause reasoning and verification checklist.
-- **Trajectory** stores the sequence of actions, errors, and recovery.
-- **Resource** stores the concrete files and edited locations.
-
-This separation keeps retrieval precise and controllable. A future task can request the method, engineering lesson, execution history, or modified resource independently instead of loading one oversized generic memory.
-
-## Validation: reuse in a new conversation and a different app
-
-A second test verifies whether the extracted knowledge remains useful beyond the original Task Manager conversation.
-
-The old conversation is deleted, then a new conversation is created for a different HTML application: a Reading Library stored in **test2.html**. Its interface and data model use books instead of tasks, but it intentionally contains the same family of state, identity, filtering, counter, keyboard, deletion, and localStorage defects.
-
-### 1. Start from a separate conversation
-
-![New Reading Library test in a separate conversation](/super-memory/reading-library-new-session.png)
-
-For demonstration purposes, the request explicitly asks Breezell to review relevant stored memories, prior lessons, and learned patterns before making changes. This makes recall visible during the test. Under normal use, Super Memory can automatically recall relevant knowledge without this explicit instruction.
-
-### 2. Recall knowledge from the deleted conversation
-
-Before editing **test2.html**, Breezell retrieves the earlier **P1 Skill** for guarded JSON hydration and the **P2 Resource** records that point to edited regions of the old **test.html** file.
-
-![Breezell recalling Skill and Resource entries](/super-memory/reading-library-memory-recall.png)
-
-This demonstrates two different forms of recall:
-
-- **Skill recall:** Supplies the reusable persistence pattern: guarded JSON.stringify and JSON.parse, safe rejection of corrupted legacy data, and restoration of a clean default.
-- **Resource recall:** Preserves the concrete origin of the learned pattern by showing which regions of the previous file were modified.
-
-In this test, deleting the original conversation did not remove the structured Super Memory entries extracted from it. The useful knowledge remained available to a later conversation.
-
-### 3. Transfer the method instead of copying the old patch
-
-Breezell applies the previous lesson to the Reading Library's shared **books** state rather than copying code written for the old **tasks** array.
-
-![Reading Library repaired using recalled knowledge](/super-memory/reading-library-repair-result.png)
-
-The new repair includes:
-
-- Guarded JSON serialization and parsing.
-- Safe removal of unrecoverable legacy values such as object-to-string corruption.
-- Loading a valid empty library without duplicating the example book.
-- Deterministic unique book identities instead of collision-prone timestamps.
-- Correct read and unread counters, filters, and empty-filter states.
-- Correct status toggling, targeted deletion, and clearing of read books.
-- Input validation and Enter-only keyboard submission.
-- Event handlers that operate on each book's stable identity.
-
-Breezell then verifies the Reading Library through a 14-check browser workflow and restores the pre-test localStorage value afterward.
-
-### What the second test proves
-
-- **Memory survives the original chat in structured form:** Deleting the previous conversation does not prevent the extracted Skill and Resource entries from being recalled in this test.
-- **Recall generalizes across implementations:** A pattern learned from a Task Manager is applied to a different Reading Library because the underlying state and persistence failures are structurally related.
-- **Skills are more than patch history:** The P1 Skill provides a reusable solution method, while P2 Resources preserve supporting implementation history.
-- **The AI repairs root causes:** It transfers the shared-state, stable-identity, persistence-boundary, and end-to-end verification principles instead of reproducing old code line by line.
-- **Explicit recall is optional:** The prompt requests memory review only to make the demonstration easy to observe. In normal conversations, relevant Super Memory entries can be recalled automatically.
-
-## Resident memories (P0)
-
-Any Super Memory entry can be made **Resident** when it should be available during every memory recall, regardless of whether the current request matches it semantically.
-
-### Set an entry as resident
-
-Hover over or select the pin icon on a memory card. The **Set resident** tooltip identifies the action.
-
-![Set resident action on a memory card](/super-memory/set-resident-action.png)
-
-After the action:
-
-- The entry is promoted to **P0**.
-- A **Resident** badge appears on the card.
-- The pin is highlighted to show that the entry is always resident.
-- The resident-capacity counter increases. In the example it changes to **Resident 1/12**.
-- The entry appears when filtering by P0.
-
-![Memory promoted to P0 Resident](/super-memory/p0-resident-memory.png)
-
-P0 is the permanent priority tier. Unlike P1 and P2 items with time-based lifecycles, a resident entry remains available until the user removes its resident status.
-
-### Resident injection in a new conversation
-
-When Super Memory runs retrieval, resident entries are injected independently of semantic relevance.
-
-![Resident memory injected into a new conversation](/super-memory/resident-memory-injection.png)
-
-In the example, a new chat contains only “Hello,” but the status still reports:
-
-> Injected 1 memories (1 resident · 0 relevant)
-
-This means one P0 resident entry was injected even though no additional relevance-matched memory was found. Resident memory therefore provides a reliable way to keep critical knowledge available in every recall cycle.
-
-### When to use P0
-
-Use Resident status for information that should consistently guide the AI, such as critical architecture invariants, mandatory workflows, durable recovery rules, or essential preferences.
-
-Avoid making temporary file locations, one-time task details, or large low-value records resident. Resident entries are injected into request context and can influence every response, so they should remain concise and genuinely universal. The interface currently shows capacity for up to 12 resident entries.
-
-Select the highlighted pin again to remove Resident status when an entry no longer needs to be recalled every time.
-
+- Super Memory distills conversations into memories, skills, experiences, trajectories and resources, without using your model's tokens.
+- Relevant entries are recalled into later requests; residents (up to 12, always P0) go into every request.
+- P1 lasts 30 days and P2 seven days unless confirmed again; expired entries become dormant and can be restored.
+- Box ▸ <BzWenben jian="box.memory.group" /> has the overview, the library, the context injection view and maintenance.

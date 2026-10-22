@@ -44,6 +44,15 @@ const props = withDefaults(
     suoding?: boolean;
     tanchugaoliang?: string;
     duiliewen?: string;
+    zhuru?: string;
+    zhurukai?: boolean;
+    zhuruwen?: string;
+    qiehuanka?: string;
+    jihuabiaoti?: string;
+    jihuazhaiyao?: string;
+    jihuawenjian?: string;
+    jihuashu?: number;
+    jihuazhuangtai?: "" | "yizhixing";
   }>(),
   {
     xuanzeqi: "",
@@ -77,6 +86,15 @@ const props = withDefaults(
     suoding: false,
     tanchugaoliang: "",
     duiliewen: "Also update the README|Then run the tests",
+    zhuru: "",
+    zhurukai: false,
+    zhuruwen: "",
+    qiehuanka: "",
+    jihuabiaoti: "",
+    jihuazhaiyao: "",
+    jihuawenjian: "dark-mode-toggle.plan.md",
+    jihuashu: 5,
+    jihuazhuangtai: "",
   },
 );
 
@@ -119,6 +137,18 @@ const tuopangaoliang = ["liulanqi", "fujian", "duanyu", "youhua", "mcp", "jineng
 const tuopanzhuangtai = ["liulanqi", "", "duanyu", "youhua", "mcp", "jineng"];
 // 排隊訊息的示意文字用「|」分隔，跟著頁面語言翻譯。
 const duiliewen = computed(() => props.duiliewen.split("|"));
+// 超級記憶的注入提示（SidebarChat.tsx RecalledMemoriesDisclosure）：zhuru 寫成「總數|常駐|相關」，
+// zhuruwen 是注入條目的標題，用「|」分隔，前面幾條是常駐的。
+const zhurushu = computed(() => props.zhuru.split("|").map((x) => Number(x) || 0));
+const zhurukaizhuang = ref(props.zhurukai);
+const zhurutiao = computed(() => (props.zhuruwen ? props.zhuruwen.split("|") : []));
+
+// Plan 模式的兩張卡（SidebarChat.tsx plan_mode_switch / update_plan）：
+// 切換建議卡等待時進度條跑 30 秒兩輪後自動略過；計畫卡的 Auto 開關即「自動執行計畫卡」。
+const qiehuanpianhao = ref<"alwaysAsk" | "never" | "alwaysRun">("alwaysAsk");
+const pianhaokai = ref(false);
+const jihuazidong = ref(false);
+
 // Context 圓環：與面板裡的示意數字一致（約 47%）。
 const huanchang = computed(() => (props.tanchu === "shangxiawen" ? 0.47 : 0.18) * 2 * Math.PI * 6);
 const tanchugao: Record<string, number> = { moshi: 330, tiji: 330, tijisou: 380, xiegang: 470, shangxiawen: 470, duanyu: 340, youhua: 360, liulanqi: 430, mcp: 330 };
@@ -187,6 +217,21 @@ const houzhuiwenzi = computed(() => {
                 <span v-if="gaoliang === 'huigun' && biaoji" class="bz-biaoji" style="top: -12px; right: -10px">{{ biaoji }}</span>
               </span>
             </div>
+            <div v-if="zhuru" class="bz-lt-zhuru" :class="{ 'bz-gl': gaoliang === 'zhuru' }">
+              <span v-if="gaoliang === 'zhuru' && biaoji" class="bz-biaoji" style="top: -10px; right: -8px">{{ biaoji }}</span>
+              <button type="button" class="bz-lt-zhuru-an" :class="{ 'bz-kai': zhurukaizhuang }" @click="zhurukaizhuang = !zhurukaizhuang">
+                <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true" class="bz-lt-zhuru-quan"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.2" /></svg>
+                <BzTubiao ming="library" :daxiao="12" :cuxi="2" class="bz-lt-zhuru-tu" />
+                <span class="bz-lt-zhuru-wen">{{ tihuan("superMemory.recalled.usedBreakdown" as never, zhurushu[0], zhurushu[1], zhurushu[2]) }}</span>
+                <svg class="bz-lt-zhuru-jian" width="12" height="12" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="m18 9l-6 6l-6-6" /></svg>
+              </button>
+              <div v-if="zhurukaizhuang" class="bz-lt-zhuru-kuang">
+                <div v-for="(x, i) in zhurutiao" :key="i" class="bz-lt-zhuru-tiao">
+                  <span class="bz-lt-zhuru-lai">{{ t((i < zhurushu[1] ? "superMemory.recalled.sourceResident" : "superMemory.recalled.sourceRelevant") as never) }}</span>
+                  <span>{{ x }}</span>
+                </div>
+              </div>
+            </div>
             <span class="bz-lt-bianji" :class="{ 'bz-gl': gaoliang === 'bianji' }" aria-label="Edit message">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="transform: scaleX(-1)" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.779 17.779L4.36 19.918L6.5 13.5m4.279 4.279l8.364-8.643a3.027 3.027 0 0 0-2.14-5.165a3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14l6.213-6.504M12.75 7.04L17 11.28" /></svg>
               <span v-if="gaoliang === 'bianji' && biaoji" class="bz-biaoji" style="top: -12px; left: -12px">{{ biaoji }}</span>
@@ -198,6 +243,57 @@ const houzhuiwenzi = computed(() => {
               <span>{{ moxing }}</span>
             </div>
             <div class="bz-lt-huida-wen">{{ da }}<span v-if="liushi" class="bz-lt-dian" aria-hidden="true"><i /><i /><i /></span></div>
+            <div v-if="qiehuanka" class="bz-lt-ka bz-lt-qhk" :class="{ 'bz-gl': gaoliang === 'qiehuanka' }">
+              <span v-if="gaoliang === 'qiehuanka' && biaoji" class="bz-biaoji" style="top: -10px; right: -8px">{{ biaoji }}</span>
+              <div class="bz-lt-qhk-tou">
+                <BzTubiao ming="library" :daxiao="14" :cuxi="2" class="bz-lt-qhk-tu" />
+                <span class="bz-lt-qhk-biao">{{ t("planSwitch.title") }}</span>
+              </div>
+              <div class="bz-lt-qhk-yuanyin">{{ qiehuanka }}</div>
+              <div class="bz-lt-qhk-di">
+                <span class="bz-lt-qhk-pianhao-wai">
+                  <button type="button" class="bz-lt-qhk-pianhao" @click="pianhaokai = !pianhaokai">
+                    {{ t(`planSwitch.${qiehuanpianhao}` as never) }}
+                    <svg width="10" height="10" viewBox="0 0 16 16"><path fill="currentColor" fill-rule="evenodd" d="m7.976 10.072l4.357-4.357l.62.618L8.284 11h-.618L3 6.333l.619-.618z" clip-rule="evenodd" /></svg>
+                  </button>
+                  <div v-if="pianhaokai" class="bz-lt-qhk-caidan">
+                    <button v-for="x in (['alwaysAsk', 'never', 'alwaysRun'] as const)" :key="x" type="button" @click="qiehuanpianhao = x; pianhaokai = false">
+                      <svg v-if="qiehuanpianhao === x" width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M10 3L4.5 8.5L2 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                      <span v-else class="bz-lt-qhk-kong" />
+                      {{ t(`planSwitch.${x}` as never) }}
+                    </button>
+                  </div>
+                </span>
+                <span class="bz-lt-qhk-an">
+                  <span class="bz-lt-qhk-lue">{{ t("planSwitch.skip") }}</span>
+                  <span class="bz-lt-qhk-qie">{{ t("planSwitch.switch") }}<i>^⏎</i></span>
+                </span>
+              </div>
+              <div class="bz-lt-qhk-jindu"><i /></div>
+            </div>
+            <div v-if="jihuabiaoti" class="bz-lt-ka bz-lt-jh" :class="{ 'bz-gl': gaoliang === 'jihua' }">
+              <span v-if="gaoliang === 'jihua' && biaoji" class="bz-biaoji" style="top: -10px; right: -8px">{{ biaoji }}</span>
+              <div class="bz-lt-jh-tou">
+                <span class="bz-lt-jh-wenjian"><BzTubiao ming="library" :daxiao="14" :cuxi="2" class="bz-lt-jh-tu" />{{ jihuawenjian }}</span>
+                <BzTubiao ming="download" :daxiao="13" :cuxi="2" class="bz-lt-jh-dakai" />
+              </div>
+              <div class="bz-lt-jh-biao">{{ jihuabiaoti }}</div>
+              <div class="bz-lt-jh-zhai">{{ jihuazhaiyao }}</div>
+              <div class="bz-lt-jh-shu">{{ jihuashu }} to-dos</div>
+              <div class="bz-lt-jh-di">
+                <span class="bz-lt-jh-kan">{{ t("planCard.actions.viewPlan") }}</span>
+                <span class="bz-lt-jh-you">
+                  <template v-if="jihuazhuangtai === 'yizhixing'">
+                    <span class="bz-lt-jh-ruo">{{ t("planCard.actions.executed") }} <BzTubiao ming="check" :daxiao="13" :cuxi="2.4" /></span>
+                  </template>
+                  <template v-else>
+                    <span class="bz-lt-jh-ruo">{{ t("planCard.actions.skip") }}</span>
+                    <span class="bz-lt-jh-ruo">{{ t("planCard.actions.auto") }} <button type="button" class="bz-kaiguan bz-xiao" :class="{ 'bz-kai': jihuazidong }" @click="jihuazidong = !jihuazidong" /></span>
+                    <span class="bz-lt-jh-zhixing">{{ t("planCard.actions.execute") }}<i> Ctrl+Enter</i></span>
+                  </template>
+                </span>
+              </div>
+            </div>
           </div>
         </template>
       </div>
@@ -1396,5 +1492,303 @@ const houzhuiwenzi = computed(() => {
 /* 總覽圖上的編號：比教學用的標記稍小，不帶光圈 */
 .bz-lt-xb {
   z-index: 3;
+}
+
+/* ---------- 超級記憶注入提示 ---------- */
+.bz-lt-zhuru {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-top: 6px;
+  border-radius: 6px;
+}
+
+.bz-lt-zhuru-an {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  color: var(--bz-fg-3);
+  text-align: left;
+}
+
+.bz-lt-zhuru-quan {
+  flex-shrink: 0;
+  opacity: 0.55;
+}
+
+.bz-lt-zhuru-tu {
+  flex-shrink: 0;
+  margin-left: -2px;
+  opacity: 0.7;
+}
+
+.bz-lt-zhuru-wen {
+  overflow: hidden;
+  padding-right: 0.25em;
+  font-size: 12px;
+  font-style: italic;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  opacity: 0.85;
+}
+
+.bz-lt-zhuru-jian {
+  flex-shrink: 0;
+  opacity: 0;
+  transform: rotate(-90deg);
+  transition: transform 0.15s, opacity 0.15s;
+}
+
+.bz-lt-zhuru-an:hover .bz-lt-zhuru-jian,
+.bz-lt-zhuru-an.bz-kai .bz-lt-zhuru-jian {
+  opacity: 0.45;
+}
+
+.bz-lt-zhuru-an.bz-kai .bz-lt-zhuru-jian {
+  transform: none;
+}
+
+.bz-lt-zhuru-kuang {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 6px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--bz-fg) 4%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--bz-fg) 8%, transparent);
+}
+
+.bz-lt-zhuru-tiao {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  color: var(--bz-fg-2);
+  font-size: 11.5px;
+  line-height: 1.4;
+}
+
+.bz-lt-zhuru-lai {
+  flex-shrink: 0;
+  color: var(--bz-fg-3);
+  font-size: 9px;
+  font-weight: 600;
+  opacity: 0.75;
+}
+
+/* ---------- Plan 模式的卡片 ---------- */
+.bz-lt-ka {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 6px 0 2px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  background: var(--bz-editor-bg);
+  border: 1px solid color-mix(in srgb, var(--bz-fg) 12%, transparent);
+}
+
+.bz-lt-qhk-tou,
+.bz-lt-jh-wenjian {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bz-lt-qhk-tu {
+  color: #e89c30;
+  opacity: 0.7;
+}
+
+.bz-lt-qhk-biao {
+  color: #e89c30;
+  font-size: 13px;
+}
+
+.bz-lt-qhk-yuanyin {
+  color: color-mix(in srgb, var(--bz-fg) 60%, transparent);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.bz-lt-qhk-di,
+.bz-lt-jh-di {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.bz-lt-qhk-pianhao-wai {
+  position: relative;
+}
+
+.bz-lt-qhk-pianhao {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 20px;
+  padding: 0 6px;
+  font-size: 12px;
+  color: var(--bz-fg-2);
+  opacity: 0.7;
+}
+
+.bz-lt-qhk-caidan {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  min-width: 140px;
+  padding: 4px;
+  border-radius: 6px;
+  background: var(--bz-menu-bg);
+  border: 1px solid color-mix(in srgb, var(--bz-fg) 18%, transparent);
+  box-shadow: var(--bz-shadow);
+}
+
+.bz-lt-qhk-caidan button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  text-align: left;
+}
+
+.bz-lt-qhk-caidan button:hover {
+  background: color-mix(in srgb, var(--bz-button-bg) 20%, transparent);
+}
+
+.bz-lt-qhk-kong {
+  width: 12px;
+}
+
+.bz-lt-qhk-an,
+.bz-lt-jh-you {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.bz-lt-qhk-lue {
+  padding: 0 6px;
+  color: var(--bz-fg-2);
+}
+
+.bz-lt-qhk-qie {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #fff;
+  background: #e89c30;
+}
+
+.bz-lt-qhk-qie i {
+  font-size: 10px;
+  font-style: normal;
+  opacity: 0.5;
+}
+
+.bz-lt-qhk-jindu {
+  height: 2px;
+  margin: 4px 0 -2px;
+  overflow: hidden;
+  border-radius: 1px;
+  background: color-mix(in srgb, var(--bz-fg) 10%, transparent);
+}
+
+.bz-lt-qhk-jindu i {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: #e89c30;
+  animation: bz-lt-jindu 30s linear infinite;
+}
+
+@keyframes bz-lt-jindu {
+  to { width: 100%; }
+}
+
+.bz-lt-jh-tou {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bz-lt-jh-wenjian {
+  gap: 4px;
+  color: var(--bz-fg);
+}
+
+.bz-lt-jh-tu {
+  color: var(--bz-fg-3);
+  opacity: 0.75;
+}
+
+.bz-lt-jh-dakai {
+  color: var(--bz-fg-2);
+}
+
+.bz-lt-jh-biao {
+  color: var(--bz-fg);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.bz-lt-jh-zhai {
+  margin-top: 2px;
+  color: var(--bz-fg-3);
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.bz-lt-jh-shu {
+  margin-top: 2px;
+  font-weight: 600;
+  color: var(--bz-fg);
+}
+
+.bz-lt-jh-kan {
+  color: var(--bz-link);
+}
+
+.bz-lt-jh-ruo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--bz-fg-3);
+}
+
+.bz-lt-jh-zhixing {
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--bz-button-fg);
+  background: var(--bz-button-bg);
+}
+
+.bz-lt-jh-zhixing i {
+  font-style: normal;
+  opacity: 0.72;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bz-lt-qhk-jindu i {
+    animation: none;
+    width: 40%;
+  }
 }
 </style>
