@@ -19,6 +19,7 @@ import BzChangguiye from "./components/byok/BzChangguiye.vue";
 import BzShijuedaili from "./components/byok/BzShijuedaili.vue";
 import BzGuize from "./components/byok/BzGuize.vue";
 import BzGongneng from "./components/byok/BzGongneng.vue";
+import BzDuanyu from "./components/byok/BzDuanyu.vue";
 
 type shituguodu = {
   ready: Promise<void>;
@@ -583,6 +584,7 @@ function zhuceyuanjian(yingyong: App | undefined) {
   yingyong.component("BzShijuedaili", BzShijuedaili);
   yingyong.component("BzGuize", BzGuize);
   yingyong.component("BzGongneng", BzGongneng);
+  yingyong.component("BzDuanyu", BzDuanyu);
 }
 
 export default {

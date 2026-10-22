@@ -1,103 +1,258 @@
 ---
 title: Dialog Box Overview
-description: Overview of the Breezell dialog box, including mentions, context usage, mode selection, model controls, and quick actions.
+description: A complete tour of the Breezell chat panel — writing and sending, modes, models, @ and / menus, the tray buttons, context usage and compression, queued messages and rolling back.
 ---
 
 # Dialog Box Overview
 
-The Breezell dialog box is the main place where you write prompts, choose a working mode, select a model, attach context, and control how the agent handles the current request.
+The chat panel on the **Agent** side of Breezell is where you talk to the AI: you write the request, pick how the AI works and which model it uses, attach context, and follow its progress. This page goes through every part of it.
 
-This page explains the visible controls shown in the dialog box screenshots.
+::: tip About the screens on this page
+The Breezell screens below are rebuilt in HTML from the Breezell source code. Their text follows the language of this page. Some of them react like the real panel: hover the mode menu, the Context list or a sent message, and click the switches and stars.
+:::
 
-## Default Input State
+## The parts of the chat panel
 
-The default input state is the normal starting point for a new message. It keeps the prompt field and essential controls visible.
+<BzLiaotian biaotilan quanbiao wen="Add a dark mode toggle to the settings page." da="I'll add a toggle to SettingsPage.vue that switches the theme class on the page and remembers the choice. Let me look at how the settings are stored first." />
 
-![Default input state](/dialog-box/input-default.png)
+| | Part | What it does |
+| --- | --- | --- |
+| 1 | Header buttons | **New Chat** (+), **Skills & Memory** (notebook) and **Chat History** (clock). Skills & Memory opens [Rules, Memories & Skills](/prompt-settings). |
+| 2 | Input box | Where you write. It shows <BzWenben jian="chat.input.placeholder" /> while empty. |
+| 3 | Mode | How the AI works on this message: chat only, plan, read-only analysis, edit files, and more. See [Choose a mode](#mode). |
+| 4 | Model | The model that answers, followed by its context window and reasoning effort, for example `200K Medium`. See [Choose a model](#model). |
+| 5 | Context ring | How full the context window is. Click it for the details and for manual compression. See [Context usage](#context). |
+| 6 | **@** | Adds files, folders or past chats to the message. See [Add context with @](#mention). |
+| 7 | Send | Sends the message. While the AI is answering it becomes a stop button. |
+| 8 | Tray | The row of buttons under the input box: Breezell Browser, attach, Quick Phrases, Optimize prompt, MCP and Skills. See [The tray](#tray). |
 
-Type your request, choose the mode and model if needed, then send the message to Breezell.
+## Write and send a message {#send}
 
-## Mode Selector Menu
+1. Click the input box and write your request. Say what you want and where, for example the file or the page.
+2. Press `Enter` to send. `Shift+Enter` starts a new line instead.
 
-The pointer highlights the mode selector menu. This menu lists the available working modes.
+As soon as there is text, the send button turns from grey to white:
 
-![Mode selector menu](/dialog-box/mode-selector.png)
+<BzLiaotian shuru="Add a dark mode toggle to the settings page." />
 
-Available modes include:
+To add an image, paste it into the input box or drag it in. To add other files, use the paperclip in the tray. In the editor, select code and press `Ctrl+L` (`Cmd+L` on macOS) to add the selection to the chat.
 
-- [**Chat**](/mode-selection#chat) for quick questions and answers
-- [**Plan**](/mode-selection#plan) for implementation planning before editing
-- [**Analyze**](/mode-selection#analyze) for read-only investigation
-- [**Entanglement**](/mode-selection#entanglement) for deeper causal reasoning
-- [**Agent**](/mode-selection#agent) for autonomous file edits and tool usage
-- [**Teams**](/mode-selection#teams) for parallel AI teammates on complex tasks
+### While the AI is answering
 
-For more details, see [Mode Selection](/mode-selection). Choose the mode that matches the amount of autonomy and depth you need.
+The send button turns into a white stop button with a square. Click it to stop the answer.
 
-## Model Selector
+You can keep writing in the meantime. Messages you send while an answer is running are not lost: they wait above the input box, under <BzWenben jian="chat.queue.queued" canshu="2" />, and are sent one after another when the AI is free.
 
-The pointer highlights the model selector. The selector shows the current model and lets you switch to another available model before sending the message.
+<BzLiaotian liushi duilie gaoliang="duilie" biaoji="1" duiliewen="Also update the README|Then run the tests" wen="Add a dark mode toggle to the settings page." da="I'll add a toggle to SettingsPage.vue that switches the theme class on the page." />
 
-![Model selector](/dialog-box/input-compact-controls.png)
+Each queued message has these buttons: <BzWenben jian="chat.queue.moveUp" /> and <BzWenben jian="chat.queue.moveDown" /> (when there is more than one), <BzWenben jian="common.edit" /> (back into the input box), <BzWenben jian="chat.queue.sendNow" /> (stops the current answer and sends this one) and <BzWenben jian="common.delete" />. You can also drag them into a new order. If a queued message cannot be sent, the reason appears under it, for example <BzWenben jian="chat.queue.notSent.turnError" />
 
-Use this when you want to choose a model with different speed, reasoning, or capability characteristics.
+## Choose a mode {#mode}
 
-## File Upload
+Click the mode capsule at the bottom left of the input box. Hover a mode to read what it does:
 
-The pointer highlights the file upload control.
+<BzLiaotian tanchu="moshi" moshi="agent" />
 
-![File upload control](/dialog-box/input-model-controls.png)
+| Mode | In short |
+| --- | --- |
+| [Chat](/mode-selection#chat) | <BzWenben jian="chatMode.normalDetail" />: <BzWenben jian="chatMode.normalExplain" /> |
+| [Plan](/mode-selection#plan) | <BzWenben jian="chatMode.planDetail" /> |
+| [Analyze](/mode-selection#analyze) | <BzWenben jian="chatMode.analyzeDetail" /> |
+| [Entanglement](/mode-selection#entanglement) | <BzWenben jian="chatMode.entanglementDetail" /> |
+| [Agent](/mode-selection#agent) | <BzWenben jian="chatMode.agentDetail" /> |
+| [Teams](/mode-selection#teams) | <BzWenben jian="chatMode.agentTeamsDetail" /> |
+| DarkSelene | <BzWenben jian="chatMode.darkSeleneDetail" /> |
 
-Click this control to attach local files to the current message before sending it to Breezell. Uploaded files become part of the request context, so Breezell can inspect or reference them while answering.
+Agent is the default and suits most tasks. The mode you pick applies from your next message on; when you send in a different mode, a <BzWenben jian="chatMode.switchedTo" canshujian="chatMode.planLabel" /> line marks the change in the conversation.
 
-## Breezell Browser
+Entanglement and Teams are locked until five friends have helped you unlock them, or until you buy any plan. A locked mode shows a lock in the menu, and its description shows your progress:
 
-The pointer highlights the **Breezell Browser** control.
+<BzLiaotian tanchu="moshi" moshi="agent" suoding />
 
-![Breezell Browser control](/dialog-box/input-agent-basic.png)
+## Choose a model {#model}
 
-Breezell Browser is Breezell's built-in browser tool. Use it to open webpages, view online content, search for information, and help AI retrieve and analyze web content without leaving the dialog box.
+Click the model name next to the mode. The model picker has a search box, the model sources and the per-model settings (context window, reasoning effort, Fast). It is described step by step in [Custom API (BYOK)](/custom-api#use-claude-in-chat).
 
-## Context Usage Breakdown
+<BzLiaotian xuanzeqi="api" moxing="claude-opus-5-5" />
 
-The pointer highlights the context usage indicator. Opening it shows a detailed breakdown of how the current context window is being used.
+The text after the model name is a short summary of those settings: `200K Medium` means a 200K context window and medium reasoning effort; `1M High Fast` means the 1M window, high effort and Fast. See [Context, reasoning and Fast](/custom-api#context-reasoning-and-fast).
 
-![Context usage breakdown](/dialog-box/context-usage-breakdown.png)
+## Add context with @ {#mention}
 
-The breakdown separates usage into categories such as system prompt, tools, rules, memories, skills, MCP, subagents, and conversation content. Use it to understand which parts of the session are consuming the most tokens.
+Type `@` in the input box, or click the **@** button. The menu opens right above the input box:
 
-## Context Manual Compression
+<BzLiaotian tanchu="tiji" shuru="@" />
 
-The pointer highlights the **Manual compress** control in the context panel. This action summarizes earlier conversation content so the session can keep useful information while reducing context usage.
+| Entry | Adds |
+| --- | --- |
+| files | A file from the workspace. |
+| folders | A whole folder. |
+| chats | An earlier conversation. The AI gets a pointer to its transcript and reads it when it needs to, so several chats can come along without filling the context. |
 
-![Context panel with manual compression](/dialog-box/context-manual-compress.png)
+You do not have to open a category first: type right after `@` and Breezell searches files and folders together. Open files come first and are marked `Recent`. Use the arrow keys and `Enter`, or click.
 
-Manual compression is useful during long conversations, especially when the context window is becoming large but you still want to continue in the same session.
+<BzLiaotian tanchu="tijisou" shuru="@side" sou="side" />
 
-## Quick Phrases
+Inside files and folders, a chip in the menu header switches between <BzWenben jian="inputToolbar.filterOn" /> and <BzWenben jian="inputToolbar.filterOff" />: <BzWenben jian="inputToolbar.toggleWorkspaceNoiseFilter" />. If nothing matches, Breezell offers files with uncommitted changes, marked `Changed`.
 
-The pointer highlights the **Quick Phrases** button in the input tray. Quick Phrases let you save frequently used prompts or instructions and reuse them in new messages without typing them again.
+Each pick becomes a tag in your message, so the AI knows exactly which file, folder or chat you mean.
 
-![Quick Phrases button in the input tray](/dialog-box/quick-phrases-button.png)
+## Skills and quick phrases with / {#slash}
 
-Open **Quick Phrases** to view and organize saved phrases. Use **Add** to create a phrase. The **All phrases** pane contains every saved phrase; drag a phrase to **Favorites** on the right to keep frequently used items close at hand. Drag it back to remove it from Favorites.
+Type `/` at the start of the input box to see your [quick phrases](#quick-phrases) and skills in one list:
 
-Select a saved phrase to insert it into the current input. You can still edit the text before sending the message.
+<BzLiaotian tanchu="xiegang" shuru="/" />
 
-![Quick Phrases manager](/dialog-box/quick-phrases-manager.png)
+- Picking a quick phrase does what the phrase is set to do: insert its text, send it, or run it in the terminal.
+- Picking a skill adds it to the message, so the AI uses that skill for this request.
+- Skills that are off are greyed out with a switch on the row; switch one on right here to use it.
 
-## Mention Menu
+## The tray under the input box {#tray}
 
-The pointer highlights the quick context area used to open the mention menu. The mention menu lets you add files, folders, MCP tools, and skills to the current message.
+The dashed tray under the input box holds six buttons. Hover a button to see its name.
 
-![Mention menu in the Breezell dialog box](/dialog-box/mention-menu.png)
+| Button | What it does |
+| --- | --- |
+| Breezell Browser (globe) | Opens the panel of Breezell's built-in browser. |
+| <BzWenben jian="inputToolbar.attach" /> (paperclip) | Attaches files from your computer to the message. |
+| <BzWenben jian="inputToolbar.quickPhrases" /> | Your saved phrases and commands. |
+| <BzWenben jian="inputToolbar.optimizePrompt" /> (wand) | Rewrites what you have written into a clearer prompt. |
+| MCP | Switches MCP servers on or off. |
+| <BzWenben jian="inputToolbar.skills" /> (layers) | Switches skills on or off. |
 
-Use this when your request depends on specific workspace content or an external capability. Adding the right context helps Breezell understand what it should inspect or use before answering.
+A small green dot on MCP or Skills means at least one is on. When the chat panel is narrow, Breezell Browser moves into a **⋯** (<BzWenben jian="inputToolbar.more" />) menu. When you have referenced a conversation from Chat History, a blue <BzWenben jian="inputToolbar.referenced" /> button appears in the tray; click it to remove the reference.
 
-## Usage Tips
+### Breezell Browser {#browser}
 
-- Add file or folder context when the request depends on specific project content.
-- Agent is the default mode and the recommended automatic workflow for most tasks.
-- Change modes only when you need a specific workflow, such as planning first or analyzing without editing.
-- Context compression runs automatically. Use manual compression only when you prefer strict manual control or have a special requirement.
-- Review the selected model when accuracy, speed, or reasoning depth matters.
+Breezell Browser is the browser built into Breezell. Pages open in editor tabs, right next to your code.
+
+<BzLiaotian tanchu="liulanqi" gaoliang="liulanqi" biaoji="1" />
+
+- While no browser is open, the panel shows <BzWenben jian="browserPanel.readyToLaunch" />. Click <BzWenben jian="browserPanel.open" />, or type a link or search words into the field (<BzWenben jian="browserPanel.searchPlaceholder" />) and press `Enter`.
+- Once pages are open, the panel lists them as tabs: click one to switch to it, and use the buttons on a row to mute or close it. The header button mutes all tabs.
+
+The AI's own browser tools run off-screen by default. To watch them work, turn off <BzWenben jian="featureOptions.codeBehavior.browserHeadless" /> in [Feature Options](/feature-options-overview).
+
+### Quick Phrases {#quick-phrases}
+
+Quick Phrases are texts and commands you use often. The button opens your favorites; click one to use it.
+
+<BzLiaotian tanchu="duanyu" tanchugaoliang="guanli" biaoji="1" />
+
+Click <BzWenben jian="quickPhrases.manage" /> to open the manager. The left side lists all phrases, the right side your favorites, which are the ones the button shows.
+
+<BzDuanyu gaoliang="jiantou" biaoji="2" />
+
+- Click the star on a phrase, or select it and click the arrow in the middle, to add it to <BzWenben jian="quickPhrases.favorites" />. You can also drag it to the right. The **×** on a favorite removes it from the favorites only.
+- The pencil on a favorite edits it; the bin on the left deletes the phrase.
+- <BzWenben jian="common.add" /> at the top opens the editor for a new phrase:
+
+<BzDuanyu bianji gaoliang="leixing" biaoji="3" />
+
+Every phrase has a name, content and an action type:
+
+| Type | When you pick the phrase |
+| --- | --- |
+| <BzWenben jian="quickPhrases.insert" /> | The content is put into the input box, so you can still edit it before sending. |
+| <BzWenben jian="quickPhrases.send" /> | The content is sent as a message right away. |
+| <BzWenben jian="quickPhrases.terminal" /> | The content runs as a command in a terminal. An optional <BzWenben jian="quickPhrases.workingDirectory" /> sets the folder it runs in. |
+
+Quick phrases also appear in the [`/` menu](#slash).
+
+### Optimize prompt {#optimize}
+
+Write a rough request, then click the wand. Breezell rewrites it into a clearer prompt and shows the result first; nothing is sent.
+
+<BzLiaotian tanchu="youhua" shuru="make settings page have dark mode" youhuawen="Add a dark mode toggle to the settings page. Store the choice so it persists across reloads, apply it by switching a theme class on the root element, and follow the system preference until the user picks a mode." tanchugaoliang="tihuan" biaoji="1" />
+
+- <BzWenben jian="promptOptimize.replace" /> puts the new text into the input box. Until you change the text, clicking the wand again is <BzWenben jian="promptOptimize.undo" /> and brings your original back.
+- <BzWenben jian="promptOptimize.retrySame" /> writes another version; <BzWenben jian="promptOptimize.dismiss" /> closes the panel.
+- With an empty input box, the wand only shows <BzWenben jian="inputToolbar.optimizePromptEmpty" />.
+
+The rewrite uses the Chat model unless you give it a dedicated one in [Feature Options](/feature-options-overview) (<BzWenben jian="models.promptOptimizeModel.title" />).
+
+### MCP {#mcp}
+
+The MCP panel lists your MCP servers with their status: green is connected, red has an error, grey is off or not started.
+
+<BzLiaotian tanchu="mcp" gaoliang="mcp" biaoji="1" />
+
+- The switch turns a server on or off for the AI. The header shows how many are on, for example `2/3`.
+- The arrow (<BzWenben jian="inputToolbar.referenceMcpServer" />) adds the server to your message, so the AI uses its tools for this request.
+- **+** (<BzWenben jian="mcp.addServer" />) opens `mcp.json`, where servers are added.
+
+### Skills {#skills}
+
+The Skills button works the same way for skills, with the tabs <BzWenben jian="skills.builtinTab" /> and <BzWenben jian="skills.myTab" />. See [Use skills in a chat](/prompt-settings#use-skills-in-a-chat).
+
+::: warning Switch MCP servers and skills before a long conversation
+<BzWenben jian="inputToolbar.toolsCacheTip" />
+:::
+
+## Context usage and compression {#context}
+
+The ring next to **@** fills up as the conversation uses the model's context window. Hover it to see the numbers, for example `47.0% - 94.2K / 200.0K context used`, and click it to open the **Context** panel:
+
+<BzLiaotian tanchu="shangxiawen" tanchugaoliang="yasuo" biaoji="1" />
+
+The bar and the list split the used tokens by kind. Hover a row to pick out its part of the bar.
+
+| Category | What it counts |
+| --- | --- |
+| System prompt | Breezell's instructions for the current mode |
+| Tools | The descriptions of the tools the AI can call |
+| Rules | Your workspace or global rules |
+| Memories | Memories sent with the request |
+| Skills | The list of skills that are on |
+| MCP | The tools of the MCP servers that are on |
+| Subagents | Work done by subagents |
+| Conversation | Your messages, the answers and the tool results |
+
+### Automatic and manual compression
+
+When a conversation reaches about 90% of the usable context window, Breezell compresses it automatically: older messages are replaced by a summary, and the conversation goes on. You do not need to do anything.
+
+To make room earlier, click <BzWenben jian="contextUsage.compress" /> in the Context panel (<BzWenben jian="contextUsage.compressTooltip" />). While it runs, the button shows <BzWenben jian="contextUsage.compressing" /> and a percentage. Afterwards the panel shows one of:
+
+| Message | Meaning |
+| --- | --- |
+| <BzWenben jian="contextUsage.compressed" /> | Done. |
+| <BzWenben jian="contextUsage.nothingToCompress" /> | The conversation is too short to compress. |
+| <BzWenben jian="contextUsage.errorBusy" /> | Stop the answer first, then compress. |
+| <BzWenben jian="contextUsage.errorNoModel" /> | Choose a model under the input box first. |
+
+After you switch to a model with a smaller context window, the ring may show <BzWenben jian="contextUsage.converting" /> while Breezell fits the conversation into the new window.
+
+## Edit or roll back a sent message {#edit}
+
+Hover one of your sent messages. A pencil appears at its top left and a return arrow on its right:
+
+<BzLiaotian bianji gaoliang="huigun" biaoji="1" wen="Add a dark mode toggle to the settings page." da="Done. SettingsPage.vue now has a Dark mode switch, the choice is saved, and the page follows the system setting until you change it." />
+
+- **Edit**: click the message or the pencil, change the text and send it again.
+- **Roll back** (<BzWenben jian="editor.revertToThisPoint" />): click the arrow and confirm. The later messages are removed, and the files they changed go back to how they were at that message.
+
+<BzLiaotian huigun wen="Add a dark mode toggle to the settings page." da="Done. SettingsPage.vue now has a Dark mode switch, the choice is saved, and the page follows the system setting until you change it." />
+
+A rollback cannot be undone from the editor, so check the dialog before you click <BzWenben jian="editor.revertConfirmDo" />. While the AI is still answering in this conversation, the arrow is dimmed; stop the answer first.
+
+## Keyboard shortcuts {#shortcuts}
+
+| Keys | Action |
+| --- | --- |
+| `Enter` | Send the message |
+| `Shift+Enter` | New line |
+| `@` | Open the mention menu |
+| `/` at the start | Open skills and quick phrases |
+| `↑` `↓` then `Enter` | Move through an open menu and pick |
+| `Esc` | Close the open panel or menu |
+| `Ctrl+L` / `Cmd+L` | Add the editor selection to the chat |
+| `Ctrl+Shift+L` / `Cmd+Shift+L` | Start a new chat |
+
+## Tips
+
+- Agent is the right mode for most work. Switch only when you want a specific workflow, such as a plan first or an analysis without edits.
+- Point the AI at the right place with `@`: a file or folder is better than a long description of where something is.
+- Keep long-running conversations healthy with the Context ring; compression is automatic, and manual compression is there when you want to make room yourself.
+- Save requests you type again and again as Quick Phrases, and run project commands with the Terminal type.
+- Set MCP servers and skills before a long conversation rather than in the middle of it.

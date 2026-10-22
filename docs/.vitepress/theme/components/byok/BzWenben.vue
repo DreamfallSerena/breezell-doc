@@ -3,9 +3,13 @@ import { computed } from "vue";
 import { shiyongwenben } from "./shuju";
 
 // 在正文裡引用 Breezell 界面上的原文案（取自 Breezell 的 i18n），隨頁面語言切換，保證與軟體裡看到的完全一致。
-const props = defineProps<{ jian: string; canshu?: string }>();
+// canshu 替換文案裡的 {0}；canshujian 則是 {0} 本身也要跟著語言走時，給它的 i18n 鍵（例如模式名稱）。
+const props = defineProps<{ jian: string; canshu?: string; canshujian?: string }>();
 const { t, tihuan } = shiyongwenben();
-const wenzi = computed(() => (props.canshu === undefined ? t(props.jian as never) : tihuan(props.jian as never, props.canshu)));
+const wenzi = computed(() => {
+  const canshu = props.canshujian ? t(props.canshujian as never) : props.canshu;
+  return canshu === undefined ? t(props.jian as never) : tihuan(props.jian as never, canshu);
+});
 </script>
 
 <template>

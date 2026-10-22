@@ -4,6 +4,7 @@ import BzTubiao from "./BzTubiao.vue";
 import BzPinpai from "./BzPinpai.vue";
 import BzMoxingxuanxiang from "./BzMoxingxuanxiang.vue";
 import BzMoshi from "./BzMoshi.vue";
+import BzShuruTanchu from "./BzShuruTanchu.vue";
 import { shiyongwenben, type duihuamoshi, type moxingxuanxiang } from "./shuju";
 
 // Agent 頁的聊天輸入框（ChatInputArea.tsx 經典樣式，Modern UI 預設關閉）與模型選擇器
@@ -31,6 +32,18 @@ const props = withDefaults(
     houzhui?: string;
     biaotilan?: boolean;
     jinengpan?: boolean;
+    tanchu?: string;
+    shuru?: string;
+    quanbiao?: boolean;
+    liushi?: boolean;
+    duilie?: boolean;
+    bianji?: boolean;
+    huigun?: boolean;
+    youhuawen?: string;
+    sou?: string;
+    suoding?: boolean;
+    tanchugaoliang?: string;
+    duiliewen?: string;
   }>(),
   {
     xuanzeqi: "",
@@ -52,6 +65,18 @@ const props = withDefaults(
     houzhui: "",
     biaotilan: false,
     jinengpan: false,
+    tanchu: "",
+    shuru: "",
+    quanbiao: false,
+    liushi: false,
+    duilie: false,
+    bianji: false,
+    huigun: false,
+    youhuawen: "",
+    sou: "side",
+    suoding: false,
+    tanchugaoliang: "",
+    duiliewen: "Also update the README|Then run the tests",
   },
 );
 
@@ -70,6 +95,33 @@ watch(
 // 托盤按鈕順序（ChatInputArea.tsx）：Breezell Browser、附加檔案、快速短語、提示詞優化、MCP、Skills。
 // MCP 與快速短語在 Breezell 裡是 codicon，這裡用外形相近的 lucide 圖示代替。
 const tuopananniu = ["globe", "paperclip", "message-square-text", "wand-sparkles", "plug", "layers"];
+const tuopanmingzi = ["Breezell Browser", "inputToolbar.attach", "inputToolbar.quickPhrases", "inputToolbar.optimizePrompt", "MCP", "inputToolbar.skills"];
+// 托盤面板以按鈕為錨（floating-ui placement top-start）：面板左緣對齊按鈕，太寬時往左推回視窗內。
+const tuopanmianban: Record<string, { xuhao: number; kuan: number }> = {
+  duanyu: { xuhao: 2, kuan: 288 },
+  youhua: { xuhao: 3, kuan: 340 },
+  mcp: { xuhao: 4, kuan: 260 },
+};
+const tanchuweizhi = computed(() => {
+  const lei = props.tanchu;
+  if (!lei) return "";
+  if (lei === "moshi") return "moshi";
+  if (lei === "shangxiawen") return "quan";
+  if (lei in tuopanmianban) return "tuopan";
+  return "fu";
+});
+const tuopanzuo = computed(() => {
+  const x = tuopanmianban[props.tanchu];
+  return x ? `clamp(0px, ${6 + x.xuhao * 28}px, calc(100% - ${x.kuan}px))` : "0px";
+});
+// 托盤按鈕各自的高亮鍵與開啟狀態（面板開著時按鈕呈按下狀）。
+const tuopangaoliang = ["liulanqi", "fujian", "duanyu", "youhua", "mcp", "jineng"];
+const tuopanzhuangtai = ["liulanqi", "", "duanyu", "youhua", "mcp", "jineng"];
+// 排隊訊息的示意文字用「|」分隔，跟著頁面語言翻譯。
+const duiliewen = computed(() => props.duiliewen.split("|"));
+// Context 圓環：與面板裡的示意數字一致（約 47%）。
+const huanchang = computed(() => (props.tanchu === "shangxiawen" ? 0.47 : 0.18) * 2 * Math.PI * 6);
+const tanchugao: Record<string, number> = { moshi: 330, tiji: 330, tijisou: 380, xiegang: 470, shangxiawen: 470, duanyu: 340, youhua: 360, liulanqi: 430, mcp: 330 };
 const neizhijineng = ["brainstorming", "breezell-design", "code-security-audit", "dispatching-parallel-agents", "receiving-code-review", "requesting-code-review"];
 // 內建技能預設關閉（skillAvailability.ts skillToggleIsOn），這裡示意使用者已打開其中兩個。
 const jinengkai = ref(new Set(["brainstorming", "requesting-code-review"]));
@@ -106,9 +158,16 @@ const houzhuiwenzi = computed(() => {
 
 <template>
   <div :class="{ bz: !qianru }">
-    <div class="bz-lt" :class="{ 'bz-chuangkou bz-cebian': !qianru, 'bz-lt-kai': xuanzeqi || jinengpan, 'bz-lt-qianru': qianru }">
+    <div
+      class="bz-lt"
+      :class="{ 'bz-chuangkou bz-cebian': !qianru, 'bz-lt-kai': xuanzeqi || jinengpan, 'bz-lt-qianru': qianru }"
+      :style="tanchu && tanchugao[tanchu] ? { minHeight: `${tanchugao[tanchu]}px` } : undefined"
+    >
       <div v-if="biaotilan" class="bz-lt-biaotilan">
-        <span class="bz-lt-btl-an"><BzTubiao ming="plus" :daxiao="16" :cuxi="1.6" /></span>
+        <span class="bz-lt-btl-an">
+          <BzTubiao ming="plus" :daxiao="16" :cuxi="1.6" />
+          <span v-if="quanbiao" class="bz-biaoji bz-lt-xb" style="top: -8px; right: -8px">1</span>
+        </span>
         <span class="bz-lt-btl-an" :class="{ 'bz-gl': gaoliang === 'jiyi' }">
           <BzTubiao ming="notebook" :daxiao="16" :cuxi="1.6" />
           <span v-if="gaoliang === 'jiyi' && biaoji" class="bz-biaoji" style="top: -10px; right: -10px">{{ biaoji }}</span>
@@ -117,18 +176,43 @@ const houzhuiwenzi = computed(() => {
       </div>
       <div class="bz-lt-duihua">
         <template v-if="wen">
-          <div class="bz-lt-yonghu">
-            <span v-if="wentupian" class="bz-lt-tu bz-lt-tu-wen" aria-hidden="true"><span class="bz-lt-tu-hua" /></span>
-            <span>{{ wen }}</span>
+          <div class="bz-lt-yonghu-wai" :class="{ 'bz-lt-xianshi': bianji || huigun }">
+            <div class="bz-lt-yonghu">
+              <div class="bz-lt-yonghu-nei">
+                <span v-if="wentupian" class="bz-lt-tu bz-lt-tu-wen" aria-hidden="true"><span class="bz-lt-tu-hua" /></span>
+                <span>{{ wen }}</span>
+              </div>
+              <span class="bz-lt-huigun" :class="{ 'bz-gl': gaoliang === 'huigun' }" :title="t('editor.revertToThisPoint')">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 10h6c1.654 0 3 1.346 3 3s-1.346 3-3 3h-3v2h3c2.757 0 5-2.243 5-5s-2.243-5-5-5H9V5L4 9l5 4z" /></svg>
+                <span v-if="gaoliang === 'huigun' && biaoji" class="bz-biaoji" style="top: -12px; right: -10px">{{ biaoji }}</span>
+              </span>
+            </div>
+            <span class="bz-lt-bianji" :class="{ 'bz-gl': gaoliang === 'bianji' }" aria-label="Edit message">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="transform: scaleX(-1)" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.779 17.779L4.36 19.918L6.5 13.5m4.279 4.279l8.364-8.643a3.027 3.027 0 0 0-2.14-5.165a3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14l6.213-6.504M12.75 7.04L17 11.28" /></svg>
+              <span v-if="gaoliang === 'bianji' && biaoji" class="bz-biaoji" style="top: -12px; left: -12px">{{ biaoji }}</span>
+            </span>
           </div>
           <div class="bz-lt-huida">
             <div class="bz-lt-huida-tou">
               <BzPinpai :pinpai="pinpai" :daxiao="14" />
               <span>{{ moxing }}</span>
             </div>
-            <div class="bz-lt-huida-wen">{{ da }}</div>
+            <div class="bz-lt-huida-wen">{{ da }}<span v-if="liushi" class="bz-lt-dian" aria-hidden="true"><i /><i /><i /></span></div>
           </div>
         </template>
+      </div>
+
+      <div v-if="huigun" class="bz-lt-zhezhao">
+        <div class="bz-lt-queren" role="dialog">
+          <div class="bz-lt-queren-nei">
+            <div class="bz-lt-queren-biao">{{ t("editor.revertConfirmTitle") }}</div>
+            <div class="bz-lt-queren-shuo">{{ t("editor.revertConfirmBody") }}</div>
+          </div>
+          <div class="bz-lt-queren-di">
+            <span class="bz-lt-queren-ci">{{ t("editor.revertConfirmKeep") }}</span>
+            <span class="bz-lt-queren-zhu">{{ t("editor.revertConfirmDo") }}<span class="bz-lt-queren-jian">⏎</span></span>
+          </div>
+        </div>
       </div>
 
       <div class="bz-lt-dibu">
@@ -207,14 +291,43 @@ const houzhuiwenzi = computed(() => {
             <span v-if="gaoliang === 'tishi' && biaoji" class="bz-biaoji" style="top: -10px; right: -8px">{{ biaoji }}</span>
           </span>
         </div>
+        <div v-if="duilie" class="bz-lt-duilie" :class="{ 'bz-gl': gaoliang === 'duilie' }">
+          <span v-if="gaoliang === 'duilie' && biaoji" class="bz-biaoji" style="top: -10px; right: -8px">{{ biaoji }}</span>
+          <div class="bz-lt-duilie-tou">
+            <span>{{ t("chat.queue.queued").replace("{0}", "2") }}</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(90deg)"><polyline points="9 18 15 12 9 6" /></svg>
+          </div>
+          <div v-for="(x, i) in duiliewen" :key="i" class="bz-lt-duilie-hang">
+            <svg class="bz-lt-duilie-tu" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z" /></svg>
+            <span class="bz-lt-duilie-wen">{{ x }}</span>
+            <span class="bz-lt-duilie-an">
+              <span :class="{ 'bz-jinyong': i === 0 }" :title="t('chat.queue.moveUp')"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10l4-4 4 4" /></svg></span>
+              <span :class="{ 'bz-jinyong': i === duiliewen.length - 1 }" :title="t('chat.queue.moveDown')"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4" /></svg></span>
+              <span :title="t('common.edit')"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" stroke="currentColor" stroke-width="0.6"><path d="M13.23 1h-1.46L3.52 9.25l-.16.22L1 13.59 2.41 15l4.12-2.36.22-.16L15 4.23V2.77L13.23 1zM2.41 13.59l1.51-3 1.45 1.45-2.96 1.55zm3.83-2.06L4.47 9.76l8-8 1.77 1.77-8 8z" /></svg></span>
+              <span :title="t('chat.queue.sendNow')"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" stroke="currentColor" stroke-width="0.6"><path d="M8 1L3 6h3v4h4V6h3L8 1zm5 10H3v1h10v-1z" /></svg></span>
+              <span :title="t('common.delete')"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" stroke="currentColor" stroke-width="0.6"><path d="M10 3h3v1h-1v9l-1 1H5l-1-1V4H3V3h3V2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1zM9 2H7v1h2V2zM5 4v9h6V4H5zm2 2h1v5H7V6zm2 0h1v5H9V6z" /></svg></span>
+            </span>
+          </div>
+        </div>
         <div class="bz-lt-tuopan">
+          <div v-if="tanchuweizhi === 'fu' || tanchuweizhi === 'quan' || tanchuweizhi === 'tuopan'" class="bz-lt-tc" :class="`bz-lt-tc-${tanchuweizhi}`" :style="tanchuweizhi === 'tuopan' ? { left: tuopanzuo } : undefined">
+            <BzShuruTanchu :lei="tanchu" :moshi="moshi" :suoding="suoding" :gaoliang="tanchugaoliang" :biaoji="biaoji" :youhuawen="youhuawen" :sou="sou" />
+          </div>
           <div class="bz-lt-shuru">
+            <div v-if="tanchuweizhi === 'moshi'" class="bz-lt-tc bz-lt-tc-moshi">
+              <BzShuruTanchu lei="moshi" :moshi="moshi" :suoding="suoding" />
+            </div>
             <div v-if="tupian" class="bz-lt-fujian"><span class="bz-lt-tu" aria-hidden="true"><span class="bz-lt-tu-hua" /></span></div>
-            <div class="bz-lt-zhanwei">{{ t("chat.input.placeholder") }}</div>
+            <div v-if="shuru" class="bz-lt-shuruwen">{{ shuru }}<span class="bz-lt-guangbiao" aria-hidden="true" /></div>
+            <div v-else class="bz-lt-zhanwei">
+              {{ t("chat.input.placeholder") }}
+              <span v-if="quanbiao" class="bz-biaoji bz-lt-xb" style="top: -6px; right: 0">2</span>
+            </div>
             <div class="bz-lt-gongju">
               <div class="bz-lt-gongju-zuo">
                 <span class="bz-lt-moshi-wai" :class="{ 'bz-gl': gaoliang === 'moshi' }">
                   <BzMoshi :moshi="moshi" xingshi="jiaonang" />
+                  <span v-if="quanbiao" class="bz-biaoji bz-lt-xb" style="top: -12px; right: -8px">3</span>
                   <span v-if="gaoliang === 'moshi' && biaoji" class="bz-biaoji" style="top: -12px; right: -10px">{{ biaoji }}</span>
                   <span v-if="moshibiaoji" class="bz-biaoji" style="top: -14px; left: -6px">{{ moshibiaoji }}</span>
                 </span>
@@ -222,29 +335,49 @@ const houzhuiwenzi = computed(() => {
                   <span class="bz-lt-jiaonang-ming">{{ moxing }}</span>
                   <span class="bz-lt-jiaonang-hou">{{ houzhuiwenzi }}</span>
                   <BzTubiao ming="chevron-down" :daxiao="12" />
+                  <span v-if="quanbiao" class="bz-biaoji bz-lt-xb" style="top: -12px; right: -8px">4</span>
                   <span v-if="gaoliang === 'jiaonang' && biaoji" class="bz-biaoji" style="top: -12px; right: -10px">{{ biaoji }}</span>
                   <span v-if="jiaonangbiaoji" class="bz-biaoji" style="top: -14px; left: -2px">{{ jiaonangbiaoji }}</span>
                 </span>
               </div>
               <div class="bz-lt-gongju-you">
-                <svg class="bz-lt-huan" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
-                  <circle cx="8" cy="8" r="6" fill="none" stroke-width="2" stroke="color-mix(in srgb, currentColor 22%, transparent)" />
-                  <circle cx="8" cy="8" r="6" fill="none" stroke-width="2" stroke="currentColor" stroke-dasharray="4 40" transform="rotate(-90 8 8)" />
-                </svg>
-                <span class="bz-lt-at">@</span>
-                <span class="bz-lt-fasong bz-jinyong"><BzTubiao ming="arrow-up" :daxiao="16" :cuxi="2" /></span>
+                <span v-if="liushi" class="bz-lt-zhuan" aria-hidden="true" />
+                <span class="bz-lt-huan-wai" :class="{ 'bz-gl': gaoliang === 'huan', 'bz-dakai': tanchu === 'shangxiawen' }">
+                  <svg class="bz-lt-huan" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true">
+                    <circle cx="7" cy="7" r="6" fill="none" stroke-width="2" stroke="currentColor" opacity="0.15" />
+                    <circle cx="7" cy="7" r="6" fill="none" stroke-width="2" stroke="currentColor" stroke-linecap="round" :stroke-dasharray="`${huanchang} 40`" transform="rotate(-90 7 7)" />
+                  </svg>
+                  <span v-if="quanbiao" class="bz-biaoji bz-lt-xb" style="top: -14px; right: -8px">5</span>
+                  <span v-if="gaoliang === 'huan' && biaoji" class="bz-biaoji" style="top: -14px; right: -10px">{{ biaoji }}</span>
+                </span>
+                <span class="bz-lt-at" :class="{ 'bz-gl': gaoliang === 'at' }">
+                  @
+                  <span v-if="quanbiao" class="bz-biaoji bz-lt-xb" style="top: -14px; right: -8px">6</span>
+                  <span v-if="gaoliang === 'at' && biaoji" class="bz-biaoji" style="top: -14px; right: -10px">{{ biaoji }}</span>
+                </span>
+                <span v-if="liushi" class="bz-lt-fasong bz-lt-tingzhi" :class="{ 'bz-gl': gaoliang === 'tingzhi' }">
+                  <svg width="8" height="8" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="4" ry="4" fill="#000" /></svg>
+                  <span v-if="gaoliang === 'tingzhi' && biaoji" class="bz-biaoji" style="top: -14px; right: -10px">{{ biaoji }}</span>
+                </span>
+                <span v-else class="bz-lt-fasong" :class="{ 'bz-jinyong': !shuru }">
+                  <BzTubiao ming="arrow-up" :daxiao="16" :cuxi="2" />
+                  <span v-if="quanbiao" class="bz-biaoji bz-lt-xb" style="top: -14px; right: -8px">7</span>
+                </span>
               </div>
             </div>
           </div>
           <div class="bz-lt-tuopan-di">
             <span
-              v-for="ming in tuopananniu"
+              v-for="(ming, i) in tuopananniu"
               :key="ming"
               class="bz-lt-tuopan-an"
-              :class="{ 'bz-dakai': ming === 'layers' && jinengpan, 'bz-gl': ming === 'layers' && gaoliang === 'jineng' }"
+              :class="{ 'bz-dakai': (ming === 'layers' && jinengpan) || (!!tanchu && tanchu === tuopanzhuangtai[i]), 'bz-gl': gaoliang === tuopangaoliang[i] }"
+              :title="tuopanmingzi[i].includes('.') ? t(tuopanmingzi[i] as never) : tuopanmingzi[i]"
             >
               <BzTubiao :ming="ming" :daxiao="14" :cuxi="2" />
-              <span v-if="ming === 'layers' && gaoliang === 'jineng' && biaoji" class="bz-biaoji" style="top: -12px; right: -10px">{{ biaoji }}</span>
+              <span v-if="ming === 'plug' || ming === 'layers'" class="bz-lt-lvdian" aria-hidden="true" />
+              <span v-if="gaoliang === tuopangaoliang[i] && biaoji" class="bz-biaoji" style="top: -12px; right: -10px">{{ biaoji }}</span>
+              <span v-if="quanbiao && i === 0" class="bz-biaoji bz-lt-xb" style="top: -12px; left: -6px">8</span>
             </span>
             <div v-if="jinengpan" class="bz-lt-jineng">
               <div class="bz-lt-jineng-tou">
@@ -302,7 +435,7 @@ const houzhuiwenzi = computed(() => {
 
 .bz-lt-yonghu {
   display: flex;
-  flex-direction: column;
+  align-items: flex-start;
   gap: 6px;
 }
 
@@ -926,5 +1059,342 @@ const houzhuiwenzi = computed(() => {
   .bz-lt-xzq {
     width: min(320px, 100%);
   }
+}
+/* ---------- 使用者訊息：滑過時出現編輯（左上角）與回滾（右側） ---------- */
+.bz-lt-yonghu-wai {
+  position: relative;
+}
+
+.bz-lt-yonghu-nei {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.bz-lt-huigun,
+.bz-lt-bianji {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  color: var(--bz-fg-3);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.bz-lt-huigun {
+  flex-shrink: 0;
+  padding: 2px;
+  border-radius: 6px;
+}
+
+.bz-lt-bianji {
+  position: absolute;
+  top: 0;
+  left: -4px;
+  transform: translateY(-50%);
+}
+
+.bz-lt-yonghu-wai:hover .bz-lt-huigun,
+.bz-lt-yonghu-wai:hover .bz-lt-bianji,
+.bz-lt-xianshi .bz-lt-huigun,
+.bz-lt-xianshi .bz-lt-bianji,
+.bz-lt-huigun.bz-gl,
+.bz-lt-bianji.bz-gl {
+  opacity: 1;
+}
+
+.bz-lt-dian {
+  display: inline-flex;
+  gap: 3px;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+.bz-lt-dian i {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.4;
+  animation: bz-lt-tiao 1.2s ease-in-out infinite;
+}
+
+.bz-lt-dian i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.bz-lt-dian i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes bz-lt-tiao {
+  0%, 60%, 100% { opacity: 0.25; }
+  30% { opacity: 0.9; }
+}
+
+/* ---------- 回滾確認（UserMessageRevertConfirm：置中、420px） ---------- */
+.bz-lt-zhezhao {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.bz-lt-queren {
+  width: min(420px, 100%);
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--bz-editor-bg);
+  color: var(--bz-fg);
+  border: 1px solid color-mix(in srgb, var(--bz-fg) 18%, transparent);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28), inset 0 1px 0 color-mix(in srgb, var(--bz-fg) 8%, transparent);
+}
+
+.bz-lt-queren-nei {
+  padding: 12px;
+}
+
+.bz-lt-queren-biao {
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.bz-lt-queren-shuo {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--bz-fg-3);
+}
+
+.bz-lt-queren-di {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 0 12px 12px;
+}
+
+.bz-lt-queren-ci,
+.bz-lt-queren-zhu {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.bz-lt-queren-ci {
+  background: color-mix(in srgb, var(--bz-fg) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--bz-fg) 14%, transparent);
+}
+
+.bz-lt-queren-zhu {
+  color: var(--bz-button-fg);
+  background: var(--bz-button-bg);
+}
+
+.bz-lt-queren-jian {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+/* ---------- 排隊訊息（MessageQueueBar，貼在輸入框上方、左右各縮 16px） ---------- */
+.bz-lt-duilie {
+  position: relative;
+  margin: 0 16px;
+  padding-bottom: 4px;
+  border-radius: 6px 6px 0 0;
+  background: var(--bz-sidebar-bg);
+  border: 1px solid color-mix(in srgb, var(--bz-fg) 12%, transparent);
+  border-bottom: 0;
+}
+
+.bz-lt-duilie-tou {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--bz-fg-4);
+}
+
+.bz-lt-duilie-hang {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 4px;
+  padding: 4px 6px;
+}
+
+.bz-lt-duilie-tu {
+  flex-shrink: 0;
+  color: var(--bz-fg-4);
+  opacity: 0.6;
+}
+
+.bz-lt-duilie-wen {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  font-size: 13px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--bz-fg-2);
+}
+
+.bz-lt-duilie-an {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+  opacity: 0.8;
+  color: var(--bz-fg-2);
+}
+
+.bz-lt-duilie-an > span {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+}
+
+.bz-lt-duilie-an > span.bz-jinyong {
+  opacity: 0.3;
+}
+
+/* ---------- 輸入框周圍的彈出面板 ---------- */
+.bz-lt-tuopan,
+.bz-lt-shuru {
+  position: relative;
+}
+
+.bz-lt-tc {
+  position: absolute;
+  z-index: 6;
+}
+
+/* @ / 選單與瀏覽器面板貼在輸入框上緣，與輸入框同寬 */
+.bz-lt-tc-fu {
+  right: 0;
+  bottom: 100%;
+  left: 0;
+}
+
+/* Context 面板與輸入框同寬，上移 8px */
+.bz-lt-tc-quan {
+  right: 0;
+  bottom: calc(100% + 8px);
+  left: 0;
+}
+
+/* 托盤面板以按鈕為錨，蓋在輸入框上 */
+.bz-lt-tc-tuopan {
+  bottom: 34px;
+}
+
+/* 模式選單從模式膠囊往上開（placement top-start） */
+.bz-lt-tc-moshi {
+  bottom: 36px;
+  left: 6px;
+}
+
+.bz-lt-shuruwen {
+  min-height: 20px;
+  font-size: 13px;
+  color: var(--bz-fg-1);
+  white-space: pre-wrap;
+}
+
+.bz-lt-guangbiao {
+  display: inline-block;
+  width: 1px;
+  height: 15px;
+  margin-left: 1px;
+  vertical-align: -3px;
+  background: var(--bz-fg-1);
+  animation: bz-lt-shan 1s steps(1) infinite;
+}
+
+@keyframes bz-lt-shan {
+  50% { opacity: 0; }
+}
+
+.bz-lt-zhanwei {
+  position: relative;
+}
+
+.bz-lt-huan-wai {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin-right: 4px;
+  border-radius: 4px;
+  color: var(--bz-fg-3);
+}
+
+.bz-lt-huan-wai.bz-dakai {
+  color: var(--bz-fg-1);
+}
+
+.bz-lt-huan-wai .bz-lt-huan {
+  margin-right: 0;
+}
+
+.bz-lt-at,
+.bz-lt-fasong {
+  position: relative;
+}
+
+.bz-lt-at.bz-gl {
+  border-radius: 4px;
+}
+
+.bz-lt-fasong.bz-lt-tingzhi {
+  background: #fff;
+}
+
+.bz-lt-zhuan {
+  width: 12px;
+  height: 12px;
+  margin-right: 4px;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--bz-fg) 20%, transparent);
+  border-top-color: var(--bz-fg-2);
+  animation: bz-lt-zhuan 0.9s linear infinite;
+}
+
+@keyframes bz-lt-zhuan {
+  to { transform: rotate(360deg); }
+}
+
+.bz-lt-tuopan-an {
+  position: relative;
+}
+
+.bz-lt-lvdian {
+  position: absolute;
+  top: 4px;
+  right: 3px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #3fb950;
+}
+
+/* 總覽圖上的編號：比教學用的標記稍小，不帶光圈 */
+.bz-lt-xb {
+  z-index: 3;
 }
 </style>
