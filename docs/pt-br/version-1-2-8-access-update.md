@@ -1,27 +1,34 @@
 ---
 title: Atualização de acesso da versão 1.2.8
-description: Informações sobre a mudança no desbloqueio de Entanglement e Teams no Breezell.
+description: Desde a versão 1.2.8, Entanglement e Teams são desbloqueados com a ajuda de cinco amigos ou com qualquer plano pago. O modo Agent e a API personalizada não são afetados.
 ---
 
 # Atualização de acesso da versão 1.2.8
 
-Para manter a operação estável do Breezell no longo prazo, Entanglement e Teams passarão a usar desbloqueio por convite a partir da versão 1.2.8.
+Para apoiar a operação do Breezell no longo prazo, Entanglement e Teams passam a ser desbloqueados por convite a partir da versão 1.2.8.
 
-## Regras de desbloqueio
+::: tip Sobre as telas desta página
+A tela do Breezell abaixo foi recriada em HTML a partir do código-fonte do Breezell. O texto dela acompanha o idioma desta página.
+:::
 
-- **Entanglement e Teams:** São desbloqueados depois que cinco novos usuários convidados concluírem o cadastro.
-- **Usuários pagos atuais:** Não é necessário convidar usuários. Entre em contato com um administrador para desbloquear o acesso.
-- **Usuários do plano Custom API:** Não é necessário convidar usuários. Entre em contato com um administrador para desbloquear o acesso.
+## O que mudou {#changes}
 
-## Acesso sem alterações
+- **Entanglement e Teams** são desbloqueados depois que cinco usuários do Breezell ajudarem você pelo seu link de convite. O desbloqueio é permanente. Veja [Como convidar novos usuários](/invite-new-users).
+- **Planos pagos** incluem os dois modos; não é preciso convidar ninguém.
+- **Usuários do plano Custom API** também não precisam de convites. Se os modos ainda estiverem bloqueados para você, entre em contato com um administrador.
 
-- **Modo Agent:** Não é afetado por este ajuste e continua disponível normalmente.
-- **API personalizada:** Continua gratuita e não se tornará paga em razão deste ajuste.
+Enquanto os modos não forem desbloqueados, eles mostram um cadeado no menu de modos, e passar o mouse sobre eles mostra o seu progresso:
 
-## Escopo desta atualização
+<BzLiaotian tanchu="moshi" moshi="agent" suoding />
 
-Esta atualização altera apenas a forma de desbloquear Entanglement e Teams. Todos os outros recursos permanecem inalterados.
+Ao escolher um modo bloqueado, aparece a mensagem <BzWenben jian="chatMode.entanglementSendBlocked" />
 
-## Agradecemos o apoio
+## O que não mudou {#unchanged}
 
-Agradecemos sua compreensão e apoio. Continuaremos mantendo e melhorando o Breezell para que o projeto opere de forma confiável no longo prazo, procurando minimizar o impacto para os usuários atuais.
+- O **modo Agent** e todos os outros modos continuam disponíveis como antes.
+- A **API personalizada (BYOK)** continua gratuita e não passa a ser paga por causa desta mudança. Veja [API personalizada (BYOK)](/custom-api).
+- Todos os outros recursos continuam iguais.
+
+## Obrigado {#thanks}
+
+Agradecemos a sua compreensão e o seu apoio. Continuaremos mantendo e melhorando o Breezell para que ele funcione de forma confiável no longo prazo, reduzindo ao mínimo o impacto para os usuários atuais.
