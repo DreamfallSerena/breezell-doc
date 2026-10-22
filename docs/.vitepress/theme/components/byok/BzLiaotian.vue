@@ -18,7 +18,7 @@ const props = withDefaults(
     caowei?: string;
     wen?: string;
     da?: string;
-    gaoliang?: "jiaonang" | "fenye" | "hang" | "moshi" | "tishi" | "";
+    gaoliang?: "jiaonang" | "fenye" | "hang" | "moshi" | "tishi" | "jiyi" | "jineng" | "";
     biaoji?: string;
     moshi?: duihuamoshi;
     qianru?: boolean;
@@ -29,6 +29,8 @@ const props = withDefaults(
     tupian?: boolean;
     wentupian?: boolean;
     houzhui?: string;
+    biaotilan?: boolean;
+    jinengpan?: boolean;
   }>(),
   {
     xuanzeqi: "",
@@ -48,6 +50,8 @@ const props = withDefaults(
     tupian: false,
     wentupian: false,
     houzhui: "",
+    biaotilan: false,
+    jinengpan: false,
   },
 );
 
@@ -62,6 +66,18 @@ watch(
     if (zhi) dangqianfenye.value = zhi;
   },
 );
+
+// 托盤按鈕順序（ChatInputArea.tsx）：Breezell Browser、附加檔案、快速短語、提示詞優化、MCP、Skills。
+// MCP 與快速短語在 Breezell 裡是 codicon，這裡用外形相近的 lucide 圖示代替。
+const tuopananniu = ["globe", "paperclip", "message-square-text", "wand-sparkles", "plug", "layers"];
+const neizhijineng = ["brainstorming", "breezell-design", "code-security-audit", "dispatching-parallel-agents", "receiving-code-review", "requesting-code-review"];
+const jinengkai = ref(new Set(neizhijineng.filter((ming) => ming !== "code-security-audit")));
+const qiehuanjineng = (ming: string) => {
+  const xin = new Set(jinengkai.value);
+  if (xin.has(ming)) xin.delete(ming);
+  else xin.add(ming);
+  jinengkai.value = xin;
+};
 
 const anthropichang = [
   { ming: "claude-fable-5-1", jia: "$10.0/$50.0" },
@@ -89,7 +105,15 @@ const houzhuiwenzi = computed(() => {
 
 <template>
   <div :class="{ bz: !qianru }">
-    <div class="bz-lt" :class="{ 'bz-chuangkou bz-cebian': !qianru, 'bz-lt-kai': xuanzeqi, 'bz-lt-qianru': qianru }">
+    <div class="bz-lt" :class="{ 'bz-chuangkou bz-cebian': !qianru, 'bz-lt-kai': xuanzeqi || jinengpan, 'bz-lt-qianru': qianru }">
+      <div v-if="biaotilan" class="bz-lt-biaotilan">
+        <span class="bz-lt-btl-an"><BzTubiao ming="plus" :daxiao="16" :cuxi="1.6" /></span>
+        <span class="bz-lt-btl-an" :class="{ 'bz-gl': gaoliang === 'jiyi' }">
+          <BzTubiao ming="notebook" :daxiao="16" :cuxi="1.6" />
+          <span v-if="gaoliang === 'jiyi' && biaoji" class="bz-biaoji" style="top: -10px; right: -10px">{{ biaoji }}</span>
+        </span>
+        <span class="bz-lt-btl-an"><BzTubiao ming="history" :daxiao="16" :cuxi="1.6" /></span>
+      </div>
       <div class="bz-lt-duihua">
         <template v-if="wen">
           <div class="bz-lt-yonghu">
@@ -212,7 +236,30 @@ const houzhuiwenzi = computed(() => {
             </div>
           </div>
           <div class="bz-lt-tuopan-di">
-            <span v-for="ming in ['paperclip', 'image', 'globe', 'sparkles']" :key="ming" class="bz-lt-tuopan-an"><BzTubiao :ming="ming" :daxiao="14" :cuxi="2" /></span>
+            <span
+              v-for="ming in tuopananniu"
+              :key="ming"
+              class="bz-lt-tuopan-an"
+              :class="{ 'bz-dakai': ming === 'layers' && jinengpan, 'bz-gl': ming === 'layers' && gaoliang === 'jineng' }"
+            >
+              <BzTubiao :ming="ming" :daxiao="14" :cuxi="2" />
+              <span v-if="ming === 'layers' && gaoliang === 'jineng' && biaoji" class="bz-biaoji" style="top: -12px; right: -10px">{{ biaoji }}</span>
+            </span>
+            <div v-if="jinengpan" class="bz-lt-jineng">
+              <div class="bz-lt-jineng-tou">
+                <span class="bz-lt-jineng-tab bz-xuan">{{ t("skills.builtinTab") }} <span class="bz-lt-jineng-shu">16</span></span>
+                <span class="bz-lt-jineng-tab">{{ t("skills.myTab") }} <span class="bz-lt-jineng-shu">2</span></span>
+                <span class="bz-lt-jineng-xinxi" :title="t('inputToolbar.toolsCacheTip')"><BzTubiao ming="info" :daxiao="12" /></span>
+              </div>
+              <div class="bz-lt-jineng-liebiao">
+                <div v-for="ming in neizhijineng" :key="ming" class="bz-lt-jineng-hang" :class="{ 'bz-guan': !jinengkai.has(ming) }">
+                  <BzTubiao ming="layers" :daxiao="13" />
+                  <span class="bz-lt-jineng-ming">{{ ming }}</span>
+                  <span class="bz-lt-jineng-yin" :title="t('inputToolbar.referenceSkill')"><BzTubiao ming="send" :daxiao="13" /></span>
+                  <button type="button" class="bz-lt-jineng-kai" :class="{ 'bz-kai': jinengkai.has(ming) }" @click="qiehuanjineng(ming)" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -703,6 +750,156 @@ const houzhuiwenzi = computed(() => {
   gap: 2px;
   padding: 2px 6px 0;
   color: var(--bz-fg-3);
+}
+
+.bz-lt-biaotilan {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2px;
+  height: 35px;
+  margin: -12px -12px 8px;
+  padding: 0 8px;
+  align-items: center;
+  border-bottom: 1px solid var(--bz-border4);
+}
+
+.bz-lt-btl-an {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 22px;
+  border-radius: 5px;
+  color: var(--bz-fg-2);
+}
+
+.bz-lt-tuopan-di {
+  position: relative;
+}
+
+.bz-lt-tuopan-an.bz-dakai {
+  color: var(--bz-fg-1);
+  background: color-mix(in srgb, var(--bz-fg) 10%, transparent);
+}
+
+/* 技能面板（ChatInputArea.tsx showSkillsPanel）：內建 / 我的技能兩個分頁，每列可「在訊息中引用」或開關 */
+.bz-lt-jineng {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 6px;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  width: 280px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--bz-editor-bg);
+  color: var(--bz-fg);
+  border: 1px solid color-mix(in srgb, var(--bz-fg) 18%, transparent);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+}
+
+.bz-lt-jineng-tou {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px;
+  border-bottom: 1px solid color-mix(in srgb, var(--bz-fg) 12%, transparent);
+}
+
+.bz-lt-jineng-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 24px;
+  padding: 0 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--bz-fg-3);
+}
+
+.bz-lt-jineng-tab.bz-xuan {
+  color: var(--bz-fg-1);
+  background: color-mix(in srgb, var(--bz-fg) 12%, transparent);
+}
+
+.bz-lt-jineng-shu {
+  opacity: 0.6;
+}
+
+.bz-lt-jineng-xinxi {
+  display: inline-flex;
+  margin-left: auto;
+  opacity: 0.7;
+  color: var(--bz-desc, var(--bz-fg-3));
+}
+
+.bz-lt-jineng-liebiao {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 0;
+}
+
+.bz-lt-jineng-hang {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  color: var(--bz-fg);
+}
+
+.bz-lt-jineng-hang.bz-guan {
+  color: var(--bz-fg-3);
+}
+
+.bz-lt-jineng-ming {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.bz-lt-jineng-yin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: var(--bz-fg-2);
+}
+
+.bz-lt-jineng-kai {
+  position: relative;
+  width: 28px;
+  height: 16px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bz-fg) 26%, transparent);
+}
+
+.bz-lt-jineng-kai::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: #fff;
+  transition: left 150ms;
+}
+
+.bz-lt-jineng-kai.bz-kai {
+  background: var(--bz-button-bg);
+}
+
+.bz-lt-jineng-kai.bz-kai::after {
+  left: 14px;
 }
 
 .bz-lt-tuopan-an {

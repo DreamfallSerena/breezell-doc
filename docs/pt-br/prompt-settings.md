@@ -1,69 +1,146 @@
 ---
 title: Configurações de prompt e habilidades
-description: Configure regras, memórias, habilidades e o comportamento relacionado da IA no escopo do espaço de trabalho ou global.
+description: Dê ao Breezell instruções permanentes, memórias, skills reutilizáveis e um estilo de mensagem de commit, por projeto ou para todos os projetos.
 ---
 
 # Configurações de prompt e habilidades
 
-Esta página reúne as instruções, o conhecimento reutilizável e os fluxos de trabalho que o Breezell pode utilizar.
+O Breezell reúne quatro tipos de instruções permanentes para a IA em um único painel, **Rules, Memories & Skills**:
 
-## Abrir as configurações
+| | O que é | Uso |
+| --- | --- | --- |
+| **Rules** | Instruções que a IA precisa seguir, como convenções de código ou o idioma das respostas | Em todas as solicitações |
+| **Memories** | Notas datadas: fatos e decisões a manter entre conversas | Como notas de contexto; a sua solicitação mais recente prevalece |
+| **Skills** | Roteiros passo a passo para uma tarefa específica, como escrever notas de versão | Carregadas pela IA quando uma tarefa corresponde a elas |
+| **Commit** | Como devem ser as mensagens de commit do Git geradas pela IA | Quando você gera uma mensagem de commit |
 
-A seta destaca o botão **Rules, Memories & Skills** na barra de ferramentas do canto superior direito. Ele fica imediatamente à direita do botão **New Chat** (+).
+::: tip Sobre as telas desta página
+As telas do Breezell abaixo foram recriadas em HTML a partir do código-fonte do Breezell. O texto delas acompanha o idioma desta página. A navegação no painel é interativa. Rótulos como Rules, Memories, Skills e Commit também estão em inglês no Breezell.
+:::
 
-![Botão de configurações de prompt e habilidades](/prompt-settings/prompt-and-skill-settings-button.png)
+## Abrir o painel
 
-Clique no botão para abrir o painel de configurações.
+Clique no botão **Skills & Memory** (o ícone de caderno) na parte superior do painel de chat, entre **New Chat** (+) e **Chat History**.
 
-## Escopos de espaço de trabalho e global
+<BzLiaotian biaotilan gaoliang="jiyi" biaoji="1" />
 
-A barra lateral divide as configurações em dois escopos:
+Você também pode abri-lo em Box ▸ <BzWenben jian="box.title" /> ▸ <BzWenben jian="tab.mcp" />: o primeiro cartão dessa página é <BzWenben jian="box.mcp.openSkillsMemory" />.
 
-- **Workspace:** Aplica-se somente ao projeto atual. Os arquivos são armazenados no diretório **.breezell** do projeto para que as configurações permaneçam vinculadas ao espaço de trabalho.
-- **Global:** Aplica-se a todos os espaços de trabalho. Use esse escopo para preferências e fluxos que devem estar disponíveis em qualquer projeto.
+## Espaço de trabalho e global
 
-Primeiro selecione o escopo e, em seguida, **Rules**, **Memories**, **Skills** ou **Commit**. O rótulo ao lado do título confirma o escopo ativo.
+O lado esquerdo do painel tem dois grupos:
 
-## Regras
+- <BzWenben jian="common.workspace" />: apenas para o projeto que está aberto. Os arquivos ficam na pasta `.breezell` do projeto, então podem entrar nos commits e ser compartilhados com a sua equipe. Esse grupo fica esmaecido quando nenhuma pasta está aberta.
+- <BzWenben jian="common.global" />: para todos os projetos neste computador. Os arquivos ficam em `.breezell`, na sua pasta pessoal.
 
-As regras são instruções personalizadas que o Breezell deve seguir no escopo selecionado. Elas podem definir convenções de código, ferramentas obrigatórias, formatos de resposta, restrições do projeto e outras orientações persistentes.
+Escolha o escopo e o tipo à esquerda. O cabeçalho mostra qual deles você está editando, e o caminho na parte inferior mostra o arquivo em que ele fica salvo.
 
-![Configurações de regras do espaço de trabalho](/prompt-settings/rules-settings.png)
+<BzGuize />
 
-No escopo Workspace, o arquivo é armazenado em **{workspace}/.breezell/rules/breezell.md**. Escreva instruções específicas e sem conflitos. A ação **Clear** remove o conteúdo do escopo de Rules ativo.
+O painel salva quando você troca de página, sai de um editor ou fecha o painel. <BzWenben jian="rulesMemories.clear" />, no canto superior direito, esvazia a página atual; clique duas vezes para confirmar.
 
-## Memórias
+## Rules
 
-As memórias armazenam fatos, preferências, decisões e contexto do projeto para conversas futuras. O número ao lado de **Memories** indica quantas entradas existem no escopo.
+As regras são Markdown simples. Escreva instruções curtas, específicas e que não se contradigam, por exemplo:
 
-![Editor de memória do espaço de trabalho](/prompt-settings/memory-settings.png)
+```markdown
+# Project rules
+- Use TypeScript strict mode. Do not add any.
+- Run `pnpm test` after changing files under src/.
+- Answer in Traditional Chinese; keep code and identifiers in English.
+```
 
-Digite uma memória clara por vez e selecione **Save** ou pressione **Ctrl+Enter**. As memórias do Workspace são armazenadas em **{workspace}/.breezell/memories/workspace_memories.md**. Use memórias globais apenas para informações que devam valer em vários projetos.
+| Escopo | Arquivo |
+| --- | --- |
+| <BzWenben jian="common.workspace" /> | `{workspace}/.breezell/rules/breezell.md` |
+| <BzWenben jian="common.global" /> | `~/.breezell/memories/global_rules.md` |
 
-## Habilidades
+::: warning As regras do espaço de trabalho substituem as regras globais
+Quando o projeto aberto tem regras do espaço de trabalho, o Breezell envia essas regras e deixa as regras globais de fora. As regras globais só são usadas em projetos sem regras do espaço de trabalho. Se um projeto também precisar de algumas das suas regras globais, copie-as para as regras do espaço de trabalho dele.
+:::
 
-As habilidades são pacotes reutilizáveis de instruções que ensinam o Breezell a executar uma tarefa ou fluxo de trabalho específico. Abra **Skills** no escopo desejado para criá-las ou gerenciá-las.
+Em um espaço de trabalho com várias pastas, as regras de todas as pastas são usadas. O Breezell lê o arquivo salvo, então um rascunho não salvo nunca chega à IA.
 
-![Criar uma habilidade no espaço de trabalho](/prompt-settings/skill-creation.png)
+## Memories
 
-Para criar uma habilidade:
+As memórias são notas curtas e datadas: decisões, preferências, como o projeto está configurado. A própria IA também pode adicionar notas aqui com a ferramenta `update_memory`.
 
-1. Informe um nome exclusivo usando apenas letras minúsculas e hifens.
-2. Adicione uma breve descrição que explique claramente quando e para que a habilidade deve ser usada.
-3. Escreva no editor principal as instruções, as etapas, as restrições e o resultado esperado.
-4. Selecione **Create Skill**.
+O Breezell trata as memórias como notas, não como regras. Quando uma memória contradiz a sua solicitação mais recente ou o código atual, a IA segue a solicitação e o código e, em vez disso, se oferece para atualizar a memória. Coloque em Rules tudo o que precisa valer sempre.
 
-Uma habilidade do Workspace é armazenada em `{workspace}/.breezell/skills/<name>/SKILL.md`. Mantenha cada habilidade focada em uma responsabilidade repetível para que o Breezell possa selecioná-la e aplicá-la com confiabilidade.
+<BzGuize fenye="memories" gaoliang="tianjiajiyi" biaoji="1" />
 
-## Mensagens de commit
+1. Abra <BzWenben jian="common.workspace" /> ▸ Memories (ou <BzWenben jian="common.global" /> ▸ Memories).
+2. Clique em <BzWenben jian="rulesMemories.addMemory" />.
+3. Escreva um fato por memória e pressione `Ctrl+Enter` (ou clique em Save).
 
-A seção **Commit** permite personalizar o prompt que o Breezell usa para gerar mensagens de commit do Git.
+Cada memória é um cartão com a sua data. Passe o mouse sobre um cartão para excluí-lo. O número ao lado de Memories na lista à esquerda indica quantas memórias existem.
 
-![Configurações de mensagem de commit do espaço de trabalho](/prompt-settings/commit-message-settings.png)
+| Escopo | Arquivo |
+| --- | --- |
+| <BzWenben jian="common.workspace" /> | `{workspace}/.breezell/memories/workspace_memories.md` |
+| <BzWenben jian="common.global" /> | `~/.breezell/memories/global_memories.md` |
 
-- **Prompt personalizado:** Quando o editor contém texto, ele substitui completamente o prompt de Conventional Commits integrado ao Breezell.
-- **Prioridade de escopo:** O prompt de Workspace tem prioridade sobre o prompt Global. Use Workspace para convenções específicas do repositório e Global para padrões compartilhados entre projetos.
-- **Contexto automático:** O Breezell continua fornecendo ao modelo o diff atual, o branch e os commits recentes. O prompt personalizado precisa definir apenas o estilo, o idioma, o formato e as restrições desejadas.
-- **Restaurar o padrão:** Selecione **Clear** para remover o conteúdo personalizado e restaurar o prompt integrado.
+As memórias exigem um plano com Super Memory. Sem ele, a página mostra <BzWenben jian="superMemory.proRequired" />. Para as memórias que a IA coleta por conta própria, consulte [Super Memory](/super-memory).
 
-O prompt de commit do Workspace é armazenado em **{workspace}/.breezell/rules/commit_prompt.md**.
+## Skills
+
+Uma skill é uma pasta com um arquivo `SKILL.md`. O Breezell passa para a IA o nome e a descrição de cada skill ativada; quando uma tarefa corresponde a uma descrição, a IA carrega as instruções completas dessa skill e as segue. Por isso, uma boa descrição diz **quando** usar a skill.
+
+### Criar uma skill
+
+1. Abra <BzWenben jian="common.workspace" /> ▸ Skills (ou <BzWenben jian="common.global" /> ▸ Skills) e clique em <BzWenben jian="skills.newSkill" />.
+2. Digite um nome: letras minúsculas e hifens, por exemplo `release-notes`.
+3. Digite uma descrição de uma linha sobre a finalidade da skill.
+4. Escreva as instruções: etapas, regras e o resultado esperado.
+5. Clique em <BzWenben jian="skills.createSkill" />.
+
+<BzGuize fenye="xinjineng" />
+
+| Escopo | Pasta |
+| --- | --- |
+| <BzWenben jian="common.workspace" /> | `{workspace}/.breezell/skills/<name>/SKILL.md` |
+| <BzWenben jian="common.global" /> | `~/.breezell/skills/<name>/SKILL.md` |
+
+Uma skill pode incluir outros arquivos (referências, scripts) ao lado do `SKILL.md`. A página de detalhes da skill lista esses arquivos, e um clique abre o arquivo.
+
+### Importar skills
+
+Arraste arquivos para a lista de skills: <BzWenben jian="skills.dropZipPrompt" />. Um `.zip` pode conter várias pastas de skills de uma vez; um único `.md` vira uma skill com o nome do arquivo.
+
+### Usar skills em um chat
+
+Clique no botão **Skills** (o ícone de camadas) na linha abaixo da caixa de entrada do chat:
+
+<BzLiaotian jinengpan gaoliang="jineng" biaoji="1" />
+
+- <BzWenben jian="skills.builtinTab" />: as skills que vêm com o Breezell, como `brainstorming` ou `requesting-code-review`. Elas seguem o interruptor **Superpowers Skills** em <BzWenben jian="box.title" /> ▸ <BzWenben jian="tab.featureOptions" />.
+- <BzWenben jian="skills.myTab" />: as suas skills do espaço de trabalho e globais.
+- O interruptor ativa ou desativa uma skill. Uma skill desativada não é oferecida à IA.
+- O botão de seta (<BzWenben jian="inputToolbar.referenceSkill" />) adiciona a skill à sua mensagem, para que a IA a use nesta solicitação.
+
+Você também pode digitar `/` na caixa de entrada para abrir o menu de skills.
+
+Ativar ou desativar skills ou servidores MCP altera o início do prompt, o que pode fazer você perder o prompt cache do provedor. Configure o que precisa antes de uma conversa longa, e não no meio dela.
+
+## Mensagem de commit
+
+A página Commit altera a forma como o Breezell escreve mensagens de commit do Git quando você gera uma.
+
+<BzGuize fenye="commit" />
+
+- Uma página vazia usa o prompt de Conventional Commits integrado ao Breezell.
+- O texto na página **substitui** completamente o prompt integrado. O Breezell continua fornecendo ao modelo o diff, o branch e os commits recentes, então descreva apenas o estilo: idioma, formato, tamanho.
+- O prompt de <BzWenben jian="common.workspace" /> prevalece sobre o de <BzWenben jian="common.global" />.
+- <BzWenben jian="rulesMemories.clear" /> restaura o prompt integrado.
+
+| Escopo | Arquivo |
+| --- | --- |
+| <BzWenben jian="common.workspace" /> | `{workspace}/.breezell/rules/commit_prompt.md` |
+| <BzWenben jian="common.global" /> | `~/.breezell/memories/global_commit_prompt.md` |
+
+## Resumo
+
+- Rules: o que a IA precisa fazer sempre. As regras do espaço de trabalho substituem as regras globais.
+- Memories: fatos a lembrar, um por cartão.
+- Skills: roteiros que a IA carrega quando uma tarefa corresponde à descrição deles; você os ativa ou desativa abaixo da caixa de entrada do chat.
+- Commit: o seu estilo de mensagem de commit, que substitui o prompt integrado.

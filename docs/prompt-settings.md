@@ -1,69 +1,146 @@
 ---
 title: Prompt & Skill Settings
-description: Configure rules, memories, skills, and related AI behavior at workspace or global scope.
+description: Give Breezell standing instructions, memories, reusable skills and a commit message style, per project or for all projects.
 ---
 
 # Prompt & Skill Settings
 
-Prompt & Skill Settings provides one place to manage the instructions, reusable knowledge, and workflows that Breezell can use.
+Breezell keeps four kinds of standing instructions for the AI in one panel, **Rules, Memories & Skills**:
 
-## Open Prompt & Skill Settings
+| | What it is | Used |
+| --- | --- | --- |
+| **Rules** | Instructions the AI must follow, such as coding conventions or the language of its answers | In every request |
+| **Memories** | Dated notes: facts and decisions to keep across conversations | As background notes; your latest request wins |
+| **Skills** | Step-by-step playbooks for a specific job, such as writing release notes | Loaded by the AI when a task matches |
+| **Commit** | How AI-generated Git commit messages should look | When you generate a commit message |
 
-The arrow highlights the **Rules, Memories & Skills** button in the upper-right toolbar. It is immediately to the right of the **New Chat** (+) button.
+::: tip About the screens on this page
+The Breezell screens below are rebuilt in HTML from the Breezell source code. Their text follows the language of this page. The navigation in the panel is interactive. Labels such as Rules, Memories, Skills and Commit are English in Breezell as well.
+:::
 
-![Prompt and Skill Settings button highlighted](/prompt-settings/prompt-and-skill-settings-button.png)
+## Open the panel
 
-Click the button to open the settings panel.
+Click the **Skills & Memory** button (the notebook icon) at the top of the chat panel, between **New Chat** (+) and **Chat History**.
 
-## Workspace and global scopes
+<BzLiaotian biaotilan gaoliang="jiyi" biaoji="1" />
 
-The sidebar separates configuration into two scopes:
+You can also open it from Box ▸ <BzWenben jian="box.title" /> ▸ <BzWenben jian="tab.mcp" />: the first card on that page is <BzWenben jian="box.mcp.openSkillsMemory" />.
 
-- **Workspace:** Applies only to the current project. Workspace files are stored inside the project's **.breezell** directory, so the configuration can travel with that workspace.
-- **Global:** Applies across all workspaces. Use this for preferences and workflows that should be available in every project.
+## Workspace and global
 
-Choose the scope first, then select **Rules**, **Memories**, **Skills**, or **Commit**. The badge beside the page title confirms the active scope.
+The left side of the panel has two groups:
+
+- <BzWenben jian="common.workspace" />: only for the project that is open. The files live in the project's `.breezell` folder, so they can be committed and shared with your team. This group is greyed out when no folder is open.
+- <BzWenben jian="common.global" />: for every project on this computer. The files live in `.breezell` in your home folder.
+
+Pick the scope and the kind on the left. The header shows which one you are editing, and the path at the bottom shows the file it is stored in.
+
+<BzGuize />
+
+The panel saves when you switch pages, leave an editor or close it. <BzWenben jian="rulesMemories.clear" /> at the top right empties the current page; click it twice to confirm.
 
 ## Rules
 
-Rules are custom AI instructions that Breezell should follow while working in the selected scope. Use them for coding conventions, required tools, response formats, project constraints, or other persistent guidance.
+Rules are plain Markdown. Write short, specific instructions that do not contradict each other, for example:
 
-![Workspace Rules settings](/prompt-settings/rules-settings.png)
+```markdown
+# Project rules
+- Use TypeScript strict mode. Do not add any.
+- Run `pnpm test` after changing files under src/.
+- Answer in Traditional Chinese; keep code and identifiers in English.
+```
 
-In workspace scope, the rule file is stored at **{workspace}/.breezell/rules/breezell.md**. Write specific, non-conflicting instructions. The **Clear** action removes the content in the active Rules scope.
+| Scope | File |
+| --- | --- |
+| <BzWenben jian="common.workspace" /> | `{workspace}/.breezell/rules/breezell.md` |
+| <BzWenben jian="common.global" /> | `~/.breezell/memories/global_rules.md` |
+
+::: warning Workspace rules replace global rules
+When the open project has workspace rules, Breezell sends those and leaves the global rules out. Global rules are used only in projects without workspace rules. If a project needs some of your global rules too, copy them into its workspace rules.
+:::
+
+In a workspace with several folders, the rules of every folder are used. Breezell reads the saved file, so an unsaved draft never reaches the AI.
 
 ## Memories
 
-Memories store facts, preferences, decisions, and project context that should remain available for later conversations. The number beside **Memories** shows how many entries exist in that scope.
+Memories are short, dated notes: decisions, preferences, how the project is set up. The AI can also add notes here itself with its `update_memory` tool.
 
-![Workspace Memory editor](/prompt-settings/memory-settings.png)
+Breezell treats memories as notes, not as rules. When a memory disagrees with your latest request or with the current code, the AI follows the request and the code and offers to update the memory instead. Put anything that must always hold into Rules.
 
-Enter one clear memory at a time, then select **Save** or press **Ctrl+Enter**. Workspace memories are stored at **{workspace}/.breezell/memories/workspace_memories.md**. Use global memories only for information that should apply across projects.
+<BzGuize fenye="memories" gaoliang="tianjiajiyi" biaoji="1" />
+
+1. Open <BzWenben jian="common.workspace" /> ▸ Memories (or <BzWenben jian="common.global" /> ▸ Memories).
+2. Click <BzWenben jian="rulesMemories.addMemory" />.
+3. Write one fact per memory and press `Ctrl+Enter` (or click Save).
+
+Each memory is a card with its date. Hover a card to delete it. The number beside Memories in the left list is how many there are.
+
+| Scope | File |
+| --- | --- |
+| <BzWenben jian="common.workspace" /> | `{workspace}/.breezell/memories/workspace_memories.md` |
+| <BzWenben jian="common.global" /> | `~/.breezell/memories/global_memories.md` |
+
+Memories need a plan with Super Memory. Without one, the page shows <BzWenben jian="superMemory.proRequired" />. For memories the AI collects on its own, see [Super Memory](/super-memory).
 
 ## Skills
 
-Skills are reusable instruction packages that teach Breezell how to perform a specific task or workflow. Open **Skills** under the required scope to create or manage them.
+A skill is a folder with a `SKILL.md` file. Breezell gives the AI the name and description of every skill that is switched on; when a task matches a description, the AI loads that skill's full instructions and follows them. A good description therefore says **when** to use the skill.
 
-![Create a workspace skill](/prompt-settings/skill-creation.png)
+### Create a skill
 
-To create a skill:
+1. Open <BzWenben jian="common.workspace" /> ▸ Skills (or <BzWenben jian="common.global" /> ▸ Skills) and click <BzWenben jian="skills.newSkill" />.
+2. Enter a name: lowercase letters and hyphens, for example `release-notes`.
+3. Enter a one-line description of what the skill is for.
+4. Write the instructions: steps, rules and the expected result.
+5. Click <BzWenben jian="skills.createSkill" />.
 
-1. Enter a unique skill name using lowercase letters and hyphens only.
-2. Add a brief description that clearly states when and what the skill is for.
-3. Write the skill instructions, workflow, constraints, and expected output in the main editor.
-4. Select **Create Skill**.
+<BzGuize fenye="xinjineng" />
 
-A workspace skill is stored at `{workspace}/.breezell/skills/<name>/SKILL.md`. Keep each skill focused on one repeatable responsibility so Breezell can select and apply it reliably.
+| Scope | Folder |
+| --- | --- |
+| <BzWenben jian="common.workspace" /> | `{workspace}/.breezell/skills/<name>/SKILL.md` |
+| <BzWenben jian="common.global" /> | `~/.breezell/skills/<name>/SKILL.md` |
+
+A skill can bundle more files (references, scripts) next to `SKILL.md`. Its detail page lists them, and a click opens the file.
+
+### Import skills
+
+Drag files onto the skills list: <BzWenben jian="skills.dropZipPrompt" />. A `.zip` can hold many skill folders at once; a single `.md` becomes one skill named after the file.
+
+### Use skills in a chat
+
+Click the **Skills** button (the layers icon) in the row under the chat input:
+
+<BzLiaotian jinengpan gaoliang="jineng" biaoji="1" />
+
+- <BzWenben jian="skills.builtinTab" />: the skills that come with Breezell, such as `brainstorming` or `requesting-code-review`. They follow the **Superpowers Skills** switch in <BzWenben jian="box.title" /> ▸ <BzWenben jian="tab.featureOptions" />.
+- <BzWenben jian="skills.myTab" />: your workspace and global skills.
+- The switch turns a skill on or off. A skill that is off is not offered to the AI.
+- The arrow button (<BzWenben jian="inputToolbar.referenceSkill" />) adds the skill to your message, so the AI uses it for this request.
+
+You can also type `/` in the input box to open the skills menu.
+
+Switching skills or MCP servers on or off changes the start of the prompt, which can cost you the provider's prompt cache. Set what you need before a long conversation rather than in the middle of it.
 
 ## Commit message
 
-**Commit** lets you customize the prompt Breezell uses to generate Git commit messages.
+Commit changes how Breezell writes Git commit messages when you generate one.
 
-![Workspace Commit Message settings](/prompt-settings/commit-message-settings.png)
+<BzGuize fenye="commit" />
 
-- **Custom prompt:** When this editor contains text, it completely replaces Breezell's built-in Conventional Commits prompt.
-- **Scope priority:** A Workspace commit prompt takes precedence over the Global prompt. Use Workspace for repository-specific conventions and Global for defaults shared across projects.
-- **Automatic context:** Breezell still supplies the current diff, branch, and recent commits to the model, so the custom prompt only needs to describe the required style, language, format, and constraints.
-- **Restore the default:** Select **Clear** to remove the custom content and restore the built-in prompt.
+- An empty page uses Breezell's built-in Conventional Commits prompt.
+- Text on the page **replaces** the built-in prompt completely. Breezell still gives the model the diff, the branch and recent commits, so describe only the style: language, format, length.
+- The <BzWenben jian="common.workspace" /> prompt wins over the <BzWenben jian="common.global" /> one.
+- <BzWenben jian="rulesMemories.clear" /> restores the built-in prompt.
 
-The Workspace commit prompt is stored at **{workspace}/.breezell/rules/commit_prompt.md**.
+| Scope | File |
+| --- | --- |
+| <BzWenben jian="common.workspace" /> | `{workspace}/.breezell/rules/commit_prompt.md` |
+| <BzWenben jian="common.global" /> | `~/.breezell/memories/global_commit_prompt.md` |
+
+## Summary
+
+- Rules: what the AI must always do. Workspace rules replace global rules.
+- Memories: facts to remember, one per card.
+- Skills: playbooks the AI loads when a task matches their description; switch them on or off under the chat input.
+- Commit: your commit message style, replacing the built-in prompt.
