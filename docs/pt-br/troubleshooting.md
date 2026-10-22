@@ -1,48 +1,80 @@
 ---
 title: Solução de problemas
-description: Soluções para problemas comuns de instalação e inicialização do Breezell, incluindo o aviso de aplicativo danificado no macOS.
+description: Escolha o download certo do Breezell para macOS, Windows ou Linux e resolva os avisos “Breezell.app está danificado” e “desenvolvedor não identificado” do macOS.
 ---
 
 # Solução de problemas
 
-Aqui estão soluções práticas para problemas comuns de instalação e inicialização do Breezell. Novos casos serão adicionados quando forem identificados.
+Esta página reúne soluções para problemas comuns de instalação e inicialização. Novos casos serão adicionados à medida que surgirem.
 
-## Instalar o Breezell no macOS
+::: tip Sobre as telas desta página
+A página de download abaixo foi recriada em HTML a partir do código-fonte do breezell.com, que está em inglês. A caixa de diálogo do macOS e a janela do Terminal foram desenhadas para mostrar o que você verá em um Mac.
+:::
 
-1. Abra a página de download do Breezell e selecione **macOS**.
-2. Em um Mac com chip Apple M1, M2, M3 ou posterior, baixe **Apple Silicon**.
-3. Abra a imagem baixada, arraste **Breezell.app** para **Aplicativos**, aguarde a cópia e inicie-o em **Finder → Aplicativos**.
+## Escolher o download certo {#download}
 
-## “Breezell.app está danificado” ou “desenvolvedor não identificado”
+Abra a página de download em [breezell.com/download](https://breezell.com/download). No topo, ela recomenda a versão para o seu computador; mais abaixo, escolha a sua plataforma para ver todas as versões. Clique nas abas aqui para compará-las:
 
-O macOS pode adicionar um atributo de quarentena a aplicativos baixados fora da App Store. O aviso não significa necessariamente que o arquivo esteja danificado.
+<BzXiazai gaoliang="fenye" biaoji="1" />
 
-![Instalação do Breezell e solução do aviso de aplicativo danificado](/troubleshooting/macos-installation-guide.png)
+| Plataforma | Versão | Indicada para |
+| --- | --- | --- |
+| macOS | Apple Silicon | Macs com chip M1, M2, M3, M4 ou mais recente |
+| macOS | Intel | Macs mais antigos com processador Intel |
+| macOS | Universal | Os dois tipos, como versão legada |
+| Windows | x64 · System / ARM64 · System | Instala para todos os usuários do computador; exige direitos de administrador |
+| Windows | x64 · User / ARM64 · User | Instala só para o seu usuário; não exige direitos de administrador |
+| Linux | .deb | Ubuntu, Debian e derivados (x64, ARM64, ARM32) |
+| Linux | .rpm | Fedora, RHEL, CentOS e derivados (x64, ARM64, ARM32) |
 
-### 1. Abra o Terminal
+Para ver o chip do seu Mac, abra o menu Apple ▸ **Sobre Este Mac** (About This Mac). Os lançamentos anteriores ficam em **View past versions**, no fim da página de download.
 
-Pressione **Command (⌘) + Espaço**, procure **Terminal** e abra-o. Também é possível usar **Aplicativos → Utilitários → Terminal**.
+## Instalar o Breezell no macOS {#install-macos}
 
-### 2. Remova a quarentena do Breezell
+1. Baixe a versão para o seu Mac na página de download.
+2. Abra a imagem baixada e arraste **Breezell.app** para **Aplicativos** (Applications). Aguarde até a cópia terminar.
+3. Inicie o Breezell em **Finder ▸ Aplicativos**.
 
-Cole o comando e pressione **Return**:
+## “Breezell.app está danificado” ou “desenvolvedor não identificado” {#damaged}
+
+O macOS marca os aplicativos baixados fora da App Store com um atributo de quarentena. Em alguns Macs, isso faz com que o macOS se recuse a abrir o Breezell e mostre um aviso como este, mesmo que o aplicativo não esteja danificado:
+
+<BzXiazai ye="jinggao" />
+
+Clique em **Cancelar** (Cancel), não em **Mover para o Lixo** (Move to Trash), e siga os passos abaixo uma única vez. Os mesmos passos aparecem na página de download quando o macOS está selecionado:
+
+<BzXiazai gaoliang="zhinan" biaoji="1" />
+
+### 1. Abrir o Terminal {#open-terminal}
+
+Pressione **Command (⌘) + barra de espaço** para abrir o Spotlight, digite **Terminal** e pressione **Return**. Você também pode encontrá-lo em **Aplicativos ▸ Utilitários ▸ Terminal** (Applications ▸ Utilities ▸ Terminal).
+
+### 2. Remover o atributo de quarentena do Breezell {#remove-quarantine}
+
+Cole este comando e pressione **Return**:
 
 ```bash
 sudo xattr -rd com.apple.quarantine "/Applications/Breezell.app"
 ```
 
-Digite a senha de administrador do Mac e pressione **Return** novamente. A senha não aparece durante a digitação. Se não houver saída, normalmente o comando foi concluído com sucesso.
+O Terminal pede a senha de administrador do Mac. Digite-a e pressione **Return**; os caracteres não aparecem enquanto você digita.
 
-O comando remove a quarentena apenas de **Breezell.app**. Ele não desativa o Gatekeeper nem altera a segurança de outros aplicativos.
+<BzXiazai ye="zhongduan" />
 
-### 3. Abra o Breezell novamente
+Se nada for exibido, normalmente o comando funcionou. Ele remove o atributo de quarentena apenas do **Breezell.app**; o Gatekeeper e as verificações de segurança dos outros aplicativos continuam como estão.
 
-Volte para **Aplicativos** e inicie o Breezell outra vez.
+### 3. Abrir o Breezell novamente {#reopen}
+
+Volte para **Aplicativos** e inicie o Breezell.
 
 ::: warning Segurança
-Use somente com o Breezell baixado do site oficial. Não remova a quarentena de aplicativos de origem não confiável.
+Faça isso somente com o Breezell baixado do site oficial. Não remova o atributo de quarentena de aplicativos cuja origem não seja confiável para você.
 :::
 
-## “No such file or directory”
+## “No such file or directory” {#no-such-file}
 
-Mova o Breezell para **Aplicativos** e confirme que o nome é exatamente **Breezell.app**. Se estiver em outro local, substitua `/Applications/Breezell.app` pelo caminho real.
+O comando não encontrou o aplicativo em `/Applications/Breezell.app`. Mova o Breezell para **Aplicativos** e confira se o nome é exatamente **Breezell.app**. Se você o mantém em outro lugar, substitua `/Applications/Breezell.app` no comando pelo caminho real dele.
+
+## Ainda com problemas? {#contact}
+
+Consulte [Problemas conhecidos](/known-issues) ou fale conosco pela [página de contato](https://breezell.com/contact), informando o seu sistema operacional, a versão do Breezell e a mensagem exata que aparece.
