@@ -5,6 +5,7 @@ import BzPinpai from "./BzPinpai.vue";
 import BzMoxingxuanxiang from "./BzMoxingxuanxiang.vue";
 import BzMoshi from "./BzMoshi.vue";
 import BzShuruTanchu from "./BzShuruTanchu.vue";
+import BzJiuchan from "./BzJiuchan.vue";
 import { shiyongwenben, type duihuamoshi, type moxingxuanxiang } from "./shuju";
 
 // Agent 頁的聊天輸入框（ChatInputArea.tsx 經典樣式，Modern UI 預設關閉）與模型選擇器
@@ -53,6 +54,12 @@ const props = withDefaults(
     jihuawenjian?: string;
     jihuashu?: number;
     jihuazhuangtai?: "" | "yizhixing";
+    jiuchan?: string;
+    jiuchanzhankai?: boolean;
+    jiuchanyange?: boolean;
+    yinguo?: string;
+    yinguowen?: string;
+    yinguowancheng?: boolean;
   }>(),
   {
     xuanzeqi: "",
@@ -95,6 +102,12 @@ const props = withDefaults(
     jihuawenjian: "dark-mode-toggle.plan.md",
     jihuashu: 5,
     jihuazhuangtai: "",
+    jiuchan: "",
+    jiuchanzhankai: false,
+    jiuchanyange: false,
+    yinguo: "",
+    yinguowen: "",
+    yinguowancheng: false,
   },
 );
 
@@ -148,6 +161,8 @@ const zhurutiao = computed(() => (props.zhuruwen ? props.zhuruwen.split("|") : [
 const qiehuanpianhao = ref<"alwaysAsk" | "never" | "alwaysRun">("alwaysAsk");
 const pianhaokai = ref(false);
 const jihuazidong = ref(false);
+// Entanglement 回覆裡的因果追蹤列（CausalTraceToolCard）：「Tracing Causal Pathways · 摘要」，點開看細節。
+const yinguokai = ref(false);
 
 // Context 圓環：與面板裡的示意數字一致（約 47%）。
 const huanchang = computed(() => (props.tanchu === "shangxiawen" ? 0.47 : 0.18) * 2 * Math.PI * 6);
@@ -204,6 +219,7 @@ const houzhuiwenzi = computed(() => {
         </span>
         <span class="bz-lt-btl-an"><BzTubiao ming="history" :daxiao="16" :cuxi="1.6" /></span>
       </div>
+      <BzJiuchan v-if="jiuchan" qianru :jieduan="jiuchan" :zhankai="jiuchanzhankai" :yange="jiuchanyange" :gaoliang="gaoliang" :biaoji="biaoji" />
       <div class="bz-lt-duihua">
         <template v-if="wen">
           <div class="bz-lt-yonghu-wai" :class="{ 'bz-lt-xianshi': bianji || huigun }">
@@ -241,6 +257,16 @@ const houzhuiwenzi = computed(() => {
             <div class="bz-lt-huida-tou">
               <BzPinpai :pinpai="pinpai" :daxiao="14" />
               <span>{{ moxing }}</span>
+            </div>
+            <div v-if="yinguo" class="bz-lt-yinguo" :class="{ 'bz-gl': gaoliang === 'yinguo' }">
+              <span v-if="gaoliang === 'yinguo' && biaoji" class="bz-biaoji" style="top: -10px; right: -8px">{{ biaoji }}</span>
+              <button type="button" class="bz-lt-yinguo-tou" @click="yinguokai = !yinguokai">
+                <span class="bz-lt-yinguo-ming">{{ yinguowancheng ? "Causal Trace Complete" : "Tracing Causal Pathways" }}</span>
+                <span class="bz-lt-yinguo-dian">·</span>
+                <span class="bz-lt-yinguo-chip">{{ yinguo }}</span>
+                <svg width="13" height="13" viewBox="0 0 24 24" class="bz-lt-yinguo-jian" :class="{ 'bz-kai': yinguokai }"><path fill="none" stroke="currentColor" stroke-width="2" d="m18 9l-6 6l-6-6" /></svg>
+              </button>
+              <div v-if="yinguokai && yinguowen" class="bz-lt-yinguo-ti">{{ yinguowen.split("|").join("\n") }}</div>
             </div>
             <div class="bz-lt-huida-wen">{{ da }}<span v-if="liushi" class="bz-lt-dian" aria-hidden="true"><i /><i /><i /></span></div>
             <div v-if="qiehuanka" class="bz-lt-ka bz-lt-qhk" :class="{ 'bz-gl': gaoliang === 'qiehuanka' }">
@@ -1790,5 +1816,67 @@ const houzhuiwenzi = computed(() => {
     animation: none;
     width: 40%;
   }
+}
+
+/* ---------- Entanglement 的因果追蹤列 ---------- */
+.bz-lt-yinguo {
+  position: relative;
+  min-width: 0;
+  border-radius: 6px;
+}
+
+.bz-lt-yinguo-tou {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  font-size: 13px;
+  text-align: left;
+}
+
+.bz-lt-yinguo-ming {
+  flex-shrink: 0;
+  color: var(--bz-fg);
+  opacity: 0.7;
+}
+
+.bz-lt-yinguo-dian {
+  flex-shrink: 0;
+  opacity: 0.35;
+}
+
+.bz-lt-yinguo-chip {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  opacity: 0.45;
+}
+
+.bz-lt-yinguo-jian {
+  flex-shrink: 0;
+  opacity: 0;
+  transform: rotate(-90deg);
+  transition: transform 0.15s, opacity 0.15s;
+}
+
+.bz-lt-yinguo-tou:hover .bz-lt-yinguo-jian,
+.bz-lt-yinguo-jian.bz-kai {
+  opacity: 0.6;
+}
+
+.bz-lt-yinguo-jian.bz-kai {
+  transform: none;
+}
+
+.bz-lt-yinguo-ti {
+  max-height: 144px;
+  overflow-y: auto;
+  padding: 2px 0 4px 6px;
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  opacity: 0.5;
 }
 </style>

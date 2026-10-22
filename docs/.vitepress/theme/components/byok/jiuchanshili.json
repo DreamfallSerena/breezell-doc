@@ -1,0 +1,546 @@
+{
+ "en": {
+  "mubiao": "The task counter shows the right number after a task is deleted",
+  "wancheng": "After add, complete, delete and reload the counter equals the number of tasks; the existing tests pass",
+  "genyin": "deleteTask() filters a copy of the tasks array; renderCounters() still reads the original array",
+  "jizhi": "filter() returns a new array that is never written back to state.tasks",
+  "fanshi": "If deleteTask() wrote the filtered array back, the counter would drop by one",
+  "jiashe": [
+   {
+    "id": "H1",
+    "zhuangtai": "testing",
+    "miaoshu": "deleteTask() updates a copy, not the shared tasks array",
+    "fou": "The counter is already wrong when state.tasks is updated in place"
+   },
+   {
+    "id": "H2",
+    "zhuangtai": "rejected",
+    "miaoshu": "renderCounters() is not called after a delete",
+    "jiaoxun": "It is called every time; the data it reads is stale"
+   }
+  ],
+  "zhengju": [
+   {
+    "ji": "++",
+    "lun": 2,
+    "wen": "After deleting 1 of 3 tasks, state.tasks.length is still 3",
+    "gongju": "Read"
+   },
+   {
+    "ji": "-",
+    "lun": 3,
+    "wen": "renderCounters() runs after every delete",
+    "gongju": "Grep"
+   },
+   {
+    "ji": "+",
+    "lun": 3,
+    "wen": "deleteTask() assigns the filter() result to a local variable only",
+    "gongju": "Read"
+   },
+   {
+    "ji": "~",
+    "lun": 4,
+    "wen": "The Active filter count probably has the same problem"
+   }
+  ],
+  "xiufu": "Write the filtered array back to state.tasks, then call renderCounters()",
+  "yanzheng": "Delete 1 of 3 tasks: the counter shows 2, and still 2 after a reload",
+  "yuce": "After the fix, the Active filter count also drops by one",
+  "tu": [
+   {
+    "cong": "deleteTask()",
+    "dao": "filtered copy"
+   },
+   {
+    "cong": "filtered copy",
+    "dao": "state.tasks unchanged"
+   },
+   {
+    "cong": "state.tasks unchanged",
+    "dao": "counter stale"
+   }
+  ],
+  "huandeng": [
+   "deleteTask() filters a copy of the tasks array",
+   "deleteTask() updates a copy, not the shared tasks array",
+   "After deleting 1 of 3 tasks, state.tasks.length is still 3"
+  ]
+ },
+ "zh-hans": {
+  "mubiao": "删除任务后，任务计数器显示正确的数字",
+  "wancheng": "经过添加、完成、删除和重新加载后，计数器都等于任务数量；现有测试全部通过",
+  "genyin": "deleteTask() 过滤的是 tasks 数组的副本；renderCounters() 读取的仍是原数组",
+  "jizhi": "filter() 返回的新数组从未写回 state.tasks",
+  "fanshi": "如果 deleteTask() 把过滤后的数组写回，计数器就会减一",
+  "jiashe": [
+   {
+    "id": "H1",
+    "zhuangtai": "testing",
+    "miaoshu": "deleteTask() 更新的是副本，而不是共享的 tasks 数组",
+    "fou": "原地更新 state.tasks 时，计数器仍然出错"
+   },
+   {
+    "id": "H2",
+    "zhuangtai": "rejected",
+    "miaoshu": "删除后没有调用 renderCounters()",
+    "jiaoxun": "它每次都会被调用；问题在于它读取的数据已过时"
+   }
+  ],
+  "zhengju": [
+   {
+    "ji": "++",
+    "lun": 2,
+    "wen": "删除 3 个任务中的 1 个后，state.tasks.length 仍为 3",
+    "gongju": "Read"
+   },
+   {
+    "ji": "-",
+    "lun": 3,
+    "wen": "每次删除后都会运行 renderCounters()",
+    "gongju": "Grep"
+   },
+   {
+    "ji": "+",
+    "lun": 3,
+    "wen": "deleteTask() 只把 filter() 的结果赋给了一个局部变量",
+    "gongju": "Read"
+   },
+   {
+    "ji": "~",
+    "lun": 4,
+    "wen": "Active 筛选项的计数很可能也有同样的问题"
+   }
+  ],
+  "xiufu": "把过滤后的数组写回 state.tasks，然后调用 renderCounters()",
+  "yanzheng": "删除 3 个任务中的 1 个：计数器显示 2，重新加载后仍为 2",
+  "yuce": "修复后，Active 筛选项的计数也会减一",
+  "tu": [
+   {
+    "cong": "deleteTask()",
+    "dao": "过滤后的副本"
+   },
+   {
+    "cong": "过滤后的副本",
+    "dao": "state.tasks 未改变"
+   },
+   {
+    "cong": "state.tasks 未改变",
+    "dao": "计数器未更新"
+   }
+  ],
+  "huandeng": [
+   "deleteTask() 过滤的是 tasks 数组的副本",
+   "deleteTask() 更新的是副本，而不是共享的 tasks 数组",
+   "删除 3 个任务中的 1 个后，state.tasks.length 仍为 3"
+  ]
+ },
+ "zh-hant": {
+  "mubiao": "刪除任務後，任務計數器顯示正確的數字",
+  "wancheng": "新增、完成、刪除和重新載入後，計數器都等於任務數量；現有的測試全部通過",
+  "genyin": "deleteTask() 篩選的是 tasks 陣列的副本；renderCounters() 讀取的仍是原本的陣列",
+  "jizhi": "filter() 會回傳新的陣列，但這個陣列從未寫回 state.tasks",
+  "fanshi": "如果 deleteTask() 把篩選後的陣列寫回去，計數器就會減一",
+  "jiashe": [
+   {
+    "id": "H1",
+    "zhuangtai": "testing",
+    "miaoshu": "deleteTask() 更新的是副本，而不是共用的 tasks 陣列",
+    "fou": "即使就地更新 state.tasks，計數器仍然出錯"
+   },
+   {
+    "id": "H2",
+    "zhuangtai": "rejected",
+    "miaoshu": "刪除後沒有呼叫 renderCounters()",
+    "jiaoxun": "它每次都會被呼叫；問題在於它讀到的資料是舊的"
+   }
+  ],
+  "zhengju": [
+   {
+    "ji": "++",
+    "lun": 2,
+    "wen": "從 3 個任務中刪除 1 個後，state.tasks.length 仍是 3",
+    "gongju": "Read"
+   },
+   {
+    "ji": "-",
+    "lun": 3,
+    "wen": "每次刪除後都會執行 renderCounters()",
+    "gongju": "Grep"
+   },
+   {
+    "ji": "+",
+    "lun": 3,
+    "wen": "deleteTask() 只把 filter() 的結果指派給區域變數",
+    "gongju": "Read"
+   },
+   {
+    "ji": "~",
+    "lun": 4,
+    "wen": "Active 篩選的計數可能也有同樣的問題"
+   }
+  ],
+  "xiufu": "把篩選後的陣列寫回 state.tasks，再呼叫 renderCounters()",
+  "yanzheng": "從 3 個任務中刪除 1 個：計數器顯示 2，重新載入後仍是 2",
+  "yuce": "修正後，Active 篩選的計數也會減一",
+  "tu": [
+   {
+    "cong": "deleteTask()",
+    "dao": "篩選後的副本"
+   },
+   {
+    "cong": "篩選後的副本",
+    "dao": "state.tasks 未變更"
+   },
+   {
+    "cong": "state.tasks 未變更",
+    "dao": "計數器未更新"
+   }
+  ],
+  "huandeng": [
+   "deleteTask() 篩選的是 tasks 陣列的副本",
+   "deleteTask() 更新的是副本，而不是共用的 tasks 陣列",
+   "從 3 個任務中刪除 1 個後，state.tasks.length 仍是 3"
+  ]
+ },
+ "ja": {
+  "mubiao": "タスクを削除した後、タスクのカウンターに正しい数が表示される",
+  "wancheng": "追加、完了、削除、再読み込みの後にカウンターがタスク数と一致し、既存のテストが成功する",
+  "genyin": "deleteTask() は tasks 配列のコピーをフィルターしているが、renderCounters() は元の配列を読み取り続けている",
+  "jizhi": "filter() が返す新しい配列は、state.tasks に書き戻されない",
+  "fanshi": "deleteTask() がフィルター後の配列を書き戻していれば、カウンターは 1 つ減るはず",
+  "jiashe": [
+   {
+    "id": "H1",
+    "zhuangtai": "testing",
+    "miaoshu": "deleteTask() は共有の tasks 配列ではなく、コピーを更新している",
+    "fou": "state.tasks をその場で更新しても、カウンターがすでに間違っている"
+   },
+   {
+    "id": "H2",
+    "zhuangtai": "rejected",
+    "miaoshu": "削除後に renderCounters() が呼び出されていない",
+    "jiaoxun": "毎回呼び出されている。読み取っているデータが古い"
+   }
+  ],
+  "zhengju": [
+   {
+    "ji": "++",
+    "lun": 2,
+    "wen": "3 件中 1 件のタスクを削除しても、state.tasks.length は 3 のまま",
+    "gongju": "Read"
+   },
+   {
+    "ji": "-",
+    "lun": 3,
+    "wen": "renderCounters() は削除のたびに実行されている",
+    "gongju": "Grep"
+   },
+   {
+    "ji": "+",
+    "lun": 3,
+    "wen": "deleteTask() は filter() の結果をローカル変数に代入するだけ",
+    "gongju": "Read"
+   },
+   {
+    "ji": "~",
+    "lun": 4,
+    "wen": "Active フィルターの件数にも、おそらく同じ問題がある"
+   }
+  ],
+  "xiufu": "フィルター後の配列を state.tasks に書き戻してから、renderCounters() を呼び出す",
+  "yanzheng": "3 件中 1 件のタスクを削除：カウンターが 2 を表示し、再読み込み後も 2 のまま",
+  "yuce": "修正後は、Active フィルターの件数も 1 つ減る",
+  "tu": [
+   {
+    "cong": "deleteTask()",
+    "dao": "フィルター後のコピー"
+   },
+   {
+    "cong": "フィルター後のコピー",
+    "dao": "state.tasks は未変更"
+   },
+   {
+    "cong": "state.tasks は未変更",
+    "dao": "カウンターが古いまま"
+   }
+  ],
+  "huandeng": [
+   "deleteTask() は tasks 配列のコピーをフィルターしている",
+   "deleteTask() は共有の tasks 配列ではなく、コピーを更新している",
+   "3 件中 1 件のタスクを削除しても、state.tasks.length は 3 のまま"
+  ]
+ },
+ "ko": {
+  "mubiao": "작업을 삭제한 뒤 작업 카운터에 올바른 숫자가 표시됩니다",
+  "wancheng": "추가, 완료, 삭제, 새로고침 후에 카운터가 작업 수와 같고, 기존 테스트가 통과합니다",
+  "genyin": "deleteTask()가 tasks 배열의 복사본을 필터링하고, renderCounters()는 여전히 원래 배열을 읽습니다",
+  "jizhi": "filter()는 새 배열을 반환하지만, 그 배열이 state.tasks에 다시 기록되지 않습니다",
+  "fanshi": "deleteTask()가 필터링한 배열을 다시 기록했다면 카운터가 하나 줄었을 것입니다",
+  "jiashe": [
+   {
+    "id": "H1",
+    "zhuangtai": "testing",
+    "miaoshu": "deleteTask()가 공유 tasks 배열이 아니라 복사본을 업데이트합니다",
+    "fou": "state.tasks를 직접 업데이트해도 카운터가 이미 틀립니다"
+   },
+   {
+    "id": "H2",
+    "zhuangtai": "rejected",
+    "miaoshu": "삭제 후에 renderCounters()가 호출되지 않습니다",
+    "jiaoxun": "매번 호출되지만, 읽는 데이터가 오래된 상태입니다"
+   }
+  ],
+  "zhengju": [
+   {
+    "ji": "++",
+    "lun": 2,
+    "wen": "작업 3개 중 1개를 삭제한 뒤에도 state.tasks.length가 여전히 3입니다",
+    "gongju": "Read"
+   },
+   {
+    "ji": "-",
+    "lun": 3,
+    "wen": "renderCounters()는 삭제할 때마다 실행됩니다",
+    "gongju": "Grep"
+   },
+   {
+    "ji": "+",
+    "lun": 3,
+    "wen": "deleteTask()는 filter() 결과를 지역 변수에만 할당합니다",
+    "gongju": "Read"
+   },
+   {
+    "ji": "~",
+    "lun": 4,
+    "wen": "Active 필터 개수에도 같은 문제가 있을 가능성이 높습니다"
+   }
+  ],
+  "xiufu": "필터링한 배열을 state.tasks에 다시 기록한 다음 renderCounters()를 호출합니다",
+  "yanzheng": "작업 3개 중 1개 삭제: 카운터에 2가 표시되고, 새로고침 후에도 2입니다",
+  "yuce": "수정 후에는 Active 필터 개수도 하나 줄어듭니다",
+  "tu": [
+   {
+    "cong": "deleteTask()",
+    "dao": "필터링된 복사본"
+   },
+   {
+    "cong": "필터링된 복사본",
+    "dao": "state.tasks 변경 없음"
+   },
+   {
+    "cong": "state.tasks 변경 없음",
+    "dao": "카운터 미갱신"
+   }
+  ],
+  "huandeng": [
+   "deleteTask()가 tasks 배열의 복사본을 필터링합니다",
+   "deleteTask()가 공유 tasks 배열이 아니라 복사본을 업데이트합니다",
+   "작업 3개 중 1개를 삭제한 뒤에도 state.tasks.length가 여전히 3입니다"
+  ]
+ },
+ "es": {
+  "mubiao": "El contador de tareas muestra el número correcto después de eliminar una tarea",
+  "wancheng": "Tras añadir, completar, eliminar y recargar, el contador coincide con el número de tareas; las pruebas existentes pasan",
+  "genyin": "deleteTask() filtra una copia del array de tareas; renderCounters() sigue leyendo el array original",
+  "jizhi": "filter() devuelve un array nuevo que nunca se vuelve a asignar a state.tasks",
+  "fanshi": "Si deleteTask() asignara el array filtrado a state.tasks, el contador bajaría en uno",
+  "jiashe": [
+   {
+    "id": "H1",
+    "zhuangtai": "testing",
+    "miaoshu": "deleteTask() actualiza una copia, no el array de tareas compartido",
+    "fou": "El contador ya es incorrecto cuando state.tasks se modifica in situ"
+   },
+   {
+    "id": "H2",
+    "zhuangtai": "rejected",
+    "miaoshu": "renderCounters() no se llama después de una eliminación",
+    "jiaoxun": "Se llama siempre; lo que está desactualizado son los datos que lee"
+   }
+  ],
+  "zhengju": [
+   {
+    "ji": "++",
+    "lun": 2,
+    "wen": "Tras eliminar 1 de 3 tareas, state.tasks.length sigue siendo 3",
+    "gongju": "Read"
+   },
+   {
+    "ji": "-",
+    "lun": 3,
+    "wen": "renderCounters() se ejecuta después de cada eliminación",
+    "gongju": "Grep"
+   },
+   {
+    "ji": "+",
+    "lun": 3,
+    "wen": "deleteTask() solo asigna el resultado de filter() a una variable local",
+    "gongju": "Read"
+   },
+   {
+    "ji": "~",
+    "lun": 4,
+    "wen": "El recuento del filtro Active probablemente tiene el mismo problema"
+   }
+  ],
+  "xiufu": "Volver a asignar el array filtrado a state.tasks y luego llamar a renderCounters()",
+  "yanzheng": "Eliminar 1 de 3 tareas: el contador muestra 2, y sigue en 2 tras recargar",
+  "yuce": "Tras la corrección, el recuento del filtro Active también baja en uno",
+  "tu": [
+   {
+    "cong": "deleteTask()",
+    "dao": "copia filtrada"
+   },
+   {
+    "cong": "copia filtrada",
+    "dao": "state.tasks intacto"
+   },
+   {
+    "cong": "state.tasks intacto",
+    "dao": "contador desfasado"
+   }
+  ],
+  "huandeng": [
+   "deleteTask() filtra una copia del array de tareas",
+   "deleteTask() actualiza una copia, no el array de tareas compartido",
+   "Tras eliminar 1 de 3 tareas, state.tasks.length sigue siendo 3"
+  ]
+ },
+ "pt-br": {
+  "mubiao": "O contador de tarefas mostra o número certo depois que uma tarefa é excluída",
+  "wancheng": "Depois de adicionar, concluir, excluir e recarregar, o contador é igual ao número de tarefas; os testes existentes passam",
+  "genyin": "deleteTask() filtra uma cópia do array tasks; renderCounters() ainda lê o array original",
+  "jizhi": "filter() retorna um novo array que nunca é gravado de volta em state.tasks",
+  "fanshi": "Se deleteTask() gravasse o array filtrado de volta, o contador diminuiria em um",
+  "jiashe": [
+   {
+    "id": "H1",
+    "zhuangtai": "testing",
+    "miaoshu": "deleteTask() atualiza uma cópia, não o array tasks compartilhado",
+    "fou": "O contador já fica errado quando state.tasks é atualizado diretamente"
+   },
+   {
+    "id": "H2",
+    "zhuangtai": "rejected",
+    "miaoshu": "renderCounters() não é chamada depois de uma exclusão",
+    "jiaoxun": "Ela é chamada todas as vezes; os dados que ela lê estão desatualizados"
+   }
+  ],
+  "zhengju": [
+   {
+    "ji": "++",
+    "lun": 2,
+    "wen": "Depois de excluir 1 de 3 tarefas, state.tasks.length ainda é 3",
+    "gongju": "Read"
+   },
+   {
+    "ji": "-",
+    "lun": 3,
+    "wen": "renderCounters() é executada depois de cada exclusão",
+    "gongju": "Grep"
+   },
+   {
+    "ji": "+",
+    "lun": 3,
+    "wen": "deleteTask() atribui o resultado de filter() apenas a uma variável local",
+    "gongju": "Read"
+   },
+   {
+    "ji": "~",
+    "lun": 4,
+    "wen": "A contagem do filtro Active provavelmente tem o mesmo problema"
+   }
+  ],
+  "xiufu": "Gravar o array filtrado de volta em state.tasks e então chamar renderCounters()",
+  "yanzheng": "Excluir 1 de 3 tarefas: o contador mostra 2, e continua em 2 depois de recarregar",
+  "yuce": "Depois da correção, a contagem do filtro Active também diminui em um",
+  "tu": [
+   {
+    "cong": "deleteTask()",
+    "dao": "cópia filtrada"
+   },
+   {
+    "cong": "cópia filtrada",
+    "dao": "state.tasks intacto"
+   },
+   {
+    "cong": "state.tasks intacto",
+    "dao": "contador velho"
+   }
+  ],
+  "huandeng": [
+   "deleteTask() filtra uma cópia do array tasks",
+   "deleteTask() atualiza uma cópia, não o array tasks compartilhado",
+   "Depois de excluir 1 de 3 tarefas, state.tasks.length ainda é 3"
+  ]
+ },
+ "ru": {
+  "mubiao": "Счётчик задач показывает правильное число после удаления задачи",
+  "wancheng": "После добавления, выполнения, удаления и перезагрузки счётчик равен числу задач; существующие тесты проходят",
+  "genyin": "deleteTask() фильтрует копию массива задач; renderCounters() по-прежнему читает исходный массив",
+  "jizhi": "filter() возвращает новый массив, который так и не записывается обратно в state.tasks",
+  "fanshi": "Если бы deleteTask() записывала отфильтрованный массив обратно, счётчик уменьшился бы на единицу",
+  "jiashe": [
+   {
+    "id": "H1",
+    "zhuangtai": "testing",
+    "miaoshu": "deleteTask() обновляет копию, а не общий массив задач",
+    "fou": "Счётчик неверен, даже когда state.tasks обновляется на месте"
+   },
+   {
+    "id": "H2",
+    "zhuangtai": "rejected",
+    "miaoshu": "renderCounters() не вызывается после удаления",
+    "jiaoxun": "Она вызывается каждый раз; устарели данные, которые она читает"
+   }
+  ],
+  "zhengju": [
+   {
+    "ji": "++",
+    "lun": 2,
+    "wen": "После удаления 1 из 3 задач state.tasks.length по-прежнему равно 3",
+    "gongju": "Read"
+   },
+   {
+    "ji": "-",
+    "lun": 3,
+    "wen": "renderCounters() выполняется после каждого удаления",
+    "gongju": "Grep"
+   },
+   {
+    "ji": "+",
+    "lun": 3,
+    "wen": "deleteTask() присваивает результат filter() только локальной переменной",
+    "gongju": "Read"
+   },
+   {
+    "ji": "~",
+    "lun": 4,
+    "wen": "У счётчика фильтра «Активные», вероятно, та же проблема"
+   }
+  ],
+  "xiufu": "Записать отфильтрованный массив обратно в state.tasks, затем вызвать renderCounters()",
+  "yanzheng": "Удалить 1 из 3 задач: счётчик показывает 2 и после перезагрузки по-прежнему 2",
+  "yuce": "После исправления счётчик фильтра «Активные» тоже уменьшится на единицу",
+  "tu": [
+   {
+    "cong": "deleteTask()",
+    "dao": "отфильтрованная копия"
+   },
+   {
+    "cong": "отфильтрованная копия",
+    "dao": "state.tasks не изменён"
+   },
+   {
+    "cong": "state.tasks не изменён",
+    "dao": "счётчик устарел"
+   }
+  ],
+  "huandeng": [
+   "deleteTask() фильтрует копию массива задач",
+   "deleteTask() обновляет копию, а не общий массив задач",
+   "После удаления 1 из 3 задач state.tasks.length по-прежнему равно 3"
+  ]
+ }
+}
