@@ -5,6 +5,149 @@ next: false
 
 # Changelog
 
+## 1.4.4 · 2026-10-27
+
+### Highlights
+
+- **Cross-Check:** An independent second look before the agent says it's done (off by default).
+- **Finished turns fold away:** A finished chat turn folds into one "Worked for 2m 10s" row, with the reply below it.
+- **Long conversations stay on course:** They keep their direction after their context is folded, and folding costs less.
+- **Memory recall by context:** It works in any language, and the AI can search your memories step by step.
+- **Image generation in one place:** Set up once in Box ▸ Models ▸ Image generation and used everywhere; Image Studio is rebuilt.
+- **Network recovery:** Requests recover by themselves after a VPN drops or comes back, and slow models no longer time out at about two minutes.
+- **Hot updates stay:** Hot updates no longer disappear on their own after normal use.
+
+### Chat
+
+- **Finished turns fold away:** When a turn is over, everything the agent did on the way (thoughts, searches, tool and edit cards, the text between them) folds into one row that says how long it worked and what it did, e.g. "Worked for 2m 10s · 12 files, 3 searches, 2 edits". Click it to open the turn as it was. The final reply stays outside the fold, and so do errors and images the turn produced. A turn you stopped, a turn that ended on an error, and a plain answer don't fold. Turns in your history fold the same way.
+- **Cross-Check (new, off by default):** Turn it on in Feature Options ▸ Cross-Check ("Model self-improvement"). Before the agent's final answer on a larger change (two or more files, 30 or more lines in one file, or an approved plan), a separate model call with no tools checks the work against your request: the diffs, new compiler errors, the commands and their exit codes. It writes an acceptance checklist and marks each item pass, fail or unknown. Only what it finds missing goes back to the agent, which checks each item in the code, fixes what is really missing and answers once.
+  - The result is a card under the turn. It opens to the checklist, with Check again and Fill the gaps.
+  - Skip on the wait line goes on without it. Stop or a new message after the answer only ends the check.
+  - It uses the chat's model unless you choose a dedicated one in Box ▸ Cross-Check. Files that may hold secrets (`.env`, keys, credentials) are named, but their contents are never sent.
+  - A slow check is no longer cut off after 90 seconds: it is watched, and fails only when its API is found to be down.
+- **Editing and resending a message no longer brings back changes you already handled:** Before, resending put back every file from the earlier checkpoint. After Keep All, Accept/Reject came back for changes you had already accepted. A hunk you had accepted became pending again. Changes you had rejected came back. Now a resend only restores the files the AI edited after that message. What you did yourself since then stays, including your own typing in files the AI didn't touch afterwards.
+- **Keep All and Accept all clear everything:** Keep All now also accepts pending changes in every file the conversation edited. Code Review's Accept all commits files whose steps were all decided. A step marked accepted no longer leaves Accept/Reject buttons in the editor.
+- **Long conversations stay on course after folding (context compaction):**
+  - A fold no longer leaves the AI working on an old task: the summary records how each earlier request ended, and your newest request is restated right after it.
+  - Your own earlier messages go along with the summary word for word.
+  - The summary is written in fixed sections: Goal, your intent in your words, Decisions, Technical notes, Status, Next.
+  - When possible, the summary is written on the request the agent just sent, which the provider still has cached. It's mostly billed as cache reads and comes back faster.
+  - At most 15,000 tokens of recent conversation are kept word for word beside the summary (it used to be 20% of the window, up to about 192k on 1M models), so a fold frees much more room.
+  - A single turn that grows past the window (hundreds of tool results) can now be folded in the middle, instead of being sent over the limit and failing as an "upstream" error.
+- **Background analyses: stop or rerun one at a time:**
+  - Stop on one analysis (its card or its report page) stops only that one. The round goes on with what it had found.
+  - Retry reruns a failed, stopped or interrupted analysis under the same card.
+  - The lead now gets each round once, with how every analysis ended (completed, failed with its error, or stopped).
+  - Analyses cut off by a restart come back as Interrupted, and the next message is told what they had found.
+  - The report page follows new output until you scroll up (Jump to latest), shows a status line (steps, duration, tokens, model), and has Copy report.
+  - Subagents no longer stop the round by asking you a question.
+- **Teams work in rounds:** The lead's follow-up starts a new round with its own tasks, so a report from the previous round is no longer taken for the new one. The lead's Stop now stops the teammates without reverting their files or dissolving the team. Stop on a teammate's own page marks it stopped and tells the lead. The next message wakes it.
+- **DarkSelene rides out API trouble and resumes where it stopped:**
+  - Each analysis call is sent again after a dropped connection, a timeout, 408/429/5xx or an empty reply, for about two minutes. The page and the chat card show the reconnect.
+  - A stopped session shows why in red on its chat card, with Continue analysis (keeps the finished stages) and Analyse again.
+  - If the execution turn ends on an error, it pauses with its reviews kept: Continue execution (or Try again) picks it up, End and summarize writes up what was done.
+  - Slow calls are no longer cut off at 3 or 15 minutes and resent: a silent call is watched and fails only when its API is found to be down.
+- **Entanglement mode:** The model now decides what proves a fix (diagnostics, a test, or your confirmation) instead of word lists guessing from your message. Saying "still broken" no longer silently undoes the last change; the model decides whether to keep, adjust or undo it. Explanations and acknowledgements no longer get re-asked for a causal trace, and switching into Entanglement no longer forces a trace as the first step.
+- **Smaller chat fixes:**
+  - A finished reply no longer jumps up when its copy/retry bar appears.
+  - The edit card's header drops the extra "N changes" count; the file name and +X/−Y remain.
+  - When the agent continues after a reply (a Cross-Check, a recovery, the next routed sub-task), the "Deciding next step" line now shows instead of a blank.
+  - A tool call the provider aborts mid-way (seen with `gpt-6-astra` through relays: "Tool arguments stopped making progress…") is now closed as failed and written again, instead of ending the turn as a network error.
+
+### Chat history & composer
+
+- **Redesigned chat history panel:** New Agent button, search with a select toggle, Agents / Teams / Favorites tabs, date groups with sticky headers, and two-line rows (title and time, then the first prompt and turn count, or the team's members). A streaming chat no longer makes the list redraw every frame.
+- **The history side bar can be resized:** Drag it between 200 and 600 px (default 260; it was fixed at 220, which cut "New Agent" short). Narrow widths rearrange the buttons instead of truncating them.
+- **Composer tags look calmer:** Files, skills, terminal, quotes, problems and the rest share one neutral chip, with each kind's color on its icon only. Skill chips read `/name` like the slash menu. Attachment thumbnails get a neutral frame, a round remove badge and a hover preview.
+- **Skills from other agents:** Skills installed by `npx skills` and other agents are now found in `.agents/skills` and `.claude/skills` (in each workspace folder and in your home folder) and in `~/.config/agents/skills`. Breezell's own `.breezell/skills` still win a name clash. The Rules panel lists them with the folder they came from. The Skills dot in the tray now shows right after a restart.
+- **Mode picker:** New Agent and Entanglement icons, no gradient on the labels, and a neutral mode-switch card.
+
+### Agent tools
+
+- **run_script reports what it really did:**
+  - After a script edits files, it lists the errors those edits introduced (`path:line` message), even after a failure or timeout. It used to return a meaningless "0 errors".
+  - It also lists the other files an edit reaches.
+  - A script that never edits runs read-only without asking for approval.
+  - Up to 1,000 bridged calls, and calls past the limit are reported instead of silently swallowed.
+  - Exact text can be passed as data instead of escaped JavaScript, and `edit_file` takes `dry_run`.
+  - Edits to the same file run in order.
+  - The card says why a run failed (label, line, message) and shows "N failed" for calls that threw.
+- **Code navigation that finds things:**
+  - `grep_search` rows are grouped under the function, method or class they sit in.
+  - After an edit, the receipt lists "Other files this change reaches": callers of a changed, removed or renamed declaration, with TypeScript errors.
+  - `find_symbol` now indexes 4,000 symbols per file (was 500) and files up to 2M characters, waits briefly for a cold index, understands kind names loosely, and matches abbreviations like "calcTot".
+  - `lsp` references come grouped by file, and `call_hierarchy` takes depth 1–3.
+- **Terminal and search fixes:**
+  - Output lines longer than the agent terminal's width no longer come back broken, with the next line glued on.
+  - `grep_search` works on CRLF files and with folder globs on absolute paths (e.g. `docs/**`).
+  - On PowerShell, the `&&` / `||` and `exit` rewrites no longer change text inside strings: `git commit -m "Stop on Ctrl+C; exit cleanly"` is committed as written.
+  - On Linux and macOS, `/mnt/d/…` paths are no longer mistaken for drive D:.
+- **MCP output no longer swells the context:** An MCP result over 20,000 characters is saved to a file with a preview, like long terminal output. MCP images are saved as files, and only the newest three of the current turn are sent to the model. Before, every MCP image of a thread was resent with every later request.
+
+### Memory
+
+- **Recall by context, in any language:** Memories are now chosen by a small local model that reads your request, the conversation before it and the open file. Keywords and fixed word lists are gone. It works in any language, including Thai, Hindi, Korean and accented Latin text, and it follows a conversation: a short follow-up that names nothing still finds the memory the conversation is about. Older and sleeping memories get a fair chance, and a sleeping memory wakes when a turn clearly needs it. On a test set it never trained on (10 languages), turns that needed a memory got one 62% of the time, up from 41%.
+- **The AI can look memories up step by step:** `memories_recall` now lists an index (kind, priority, state, date, how it matched), opens full records with what links them, and lets the AI narrow a result: by exact text, date, kind, priority, or another wording of the query. It no longer needs a Super Memory plan, and old memories are no longer pushed down by their age when searched. The chat card shows every record that was opened.
+- **Clearer memory state:** The chat shows when memory recall is running, when a turn used no memories, and when the relevant memories are already earlier in this conversation. Recall no longer stalls the window on large libraries. A memory that a later one shows to be wrong is kept, marked no longer valid with a link to what replaced it, and never given. Tool names no longer appear in what you see of a memory.
+- **Cloud telemetry:** If cloud telemetry is on, the numbers recall decides on are sent too: no text, and memories only as salted hashes. The consent text says so in every language, so you'll be asked to agree again.
+
+### Models & providers
+
+- **New models:**
+  - GPT-6.1 Terra (OpenAI, Azure Foundry, Codex sign-in, OpenRouter, and Breezell): the fast, cheaper GPT-6 tier with a 1.05M window. Thinking can be turned off.
+  - Kimi K3.1 Pro and K3.1 Pro Highspeed (Moonshot, AIHubMix, Kimi Code, OpenRouter, OpenCode Go, and Breezell), with their own prices.
+  - AMD Radeon Cloud: Gemma-4-31B-IT, MiniCPM-V-4.7-35B-A3B and MiniCPM-V-4.7-1B. Qwen3.8-27B gets a 262K window. MiMo-V2.6-Flash drops the audio input and thinking switch its endpoint no longer accepts.
+- **Fixes:**
+  - DeepSeek V3.1 / V3.2 and the original Qwen3-235B-A22B on Baseten, DeepInfra, Together AI, Fireworks, OpenRouter and Hugging Face showed an invented Low→Max effort slider. They now have the thinking on/off switch their hosts support.
+  - The prompt optimizer works with GPT-6.1 Sol (it asked for thinking off, which OpenAI rejects).
+  - Codex sign-in plans use the official names (Pro 100 / 200 / 500, Business, Business Premium, Enterprise, Edu…) instead of raw ids like SELF_SERVE_BUSINESS_PROLITE. GPT-5.5, GPT-5.4 and GPT-5.4-mini, which ChatGPT retired, are gone from the Codex list.
+  - Turning Fast on for a model that lost Fast no longer fails every message: it is served at the standard tier.
+  - Breezell models show Ultrafast when the service offers it, with its price.
+  - The price tooltip shows each Breezell model's long-context price and every digit ($26.25, not $26.3).
+  - Account sign-ins identify as the current client versions (Antigravity 2.26.0, Kimi Code CLI 2.3.1, DeepSeek Harness 0.2.1-rc.3, Grok Build 1.0.67, Copilot Chat 0.71.0).
+
+### Images
+
+- **One place for image models: Box ▸ Models ▸ Image generation:** Image models from the providers you set up in Models are listed there, one tile per provider, with a default model and its own parameters. Add more from each provider's catalog. Chat's `generate_image`, the composer's image mode and Image Studio all draw with this list.
+- **Better image cards in chat:** The `generate_image` card shows the model it will draw with, and you can switch it there. Images open in a viewer (zoom, download, copy, open in an editor tab). The AI is only offered image generation when an image model can actually draw, so no more cards that end in "Try again later".
+- **Edit several places at once:** "Edit this" on an image opens "Mark regions to edit": mark up to six places, each numbered in its own color with its own instructions and an optional target. The dialog now shows the image on the left and the places on the right. The same works in Image Studio.
+- **Image Studio rebuilt:** The node canvas is replaced by a composer and pages: Home (composer and recent work), a create page with progress, Stop and the results, the library, a viewer, and settings. It uses your theme's colors, tooltips match the editor, every Box image model and API profile model is offered with the parameters it takes, and every result is kept in the gallery.
+- **Breezell image models:** Breezell's own image models appear as one entry, Breezell. A Breezell chat model always draws with them.
+
+### Network & reliability
+
+- **Back on track after a VPN change:** When a VPN or proxy client dropped and came back, requests could keep waiting on a dead connection for minutes. Now a failed request makes the next one open a fresh connection and re-read the system proxy.
+- **Slow answers no longer fail at about two minutes:** On Breezell's models, a model that thinks for minutes before its first word, or an image that takes more than two minutes, used to fail with a 524 error. The connection is now kept open, and how long to wait is up to the editor.
+- **First-byte timeout you can set, and that learns:** Box ▸ Network & chat ▸ First-byte timeout: 40 (default), 60, 90, 120 or 180 seconds, or 20–240. Within that limit, the wait now adapts to each model's own recent first bytes, so a request that hangs is retried sooner (checked every 2 s instead of 10). The network health list shows why each request was retried (e.g. "retry #1 after no first byte") and its first-byte wait.
+- **HTTP/2 for chat requests:** Chat requests now use HTTP/2 by default, directly and through HTTP, HTTPS and SOCKS proxies. Switch back to HTTP/1.1 in Box ▸ Network & chat. A server that closes an HTTP/2 connection before answering gets the request again.
+- **Retry rules in one place:** Every provider follows the same retry rules. Never after your Stop, a quota that ran out, a rejected request, or text you can already see. A stream cut off with "terminated" is retried as a dropped connection. A "451" in an error's text is no longer taken for a region block.
+
+### Updates
+
+- **Hot updates no longer disappear:** Clicking the icon again, opening a file with Breezell, or a sign-in link while Breezell was running counted as a failed start. Two of those made Breezell drop a working hot update and go back to the installed version for good. These no longer count. Only real crashes do.
+- **Updates in Box:** Box has an Updates entry at the foot of its sidebar showing the running version. It lights up when a hot update is offered or ready.
+  - A new hot update appears on a card in the bottom-left corner. Update now downloads and installs it, then restarts after a 10-second countdown (Cancel, Restart now). The countdown waits while a conversation is running in any window.
+  - Repair forgets failed starts, re-downloads the latest package and restarts into it.
+  - Import package installs a package file you already have, if its SHA-256 matches the published one.
+  - If a hot update can't start, the next window says so once and offers Repair and restart.
+  - Downloads resume after a dropped connection, and installs wait out an antivirus scan holding the folder.
+
+### Interface
+
+- **Box redesign:** A branching sidebar. Account and space switcher cards (plan, days left, balance). A new Models page: tab bar, category switch, smaller provider tiles, one-line model rows with icon-only capabilities and row actions in a menu. Smaller stat cards and gauges, and tidier toolbars when the model configuration is open.
+- **Box ▸ Usage ▸ Breezell usage:** See what Breezell's own models cost you, request by request, with filters, totals and a per-request price breakdown.
+- **Editor tabs:** Git colors stay readable on tabs (neutral backgrounds instead of the accent tint). The focused group's active tab gets a short accent line, and Breezell Dark's "added" green is brighter.
+- **Icons:** The codicons are updated (101 new icons). 24 existing ones, such as close, sync and lightbulb, are slightly redrawn.
+
+### Under the hood
+
+- Electron 43.8.4.
+- Upstream VS Code's memory-leak fixes since 1.135 are ported: closed editors, terminals, tree views, notebooks and extension objects no longer hold on to memory.
+- The app is now bundled with esbuild, as upstream VS Code 1.144 does.
+- Optional TypeScript 7 native preview: the `js/ts.experimental.useTsgo` setting and its commands are back.
+- AI SDK and provider packages updated to their latest patch releases.
+- Built-in prompts are delivered from Breezell's servers. The privacy page now states exactly what reaches Breezell's servers.
+
 ## 1.4.37 · Hot Update · 2026-10-21
 
 ### Chat

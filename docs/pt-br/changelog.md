@@ -5,6 +5,149 @@ next: false
 
 # Registro de alterações
 
+## 1.4.4 · 2026-10-27
+
+### Destaques
+
+- **Cross-Check:** Uma segunda olhada independente antes de o agente dizer que terminou (desativado por padrão).
+- **Turnos concluídos se recolhem:** Um turno de chat concluído se recolhe em uma linha "Worked for 2m 10s", com a resposta logo abaixo.
+- **Conversas longas mantêm o rumo:** Elas mantêm a direção depois de o contexto ser recolhido, e recolher custa menos.
+- **Recuperação de memórias por contexto:** Funciona em qualquer idioma, e a IA pode pesquisar suas memórias passo a passo.
+- **Geração de imagens em um só lugar:** Configurada uma vez em Box ▸ Modelos ▸ Geração de imagens e usada em toda parte; o Image Studio foi reconstruído.
+- **Recuperação de rede:** As requisições se recuperam sozinhas quando uma VPN cai ou volta, e modelos lentos não expiram mais em cerca de dois minutos.
+- **As atualizações rápidas ficam:** Elas não desaparecem mais sozinhas após o uso normal.
+
+### Chat
+
+- **Turnos concluídos se recolhem:** Quando um turno termina, tudo o que o agente fez no caminho (pensamentos, buscas, cartões de ferramentas e edições, o texto entre eles) se recolhe em uma linha que diz quanto tempo trabalhou e o que fez, por exemplo "Worked for 2m 10s · 12 files, 3 searches, 2 edits". Clique para abrir o turno como estava. A resposta final fica fora do recolhimento, assim como erros e imagens produzidas pelo turno. Um turno que você parou, um turno que terminou com erro e uma resposta simples não se recolhem. Os turnos do seu histórico se recolhem do mesmo jeito.
+- **Cross-Check (novo, desativado por padrão):** Ative em Opções de recursos ▸ Cross-Check ("Melhoria automática do modelo"). Antes da resposta final do agente em uma mudança maior (dois ou mais arquivos, 30 ou mais linhas em um arquivo, ou um plano aprovado), uma chamada separada ao modelo sem ferramentas confere o trabalho com o seu pedido: os diffs, novos erros de compilação, os comandos e seus códigos de saída. Ela escreve uma lista de aceitação e marca cada item como aprovado, reprovado ou desconhecido. Só o que ela considera faltando volta ao agente, que confere cada ponto no código, corrige o que realmente falta e responde uma vez.
+  - O resultado é um cartão abaixo do turno. Ele abre na lista de verificação, com Verificar de novo e Preencher as lacunas.
+  - Pular na linha de espera segue sem isso. Parar ou uma nova mensagem depois da resposta apenas encerra a verificação.
+  - Usa o modelo do chat, a menos que você escolha um dedicado em Box ▸ Cross-Check. Arquivos que podem conter segredos (`.env`, chaves, credenciais) são nomeados, mas o conteúdo nunca é enviado.
+  - Uma verificação lenta não é mais cortada aos 90 segundos: ela é acompanhada e só falha quando se confirma que a API caiu.
+- **Editar e reenviar uma mensagem não traz mais de volta mudanças que você já resolveu:** antes, reenviar restaurava todos os arquivos desde o checkpoint anterior. Depois de Manter tudo, Aceitar/Rejeitar voltava para mudanças que você já tinha aceitado. Um trecho aceito voltava a ficar pendente. Mudanças rejeitadas voltavam. Agora um reenvio só restaura os arquivos que a IA editou depois daquela mensagem. O que você fez desde então permanece, incluindo o que você digitou em arquivos que a IA não tocou depois.
+- **Manter tudo e Aceitar tudo limpam de fato:** Manter tudo agora também aceita mudanças pendentes em todos os arquivos que a conversa editou. O Aceitar tudo do Code Review confirma arquivos cujas etapas estavam todas decididas. Uma etapa marcada como aceita não deixa mais botões Aceitar/Rejeitar no editor.
+- **Conversas longas mantêm o rumo após o recolhimento (compactação de contexto):**
+  - Um recolhimento não deixa mais a IA trabalhando em uma tarefa antiga: o resumo registra como cada pedido anterior terminou, e seu pedido mais recente é reafirmado logo depois.
+  - Suas mensagens anteriores vão junto do resumo, palavra por palavra.
+  - O resumo é escrito em seções fixas: Objetivo, sua intenção nas suas palavras, Decisões, Notas técnicas, Estado, Próximo.
+  - Quando possível, o resumo é escrito sobre a requisição que o agente acabou de enviar, que o provedor ainda tem em cache. É cobrado majoritariamente como leituras de cache e volta mais rápido.
+  - No máximo 15.000 tokens de conversa recente são mantidos palavra por palavra ao lado do resumo (antes era 20% da janela, até cerca de 192k em modelos de 1M), então um recolhimento libera muito mais espaço.
+  - Um único turno que cresce além da janela (centenas de resultados de ferramentas) agora pode ser recolhido no meio, em vez de ser enviado acima do limite e falhar como erro "upstream".
+- **Análises em segundo plano: parar ou reexecutar uma por vez:**
+  - Parar em uma análise (no cartão ou na página de relatório) para apenas aquela. A rodada continua com o que já havia encontrado.
+  - Repetir reexecuta uma análise com falha, parada ou interrompida sob o mesmo cartão.
+  - O líder agora recebe cada rodada uma vez, com como cada análise terminou (concluída, falhou com seu erro, ou parada).
+  - Análises cortadas por um reinício voltam como Interrompidas, e a próxima mensagem é informada do que elas encontraram.
+  - A página de relatório acompanha a saída nova até você rolar para cima (Ir para o mais recente), mostra uma linha de estado (etapas, duração, tokens, modelo) e tem Copiar relatório.
+  - Subagentes não param mais a rodada fazendo uma pergunta.
+- **Teams trabalha em rodadas:** o acompanhamento do líder inicia uma nova rodada com suas próprias tarefas, então um relatório da rodada anterior não é mais tomado pelo da nova. O Parar do líder agora para os colegas sem reverter os arquivos deles nem dissolver o time. Parar na página de um colega o marca como parado e avisa o líder. A próxima mensagem o desperta.
+- **DarkSelene atravessa problemas de API e retoma de onde parou:**
+  - Cada chamada de análise é reenviada após conexão caída, tempo esgotado, 408/429/5xx ou resposta vazia, por cerca de dois minutos. A página e o cartão do chat mostram a reconexão.
+  - Uma sessão parada mostra o motivo em vermelho no cartão do chat, com Continuar análise (mantém as etapas concluídas) e Analisar de novo.
+  - Se o turno de execução termina com erro, ele pausa mantendo as revisões: Continuar execução (ou Tentar de novo) retoma, e Encerrar e resumir escreve o que foi feito.
+  - Chamadas lentas não são mais cortadas aos 3 ou 15 minutos para reenvio: uma chamada silenciosa é acompanhada e só falha quando se confirma que a API caiu.
+- **Modo Entanglement:** agora o modelo decide o que prova uma correção (diagnósticos, um teste ou sua confirmação), em vez de listas de palavras adivinharem a partir da sua mensagem. Dizer "continua quebrado" não desfaz mais o último cambio em silêncio; o modelo decide se mantém, ajusta ou desfaz. Explicações e confirmações não são mais pedidas de novo para um registro causal, e entrar no Entanglement não força mais um rastro causal como primeiro passo.
+- **Pequenas correções do chat:**
+  - Uma resposta concluída não pula mais para cima quando sua barra de copiar/repetir aparece.
+  - O cabeçalho do cartão de edição perde a contagem extra de "N changes"; o nome do arquivo e +X/−Y permanecem.
+  - Quando o agente continua após uma resposta (um Cross-Check, uma recuperação, a próxima subtarefa roteada), a linha "Decidindo o próximo passo" aparece em vez de um vazio.
+  - Uma chamada de ferramenta que o provedor aborta no meio (visto com `gpt-6-astra` via relays: "Tool arguments stopped making progress…") agora é encerrada como falha e reescrita, em vez de terminar o turno como erro de rede.
+
+### Histórico de chat e compositor
+
+- **Painel de histórico de chat redesenhado:** botão Novo Agent, busca com alternador de seleção, abas Agents / Teams / Favorites, grupos por data com cabeçalhos fixos e linhas de duas linhas (título e hora, depois o primeiro prompt e a contagem de turnos, ou os membros do time). Um chat em streaming não faz mais a lista redesenhar a cada quadro.
+- **A barra lateral do histórico pode ser redimensionada:** arraste entre 200 e 600 px (padrão 260; antes era fixa em 220, o que cortava "New Agent"). Em larguras estreitas os botões se reorganizam em vez de serem truncados.
+- **As etiquetas do compositor ficaram mais discretas:** arquivos, skills, terminal, citações, problemas e o resto compartilham um chip neutro, com a cor de cada tipo apenas no ícone. Os chips de skills aparecem como `/nome`, igual ao menu de barra. As miniaturas de anexos ganham moldura neutra, selo redondo de remover e prévia ao passar o mouse.
+- **Skills de outros agentes:** skills instaladas por `npx skills` e outros agentes agora são encontradas em `.agents/skills` e `.claude/skills` (em cada pasta do espaço de trabalho e na sua pasta pessoal) e em `~/.config/agents/skills`. As próprias do Breezell em `.breezell/skills` ainda vencem em caso de nome repetido. O painel de Regras as lista com a pasta de origem. O ponto de Skills na bandeja agora aparece logo após reiniciar.
+- **Seletor de modo:** novos ícones de Agent e Entanglement, sem gradiente nos rótulos e um cartão de troca de modo neutro.
+
+### Ferramentas do Agent
+
+- **`run_script` informa o que realmente fez:**
+  - Depois que um script edita arquivos, ele lista os erros que essas edições introduziram (mensagem `path:line`), mesmo após falha ou tempo esgotado. Antes retornava um "0 errors" sem sentido.
+  - Também lista os outros arquivos que uma edição alcança.
+  - Um script que nunca edita roda em somente leitura sem pedir aprovação.
+  - Até 1.000 chamadas via ponte, e chamadas acima do limite são informadas em vez de silenciadas.
+  - Texto exato pode ser passado como dados em vez de JavaScript escapado, e `edit_file` aceita `dry_run`.
+  - Edições no mesmo arquivo rodam em ordem.
+  - O cartão diz por que uma execução falhou (rótulo, linha, mensagem) e mostra "N failed" para chamadas que lançaram exceção.
+- **Navegação de código que encontra as coisas:**
+  - As linhas de `grep_search` são agrupadas sob a função, método ou classe em que estão.
+  - Após uma edição, o recibo lista "Outros arquivos que esta mudança alcança": chamadores de uma declaração alterada, removida ou renomeada, com erros de TypeScript.
+  - `find_symbol` agora indexa 4.000 símbolos por arquivo (antes 500) e arquivos de até 2M caracteres, espera um pouco por um índice frio, entende nomes de kind de forma flexível e encontra abreviações como "calcTot".
+  - As referências de `lsp` vêm agrupadas por arquivo, e `call_hierarchy` aceita profundidade 1–3.
+- **Correções de terminal e busca:**
+  - Linhas de saída mais longas que a largura do terminal do agente não voltam mais quebradas, com a linha seguinte colada.
+  - `grep_search` funciona em arquivos CRLF e com globs de pasta em caminhos absolutos (por exemplo `docs/**`).
+  - No PowerShell, as reescritas de `&&` / `||` e `exit` não alteram mais o texto dentro de strings: `git commit -m "Stop on Ctrl+C; exit cleanly"` é confirmado como foi escrito.
+  - No Linux e no macOS, caminhos `/mnt/d/…` não são mais confundidos com a unidade D:.
+- **A saída de MCP não incha mais o contexto:** um resultado de MCP com mais de 20.000 caracteres é salvo em um arquivo com prévia, como saídas longas de terminal. Imagens de MCP são salvas como arquivos, e só as três mais recentes do turno atual são enviadas ao modelo. Antes, toda imagem de MCP de uma thread era reenviada a cada requisição seguinte.
+
+### Memória
+
+- **Recuperação por contexto, em qualquer idioma:** as memórias agora são escolhidas por um pequeno modelo local que lê seu pedido, a conversa anterior e o arquivo aberto. Palavras-chave e listas fixas de palavras foram removidas. Funciona em qualquer idioma, incluindo tailandês, hindi, coreano e texto latino com acentos, e acompanha uma conversa: um acompanhamento curto que não nomeia nada ainda encontra a memória de que a conversa trata. Memórias antigas e adormecidas têm chance justa, e uma memória adormecida desperta quando um turno claramente precisa dela. Em um conjunto de testes com o qual nunca foi treinado (10 idiomas), turnos que precisavam de uma memória a obtiveram em 62% das vezes, contra 41%.
+- **A IA pode consultar memórias passo a passo:** `memories_recall` agora lista um índice (tipo, prioridade, estado, data, como combinou), abre registros completos com o que os liga e permite à IA restringir um resultado: por texto exato, data, tipo, prioridade ou outra formulação da consulta. Não precisa mais de um plano Super Memory, e memórias antigas não são mais rebaixadas pela idade na busca. O cartão do chat mostra todo registro aberto.
+- **Estado de memória mais claro:** o chat mostra quando a recuperação está rodando, quando um turno não usou memórias e quando as memórias relevantes já estão antes nesta conversa. A recuperação não trava mais a janela com bibliotecas grandes. Uma memória que outra posterior mostra estar errada é mantida, marcada como não mais válida com um link para o que a substituiu, e nunca é entregue. Nomes de ferramentas não aparecem mais no que você vê de uma memória.
+- **Telemetria na nuvem:** se a telemetria na nuvem estiver ativa, os números em que a recuperação decide também são enviados: sem texto, e memórias apenas como hashes com sal. O texto de consentimento diz isso em todos os idiomas, então você será solicitado a concordar de novo.
+
+### Modelos e provedores
+
+- **Novos modelos:**
+  - GPT-6.1 Terra (OpenAI, Azure Foundry, login do Codex, OpenRouter e Breezell): o nível GPT-6 rápido e mais barato, com janela de 1,05M. O pensamento pode ser desativado.
+  - Kimi K3.1 Pro e K3.1 Pro Highspeed (Moonshot, AIHubMix, Kimi Code, OpenRouter, OpenCode Go e Breezell), com preços próprios.
+  - AMD Radeon Cloud: Gemma-4-31B-IT, MiniCPM-V-4.7-35B-A3B e MiniCPM-V-4.7-1B. Qwen3.8-27B ganha janela de 262K. MiMo-V2.6-Flash perde a entrada de áudio e o interruptor de pensamento que seu endpoint não aceita mais.
+- **Correções:**
+  - DeepSeek V3.1 / V3.2 e o Qwen3-235B-A22B original em Baseten, DeepInfra, Together AI, Fireworks, OpenRouter e Hugging Face mostravam um controle de esforço Low→Max inventado. Agora têm o interruptor de pensamento ligado/desligado que seus hosts suportam.
+  - O otimizador de prompts funciona com o GPT-6.1 Sol (ele pedia pensamento desligado, o que a OpenAI rejeita).
+  - Os planos de login do Codex usam os nomes oficiais (Pro 100 / 200 / 500, Business, Business Premium, Enterprise, Edu…) em vez de ids crus como SELF_SERVE_BUSINESS_PROLITE. GPT-5.5, GPT-5.4 e GPT-5.4-mini, que o ChatGPT retirou, saíram da lista do Codex.
+  - Ativar Fast em um modelo que perdeu o Fast não faz mais toda mensagem falhar: ele é servido no nível padrão.
+  - Modelos Breezell mostram Ultrafast quando o serviço oferece, com seu preço.
+  - A dica de preço mostra o preço de contexto longo de cada modelo Breezell e todos os dígitos ($26.25, não $26.3).
+  - Logins de conta se identificam com as versões atuais do cliente (Antigravity 2.26.0, Kimi Code CLI 2.3.1, DeepSeek Harness 0.2.1-rc.3, Grok Build 1.0.67, Copilot Chat 0.71.0).
+
+### Imagens
+
+- **Um só lugar para modelos de imagem: Box ▸ Modelos ▸ Geração de imagens:** os modelos de imagem dos provedores que você configurou em Modelos aparecem ali, um cartão por provedor, com um modelo padrão e seus próprios parâmetros. Adicione mais a partir do catálogo de cada provedor. O `generate_image` do chat, o modo imagem do compositor e o Image Studio desenham todos com esta lista.
+- **Cartões de imagem melhores no chat:** o cartão de `generate_image` mostra com qual modelo vai desenhar, e você pode trocar ali. As imagens abrem em um visualizador (zoom, baixar, copiar, abrir em uma aba do editor). Só se oferece geração de imagens à IA quando um modelo de imagem realmente consegue desenhar, então não há mais cartões que terminam em "Try again later".
+- **Editar vários lugares de uma vez:** "Editar isto" em uma imagem abre "Marcar regiões para editar": marque até seis lugares, cada um numerado na sua cor, com suas próprias instruções e um alvo opcional. A caixa de diálogo agora mostra a imagem à esquerda e os lugares à direita. O mesmo funciona no Image Studio.
+- **Image Studio reconstruído:** a tela de nós foi substituída por um compositor e páginas: Início (compositor e trabalho recente), uma página de criação com progresso, Parar e os resultados, a biblioteca, um visualizador e configurações. Usa as cores do seu tema, as dicas seguem o editor, todos os modelos de imagem do Box e de perfis de API são oferecidos com os parâmetros que aceitam, e todo resultado fica na galeria.
+- **Modelos de imagem da Breezell:** os modelos de imagem próprios da Breezell aparecem como uma única entrada, Breezell. Um modelo de chat da Breezell sempre desenha com eles.
+
+### Rede e confiabilidade
+
+- **De volta aos trilhos após uma mudança de VPN:** quando um cliente VPN ou proxy caía e voltava, as requisições podiam continuar esperando em uma conexão morta por minutos. Agora uma requisição que falha faz a seguinte abrir uma conexão nova e reler o proxy do sistema.
+- **Respostas lentas não falham mais em cerca de dois minutos:** nos modelos da Breezell, um modelo que pensa minutos antes da primeira palavra, ou uma imagem que leva mais de dois minutos, falhava com erro 524. Agora a conexão fica aberta, e quanto esperar é decisão do editor.
+- **Tempo limite de primeiro byte configurável, e que aprende:** Box ▸ Rede e chat ▸ Tempo limite do primeiro byte: 40 (padrão), 60, 90, 120 ou 180 segundos, ou 20–240. Dentro desse limite, a espera se adapta aos primeiros bytes recentes de cada modelo, então uma requisição travada é repetida mais cedo (verificada a cada 2 s em vez de 10). A lista de saúde da rede mostra por que cada requisição foi repetida (por exemplo "retry #1 after no first byte") e sua espera de primeiro byte.
+- **HTTP/2 para requisições do chat:** as requisições do chat agora usam HTTP/2 por padrão, direto e por proxies HTTP, HTTPS e SOCKS. Volte para HTTP/1.1 em Box ▸ Rede e chat. Um servidor que fecha uma conexão HTTP/2 antes de responder recebe a requisição de novo.
+- **Regras de repetição em um só lugar:** todos os provedores seguem as mesmas regras. Nunca depois do seu Parar, de uma cota esgotada, de uma requisição rejeitada ou de texto que você já vê. Um stream cortado com "terminated" é repetido como conexão caída. Um "451" no texto de um erro não é mais tomado por bloqueio regional.
+
+### Atualizações
+
+- **As atualizações rápidas não desaparecem mais:** clicar no ícone de novo, abrir um arquivo com o Breezell ou um link de login enquanto o Breezell estava em execução contava como inicialização falha. Duas dessas faziam o Breezell descartar uma atualização rápida que funcionava e voltar de vez para a versão instalada. Isso não conta mais; só falhas reais contam.
+- **Atualizações no Box:** o Box tem uma entrada Atualizações no pé da barra lateral, mostrando a versão em execução. Ela acende quando uma atualização rápida é oferecida ou está pronta.
+  - Uma nova atualização rápida aparece em um cartão no canto inferior esquerdo. Atualizar agora baixa e instala, e reinicia após uma contagem de 10 segundos (Cancelar, Reiniciar agora). A contagem espera enquanto houver uma conversa rodando em qualquer janela.
+  - Reparar esquece inicializações falhas, baixa de novo o pacote mais recente e reinicia nele.
+  - Importar pacote instala um arquivo de pacote que você já tem, se o SHA-256 bater com o publicado.
+  - Se uma atualização rápida não inicia, a próxima janela avisa uma vez e oferece Reparar e reiniciar.
+  - Downloads retomam após uma conexão caída, e instalações esperam uma varredura antivírus liberar a pasta.
+
+### Interface
+
+- **Box redesenhado:** uma barra lateral ramificada. Cartões de conta e troca de espaço (plano, dias restantes, saldo). Uma nova página Modelos: barra de abas, troca de categoria, cartões de provedor menores, linhas de modelo de uma linha com capacidades só em ícones e ações de linha em um menu. Cartões de estatística e medidores menores, e barras de ferramentas mais organizadas quando a configuração de modelos está aberta.
+- **Box ▸ Uso ▸ Uso do Breezell:** veja quanto os modelos próprios da Breezell custam, requisição por requisição, com filtros, totais e detalhamento de preço por requisição.
+- **Abas do editor:** as cores do Git continuam legíveis nas abas (fundos neutros em vez do tom de destaque). A aba ativa do grupo em foco ganha uma linha curta de destaque, e o verde de "adicionado" do Breezell Dark é mais brilhante.
+- **Ícones:** os codicons foram atualizados (101 ícones novos). 24 existentes, como fechar, sincronizar e lâmpada, foram levemente redesenhados.
+
+### Por baixo do capô
+
+- Electron 43.8.4.
+- As correções de vazamento de memória do VS Code upstream desde 1.135 foram portadas: editores, terminais, árvores, notebooks e objetos de extensão fechados não retêm mais memória.
+- O aplicativo agora é empacotado com esbuild, como o VS Code upstream 1.144 faz.
+- Prévia nativa opcional do TypeScript 7: a configuração `js/ts.experimental.useTsgo` e seus comandos voltaram.
+- Pacotes do AI SDK e dos provedores atualizados para as últimas versões de correção.
+- Os prompts integrados são entregues pelos servidores da Breezell. A página de privacidade agora declara exatamente o que chega aos servidores da Breezell.
+
 ## 1.4.37 · Hot Update · 2026-10-21
 
 ### Chat
