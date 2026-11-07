@@ -134,6 +134,10 @@ export default defineConfig({
           ],
         },
         {
+          text: "Plugins",
+          items: [{ text: "Plugins", link: "/plugins" }],
+        },
+        {
           text: "Announcements",
           items: [
             { text: "Version 1.2.8 Access Update", link: "/version-1-2-8-access-update" },
@@ -170,6 +174,10 @@ export default defineConfig({
           items: [
             { text: "Entanglement Mode Overview", link: "/entanglement-mode-overview" },
           ],
+        },
+        {
+          text: "Plugins",
+          items: [{ text: "Plugins", link: "/plugins" }],
         },
         {
           text: "Announcements",
@@ -210,6 +218,10 @@ export default defineConfig({
           ],
         },
         {
+          text: "Plugins",
+          items: [{ text: "Plugins", link: "/plugins" }],
+        },
+        {
           text: "Announcements",
           items: [
             { text: "Version 1.2.8 Access Update", link: "/version-1-2-8-access-update" },
@@ -242,6 +254,10 @@ export default defineConfig({
           items: [
             { text: "Entanglement Mode Overview", link: "/entanglement-mode-overview" },
           ],
+        },
+        {
+          text: "Plugins",
+          items: [{ text: "Plugins", link: "/plugins" }],
         },
         {
           text: "Announcements",

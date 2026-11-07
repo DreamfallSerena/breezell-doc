@@ -22,6 +22,7 @@ type yuyanwenben = {
   chaojijiyi: string;
   jiuchanmoshi: string;
   moshi: string;
+  chajian: string;
   yemian: string;
   shangyi: string;
   xiayi: string;
@@ -54,6 +55,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     chaojijiyi: "Super Memory",
     jiuchanmoshi: "Entanglement Mode Overview",
     moshi: "Mode Selection",
+    chajian: "Plugins",
     yemian: "On this page",
     shangyi: "Previous page",
     xiayi: "Next page",
@@ -84,6 +86,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     chaojijiyi: "スーパーメモリー",
     jiuchanmoshi: "Entanglement モードの概要",
     moshi: "モードの選択",
+    chajian: "プラグイン",
     yemian: "このページの内容",
     shangyi: "前のページ",
     xiayi: "次のページ",
@@ -114,6 +117,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     chaojijiyi: "슈퍼 메모리",
     jiuchanmoshi: "Entanglement 모드 개요",
     moshi: "모드 선택",
+    chajian: "플러그인",
     yemian: "이 페이지에서",
     shangyi: "이전 페이지",
     xiayi: "다음 페이지",
@@ -144,6 +148,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     chaojijiyi: "Super Memory",
     jiuchanmoshi: "Resumen del modo Entanglement",
     moshi: "Selección de modo",
+    chajian: "Complementos",
     yemian: "En esta página",
     shangyi: "Página anterior",
     xiayi: "Página siguiente",
@@ -174,6 +179,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     chaojijiyi: "Super Memory",
     jiuchanmoshi: "Visão geral do modo Entanglement",
     moshi: "Seleção de modo",
+    chajian: "Plugins",
     yemian: "Nesta página",
     shangyi: "Página anterior",
     xiayi: "Próxima página",
@@ -204,6 +210,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     chaojijiyi: "Суперпамять",
     jiuchanmoshi: "Обзор режима Entanglement",
     moshi: "Выбор режима",
+    chajian: "Плагины",
     yemian: "На этой странице",
     shangyi: "Предыдущая страница",
     xiayi: "Следующая страница",
@@ -234,6 +241,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     chaojijiyi: "超级记忆",
     jiuchanmoshi: "Entanglement 模式功能说明",
     moshi: "模式选择",
+    chajian: "插件",
     yemian: "本页内容",
     shangyi: "上一页",
     xiayi: "下一页",
@@ -264,6 +272,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     chaojijiyi: "超級記憶",
     jiuchanmoshi: "Entanglement 模式功能說明",
     moshi: "模式選擇",
+    chajian: "插件",
     yemian: "本頁內容",
     shangyi: "上一頁",
     xiayi: "下一頁",
@@ -309,6 +318,9 @@ function qudebianlan(luyou: string, wenben: yuyanwenben) {
   const moshidaoyin = [
     { text: wenben.jiuchanmoshi, link: lianjie("/entanglement-mode-overview") },
   ];
+  const chajian = [
+    { text: wenben.chajian, link: lianjie("/plugins") },
+  ];
   const gonggao = [
     { text: wenben.gonggaobiaoti, link: lianjie("/version-1-2-8-access-update") },
     { text: wenben.yaoqingjiaocheng, link: lianjie("/invite-new-users") },
@@ -321,6 +333,7 @@ function qudebianlan(luyou: string, wenben: yuyanwenben) {
       { text: wenben.kaishi, items: zhinan },
       { text: wenben.gaojicaozuo, items: gaoji },
       { text: wenben.moshijieshao, items: moshidaoyin },
+      { text: wenben.chajian, items: chajian },
       { text: wenben.gonggao, items: gonggao },
     ],
     [lianjie("/about")]: [
@@ -328,6 +341,7 @@ function qudebianlan(luyou: string, wenben: yuyanwenben) {
       { text: wenben.kaishi, items: zhinan },
       { text: wenben.gaojicaozuo, items: gaoji },
       { text: wenben.moshijieshao, items: moshidaoyin },
+      { text: wenben.chajian, items: chajian },
       { text: wenben.gonggao, items: gonggao },
     ],
     [lianjie("/contact")]: [
@@ -335,6 +349,7 @@ function qudebianlan(luyou: string, wenben: yuyanwenben) {
       { text: wenben.kaishi, items: zhinan },
       { text: wenben.gaojicaozuo, items: gaoji },
       { text: wenben.moshijieshao, items: moshidaoyin },
+      { text: wenben.chajian, items: chajian },
       { text: wenben.gonggao, items: gonggao },
     ],
     [lianjie("/changelog")]: [
@@ -342,12 +357,14 @@ function qudebianlan(luyou: string, wenben: yuyanwenben) {
       { text: wenben.kaishi, items: zhinan },
       { text: wenben.gaojicaozuo, items: gaoji },
       { text: wenben.moshijieshao, items: moshidaoyin },
+      { text: wenben.chajian, items: chajian },
       { text: wenben.gonggao, items: gonggao },
     ],
     [lianjie("/")]: [
       { text: wenben.kaishi, items: zhinan },
       { text: wenben.gaojicaozuo, items: gaoji },
       { text: wenben.moshijieshao, items: moshidaoyin },
+      { text: wenben.chajian, items: chajian },
       { text: wenben.gonggao, items: gonggao },
     ],
   };
