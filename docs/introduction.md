@@ -7,10 +7,6 @@ description: Meet Breezell, an AI code editor built on Code – OSS, and get fro
 
 Breezell is an AI code editor built on VS Code (Code – OSS). The editor, your extensions and your keybindings work the way you know, and next to them sits an AI that can read your project, edit files, run commands and use tools on its own.
 
-::: tip About the screens on this page
-The Breezell screens in this guide are rebuilt in HTML from the Breezell source code instead of screenshots. Their text follows the language of this page and their colors follow the light / dark switch of this site. Numbered orange badges are only labels for this guide.
-:::
-
 ## The Breezell window
 
 <BzChuangti wen="Load the config file once at startup and cache it." da="Done. config.ts now reads the file once and keeps the parsed result, and index.ts calls loadConfig() before the server starts." />

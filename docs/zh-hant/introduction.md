@@ -7,10 +7,6 @@ description: 認識以 Code – OSS 為基礎打造的 AI 程式碼編輯器 Bre
 
 Breezell 是基於 VS Code（Code – OSS）建構的 AI 程式碼編輯器。編輯器、你的擴充功能和鍵盤快速鍵都和你熟悉的一樣運作；在它們旁邊，還有一個能讀取你的專案、編輯檔案、執行命令，並自行使用工具的 AI。
 
-::: tip 關於本頁的畫面
-本指南中的 Breezell 畫面不是螢幕截圖，而是根據 Breezell 原始碼以 HTML 重新繪製而成。畫面文字會跟著本頁的語言顯示，顏色則跟著本站的淺色／深色切換。橘色的數字標記只是本指南加上的標示。
-:::
-
 ## Breezell 視窗
 
 <BzChuangti wen="啟動時只載入一次設定檔，並把結果快取起來。" da="完成。config.ts 現在只會讀取一次檔案並保留解析結果，index.ts 也會在伺服器啟動前呼叫 loadConfig()。" />

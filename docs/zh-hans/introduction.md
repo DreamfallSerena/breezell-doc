@@ -7,10 +7,6 @@ description: 认识 Breezell，一款基于 Code – OSS 构建的 AI 代码编�
 
 Breezell 是基于 VS Code（Code – OSS）构建的 AI 代码编辑器。编辑器、你的扩展和快捷键都和你熟悉的一样；在它们旁边，还有一个能够自主读取项目、编辑文件、运行命令和使用工具的 AI。
 
-::: tip 关于本页的界面示意
-本指南中的 Breezell 界面并非截图，而是依照 Breezell 源码用 HTML 重新搭建的。界面文字跟随本页语言，配色跟随本站的浅色 / 深色切换。带编号的橙色角标只是本指南添加的标注。
-:::
-
 ## Breezell 窗口
 
 <BzChuangti wen="启动时只加载一次配置文件，并把结果缓存起来。" da="已完成。config.ts 现在只读取一次文件并保留解析结果，index.ts 会在服务器启动前调用 loadConfig()。" />
