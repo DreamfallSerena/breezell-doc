@@ -77,4 +77,4 @@ The command could not find the app at `/Applications/Breezell.app`. Move Breezel
 
 ## Still stuck? {#contact}
 
-Check [Known Issues](/known-issues), or contact us through the [contact page](https://breezell.com/contact) with your operating system, the Breezell version and the exact message you see.
+Contact us through the [contact page](https://breezell.com/contact) with your operating system, the Breezell version and the exact message you see.

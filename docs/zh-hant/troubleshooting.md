@@ -77,4 +77,4 @@ sudo xattr -rd com.apple.quarantine "/Applications/Breezell.app"
 
 ## 仍然無法解決？ {#contact}
 
-請查看[已知問題回報](/known-issues)，或透過[聯絡頁面](https://breezell.com/contact)與我們聯絡，並提供你的作業系統、Breezell 版本，以及你看到的確切訊息。
+請透過[聯絡頁面](https://breezell.com/contact)與我們聯絡，並提供你的作業系統、Breezell 版本，以及你看到的確切訊息。

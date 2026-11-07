@@ -77,4 +77,4 @@ El comando no encontró la aplicación en `/Applications/Breezell.app`. Mueve Br
 
 ## ¿Sigues sin poder resolverlo? {#contact}
 
-Consulta [Problemas conocidos](/known-issues) o contáctanos a través de la [página de contacto](https://breezell.com/contact) indicando tu sistema operativo, la versión de Breezell y el mensaje exacto que ves.
+Contáctanos a través de la [página de contacto](https://breezell.com/contact) indicando tu sistema operativo, la versión de Breezell y el mensaje exacto que ves.
