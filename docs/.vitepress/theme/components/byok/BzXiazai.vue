@@ -52,7 +52,7 @@ const tubiao: Record<pingtai, string> = {
         <div class="bz-xz-xiaobiao">Download</div>
         <div class="bz-xz-dabiao">Download Breezell</div>
         <div class="bz-xz-fubiao">Choose your platform and start coding smarter.</div>
-        <span class="bz-xz-banben"><i />Latest version <b>1.4.37</b></span>
+        <span class="bz-xz-banben"><i />Latest version <b>1.4.5</b></span>
       </div>
       <div class="bz-xz-tuijian">
         <span class="bz-xz-tu bz-xz-tu-da"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path :d="tubiao.macOS" /></svg></span>
