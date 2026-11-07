@@ -5,6 +5,289 @@ next: false
 
 # Changelog
 
+## 1.4.51 · Hot Update · 2026-11-06
+
+A hot update for 1.4.5, no reinstall needed: Breezell offers it on its own, or check under "Updates" at the foot of the Box sidebar.
+
+### Chat
+
+- **Long conversations with many screenshots keep going:** after many screenshots in one conversation, messages could stop going through, with `NGHTTP2_ENHANCE_YOUR_CALM` in the error while the diagnosis blamed the network. Now:
+  - Pictures pasted earlier no longer weigh down the messages after them, so the conversation can go on.
+  - When the AI needs to look at an earlier picture again, it opens it again instead of describing it from memory.
+  - Pictures you attach to a message are always sent, and so are the pictures of a message you edit or send again.
+- **The same for pictures the AI opened:** a picture the AI opened to look at no longer stays with the rest of the conversation; it opens it again when it needs it. When it opens several pictures at once, it sees every one of them.
+- **Tables wrap to the chat's width:** tables in replies were as wide as their longest row and had to be scrolled sideways. They now wrap to the chat's width:
+  - Headers break only between words, and CJK labels stay whole.
+  - Paths and names in a table are not squeezed to one letter per line.
+  - A table scrolls sideways only when a single word is wider than the chat.
+- **A bold heading no longer runs into the paragraph above:** a bold heading on its own line in a reply, such as "(2) ..." or "(3) ...", was glued onto the end of the paragraph before it, and the space before a bold phrase in a sentence went missing ("this is **important**" read "this isimportant"). Both are fixed.
+- **Bold headings sit the same while a reply streams:** while a reply was still streaming, a bold heading on its own line stood a full gap away from its text until the reply was done. It now has its final spacing while streaming, in thinking text too.
+- **Smoother sash dragging in long conversations:** resizing the chat no longer gets slower as the conversation grows.
+
+### Box
+
+- **No more blank Box page at startup:** if you closed Breezell on the Box page, it opened next time with only the navigation on the left and nothing beside it. It now opens on the page you left.
+
+### Interface
+
+- **The "Breezell Modern UI" preview is a miniature of the workbench:** the preview on the "Breezell Modern UI" card in the title bar's Theme panel was three grey blocks. It is now a miniature in your theme's colours: the title bar with menus, the activity bar, the Explorer, the editor with tabs, code, the cursor and the minimap, the terminal, the Breezell chat and the status bar. On, the parts are floating rounded cards; off, they are square, flush and divided by hairlines, so the two are easy to tell apart.
+- **Every sash grip is equally bright:** the three-dot grip on the sash beside the Explorer looked brighter than the others. They now all look the same; dragging is unchanged.
+- **Sash highlight in your accent:** after you pick an "Accent color" in the Theme panel, hovering or dragging a sash shows a highlight line in that accent, and resetting the accent clears it. Each theme's own default sash highlight comes with the next full installer.
+
+### WSL, SSH and remote
+
+- **The AI can open the files Breezell saves for it in WSL and SSH windows:** Breezell saves things like long terminal output and images from MCP tools as files for the AI to read when it needs them. In WSL and SSH windows the AI could not open them. Now:
+  - They are kept in the workspace's `.breezell/tool-results` folder, where the read tool, the terminal and scripts all reach them.
+  - Git and search ignore that folder on their own, so it stays out of `git status`, commits and search results, and your `.gitignore` needs no change.
+  - With no folder open, they stay in your home folder as before.
+- **The Ports view no longer uses more memory over time:** while the Ports view was open, every update of its list took a little more memory. It no longer does.
+
+### Models
+
+- **OpenRouter Auto Router:** `openrouter/auto` lets OpenRouter pick the model, and each request is billed at the model it picked, so there is no list price. Image, video and audio input, tools, 2M context. Thinking starts off; turned on, it can be set to low, medium or high.
+- **LiquidAI LFM3-1.7B:** on OpenRouter as `liquid/lfm-3-1.7b` and its free route `:free`. 262,144 context, up to 8,192 output tokens, tools, text input. Its reasoning is always on, with no effort levels.
+
+## 1.4.5 · 2026-11-06
+
+### Highlights
+
+- **Plugins:** Install plugins from the market in Box ▸ Plugins, or write your own. A plugin can only use the permissions it declares and you allow.
+- **More reliable Super Memory experiences:** Approaches that did not work are no longer saved as trusted experiences.
+- **Sign-in no longer drops for no reason:** A lost network, an unreachable website, a proxy error, several open windows or a wrong computer clock no longer sign you out. A sixth device is only refused; the account is no longer blocked for 24 hours.
+- **Replies start sooner:** The first word appears faster, and sending no longer makes you wait.
+- **Watch the agent in the browser:** "Follow agent in browser" lets the agent work in a tab of its own. When you need to sign in or solve a captcha, it opens the page for you.
+- **You choose how often to retry:** Box ▸ Performance ▸ Network & chat ▸ Retries when a chat request fails. When the connection keeps dropping, the error shows within seconds.
+- **Long chats are steadier and smoother:** Chats with thousands of messages scroll without stutter. Chat history survives a crashed window, and old long chats no longer run out of memory when opened.
+- **New providers and models:** Baidu ERNIE and Ant Ling; GPT Image 2.6 can make SVGs and GIFs.
+
+### Plugins
+
+- **Box ▸ Plugins (new):** Install plugins from the Breezell plugin market on GitHub, or install a `.vsix` you packaged yourself. Plugins run only while you are signed in to Breezell. When you sign out they are turned off, and Restart extension host stops the ones that had started. Plugins cannot reach your account, your billing or Breezell's internal settings.
+  - Market: search (names and descriptions are found in any language), categories (a button opens a panel with how many plugins each one has), Open source / Closed source, sort and Refresh. A card's footer has install, Open, the on/off switch and Uninstall. Clicking the name or description opens the details, with the README, permissions, author and checksum. A download that does not match the market is not installed.
+  - Installed: one row per plugin; click one for its details page. It has the state switch (Running, Off, Waiting for sign-in, Blocked), Open, an update button when there is a new version, Version, From, License and ID, Source code and View on GitHub, the Windows, What it adds and Permissions cards, and the README. Install local .vsix is on this page too.
+  - Develop: Create a plugin makes a plugin folder from a template; open it and press F5 to run it. From code to market lists the steps to package and publish it, with the Developer guide.
+  - Plugins that can be opened are listed under Plugins in the Box sidebar; click one to open its panel or window.
+  - Plugin names, descriptions, categories and READMEs follow Breezell's display language, in English when there is no translation. Traditional and Simplified Chinese never stand in for each other.
+  - Breezell plugins no longer appear in the Extensions view; they are managed in Box ▸ Plugins.
+- **What plugins can do:**
+  - Add skills, rules and MCP servers. Your own skill or server of the same name wins.
+  - Give the agent tools, and say which modes offer them (Chat, Agent, Entanglement, Analyze, Teams); they still need your approval and get their own tool cards. A plugin can also look at the agent's tool calls before they run, and refuse them.
+  - Open windows of their own, which can also start without an editor window. On a plugin's details page, the Windows card has Add to Start menu (Windows), Add to applications menu (Linux) or Add to Applications (macOS) for a shortcut. On macOS, plugin windows take ⌘Z, ⌘A and ⌘W like other windows.
+  - Change Breezell's screens: buttons and menu entries, commands in the slash menu, pages of their own, replacements for some parts, their own drawing of code fences in a language, new modes, a companion floating on the chat box, and a settings card in Feature Options (Box search finds it). They can also change colours, fonts and looks, and switch them with the plugin's own settings.
+  - Read your conversations, send messages in them, approve tool calls, use or switch your chat model, show their texts in Breezell's display language, and ask you to restart Breezell.
+  - Input method plugins: the candidate panel can show in the code editor and in the chat box. It closes when you click elsewhere, the focus leaves or the input method is turned off, and the words offered after a commit go away by themselves; long candidates wrap instead of running out of the chat box.
+  - What plugin developers can use, and the permissions for it, is in the Developer guide on the Develop page.
+- **What plugins cannot touch:** Sign-in, plans, quota, billing, the Custom API settings, permission dialogs, tool approval and the plugin pages cannot be changed by a plugin, and anything waiting on you always shows above a plugin's screens. Signing out in any window, or a plugin being blocked, takes away what it added at once.
+  - A plugin's buttons say "From the plugin: name". Right-click one for Hide this button or Manage plugin; Show hidden buttons on the plugin's details page brings them back. A screen a plugin replaced has Show Breezell's own view.
+- **Permissions:** A plugin declares the permissions it needs, and nothing it did not declare can be used. Normal permissions (such as knowing when a conversation turn starts and ends, switching the chat model, adding buttons) are on by default. Risky ones (such as using your chat model, reading your conversations, sending messages, approving tool calls, reading your code or the chat box, changing a message before it is sent, reading your custom API keys) are asked for the first time the plugin uses them, and your answer is kept.
+  - Permissions on the plugin's details page lists each permission with its kind (Automatic or Asks you first), its state (On, Off, Asks on first use) and a switch, with Turn all on and Turn all off. An installed plugin's market details have the same switches.
+  - The install dialog has an unticked checkbox: "Allow all the permissions it asks for now, instead of when it first uses each".
+  - Reading custom API keys works only for accounts whose plan includes Custom API.
+  - Uninstalling resets a plugin's permissions to their defaults.
+- **Updates and removal:**
+  - When a plugin installed from the market has a new version, Breezell says so once, with Update to version (Update all for several) and View.
+  - After you update or uninstall a plugin that is running, the old version keeps running until the extension host restarts. Breezell says so and offers Restart extension host. The same goes for removing and installing a plugin again in one session.
+  - Uninstall is on market cards, in the details and on Installed, and asks first. The skills, rules, MCP servers and windows the plugin added go with it; its settings stay.
+  - A plugin can ask to restart the plugins, the window or all of Breezell after it is installed, updated or removed; the install dialog lists this first. When a running plugin asks for a restart, you choose Restart now or Later. Restarting without asking needs your permission, happens at most once per version, waits for a reply being written to finish, and gives notice first.
+- **Blocklist:** The market's maintainers can block a plugin that turns out to be harmful. A blocked plugin is turned off; one that is running stops at once and its windows close, and Breezell tells you once and offers to uninstall it. The market no longer shows it, and it cannot be installed or turned back on; Installed shows Blocked and the reason.
+
+### Chat
+
+- **Chat history survives a crashed window:**
+  - An empty window that crashed and is opened again no longer loses its chat history. New Window after such a crash really opens a window instead of quitting.
+  - After a session that did not close cleanly, Breezell says so ("The window closed unexpectedly last time…") and offers Open Conversation to reopen the conversation you were in. It is not opened by itself. A clean exit no longer triggers the notice.
+  - When the disk is busy or full, the workspace's conversations no longer all open empty.
+- **Old long chats behave:**
+  - A long chat in the old format no longer loses messages the first time it is saved.
+  - Very old long chats no longer crash the window with out-of-memory when opened.
+  - A reopened chat no longer shows blank space in its latest turn.
+- **A revert never empties a file:** When a revert could not find a file's backup, it used to write the file back empty. Now it says the backup is missing and leaves that file as it is; the other files are reverted as usual.
+- **Deleting a chat no longer breaks its branches:** A chat branched or copied from another one can still be reverted after the original is deleted or cleaned up.
+- **No more 400 from Claude 4.6 and later:** On a custom slot with the Anthropic format, Claude 4.6+ answered "This model does not support assistant message prefill" after a reply in a long chat had been cut off. That no longer happens. Replies in long chats are also no longer cut off early.
+- **Only the attachments you meant:** An image waiting in the composer no longer goes along with a follow-up suggestion, a queued message, a plan's prompt or a plugin's message; a queued message open for editing no longer sends its image twice. On a model without vision, clicking a follow-up suggestion no longer does nothing.
+- **Slash menu:** What you type while the slash menu is open stays in the box, so Esc no longer loses it, and Enter with no matching command sends the message: messages starting with / can be sent now. Input method candidates no longer hide under the menus that open from the box.
+- **Math in chat:** Formulas draw in their proper fonts, so a norm's double bar no longer shows as two slashes. On Windows, LaTeX code blocks no longer lose their first line, and a one-line block shows.
+- **Files named in chat open:**
+  - In WSL and SSH remote windows and multi-folder workspaces, file cards and links in the chat no longer open as "file not found".
+  - A path in a reply with `:42`, `#L42` or `#L42-L50` opens at that line.
+  - Folders named in a reply: outside the workspace they open in the system's file manager, inside it they are revealed in the Explorer view. Binary files such as archives no longer open in the text editor; a menu appears whose first entry, Open, hands them to the system's app.
+  - Paths copied out of the chat no longer carry invisible characters.
+- **Cross-Check really off by default:** Existing installs turn Cross-Check off once. If you turn it on afterwards, it stays on.
+- **Smaller chat fixes:**
+  - Replies made only of invisible characters (Kimi K3.1 Pro sends some) no longer show as an empty row.
+  - A turn you stopped while the model was writing no longer brings follow-up suggestions or a Cross-Check.
+  - Several calls of the same tool in a row get a folded header that says what they were (for example which skills were used), not just a count.
+  - The start page's suggestion creates `.breezell/rules/breezell.md` instead of the deprecated `.breezellrules`.
+
+### Agent tools
+
+- **Terminal commands:**
+  - Commands that do not end by themselves, such as dev servers, go to the background at once instead of holding the turn.
+  - Other commands no longer hang for a long time for no reason.
+  - The command card has To background: the command keeps running and the turn goes on.
+  - The AI always knows when a background command ends. When you stop a command, an idle AI says it saw the stop and does not run it again.
+  - The done sound, voice and system notification wait for the work to really end: a turn that ends with a command still running stays quiet, and you are told once that command ends.
+  - A command the AI stopped itself reads "[Stopped by the agent]" on its card instead of saying you stopped it, and the AI no longer asks you about a stop nobody made.
+  - A finished terminal card no longer shows Open and Stop for the next command, and those buttons no longer make the card taller.
+- **The AI's searches find what your project holds:**
+  - File name searches ignore letter case. On Windows, `readme.md` used to miss `Docs/README.md`.
+  - The AI's searches follow your project's `.gitignore` and the Search: Exclude setting to decide what to skip, instead of always skipping folders such as `build`, `out` and `dist` or files such as logs and images.
+  - Projects without Git (SVN, Perforce, Plastic, or an unpacked copy) also get their ignore rules applied instead of being searched whole.
+  - Unity, Unreal and Godot projects skip the folders their engines generate.
+  - Search results for file or folder names with dates or version numbers (such as `2024-10-29-notes.md`) no longer open the wrong file.
+- **Code lookups:** The AI finds functions and classes in more languages: Lua, Go types, C# structs, C++ methods defined outside their class, Ruby, Kotlin, Dart, Scala, Solidity, Elixir, OCaml and Objective-C. In a multi-folder workspace, code lookups cover every folder, not only the first.
+- **The AI no longer searches without end:** When the AI keeps searching with new words without opening any file, the turn stops and says why.
+- **The AI finds settings for you:** Ask where a setting is and the AI names its place in Box in your display language, or opens Box with that option marked. Available in Chat mode. Errors that send you to a setting name the right place in Box too.
+- **Other:**
+  - The AI no longer keeps re-sending an edit that was already applied.
+  - A very long pipeline command no longer freezes the window when the turn ends.
+  - New built-in skills: the HyperFrames skills and an Office documents skill. The Superpowers switch only covers its own skills.
+
+### Memory
+
+- **More reliable experiences:** Super Memory no longer saves approaches that did not work as trusted experiences. All of this happens on your computer.
+
+### Teams
+
+- **Pick each teammate's model on the approval card:** With Auto-approve Teams off, a new team waits on an approval card. Each member's row is now a model menu (Model for this teammate), set to the model that would really run. The card used to be a read-only preview that could name another model than the one that ran. Your pick survives a reload and applies whether you approve from the card, the system notification or its link. With auto-approve on, nothing changes: no card, the team starts at once.
+- **Retry a teammate on another model:** A teammate's error card has a model menu beside retry (Model it retries on); the pick is that teammate's model from then on.
+- **Write to a teammate directly:** The composer on a teammate's page, locked until now, sends your message to that teammate. It is read before the teammate's next step without stopping the current one, and it wakes a teammate that is idle, finished, failed or stopped.
+  - Waiting messages sit in the queue bar above the composer, one per step, and can be withdrawn (Withdraw) until the teammate reads them.
+  - A withdrawn message does not appear in the conversation and is not passed on to the lead.
+
+### Network & reliability
+
+- **Replies start sooner:** The first word comes in about 0.4 s instead of about 0.65 s, and sending no longer adds two or three seconds of waiting, including the first message after a break or after launch.
+- **Retries when a chat request fails, set by you:** Box ▸ Performance ▸ Network & chat has Retries when a chat request fails under First-byte timeout.
+  - Default picks the count by kind of error; Off shows the error card at once; or choose a count, or Custom for 1–20 times.
+  - Errors a retry cannot fix, such as being signed out or out of credit, an answer already shown, and anything after your Stop are never retried.
+- **A dropped connection shows its error sooner:** When the connection keeps dropping, the error now shows in about 5 s instead of nearly 30 s.
+- **Subagents and long chats cost less:** Subagents and long chats cost less to run. Subagents on Claude and Gemini also no longer read only the beginning of each file.
+
+### Models & providers
+
+- **New providers:**
+  - Baidu ERNIE: ERNIE 5.1 (128K context, image input, tools, always thinks). ERNIE 5.5 Flash is listed ahead of its launch (text only, not priced yet).
+  - Ant Ling: Ling-3.2-flash (1M, image and video input, tools; free for its first two weeks, not priced yet), Ling-3.1-flash (1M, text only), Ling-3.0-flash-VL (262K, image and video input) and Ling-3.0-flash (262K, text only). Ling 3.x thinks by default and can be switched off. Ling-3.2-flash has a context picker, 262K by default and 1M on request.
+- **New models:**
+  - LongCat-2.5 GA replaces LongCat-2.5-Preview and 2.0: 1M context, 128K output, image input.
+  - Tencent Hy4 GA (TokenHub, OpenCode Go, OpenRouter) is the first Hy model that reads images; hy4-preview stays text only.
+  - OpenRouter: GLM-5.3-FlashX-Legal (Z.ai's legal-domain model), Ricursive Ripple-65B Preview (text only) and the stealth model Crouton Alpha (image, video and audio input, free).
+  - Reflection Beam 1.0 (OpenRouter, Vercel, OpenCode, Together): 1M, text only, always reasons.
+  - OpenCode Go follows its lineup of 2026-11-03: Claude Haiku 5.5, Gemini 4 Argon, MiniMax M3.1 Flash, Step 5 Preview, a free Reflection Beam and the stealth model Iceman Contributor are added; Grok 4.6, Kimi K2.6, DeepSeek V4 Flash and other withdrawn entries are removed, and models you typed in yourself keep working.
+  - Listed ahead of access: Gemini 4 Carbon (Gemini API and Breezell; Google offers it to selected partners only, so most keys get a 404), and DeepSeek Flash Cyber's `cyber-personal-v3` and `cyber-enterprise-v4` (they need a Cyber Key issued after a real-name review).
+- **DeepSeek:**
+  - The list keeps only what the official API serves, `deepseek-flash` (V4.1 Flash) and `deepseek-v4-pro`, plus V4.1 Pro ahead of its launch. Names the official list no longer has leave the default list; models you added yourself stay.
+  - The retired `deepseek-chat` and `deepseek-reasoner` are removed; features set to them move to another DeepSeek model by themselves.
+
+### Images & video
+
+- **GPT Image 2.6:** `gpt-image-2.6-sunburst` and `gpt-image-2.6-flare` join OpenAI, OpenRouter and Image Studio, with everything 2.5 has (frames up to 3:1, 1K / 2K / 4K, xhigh and max quality, transparent backgrounds).
+  - Complexity (Low, Medium, High; High by default): set in Box, and the AI can set it when it draws in chat.
+  - SVG output (new images only, one at a time) and GIF: 2–16 frames (GIF frames), 20–2000 ms each (Frame time), about 512 × 512 per frame, not with a mask. Neither takes a transparent background.
+  - The ChatGPT sign-in can make GIFs too, but OpenAI has not opened this to every account yet, so some are refused; Box says so.
+  - Image Studio offers the formats a model takes, SVG and GIF included. SVGs show in the gallery, copying an SVG or GIF copies a PNG of it, and the save dialog offers .svg.
+- **Image mode understands "try again":** Saying "this one is no good" after an image used to bring back an unrelated new one. Now a message with no image of its own edits the image before it. A message that asks for more than a drawing, such as "this is no good, look online for references", turns image mode off and goes to the chat model.
+- **Edit this goes to the chat model:** Edit this or Edit regions on an image card in a normal chat no longer switches the chat to image mode. The image goes into the composer and the chat model takes your instruction: it can look things up first, then draw with the image as its reference. When the chat is already in image mode, or the chat model cannot do it, image mode still takes the edit.
+  - The card no longer shows the long prompt written for the image model; its details list the image files only.
+  - An image drawn by Breezell shows Breezell once, in the model row.
+- **Any model can have its own image recognition model:** In Box ▸ Models, a model's Advanced settings ▸ Images has the Model reads images itself switch and the Image recognition model picker, applied at once. With it off, attached images are read by the chosen model instead. Box shows the model as text-only, with Vision Proxy in its menu.
+  - While a vision proxy is set, the Vision Proxy dialog has Remove vision proxy. It used to be hard to find how to turn one off.
+- **Image Studio:**
+  - Each API profile's image API and video API can take its own network route: Direct, System proxy, Global proxy or Custom proxy (HTTP / HTTPS / SOCKS5, with a username and password, or pasted as a URL); System proxy stays the default. Fetching the model list uses that route too, and a failure says why.
+  - Add models by ID; they stay when the list is fetched again.
+  - MiniMax H3 works through relays.
+  - Riverflow V2.6 Pro: in Box ▸ Models ▸ Image generation under OpenRouter, and in Image Studio (1K / 2K / 4K, up to ten reference images).
+  - Gemini Omni 1.1 Flash (a video model on OpenRouter): Image Studio has a video preset for it (360p–4K, 16:9 or 9:16, 3–10 s, first and last frame, with sound).
+- **Seedream 5.0 Lite draws in Box:** Through a relay it failed in Box while Image Studio drew. In Image Studio, Seedream 5.0 Lite and Pro sizes and reference counts now follow the official specs: Lite offers 2K / 3K / 4K and 14 reference images, Pro 1K / 1.5K / 2K and 10 reference images.
+- **Box image edits work with more relays.**
+
+### Built-in browser & Computer Use
+
+- **Follow agent in browser (new, off by default):** Turn on Follow agent in browser in Feature Options ▸ Code Behavior, or click the eye button in the browser toolbar. The agent then works in a tab of its own marked "Agent" that you can watch live, and never touches your tabs. Reading a page does not bring the browser to the front.
+- **Pages you need to see open for you:** With Headless browser on (the default), a sign-in, a captcha or a finished page used to stay off-screen, and the agent had no way to show it to you. Now, for a page you asked to see, a page you have to act in yourself (sign-in, captcha, QR code, confirming a payment), or the result at the end, it opens the Browser tab. Its own checks still run off-screen.
+- **Cloudflare checks no longer loop:** The built-in browser no longer gets stuck repeating Cloudflare's human check.
+- **Computer Use (Windows):**
+  - It can capture the window in front or one display, zoom into part of it, click with modifier keys held, triple-click and hover, and wait for a window or control to appear or go away. Clicks on buttons, checkboxes and expanding menus are more reliable.
+  - It never types into a password field.
+  - Opening an app that already runs switches to its window (also from the tray), or lists its windows when it has several (two QQ accounts, for example).
+  - Windows are recognized when QQ or WeChat is in front.
+  - Claude models use Anthropic's own computer tool: Box ▸ Experimental ▸ Computer Use (Windows) ▸ Claude's own computer tool.
+  - The new command Breezell: Run Computer Use Evaluation tests a model on nine desktop tasks and checks each result.
+
+### Box
+
+- **Data Cleanup:**
+  - The space it can free is now what the files really take on disk.
+  - A cleanup of the current workspace no longer deletes files other workspaces still need.
+  - When the cleanup can free more than Cleanup reminder is set to (off, 200 MB, 500 MB by default, 1 GB), a card appears at the bottom left. Clean up now runs the safe cleanup and shows it to the end; Not now keeps the card away in every window for 7 days, unless as much again piles up. It stands in one column with the hot update card, so they never overlap.
+  - New things it can clean: checkpoint backups nothing uses any more (counted with Expired checkpoints); Storage of deleted projects, the data left by workspaces whose folder is gone, which deletes their conversations too, so it is never preselected, asks first with every project listed, and is never run by scheduled maintenance or the reminder; and more Space left by deleted content.
+- **Database ▸ Data Browser redesigned:** The page is one surface, and Box's navigation folds to its icon rail while it is open.
+  - The navigator on the left can be resized by dragging or folded with Collapse navigator, and both are remembered. It lists every connection with its status; the open connection can be disconnected, renamed, sent to the chat or deleted; below it are its tables with row counts, a search, sorting, and new table and SQL console.
+  - A database overview lists every table with its rows, columns and primary key, with a filter, sorting and Group by first letter. Some server databases show estimated row counts.
+  - The table view has a WHERE filter (Enter runs it), Shown columns and the total row count, with the row number and key pinned on the left.
+  - Row detail docks beside the grid: every field in full, JSON laid out, Previous / Next, edit (or double-click), Copy as JSON and delete. Delete table moved to the Structure tab, and scanning the workspace to the new-connection form.
+  - Buttons and scrollbars that appeared only on hover are gone.
+- **Model monitor ▸ Breezell:** It shows the status of the lines for your plan (for example "Breezell Pro/Pro+"). Each row shows the last 90 minutes, one bar a minute, and 24H / 7D / 30D switch the availability figure, with their average in the headline. It updates when the tab opens and on Check again. If your plan has no monitors yet, the tab says so. The other tabs check from your computer as before.
+- **Models page:**
+  - The category row (Breezell, sign-in accounts, API providers, OpenAI-compatible, image generation) stays pinned at the top, and only what is under it scrolls.
+  - OpenAI-compatible slots can be searched by name, URL or model ("opus 4.8" finds `claude-opus-4-8`). The slot the current chat uses is marked In use and comes first; the others follow by when they were last used.
+  - In a narrow Box the name gives way first, then a badge that no longer fits drops out whole, and In use shrinks to its check mark. Tooltips show only where text is cut.
+  - The fetched-models list's close button says Close; a click outside the list or Esc closes it (unless models are ticked in it).
+- **Performance ▸ Network & chat:** The diagnosis card and recent requests show the nickname you gave an OpenAI-compatible slot instead of names like "OpenAI-Compatible 9".
+- **Rules & Skills & Memory:** The panel named Skills & Memory, whose first tab is Rules, is now Rules & Skills & Memory everywhere: the Box tab (MCP & Rules & Skills & Memory), its entry card and the title-bar button.
+- **Sidebar:** The plan beside the account name is a coloured word instead of a framed pill, and the Updates icon at the foot loses its tile but keeps its colour.
+
+### Account & sign-in
+
+- **Sign-in no longer drops for no reason:** Some people were signed out with nothing wrong with their account, or could not sign in at all. Now:
+  - A lost network, an unreachable website, a challenge page, a proxy error, several open windows, two Breezell installs on one computer and a wrong computer clock no longer sign you out. You are signed out only when Breezell really ends your sign-in.
+  - Windows agree on your sign-in, so no window shows you signed in when the sign-in is gone.
+  - When your only way online is a proxy set in Box, sign-in uses that proxy too.
+  - When you enter a sign-in code, Breezell tells apart a code that did not work, too many attempts from this network, and Breezell being unreachable.
+  - When you are signed out, it says why: "This device was signed out" or "Your sign-in has ended".
+- **Breezell models no longer keep failing after the sign-in expires:** Every message used to fail after the sign-in expired, until you signed in again; now Breezell carries on by itself.
+- **A sixth device is only refused:** A sixth device used to block the whole account for 24 hours and sign out the other five. Now only the new device is refused: it stays on the sign-in page and says why, and the other five carry on. A device that wakes from sleep with every slot taken stays signed in, says it is waiting, and carries on by itself when a slot frees up. The account page explains this. A closed editor also no longer holds a device slot for hours.
+- **Sign-in kept encrypted:** Your sign-in is stored encrypted on your computer.
+- **Stop is billed for what was produced:** On Breezell's own models, Stop or a broken-off request is billed only for what was produced, not for the whole answer.
+
+### Remote development
+
+- **Remote-SSH:**
+  - Security fix: port forwarding listens on this computer only, so other computers on the local network cannot reach it.
+  - Connect to Host lists the hosts in your SSH config and takes `user@host:port`.
+  - cmd, PowerShell and Git Bash are told apart on Windows hosts.
+  - ProxyJump and PEM keys with a passphrase work; the install script's problems on macOS and on minimal Linux systems are fixed.
+  - A workspace with no folders no longer shows an error.
+- **Remote-WSL:** Install script fixes, Alpine support, and the reason shown when the script fails; a workspace with no folders no longer shows an error.
+- **Plugins in remote windows:** Installed shows one row per plugin, and an update no longer leaves the old version running on the other side.
+
+### Performance
+
+- **Smoother scrolling in long chats:** Chats with thousands of messages scroll without stutter.
+- **Box rests while it is closed:** A closed Box no longer uses resources in the background.
+- **Memory recall uses less memory:** Memory recall takes about 40% less memory.
+- **Saving huge chats uses less memory:** Saving a very large old chat uses much less memory.
+
+### Interface
+
+- **New mark on the empty chat page:** The modern and classic empty pages show a large RSI with BREEZELL running through its middle. It does not move.
+- **One size for the turn's action bar:** Request ID, the duration, Review, Git and the tool count on the right are now the size of the copy and branch buttons on the left.
+- **Quick Phrases redesigned:** The popover has a title, an add button and Manage; each of your Favorites is a row with its type icon, its name and a one-line preview (terminal commands in monospace). The manage dialog is restyled and works as before; the form saves on Enter in the name or Ctrl/Cmd+Enter in the content.
+- **Auto in the modern interface:** The Auto route switch draws correctly. The Auto model menu is no longer covered by the chat history side bar beside it, and no longer runs past the window's right edge.
+- **Deleted lines wrap in inline diffs:** With word wrap on (Alt+Z), a long deleted line in an edit's red area stayed one line, cut off at the edge. It now wraps like the editor's other lines.
+- **Other:**
+  - The delete tool's card strikes through the deleted file's name; a code block's file header has its name and icon at matching sizes.
+  - The shimmering wait text no longer shows a double image on analysis cards.
+  - The model hint on the Teams approval card's member rows uses Breezell's own tooltip instead of the system's white one.
+
+### Install & updates
+
+- **More reliable Windows updates:** A failed download shows an error right away, and an old installer is no longer installed by mistake.
+- **System requirements:** From this version on, macOS 13 or later is required, and builds are 64-bit only. There is no Linux ARM32 (armhf) editor any more, and the download page no longer recommends an x64 package to ARM32 computers; connecting to an ARM32 host over SSH still works.
+- **Linux packages:** The deb and rpm package dependencies are updated for the new version.
+- **Electron 45.2.2:** The built-in Chromium is updated to version 156, and dependencies are updated, including security fixes.
+
 ## 1.4.4 · 2026-10-27
 
 ### Highlights

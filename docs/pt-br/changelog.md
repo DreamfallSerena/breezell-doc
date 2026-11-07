@@ -5,6 +5,289 @@ next: false
 
 # Registro de alterações
 
+## 1.4.51 · Hot Update · 2026-11-06
+
+Uma atualização rápida para a 1.4.5, sem precisar reinstalar: o Breezell a oferece sozinho, ou verifique em "Atualizações" no pé da barra lateral do Box.
+
+### Chat
+
+- **Conversas longas com muitas capturas de tela continuam:** depois de muitas capturas de tela em uma conversa, as mensagens podiam parar de passar, com `NGHTTP2_ENHANCE_YOUR_CALM` no erro enquanto o diagnóstico culpava a rede. Agora:
+  - Imagens coladas antes não pesam mais nas mensagens seguintes, então a conversa pode continuar.
+  - Quando a IA precisa olhar de novo uma imagem anterior, ela a abre de novo em vez de descrevê-la de memória.
+  - As imagens que você anexa a uma mensagem são sempre enviadas, assim como as imagens de uma mensagem que você edita ou envia de novo.
+- **O mesmo para imagens que a IA abriu:** uma imagem que a IA abriu para olhar não fica mais junto com o resto da conversa; ela a abre de novo quando precisa. Quando abre várias imagens de uma vez, ela vê cada uma delas.
+- **Tabelas se ajustam à largura do chat:** as tabelas nas respostas tinham a largura da linha mais longa e precisavam ser roladas para os lados. Agora elas quebram linha na largura do chat:
+  - Os cabeçalhos só quebram entre palavras, e rótulos em CJK ficam inteiros.
+  - Caminhos e nomes em uma tabela não são espremidos em uma letra por linha.
+  - Uma tabela só rola para os lados quando uma única palavra é mais larga que o chat.
+- **Um título em negrito não gruda mais no parágrafo de cima:** um título em negrito em uma linha própria de uma resposta, como "(2) ..." ou "(3) ...", ficava colado no fim do parágrafo anterior, e o espaço antes de um trecho em negrito no meio de uma frase sumia ("this is **important**" virava "this isimportant"). Os dois foram corrigidos.
+- **Títulos em negrito ficam no lugar enquanto a resposta chega:** enquanto uma resposta ainda estava em streaming, um título em negrito em uma linha própria ficava a um espaço inteiro do seu texto até a resposta terminar. Agora ele já tem o espaçamento final durante o streaming, também no texto de pensamento.
+- **Arrastar o divisor fica mais fluido em conversas longas:** redimensionar o chat não fica mais lento conforme a conversa cresce.
+
+### Box
+
+- **Sem página do Box em branco na inicialização:** se você fechava o Breezell na página do Box, ele abria da próxima vez só com a navegação à esquerda e nada ao lado. Agora ele abre na página em que você parou.
+
+### Interface
+
+- **A prévia "Nova interface Breezell" é uma miniatura da área de trabalho:** a prévia no cartão "Nova interface Breezell" do painel Tema e Aparência da barra de título eram três blocos cinza. Agora é uma miniatura nas cores do seu tema: a barra de título com menus, a barra de atividades, o Explorador, o editor com abas, código, o cursor e o minimapa, o terminal, o chat do Breezell e a barra de status. Ativada, as partes são cartões flutuantes arredondados; desativada, são quadradas, rentes e divididas por linhas finas, então é fácil distinguir as duas.
+- **Todas as alças de divisor têm o mesmo brilho:** a alça de três pontos no divisor ao lado do Explorador parecia mais clara que as outras. Agora todas têm a mesma aparência; arrastar não mudou.
+- **Realce do divisor na sua cor de destaque:** depois que você escolhe uma "Cor de destaque" no painel Tema e Aparência, passar o mouse sobre um divisor ou arrastá-lo mostra uma linha de realce nessa cor, e redefinir a cor de destaque a remove. O realce padrão de divisor de cada tema vem com o próximo instalador completo.
+
+### WSL, SSH e remoto
+
+- **A IA consegue abrir os arquivos que o Breezell salva para ela em janelas WSL e SSH:** o Breezell salva coisas como saídas longas de terminal e imagens de ferramentas MCP como arquivos para a IA ler quando precisar. Em janelas WSL e SSH a IA não conseguia abri-los. Agora:
+  - Eles ficam na pasta `.breezell/tool-results` do espaço de trabalho, onde a ferramenta de leitura, o terminal e os scripts os alcançam.
+  - O Git e a busca ignoram essa pasta por conta própria, então ela fica fora do `git status`, dos commits e dos resultados de busca, e o seu `.gitignore` não precisa mudar.
+  - Sem pasta aberta, eles ficam na sua pasta pessoal, como antes.
+- **A visão Portas não usa mais memória com o tempo:** enquanto a visão Portas estava aberta, cada atualização da lista ocupava um pouco mais de memória. Isso não acontece mais.
+
+### Modelos
+
+- **OpenRouter Auto Router:** `openrouter/auto` deixa o OpenRouter escolher o modelo, e cada requisição é cobrada pelo modelo escolhido, então não há preço de tabela. Entrada de imagem, vídeo e áudio, ferramentas, contexto de 2M. O pensamento começa desativado; ativado, pode ser definido como baixo, médio ou alto.
+- **LiquidAI LFM3-1.7B:** no OpenRouter como `liquid/lfm-3-1.7b` e sua rota gratuita `:free`. Contexto de 262.144, até 8.192 tokens de saída, ferramentas, entrada de texto. O raciocínio está sempre ativado, sem níveis de esforço.
+
+## 1.4.5 · 2026-11-06
+
+### Destaques
+
+- **Plugins:** Instale plugins do mercado em Box ▸ Plugins, ou escreva o seu. Um plugin só pode usar as permissões que declara e que você permite.
+- **Experiências do Super Memory mais confiáveis:** Abordagens que não funcionaram não são mais salvas como experiências confiáveis.
+- **O login não cai mais sem motivo:** Uma rede perdida, um site inacessível, um erro de proxy, várias janelas abertas ou um relógio do computador errado não desconectam mais você. Um sexto dispositivo é apenas recusado; a conta não é mais bloqueada por 24 horas.
+- **As respostas começam mais cedo:** A primeira palavra aparece mais rápido, e enviar não faz mais você esperar.
+- **Acompanhe o agente no navegador:** "Acompanhar o agente no navegador" deixa o agente trabalhar em uma aba própria. Quando você precisa entrar ou resolver um captcha, ele abre a página para você.
+- **Você escolhe quantas vezes tentar de novo:** Box ▸ Desempenho ▸ Rede e chat ▸ Novas tentativas quando uma solicitação do chat falha. Quando a conexão continua caindo, o erro aparece em segundos.
+- **Chats longos mais estáveis e fluidos:** Chats com milhares de mensagens rolam sem engasgos. O histórico de chat sobrevive a uma falha da janela, e chats longos antigos não ficam mais sem memória ao abrir.
+- **Novos provedores e modelos:** Baidu ERNIE e Ant Ling; o GPT Image 2.6 pode gerar SVGs e GIFs.
+
+### Plugins
+
+- **Box ▸ Plugins (novo):** Instale plugins do mercado de plugins do Breezell no GitHub, ou instale um `.vsix` que você mesmo empacotou. Os plugins só rodam enquanto você está conectado ao Breezell. Quando você sai da conta, eles são desativados, e Reiniciar o host de extensões para os que já tinham iniciado. Os plugins não alcançam sua conta, sua cobrança nem as configurações internas do Breezell.
+  - Mercado: busca (nomes e descrições são encontrados em qualquer idioma), categorias (um botão abre um painel com quantos plugins cada uma tem), Código aberto / Código fechado, ordenação e Atualizar. O rodapé de um cartão tem instalar, Abrir, o interruptor de ativar/desativar e Desinstalar. Clicar no nome ou na descrição abre os detalhes, com o README, as permissões, o autor e a soma de verificação. Um download que não confere com o mercado não é instalado.
+  - Instalados: uma linha por plugin; clique em um para ver a página de detalhes. Ela tem o interruptor de estado (Em execução, Desativado, Aguardando login, Bloqueado), Abrir, um botão de atualização quando há versão nova, Versão, Origem, Licença e ID, Código-fonte e Ver no GitHub, os cartões Janelas, O que adiciona e Permissões, e o README. Instalar .vsix local também fica nesta página.
+  - Desenvolver: Criar um plugin gera uma pasta de plugin a partir de um modelo; abra-a e pressione F5 para executá-lo. Do código ao mercado lista os passos para empacotar e publicar, com o Guia do desenvolvedor.
+  - Os plugins que podem ser abertos aparecem em Plugins na barra lateral do Box; clique em um para abrir o painel ou a janela dele.
+  - Nomes, descrições, categorias e READMEs dos plugins seguem o idioma de exibição do Breezell, em inglês quando não há tradução. Chinês tradicional e chinês simplificado nunca substituem um ao outro.
+  - Os plugins do Breezell não aparecem mais na visão Extensões; eles são gerenciados em Box ▸ Plugins.
+- **O que os plugins podem fazer:**
+  - Adicionar skills, regras e servidores MCP. Sua própria skill ou servidor com o mesmo nome prevalece.
+  - Dar ferramentas ao agente e dizer em quais modos elas aparecem (Chat, Agent, Emaranhamento, Analisar, Teams); elas ainda precisam da sua aprovação e ganham cartões de ferramenta próprios. Um plugin também pode examinar as chamadas de ferramenta do agente antes que rodem, e recusá-las.
+  - Abrir janelas próprias, que também podem iniciar sem uma janela do editor. Na página de detalhes de um plugin, o cartão Janelas tem Adicionar ao menu Iniciar (Windows), Adicionar ao menu de aplicativos (Linux) ou Adicionar a Aplicativos (macOS) para criar um atalho. No macOS, as janelas de plugin aceitam ⌘Z, ⌘A e ⌘W como as outras janelas.
+  - Mudar as telas do Breezell: botões e itens de menu, comandos no menu de barra, páginas próprias, substitutos para algumas partes, seu próprio desenho dos blocos de código de uma linguagem, novos modos, um companheiro flutuando sobre a caixa de entrada do chat e um cartão de configurações em Opções de Recursos (a busca do Box o encontra). Também podem mudar cores, fontes e visuais, e alterná-los com as configurações do próprio plugin.
+  - Ler suas conversas, enviar mensagens nelas, aprovar chamadas de ferramenta, usar ou trocar seu modelo de chat, mostrar seus textos no idioma de exibição do Breezell e pedir que você reinicie o Breezell.
+  - Plugins de método de entrada: o painel de candidatos pode aparecer no editor de código e na caixa de entrada do chat. Ele fecha quando você clica em outro lugar, o foco sai ou o método de entrada é desligado, e as palavras oferecidas depois de confirmar o texto somem sozinhas; candidatos longos quebram linha em vez de passar da caixa de entrada do chat.
+  - O que os desenvolvedores de plugins podem usar, e as permissões para isso, está no Guia do desenvolvedor na página Desenvolver.
+- **O que os plugins não podem tocar:** Login, planos, cota, cobrança, as configurações de API personalizada, as caixas de diálogo de permissão, a aprovação de ferramentas e as páginas de plugins não podem ser alterados por um plugin, e tudo o que espera por você sempre aparece acima das telas de um plugin. Sair da conta em qualquer janela, ou um plugin ser bloqueado, remove na hora o que ele adicionou.
+  - Os botões de um plugin dizem "Do plugin: nome". Clique com o botão direito em um para Ocultar este botão ou Gerenciar plugin; Mostrar botões ocultos na página de detalhes do plugin os traz de volta. Uma tela que um plugin substituiu tem Mostrar a visão original do Breezell.
+- **Permissões:** Um plugin declara as permissões de que precisa, e nada que ele não declarou pode ser usado. Permissões normais (como saber quando um turno da conversa começa e termina, trocar o modelo de chat, adicionar botões) vêm ativadas por padrão. As arriscadas (como usar seu modelo de chat, ler suas conversas, enviar mensagens, aprovar chamadas de ferramenta, ler seu código ou a caixa de entrada do chat, alterar uma mensagem antes de ela ser enviada, ler suas chaves de API personalizadas) são pedidas na primeira vez que o plugin as usa, e sua resposta é guardada.
+  - Permissões, na página de detalhes do plugin, lista cada permissão com seu tipo (Automática ou Pergunta antes), seu estado (Ativada, Desativada, Pergunta no primeiro uso) e um interruptor, com Ativar todas e Desativar todas. Os detalhes de mercado de um plugin instalado têm os mesmos interruptores.
+  - A caixa de diálogo de instalação tem uma caixa de seleção desmarcada: "Permitir agora todas as permissões que ele pede, em vez de perguntar no primeiro uso de cada uma".
+  - Ler chaves de API personalizadas só funciona em contas cujo plano inclui Custom API.
+  - Desinstalar restaura as permissões de um plugin aos padrões.
+- **Atualizações e remoção:**
+  - Quando um plugin instalado do mercado tem versão nova, o Breezell avisa uma vez, com Atualizar para versão (Atualizar tudo quando são vários) e Ver.
+  - Depois que você atualiza ou desinstala um plugin que está rodando, a versão antiga continua rodando até o host de extensões reiniciar. O Breezell avisa e oferece Reiniciar o host de extensões. O mesmo vale para remover e instalar um plugin de novo na mesma sessão.
+  - Desinstalar fica nos cartões do mercado, nos detalhes e em Instalados, e pergunta antes. As skills, regras, servidores MCP e janelas que o plugin adicionou vão junto; as configurações dele ficam.
+  - Um plugin pode pedir para reiniciar os plugins, a janela ou o Breezell inteiro depois de ser instalado, atualizado ou removido; a caixa de diálogo de instalação lista isso primeiro. Quando um plugin em execução pede para reiniciar, você escolhe Reiniciar agora ou Mais tarde. Reiniciar sem perguntar exige sua permissão, acontece no máximo uma vez por versão, espera terminar uma resposta que esteja sendo escrita e avisa antes.
+- **Lista de bloqueio:** Os mantenedores do mercado podem bloquear um plugin que se mostre nocivo. Um plugin bloqueado é desativado; um que está rodando para na hora e suas janelas fecham, e o Breezell avisa você uma vez e oferece desinstalá-lo. O mercado não o mostra mais, e ele não pode ser instalado nem reativado; Instalados mostra Bloqueado e o motivo.
+
+### Chat
+
+- **O histórico de chat sobrevive a uma falha da janela:**
+  - Uma janela vazia que falhou e é aberta de novo não perde mais o histórico de chat. New Window depois de uma falha assim realmente abre uma janela em vez de fechar o aplicativo.
+  - Depois de uma sessão que não fechou direito, o Breezell avisa ("The window closed unexpectedly last time…") e oferece Open Conversation para reabrir a conversa em que você estava. Ela não é aberta sozinha. Uma saída normal não dispara mais o aviso.
+  - Quando o disco está ocupado ou cheio, as conversas do espaço de trabalho não abrem mais todas vazias.
+- **Chats longos antigos funcionam direito:**
+  - Um chat longo no formato antigo não perde mais mensagens na primeira vez que é salvo.
+  - Chats longos muito antigos não derrubam mais a janela por falta de memória ao abrir.
+  - Um chat reaberto não mostra mais espaço em branco no turno mais recente.
+- **Reverter nunca esvazia um arquivo:** Quando uma reversão não encontrava o backup de um arquivo, ela gravava o arquivo de volta vazio. Agora ela avisa que o backup está faltando e deixa esse arquivo como está; os outros arquivos são revertidos normalmente.
+- **Excluir um chat não quebra mais seus ramos:** Um chat ramificado ou copiado de outro ainda pode ser revertido depois que o original é excluído ou limpo.
+- **Sem mais 400 do Claude 4.6 e posteriores:** Em um slot personalizado com o formato Anthropic, o Claude 4.6+ respondia "This model does not support assistant message prefill" depois que uma resposta em um chat longo tinha sido cortada. Isso não acontece mais. As respostas em chats longos também não são mais cortadas antes da hora.
+- **Só os anexos que você quis:** Uma imagem esperando no compositor não vai mais junto com uma sugestão de acompanhamento, uma mensagem na fila, o prompt de um plano ou a mensagem de um plugin; uma mensagem na fila aberta para edição não envia mais sua imagem duas vezes. Em um modelo sem visão, clicar em uma sugestão de acompanhamento não fica mais sem efeito.
+- **Menu de barra:** O que você digita com o menu de barra aberto fica na caixa, então o Esc não o perde mais, e Enter sem comando correspondente envia a mensagem: agora dá para enviar mensagens que começam com /. Os candidatos do método de entrada não ficam mais escondidos sob os menus que abrem a partir da caixa.
+- **Matemática no chat:** As fórmulas são desenhadas com as fontes certas, então a barra dupla de uma norma não aparece mais como duas barras inclinadas. No Windows, blocos de código LaTeX não perdem mais a primeira linha, e um bloco de uma linha aparece.
+- **Arquivos citados no chat abrem:**
+  - Em janelas remotas WSL e SSH e em espaços de trabalho com várias pastas, cartões de arquivo e links no chat não abrem mais como "arquivo não encontrado".
+  - Um caminho em uma resposta com `:42`, `#L42` ou `#L42-L50` abre naquela linha.
+  - Pastas citadas em uma resposta: fora do espaço de trabalho, abrem no gerenciador de arquivos do sistema; dentro dele, são mostradas na visão Explorador. Arquivos binários, como arquivos compactados, não abrem mais no editor de texto; aparece um menu cuja primeira opção, Abrir, os entrega ao aplicativo do sistema.
+  - Caminhos copiados do chat não carregam mais caracteres invisíveis.
+- **Cross-Check realmente desativado por padrão:** Instalações existentes desativam o Cross-Check uma vez. Se você ativá-lo depois, ele continua ativado.
+- **Correções menores do chat:**
+  - Respostas feitas só de caracteres invisíveis (o Kimi K3.1 Pro envia algumas) não aparecem mais como uma linha vazia.
+  - Um turno que você parou enquanto o modelo escrevia não traz mais sugestões de acompanhamento nem um Cross-Check.
+  - Várias chamadas seguidas da mesma ferramenta ganham um cabeçalho recolhido que diz o que foram (por exemplo, quais skills foram usadas), não só uma contagem.
+  - A sugestão da página inicial cria `.breezell/rules/breezell.md` em vez do `.breezellrules` obsoleto.
+
+### Ferramentas do Agent
+
+- **Comandos de terminal:**
+  - Comandos que não terminam sozinhos, como servidores de desenvolvimento, vão para segundo plano na hora em vez de segurar o turno.
+  - Outros comandos não ficam mais travados por muito tempo sem motivo.
+  - O cartão do comando tem Para segundo plano: o comando continua rodando e o turno segue.
+  - A IA sempre sabe quando um comando em segundo plano termina. Quando você para um comando, uma IA ociosa diz que viu a parada e não o executa de novo.
+  - O som de conclusão, a voz e a notificação do sistema esperam o trabalho realmente terminar: um turno que termina com um comando ainda rodando fica em silêncio, e você é avisado uma vez quando esse comando termina.
+  - Um comando que a própria IA parou mostra "[Stopped by the agent]" no cartão em vez de dizer que você o parou, e a IA não pergunta mais sobre uma parada que ninguém fez.
+  - Um cartão de terminal concluído não mostra mais Abrir e Parar para o próximo comando, e esses botões não deixam mais o cartão mais alto.
+- **As buscas da IA encontram o que seu projeto tem:**
+  - Buscas por nome de arquivo ignoram maiúsculas e minúsculas. No Windows, `readme.md` não encontrava `Docs/README.md`.
+  - As buscas da IA seguem o `.gitignore` do seu projeto e a configuração Search: Exclude para decidir o que pular, em vez de sempre pular pastas como `build`, `out` e `dist` ou arquivos como logs e imagens.
+  - Projetos sem Git (SVN, Perforce, Plastic ou uma cópia descompactada) também têm suas regras de ignorar aplicadas, em vez de serem buscados inteiros.
+  - Projetos Unity, Unreal e Godot pulam as pastas que seus motores geram.
+  - Resultados de busca para nomes de arquivo ou pasta com datas ou números de versão (como `2024-10-29-notes.md`) não abrem mais o arquivo errado.
+- **Consultas de código:** A IA encontra funções e classes em mais linguagens: Lua, tipos de Go, structs de C#, métodos de C++ definidos fora da classe, Ruby, Kotlin, Dart, Scala, Solidity, Elixir, OCaml e Objective-C. Em um espaço de trabalho com várias pastas, as consultas de código cobrem todas as pastas, não só a primeira.
+- **A IA não busca mais sem fim:** Quando a IA continua buscando com palavras novas sem abrir nenhum arquivo, o turno para e diz por quê.
+- **A IA encontra configurações para você:** Pergunte onde fica uma configuração e a IA diz o lugar dela no Box no seu idioma de exibição, ou abre o Box com essa opção destacada. Disponível no modo Chat. Erros que mandam você a uma configuração também indicam o lugar certo no Box.
+- **Outros:**
+  - A IA não fica mais reenviando uma edição que já foi aplicada.
+  - Um comando de pipeline muito longo não congela mais a janela quando o turno termina.
+  - Novas skills integradas: as skills HyperFrames e uma skill de documentos do Office. O interruptor do Superpowers só abrange as skills dele.
+
+### Memória
+
+- **Experiências mais confiáveis:** O Super Memory não salva mais abordagens que não funcionaram como experiências confiáveis. Tudo isso acontece no seu computador.
+
+### Teams
+
+- **Escolha o modelo de cada colega no cartão de aprovação:** Com Aprovar Teams automaticamente desativado, um time novo espera em um cartão de aprovação. A linha de cada membro agora é um menu de modelo (Modelo deste colega), definido com o modelo que realmente rodaria. O cartão era uma prévia somente leitura que podia nomear um modelo diferente do que rodou. Sua escolha sobrevive a um recarregamento e vale quer você aprove pelo cartão, pela notificação do sistema ou pelo link dela. Com a aprovação automática ativada, nada muda: sem cartão, o time começa na hora.
+- **Tentar de novo um colega em outro modelo:** O cartão de erro de um colega tem um menu de modelo ao lado de tentar de novo (Modelo com que tenta de novo); a escolha passa a ser o modelo desse colega dali em diante.
+- **Escreva direto para um colega:** O compositor na página de um colega, travado até agora, envia sua mensagem para esse colega. Ela é lida antes do próximo passo do colega sem interromper o atual, e desperta um colega ocioso, concluído, com falha ou parado.
+  - As mensagens em espera ficam na barra de fila acima do compositor, uma por passo, e podem ser retiradas (Retirar) até o colega lê-las.
+  - Uma mensagem retirada não aparece na conversa e não é repassada ao líder.
+
+### Rede e confiabilidade
+
+- **As respostas começam mais cedo:** A primeira palavra chega em cerca de 0,4 s em vez de cerca de 0,65 s, e enviar não acrescenta mais dois ou três segundos de espera, incluindo a primeira mensagem depois de uma pausa ou depois de iniciar.
+- **Novas tentativas quando uma solicitação do chat falha, definidas por você:** Box ▸ Desempenho ▸ Rede e chat tem Novas tentativas quando uma solicitação do chat falha abaixo de Tempo limite do primeiro byte.
+  - Padrão escolhe a quantidade conforme o tipo de erro; Sem novas tentativas mostra o cartão de erro na hora; ou escolha uma quantidade, ou Personalizado para 1–20 vezes.
+  - Erros que uma nova tentativa não resolve, como estar desconectado ou sem crédito, uma resposta já exibida e qualquer coisa depois do seu Parar, nunca são tentados de novo.
+- **Uma conexão caída mostra o erro mais cedo:** Quando a conexão continua caindo, o erro agora aparece em cerca de 5 s em vez de quase 30 s.
+- **Subagentes e chats longos custam menos:** Subagentes e chats longos custam menos para rodar. Subagentes no Claude e no Gemini também não leem mais só o começo de cada arquivo.
+
+### Modelos e provedores
+
+- **Novos provedores:**
+  - Baidu ERNIE: ERNIE 5.1 (contexto de 128K, entrada de imagens, ferramentas, sempre pensa). O ERNIE 5.5 Flash está listado antes do lançamento (somente texto, ainda sem preço).
+  - Ant Ling: Ling-3.2-flash (1M, entrada de imagens e vídeo, ferramentas; grátis nas duas primeiras semanas, ainda sem preço), Ling-3.1-flash (1M, somente texto), Ling-3.0-flash-VL (262K, entrada de imagens e vídeo) e Ling-3.0-flash (262K, somente texto). O Ling 3.x pensa por padrão, e isso pode ser desativado. O Ling-3.2-flash tem um seletor de contexto, 262K por padrão e 1M sob demanda.
+- **Novos modelos:**
+  - O LongCat-2.5 GA substitui o LongCat-2.5-Preview e o 2.0: contexto de 1M, saída de 128K, entrada de imagens.
+  - O Tencent Hy4 GA (TokenHub, OpenCode Go, OpenRouter) é o primeiro modelo Hy que lê imagens; o hy4-preview continua somente texto.
+  - OpenRouter: GLM-5.3-FlashX-Legal (o modelo de domínio jurídico da Z.ai), Ricursive Ripple-65B Preview (somente texto) e o modelo stealth Crouton Alpha (entrada de imagens, vídeo e áudio, grátis).
+  - Reflection Beam 1.0 (OpenRouter, Vercel, OpenCode, Together): 1M, somente texto, sempre raciocina.
+  - O OpenCode Go segue sua lista de 2026-11-03: entram Claude Haiku 5.5, Gemini 4 Argon, MiniMax M3.1 Flash, Step 5 Preview, um Reflection Beam grátis e o modelo stealth Iceman Contributor; Grok 4.6, Kimi K2.6, DeepSeek V4 Flash e outras entradas retiradas saem, e os modelos que você mesmo digitou continuam funcionando.
+  - Listados antes do acesso: Gemini 4 Carbon (Gemini API e Breezell; o Google o oferece só a parceiros selecionados, então a maioria das chaves recebe 404) e os `cyber-personal-v3` e `cyber-enterprise-v4` do DeepSeek Flash Cyber (precisam de uma Cyber Key emitida após uma verificação de identidade).
+- **DeepSeek:**
+  - A lista mantém só o que a API oficial serve, `deepseek-flash` (V4.1 Flash) e `deepseek-v4-pro`, mais o V4.1 Pro antes do lançamento. Nomes que a lista oficial não tem mais saem da lista padrão; os modelos que você mesmo adicionou continuam.
+  - Os aposentados `deepseek-chat` e `deepseek-reasoner` foram removidos; recursos configurados com eles passam sozinhos para outro modelo DeepSeek.
+
+### Imagens e vídeo
+
+- **GPT Image 2.6:** `gpt-image-2.6-sunburst` e `gpt-image-2.6-flare` chegam a OpenAI, OpenRouter e Image Studio, com tudo o que o 2.5 tem (proporções de até 3:1, 1K / 2K / 4K, qualidade xhigh e max, fundos transparentes).
+  - Complexidade (Baixa, Média, Alta; Alta por padrão): definida no Box, e a IA pode defini-la quando desenha no chat.
+  - Saída SVG (só imagens novas, uma por vez) e GIF: 2–16 quadros (Quadros do GIF), 20–2000 ms cada (Duração do quadro), cerca de 512 × 512 por quadro, sem máscara. Nenhum dos dois aceita fundo transparente.
+  - O login do ChatGPT também pode gerar GIFs, mas a OpenAI ainda não liberou isso para todas as contas, então algumas são recusadas; o Box avisa isso.
+  - O Image Studio oferece os formatos que um modelo aceita, incluindo SVG e GIF. SVGs aparecem na galeria, copiar um SVG ou GIF copia um PNG dele, e a caixa de diálogo de salvar oferece .svg.
+- **O modo imagem entende "tenta de novo":** Dizer "esta não ficou boa" depois de uma imagem trazia uma imagem nova sem relação. Agora uma mensagem sem imagem própria edita a imagem anterior. Uma mensagem que pede mais do que um desenho, como "esta não ficou boa, procure referências na internet", desativa o modo imagem e vai para o modelo de chat.
+- **Editar esta vai para o modelo de chat:** Editar esta ou Editar áreas em um cartão de imagem em um chat normal não troca mais o chat para o modo imagem. A imagem vai para o compositor e o modelo de chat recebe sua instrução: ele pode pesquisar antes e depois desenhar usando a imagem como referência. Quando o chat já está no modo imagem, ou o modelo de chat não consegue fazer isso, o modo imagem continua cuidando da edição.
+  - O cartão não mostra mais o prompt longo escrito para o modelo de imagem; os detalhes listam só os arquivos de imagem.
+  - Uma imagem desenhada pelo Breezell mostra Breezell uma vez, na linha do modelo.
+- **Qualquer modelo pode ter seu próprio modelo de reconhecimento de imagem:** Em Box ▸ Modelos, Configurações avançadas ▸ Imagens de um modelo tem o interruptor O modelo lê as imagens e o seletor Modelo de reconhecimento de imagem, aplicados na hora. Com o interruptor desligado, as imagens anexadas são lidas pelo modelo escolhido. O Box mostra o modelo como somente texto, com Proxy de visão no menu dele.
+  - Enquanto um proxy de visão está definido, a caixa de diálogo Proxy de visão tem Remover proxy de visão. Antes era difícil descobrir como desativá-lo.
+- **Image Studio:**
+  - A API de imagem e a API de vídeo de cada perfil de API podem usar sua própria rota de rede: Direto, Proxy do sistema, Proxy global ou Proxy personalizado (HTTP / HTTPS / SOCKS5, com usuário e senha, ou colado como URL); Proxy do sistema continua sendo o padrão. Buscar a lista de modelos também usa essa rota, e uma falha diz por quê.
+  - Adicione modelos por ID; eles continuam quando a lista é buscada de novo.
+  - O MiniMax H3 funciona por relays.
+  - Riverflow V2.6 Pro: em Box ▸ Modelos ▸ Geração de imagens, sob OpenRouter, e no Image Studio (1K / 2K / 4K, até dez imagens de referência).
+  - Gemini Omni 1.1 Flash (um modelo de vídeo no OpenRouter): o Image Studio tem uma predefinição de vídeo para ele (360p–4K, 16:9 ou 9:16, 3–10 s, primeiro e último quadro, com som).
+- **O Seedream 5.0 Lite desenha no Box:** Por um relay, ele falhava no Box enquanto o Image Studio desenhava. No Image Studio, os tamanhos e a quantidade de referências do Seedream 5.0 Lite e Pro agora seguem as especificações oficiais: o Lite oferece 2K / 3K / 4K e 14 imagens de referência, o Pro 1K / 1.5K / 2K e 10 imagens de referência.
+- **As edições de imagem do Box funcionam com mais relays.**
+
+### Navegador integrado e Computer Use
+
+- **Acompanhar o agente no navegador (novo, desativado por padrão):** Ative Acompanhar o agente no navegador em Opções de Recursos ▸ Comportamento de Código, ou clique no botão de olho na barra de ferramentas do navegador. O agente passa a trabalhar em uma aba própria marcada como "Agent", que você pode acompanhar ao vivo, e nunca mexe nas suas abas. Ler uma página não traz o navegador para a frente.
+- **Páginas que você precisa ver abrem para você:** Com Navegador sem janela ativado (o padrão), um login, um captcha ou uma página concluída ficavam fora da tela, e o agente não tinha como mostrá-los a você. Agora, para uma página que você pediu para ver, uma página em que você mesmo precisa agir (login, captcha, QR code, confirmação de pagamento) ou o resultado no fim, ele abre a aba Navegador. As verificações dele continuam rodando fora da tela.
+- **As verificações do Cloudflare não entram mais em loop:** O navegador integrado não fica mais preso repetindo a verificação humana do Cloudflare.
+- **Computer Use (Windows):**
+  - Pode capturar a janela da frente ou uma tela, ampliar parte dela, clicar com teclas modificadoras pressionadas, dar clique triplo e passar o mouse, e esperar uma janela ou um controle aparecer ou sumir. Cliques em botões, caixas de seleção e menus expansíveis são mais confiáveis.
+  - Nunca digita em um campo de senha.
+  - Abrir um aplicativo que já está rodando troca para a janela dele (também a partir da bandeja), ou lista as janelas quando há várias (duas contas do QQ, por exemplo).
+  - As janelas são reconhecidas quando o QQ ou o WeChat está na frente.
+  - Os modelos Claude usam a própria ferramenta de computador da Anthropic: Box ▸ Experimental ▸ Computer Use (Windows) ▸ Ferramenta de computador própria do Claude.
+  - O novo comando Breezell: Run Computer Use Evaluation testa um modelo em nove tarefas de desktop e confere cada resultado.
+
+### Box
+
+- **Limpeza de dados:**
+  - O espaço que ela pode liberar agora é o que os arquivos realmente ocupam no disco.
+  - Uma limpeza do espaço de trabalho atual não exclui mais arquivos de que outros espaços de trabalho ainda precisam.
+  - Quando a limpeza pode liberar mais do que o valor de Lembrete de limpeza (desativado, 200 MB, 500 MB por padrão, 1 GB), aparece um cartão no canto inferior esquerdo. Limpar agora executa a limpeza segura e a mostra até o fim; Agora não afasta o cartão em todas as janelas por 7 dias, a menos que se acumule o mesmo tanto de novo. Ele fica na mesma coluna que o cartão de atualização rápida, então os dois nunca se sobrepõem.
+  - Novas coisas que ela pode limpar: backups de checkpoints que nada mais usa (contados em Expired checkpoints); Armazenamento de projetos excluídos, os dados deixados por espaços de trabalho cuja pasta não existe mais, o que também exclui as conversas deles, por isso nunca vem pré-selecionado, pergunta antes listando cada projeto e nunca é executado pela manutenção agendada nem pelo lembrete; e mais Space left by deleted content.
+- **Banco de dados ▸ Navegador de dados redesenhado:** A página é uma superfície única, e a navegação do Box se recolhe na faixa de ícones enquanto ela está aberta.
+  - O painel de navegação à esquerda pode ser redimensionado arrastando ou recolhido com Recolher navegador, e as duas coisas são lembradas. Ele lista cada conexão com seu estado; a conexão aberta pode ser desconectada, renomeada, enviada ao chat ou excluída; abaixo dela ficam as tabelas com a contagem de linhas, uma busca, ordenação, e nova tabela e Console SQL.
+  - Uma visão geral do banco de dados lista cada tabela com suas linhas, colunas e chave primária, com filtro, ordenação e Agrupar pela inicial. Alguns bancos de dados de servidor mostram contagens de linhas estimadas.
+  - A visão de tabela tem um filtro WHERE (Enter executa), Colunas visíveis e o total de linhas, com o número da linha e a chave fixados à esquerda.
+  - Detalhes da linha fica encaixado ao lado da grade: cada campo por inteiro, JSON formatado, Anterior / Próxima, editar (ou clique duplo), Copiar como JSON e excluir. Excluir Tabela foi para a aba Estrutura, e a varredura do espaço de trabalho, para o formulário de nova conexão.
+  - Botões e barras de rolagem que só apareciam ao passar o mouse sumiram.
+- **Monitor de modelos ▸ Breezell:** Mostra o estado das rotas do seu plano (por exemplo "Breezell Pro/Pro+"). Cada linha mostra os últimos 90 minutos, uma barra por minuto, e 24H / 7D / 30D trocam o número de disponibilidade, com a média no título. Atualiza quando a aba abre e em Verificar de novo. Se o seu plano ainda não tem monitores, a aba avisa. As outras abas verificam a partir do seu computador, como antes.
+- **Página Modelos:**
+  - A barra de categorias (Breezell, contas com login, Provedores de API, Compatível com OpenAI, geração de imagens) fica fixa no topo, e só o que está abaixo dela rola.
+  - Slots compatíveis com OpenAI podem ser buscados por nome, URL ou modelo ("opus 4.8" encontra `claude-opus-4-8`). O slot que o chat atual usa é marcado como Em uso e vem primeiro; os outros seguem pela última vez em que foram usados.
+  - Em um Box estreito, o nome cede primeiro, depois um selo que não cabe mais sai inteiro, e Em uso encolhe até sua marca de seleção. As dicas só aparecem onde o texto é cortado.
+  - O botão de fechar da lista de modelos buscados diz Fechar; um clique fora da lista ou Esc a fecha (a menos que haja modelos marcados nela).
+- **Desempenho ▸ Rede e chat:** O cartão de diagnóstico e as requisições recentes mostram o apelido que você deu a um slot compatível com OpenAI em vez de nomes como "OpenAI-Compatible 9".
+- **Rules & Skills & Memory:** O painel chamado Skills & Memory, cuja primeira aba é Rules, agora se chama Rules & Skills & Memory em toda parte: a aba do Box (MCP & Rules & Skills & Memory), seu cartão de entrada e o botão da barra de título.
+- **Barra lateral:** O plano ao lado do nome da conta é uma palavra colorida em vez de uma pílula com moldura, e o ícone Atualizações no rodapé perde o fundo, mas mantém a cor.
+
+### Conta e login
+
+- **O login não cai mais sem motivo:** Algumas pessoas eram desconectadas sem nada de errado com a conta, ou nem conseguiam entrar. Agora:
+  - Uma rede perdida, um site inacessível, uma página de desafio, um erro de proxy, várias janelas abertas, duas instalações do Breezell em um computador e um relógio do computador errado não desconectam mais você. Você só é desconectado quando o Breezell realmente encerra a sua sessão.
+  - As janelas concordam sobre o seu login, então nenhuma janela mostra você conectado quando o login já acabou.
+  - Quando o seu único caminho para a internet é um proxy definido no Box, o login também usa esse proxy.
+  - Quando você digita um código de login, o Breezell distingue um código que não funcionou, tentativas demais a partir desta rede e o Breezell estar inacessível.
+  - Quando você é desconectado, ele diz por quê: "A sessão neste dispositivo foi encerrada" ou "Sua sessão terminou".
+- **Os modelos Breezell não continuam falhando depois que o login expira:** Toda mensagem falhava depois que o login expirava, até você entrar de novo; agora o Breezell continua sozinho.
+- **Um sexto dispositivo é apenas recusado:** Um sexto dispositivo bloqueava a conta inteira por 24 horas e desconectava os outros cinco. Agora só o dispositivo novo é recusado: ele fica na página de login e diz por quê, e os outros cinco continuam. Um dispositivo que acorda da suspensão com todas as vagas ocupadas continua conectado, diz que está esperando e continua sozinho quando uma vaga se libera. A página da conta explica isso. Um editor fechado também não segura mais uma vaga de dispositivo por horas.
+- **Login guardado com criptografia:** Seu login é armazenado criptografado no seu computador.
+- **Parar é cobrado pelo que foi produzido:** Nos modelos próprios da Breezell, Parar ou uma requisição interrompida é cobrado só pelo que foi produzido, não pela resposta inteira.
+
+### Desenvolvimento remoto
+
+- **Remote-SSH:**
+  - Correção de segurança: o encaminhamento de portas escuta só neste computador, então outros computadores da rede local não conseguem alcançá-lo.
+  - Connect to Host lista os hosts da sua configuração SSH e aceita `user@host:port`.
+  - cmd, PowerShell e Git Bash são diferenciados em hosts Windows.
+  - ProxyJump e chaves PEM com senha funcionam; os problemas do script de instalação no macOS e em sistemas Linux mínimos foram corrigidos.
+  - Um espaço de trabalho sem pastas não mostra mais um erro.
+- **Remote-WSL:** Correções no script de instalação, suporte a Alpine e o motivo exibido quando o script falha; um espaço de trabalho sem pastas não mostra mais um erro.
+- **Plugins em janelas remotas:** Instalados mostra uma linha por plugin, e uma atualização não deixa mais a versão antiga rodando do outro lado.
+
+### Desempenho
+
+- **Rolagem mais fluida em chats longos:** Chats com milhares de mensagens rolam sem engasgos.
+- **O Box descansa enquanto está fechado:** Um Box fechado não usa mais recursos em segundo plano.
+- **A recuperação de memórias usa menos memória:** A recuperação de memórias usa cerca de 40% menos memória.
+- **Salvar chats enormes usa menos memória:** Salvar um chat antigo muito grande usa bem menos memória.
+
+### Interface
+
+- **Nova marca na página de chat vazia:** As páginas vazias moderna e clássica mostram um RSI grande com BREEZELL atravessando o meio. A marca não se move.
+- **Um tamanho só para a barra de ações do turno:** Request ID, a duração, Revisar, Git e a contagem de ferramentas à direita agora têm o tamanho dos botões de copiar e de ramificar à esquerda.
+- **Frases Rápidas redesenhadas:** O popover tem um título, um botão de adicionar e Gerenciar; cada uma das suas Favoritas é uma linha com o ícone do tipo, o nome e uma prévia de uma linha (comandos de terminal em fonte monoespaçada). A caixa de diálogo de gerenciamento ganhou novo estilo e funciona como antes; o formulário salva com Enter no nome ou Ctrl/Cmd+Enter no conteúdo.
+- **Auto na interface moderna:** O interruptor de rota do Auto é desenhado corretamente. O menu de modelos do Auto não fica mais coberto pela barra lateral do histórico de chat ao lado, e não passa mais da borda direita da janela.
+- **Linhas excluídas quebram em diffs inline:** Com a quebra de linha ativada (Alt+Z), uma linha excluída longa na área vermelha de uma edição continuava em uma linha só, cortada na borda. Agora ela quebra como as outras linhas do editor.
+- **Outros:**
+  - O cartão da ferramenta de exclusão risca o nome do arquivo excluído; o cabeçalho de arquivo de um bloco de código tem nome e ícone em tamanhos combinando.
+  - O texto de espera cintilante não mostra mais imagem dupla nos cartões de análise.
+  - A dica de modelo nas linhas de membros do cartão de aprovação do Teams usa a dica própria do Breezell em vez da branca do sistema.
+
+### Instalação e atualizações
+
+- **Atualizações do Windows mais confiáveis:** Um download com falha mostra um erro na hora, e um instalador antigo não é mais instalado por engano.
+- **Requisitos do sistema:** A partir desta versão, é necessário macOS 13 ou posterior, e as compilações são somente de 64 bits. Não há mais editor para Linux ARM32 (armhf), e a página de download não recomenda mais um pacote x64 para computadores ARM32; conectar a um host ARM32 por SSH continua funcionando.
+- **Pacotes Linux:** As dependências dos pacotes deb e rpm foram atualizadas para a nova versão.
+- **Electron 45.2.2:** O Chromium integrado foi atualizado para a versão 156, e as dependências foram atualizadas, incluindo correções de segurança.
+
 ## 1.4.4 · 2026-10-27
 
 ### Destaques
