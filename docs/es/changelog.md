@@ -5,6 +5,40 @@ next: false
 
 # Registro de cambios
 
+## 1.4.52 · Hot Update · 2026-11-07
+
+Una actualización en caliente para 1.4.5, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en "Actualizaciones", al pie de la barra lateral de Box.
+
+### Barra de título
+
+- **El cuadro de búsqueda es ahora una cápsula viva:** el cuadro de búsqueda del centro de la barra de título es una cápsula que se adapta a lo que muestra. En reposo contiene la búsqueda y la campana de notificaciones, como antes, y un clic sigue abriendo la búsqueda. Sus textos siguen el idioma de Breezell.
+- **Lo que hace la IA, de un vistazo:** mientras un chat está en marcha, la cápsula muestra:
+  - el icono del modelo que trabaja en él;
+  - el paso actual: "Pensando", "Escribiendo", "Editando app.ts", "Leyendo README.md", "Buscando en el código", "Ejecutando un comando", "Usando una herramienta", "Esperando subtareas", "Condensando el contexto" o "Reconectando";
+  - cuánto lleva el turno;
+  - un número como "+2" cuando hay varios chats trabajando. El que tienes abierto va primero si está entre ellos.
+  - Los pasos que se suceden rápido no parpadean: cada texto se queda un momento.
+- **Esperando tu respuesta:** cuando la IA se detiene para que respondas o apruebes algo, la cápsula dice "Esperando tu respuesta" ("3 chats esperan tu respuesta" si hay varios), y "Ver" abre ese chat. Un chat que te espera va antes que el trabajo en curso.
+- **Listo, o algo salió mal:** un turno terminado muestra "Listo" y su duración ("en 1:23") durante unos segundos. Un turno que terminó con un error muestra "Algo salió mal", con "Ver" para abrir el chat. Un turno que detienes tú no muestra nada.
+- **Tareas de compilación y pruebas:** una tarea que ejecutas, como una compilación o las pruebas, muestra "Ejecutando build" con un reloj. Al terminar, la cápsula muestra "build terminó" con su duración, o "build falló" con su código de salida y "Ver" para abrir su terminal. Las tareas de vigilancia que siguen en segundo plano no se muestran, ni tampoco una tarea que detienes.
+- **Una tarea junto a la IA:** si una tarea se ejecuta mientras la IA trabaja, la tarea pasa a un pequeño punto a la derecha de la cápsula. Pasa el puntero por encima para ver su nombre; haz clic para abrir su terminal.
+- **Actualizaciones y notificaciones en un solo lugar:**
+  - El progreso de la actualización a una nueva versión (búsqueda, descarga, instalación) y el botón de una actualización disponible se muestran ahora en la cápsula, en lugar de un indicador aparte a su lado.
+  - La campana de notificaciones está al final de la cápsula, y el panel de notificaciones se despliega desde la cápsula y vuelve a ella. Con el movimiento reducido activado, el panel simplemente aparece.
+  - Mientras la barra de depuración ocupa ese lugar, la cápsula se queda en reposo para que los botones de depuración sigan a mano.
+- **Ejecutar como administrador:** ahora lo indica un escudo después del nombre del espacio de trabajo, en lugar de un texto que desplazaba el nombre.
+- **Teclado:** Intro o Espacio sobre la campana abren las notificaciones en lugar de la búsqueda, y los botones de la cápsula también funcionan con Intro y Espacio.
+
+### La IA al editar archivos
+
+- **Una ruta un poco equivocada ya no termina en un error de lectura:** cuando la IA editaba un archivo en una ruta que no existe, por ejemplo con una carpeta de menos, recibía solo el error de lectura y te decía que no podía abrir el archivo, aunque el Explorador lo mostraba; a menudo parecía que solo reiniciar ayudaba. Ahora:
+  - La IA sabe que la ruta no existe y qué archivos de tu espacio de trabajo tienen ese nombre, y edita el correcto.
+  - Si en tu espacio de trabajo no hay ningún archivo con ese nombre, te pregunta dónde está en lugar de probar más carpetas al azar.
+  - Si quería crear un archivo nuevo, lo crea.
+- **Windows: las ediciones de la IA que fallaban sin motivo ahora se aplican:** en Windows, algunas ediciones y archivos nuevos de la IA se rechazaban aunque no tenían ningún problema. Ahora se aplican tal como la IA los escribió. Antes:
+  - la edición se trataba como si su contenido se hubiera cortado, y la IA la dividía una y otra vez en ediciones más pequeñas que fallaban igual;
+  - o la llamada se rechazaba por nombrar dos archivos distintos, o el cambio iba a una ruta que no se podía abrir.
+
 ## 1.4.51 · Hot Update · 2026-11-06
 
 Una actualización en caliente para 1.4.5, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en "Actualizaciones", al pie de la barra lateral de Box.

@@ -5,6 +5,40 @@ next: false
 
 # Changelog
 
+## 1.4.52 · Hot Update · 2026-11-07
+
+A hot update for 1.4.5, no reinstall needed: Breezell offers it on its own, or check under "Updates" at the foot of the Box sidebar.
+
+### Title bar
+
+- **The search box is now a live capsule:** the search box in the middle of the title bar is a capsule that grows to fit what it shows. At rest it holds search and the notification bell as before, and a click on it still opens search. Its words follow Breezell's display language.
+- **What the AI is doing, at a glance:** while a conversation runs, the capsule shows:
+  - the icon of the model working on it;
+  - the current step: "Thinking", "Writing", "Editing app.ts", "Reading README.md", "Searching the code", "Running a command", "Using a tool", "Waiting on subtasks", "Condensing context" or "Reconnecting";
+  - how long the turn has been running;
+  - a count such as "+2" when several conversations are at work. The one you have open comes first when it is among them.
+  - Steps that follow each other quickly do not flicker: each wording stays up for a moment.
+- **Waiting for you:** when the AI stops for your answer or approval, the capsule says "Waiting for you" ("3 chats waiting for you" when there are several), and "View" opens that conversation. A conversation waiting on you comes before work in progress.
+- **Done, or something went wrong:** a finished turn shows "Done" and how long it took ("took 1:23") for a few seconds. A turn that ended on an error shows "Something went wrong", with "View" to open the conversation. A turn you stop yourself shows nothing.
+- **Build and test tasks:** a task you run, such as a build or a test run, shows "Running build" with a clock. When it ends, the capsule shows "build succeeded" with its time, or "build failed" with its exit code and "View" to open its terminal. Watch tasks that keep running in the background are not shown, and neither is a task you stop.
+- **A task beside the AI:** when a task runs while the AI works, the task moves into a small dot to the right of the capsule. Hover it for the task's name; click it to open its terminal.
+- **Updates and notifications in one place:**
+  - Update progress (checking, downloading, installing) and the button for an available update now show in the capsule instead of an indicator of their own beside it.
+  - The notification bell sits at the end of the capsule, and the notification panel grows out of the capsule and goes back into it. With reduced motion on, the panel simply appears.
+  - While the debug toolbar shares the spot, the capsule stays at rest so the debug buttons stay in reach.
+- **Running as administrator:** a shield after the workspace name now says so, instead of text that crowded the name out.
+- **Keyboard:** Enter or Space on the bell opens the notifications instead of search, and the capsule's own buttons work with Enter and Space too.
+
+### AI editing files
+
+- **A path that is slightly off no longer ends in "Unable to read file":** when the AI edited a file at a path that does not exist, for example with a folder left out, it got the bare error "Unable to read file ... (Error: Unable to resolve nonexistent file ...)" and told you the file could not be opened, while the Explorer showed it; often only a restart seemed to help. Now:
+  - The AI learns that the path does not exist and which files in your workspace have that name, and edits the right one.
+  - When no file of that name is in your workspace, it asks you where the file is instead of guessing more folders.
+  - When it meant to create a new file, it creates it instead.
+- **Windows: AI edits that failed for no reason now go through:** on Windows, some AI edits and new files were refused although nothing was wrong with them. They now go through as the AI wrote them. Before:
+  - the edit was treated as if its content had been cut off, and the AI kept splitting it into smaller edits that failed the same way;
+  - or the call was refused for naming two different files, or the change went to a path that could not be opened.
+
 ## 1.4.51 · Hot Update · 2026-11-06
 
 A hot update for 1.4.5, no reinstall needed: Breezell offers it on its own, or check under "Updates" at the foot of the Box sidebar.
