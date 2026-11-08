@@ -5,6 +5,67 @@ next: false
 
 # Registro de cambios
 
+## 1.4.53 · Hot Update · 2026-11-08
+
+Una actualización en caliente para 1.4.5, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en "Actualizaciones", al pie de la barra lateral de Box.
+
+### Barra de título
+
+- **Vuelve el cuadro de búsqueda:** el centro de la barra de título vuelve a tener el cuadro de búsqueda de antes de 1.4.52, y un clic abre la búsqueda. La campana de notificaciones y el botón de actualización vuelven a estar a su lado, y el progreso de la actualización (búsqueda, descarga, instalación) vuelve a mostrarse en el botón de actualización. Al ejecutar como administrador, el nombre del espacio de trabajo vuelve a ir seguido de un texto que lo indica.
+- **La cápsula pasa a ser el plugin "Isla de actividad":** la cápsula adaptable de 1.4.52 ya no viene integrada en Breezell; ahora es "Isla de actividad", un plugin de código abierto del mercado de plugins. Quien quiera usarla puede instalarlo; sin él, la barra de título se ve como siempre.
+
+### Plugin Isla de actividad
+
+- **Instalación:** busca "Isla de actividad" en Box ▸ Plugins ▸ Mercado. Necesita Breezell 1.4.53 o posterior; las versiones anteriores no lo instalan.
+- **En la barra de título:** normalmente muestra el nombre del espacio de trabajo, y un clic abre la búsqueda. Mientras la IA trabaja, la cápsula se ensancha y muestra:
+  - el paso actual, por ejemplo "Pensando", "Editando app.ts" o "Ejecutando un comando";
+  - el icono del modelo que trabaja y cuánto tiempo lleva;
+  - "Esperando tu respuesta", "Listo" o "Algo salió mal", con "Ver" para abrir ese chat;
+  - el progreso de las tareas de compilación o pruebas; si una falla, "Ver" abre su terminal.
+- **Al salir de Breezell:** si cambias a otra aplicación o minimizas Breezell, la cápsula vuela desde la barra de título hasta la parte superior de la pantalla y flota sobre todas las aplicaciones; cuando no pasa nada, muestra "Todo en calma". Al volver a Breezell, regresa volando a la barra de título.
+- **Abrir el panel:** haz clic en la cápsula que flota arriba y se despliega en un panel:
+  - cuántos chats están en marcha o esperan tu respuesta, qué hace cada uno y cuánto lleva;
+  - si le permites "Leer tus conversaciones", también las últimas frases de cada respuesta;
+  - un clic en un chat te lleva directamente a él; "Volver al editor" te devuelve a Breezell;
+  - un clic fuera del panel o Esc lo cierra.
+- **Varias ventanas de Breezell:** en la parte superior de la pantalla hay una sola isla, que reúne todas las ventanas y pone primero lo que más necesita tu atención. El panel se agrupa por ventanas; "Ir" te lleva a esa ventana.
+- **Permisos:** flotar sobre otras aplicaciones y leer tus conversaciones se te piden solo la primera vez que hacen falta. Si no permites que flote, la isla se queda en la barra de título; si no permites que lea tus conversaciones, el panel muestra solo lo que está haciendo la IA en cada ventana.
+- **Sistemas:** puede flotar en Windows, en macOS (también sobre aplicaciones a pantalla completa) y en las sesiones X11 de Linux. En una sesión de Wayland en Linux, la isla se queda en la barra de título, y la primera vez te lo indica.
+- **Ajustes:** en Opciones de funciones ▸ Plugins, bajo "Isla de actividad", puedes desactivar "Hacer flotar la isla en la parte superior de la pantalla, sobre otras apps, al salir de Breezell o minimizarlo…" para que la isla se quede siempre en la barra de título. Con el movimiento reducido activado, se mueve directamente, sin animación.
+
+### Super Memory
+
+- **Grupos de proyectos:** en la lista de proyectos del Explorador, el botón junto a "Actual" y "Todos" abre "Grupo del proyecto y memorias compartidas". Puedes crear uno con "Nuevo grupo…", usar "Mover al grupo" o "Quitar del grupo" en un proyecto, y también "Renombrar grupo" y "Disolver grupo".
+- **Memorias compartidas:** con "Compartir memorias" activado en un grupo, los proyectos del grupo recuperan memorias unos de otros; cada memoria sigue perteneciendo al proyecto en el que se aprendió. Está desactivado de forma predeterminada.
+- **La Biblioteca de memoria muestra el origen:** en "Biblioteca de memoria":
+  - las memorias de otros proyectos del mismo grupo llevan "De *nombre del proyecto*";
+  - cuando una memoria resulta equivocada en este proyecto, lleva "No aplica aquí", sin que eso cambie nada en su proyecto de origen;
+  - con el uso compartido activado, puedes filtrar por "Todas las fuentes", "Este proyecto" y "Proyectos del grupo".
+- **El mismo proyecto en sistemas distintos:** un mismo proyecto abierto en Windows, WSL, Linux, macOS o por SSH se reconoce como el mismo proyecto, y sus memorias van con él. Funciona después de haberlo abierto una vez en cada entorno.
+- **Recordar por significado (próximamente):** Box ▸ Super Memory ▸ "Presupuesto y mantenimiento" tiene una tarjeta nueva, "Recordar por significado", con la que también se encuentran memorias escritas con otras palabras o en otro idioma. Esta función llegará con el próximo paquete de instalación completo de Breezell; esta actualización en caliente no descarga ningún archivo, la tarjeta muestra "Llega con la próxima instalación completa de Breezell; hasta entonces, solo por palabras." y las memorias se siguen recuperando como hasta ahora.
+
+### Funciones experimentales eliminadas
+
+- **La pestaña "Experimental" de los ajustes pierde cinco funciones:**
+  - "Preanálisis de memoria", junto con la pestaña "Análisis de memoria";
+  - "Modo humano en el bucle";
+  - "Verificación estricta de Entrelazamiento" y "Modelo del modo estricto";
+  - "Estrategia adaptativa del agente";
+  - "Enrutado automático de modelos".
+- **No tienes que hacer nada:** si tenías alguna de estas funciones activada, tus chats siguen funcionando como siempre. Si habías elegido "Auto" en el selector de modelo, ahora se usa el modelo que elegiste en el cuadro de chat.
+
+### Plugins
+
+- **Lo nuevo que pueden hacer los plugins:**
+  - poner una página propia en el centro de la barra de título, en el lugar del cuadro de búsqueda; solo un plugin a la vez puede hacerlo;
+  - mostrar una ventana pequeña que flota sobre las demás aplicaciones;
+  - saber en qué paso está la IA, qué modelo usa y cómo van las tareas de compilación o pruebas, sin ver el contenido de los mensajes;
+  - coordinarse consigo mismo entre varias ventanas de Breezell, por ejemplo para mostrar un único resumen solo en la última ventana que usaste.
+- **Dos interruptores de permisos nuevos:** Box ▸ Plugins ▸ Instalados tiene ahora:
+  - "Mostrar una ventana pequeña propia que flota sobre las demás aplicaciones; no puede recibir lo que se escribe con el teclado": se te pregunta la primera vez que se usa;
+  - "Ver qué hace Agent (su paso, el archivo en el que trabaja, el modelo, cuánto lleva) y cómo van las tareas en segundo plano; sin el contenido de los mensajes": activado de forma predeterminada; puedes desactivarlo.
+- **Los plugins ya instalados no se ven afectados** y no necesitan actualizarse.
+
 ## 1.4.52 · Hot Update · 2026-11-07
 
 Una actualización en caliente para 1.4.5, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en "Actualizaciones", al pie de la barra lateral de Box.

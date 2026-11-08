@@ -5,6 +5,67 @@ next: false
 
 # Changelog
 
+## 1.4.53 · Hot Update · 2026-11-08
+
+A hot update for 1.4.5, no reinstall needed: Breezell offers it on its own, or check under "Updates" at the foot of the Box sidebar.
+
+### Title bar
+
+- **The search box is back:** the middle of the title bar has the search box from before 1.4.52 again, and a click on it opens search. The notification bell and the update button are back beside it, and update progress (checking, downloading, installing) shows on the update button again. When Breezell runs as administrator, text after the workspace name says so again.
+- **The capsule becomes the "Activity Island" plugin:** the capsule from 1.4.52 that grows and shrinks is no longer built into Breezell. It is now "Activity Island", an open-source plugin on the plugin market that you can install if you want it; without it, the title bar looks the way it used to.
+
+### Activity Island plugin
+
+- **Installing:** look for "Activity Island" under Box ▸ Plugins ▸ Market. It needs Breezell 1.4.53 or later; older versions will not install it.
+- **In the title bar:** most of the time it shows the workspace name, and a click on it opens search. While the AI works, the capsule widens to show:
+  - the current step, such as "Thinking", "Editing app.ts" or "Running a command";
+  - the icon of the model working on it, and a clock;
+  - "Waiting for you", "Done" or "Something went wrong", with "View" to open that conversation;
+  - how a build or test task is going, with "View" to open its terminal when it fails.
+- **When you leave Breezell:** switch to another app or minimize Breezell, and the capsule flies from the title bar to the top of the screen, floating above every app; when nothing is going on, it shows "All quiet". Come back to Breezell and it flies back into the title bar.
+- **Opening the panel:** click the capsule floating at the top and it opens into a panel:
+  - how many conversations are running or waiting for you, what each one is doing and how long it has been running;
+  - once you allow "Read your conversations" for it, the last few lines of each reply as well;
+  - click a conversation to go straight to it; click "Back to editor" to return to Breezell;
+  - click anywhere outside the panel or press Esc to close it.
+- **Several Breezell windows:** there is just one island at the top of the screen, covering every window, and what most needs you comes first. The panel is grouped by window; click "Go" to switch to that window.
+- **Permissions:** floating above other apps and reading conversations are each asked for only when you first use them. If you do not allow floating, the island stays in the title bar; if you do not allow reading conversations, the panel only shows what the AI in each window is doing.
+- **Platforms:** the island can float on Windows, macOS (including above full-screen apps) and Linux X11 sessions. In a Linux Wayland session, the island stays in the title bar and lets you know once, the first time.
+- **Settings:** under "Activity Island" in Feature Options ▸ Plugins, you can turn off "Float the island at the top of the screen, above other apps, when you leave Breezell or minimize it…", and the island stays in the title bar all the time. With reduced motion on, it just moves, with no animation.
+
+### Super Memory
+
+- **Project groups:** in the Explorer's project list, the button next to "Current" and "All" opens "Project Group and Shared Memories". There you can make a group with "New Group…", put a project in or take it out with "Move to Group" and "Remove from Group", and use "Rename Group" and "Dissolve Group".
+- **Shared memories:** when "Share Memories" is on for a group, the projects in it recall each other's memories; each memory still belongs to the project that learned it. It is off by default.
+- **The Memory Library shows where memories come from:** in the "Memory Library":
+  - memories from other projects in the group are marked "From *project name*";
+  - a memory that turns out wrong for this project is marked "Does not apply here", without changing it in the project it came from;
+  - with sharing on, you can filter by "All Sources", "This Project" or "Group Projects".
+- **The same project on different systems:** a project opened on Windows, WSL, Linux or macOS, or over SSH, is recognized as the same project, and its memories go with it. This takes effect after you have opened the project once in each environment.
+- **Recall by meaning (coming later):** Box ▸ Super Memory ▸ "Budget & Maintenance" has a new "Recall by meaning" card, so memories worded differently or written in another language can be found too. This feature comes with the next full Breezell install; this hot update does not download any files: the card shows "Comes with the next full Breezell install; until then recall goes by words.", and recall carries on as before.
+
+### Removed experimental features
+
+- **Five features removed from the "Experimental" tab in settings:**
+  - "Memory Preflight", together with the "Memory Analysis" tab;
+  - "Human-in-the-loop mode";
+  - "Entanglement Strict Verification" and "Strict mode model";
+  - "Adaptive agent strategy";
+  - "Auto model routing".
+- **Nothing to do:** if you had these features on, your conversations carry on as usual. If you had picked "Auto" in model selection, the model picked in the chat box is used instead.
+
+### Plugins
+
+- **New things plugins can do:**
+  - put a page of their own in the middle of the title bar, in place of the search box; only one plugin can do this at a time;
+  - show a small window that floats above other apps;
+  - know which step the AI is on, which model it uses and how build or test tasks are going, but not see any message content;
+  - work together across Breezell windows when it is the same plugin, for example to show one summary only in the window you used last.
+- **Two new permission switches:** Box ▸ Plugins ▸ Installed now has:
+  - "Show a small window of its own that floats above other apps; it cannot take keyboard input": you are asked the first time it is used;
+  - "See what the agent is doing (its step, the file name it works on, the model, how long it has run) and how background tasks go; no message content": on by default, and you can turn it off.
+- **Plugins you already installed are not affected** and need no update.
+
 ## 1.4.52 · Hot Update · 2026-11-07
 
 A hot update for 1.4.5, no reinstall needed: Breezell offers it on its own, or check under "Updates" at the foot of the Box sidebar.
