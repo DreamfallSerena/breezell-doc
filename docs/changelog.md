@@ -5,6 +5,34 @@ next: false
 
 # Changelog
 
+## 1.4.54 · Hot Update · 2026-11-09
+
+A hot update for 1.4.5, no reinstall needed: Breezell offers it on its own, or check under "Updates" at the foot of the Box sidebar.
+
+### Project groups
+
+- **Grouping offered in chat:** When you mention another open project in a conversation (its name, a path, a file, an API route or a port it serves), "Put these projects in one group?" appears above the message box with that project ticked. Press "Group them" or "Group and Merge into One Window", or choose "Not now" or "Don't ask for these". Nothing changes until you press a button, and the AI answers as usual.
+- **The group page:** "Project Group and Shared Memories" now opens as a tab in the editor area, from the button next to "Current" and "All" above the Explorer. When the Folders view was moved out of the Explorer, the same button is on its title bar, and the command palette has it too.
+- **Where members are:** The tab lists each member with where it lives (Windows, WSL, SSH) and whether its window is open, closed with its files reachable from here, or closed. Closed members have an "Open" button.
+- **Adding projects:** "Add Open Windows" and "Add Folders to Group…" bring projects in; a folder's window does not need to be open.
+- **Managing the group:** Rename the group, "Leave Group" or "Dissolve Group" (press it twice). Without a group, create one here or join another.
+
+### Working across a group
+
+- **Reading group projects:** The AI knows which projects are in the group and can read their files when you talk about them. A project in another environment (a WSL project from a Windows window, for example) can be read while its window is open; when it is not, you are offered to open it.
+- **Changing group projects:** With "Allow AI to Change Group Projects" on, it can also change their files and run commands in their folders. Off by default.
+- **Shared conversations:** With "Share Conversations" on, "Group Projects' Conversations…" lets you "View" another project's conversation, "Continue here", or "Attach to my next message"; "Hand to a Group Project…" gives a task to another project's window and tells you when it is done.
+- **One window:** "Merge into One Window" opens the group's projects as one window with several folders, Windows and WSL projects included. Their windows close and their conversations are copied over, each title marked with its project. "Split into Separate Windows" takes them apart again.
+
+### Chat
+
+- **Chat tabs beside code tabs:** Chat tabs can sit in the same row as code tabs: a conversation dragged from the history onto the file tabs, "Open in editor tab", and a chat tab's "New Chat" stay where you put them instead of moving to another column.
+- **Conversation history fixed:** After a project had been opened in a workspace with several folders, opening the project on its own showed its conversations with their first line as the title and the time of opening as every date. Each project now keeps its conversations' titles and dates.
+
+### WSL
+
+- **Empty WSL window fixed:** A WSL project opened from a shortcut sometimes showed an empty window (an empty Explorer, and "No source control providers registered" in Source Control). It now connects and shows the project.
+
 ## 1.4.53 · Hot Update · 2026-11-08
 
 A hot update for 1.4.5, no reinstall needed: Breezell offers it on its own, or check under "Updates" at the foot of the Box sidebar.

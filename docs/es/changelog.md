@@ -5,6 +5,34 @@ next: false
 
 # Registro de cambios
 
+## 1.4.54 · Hot Update · 2026-11-09
+
+Una actualización en caliente para 1.4.5, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en "Actualizaciones", al pie de la barra lateral de Box.
+
+### Grupos de proyectos
+
+- **Agrupar desde la conversación:** Cuando mencionas otro proyecto abierto en una conversación (su nombre, una ruta, un archivo, una ruta de API o un puerto que sirve), aparece «¿Poner estos proyectos en un grupo?» sobre el cuadro de mensaje, con ese proyecto ya marcado. Pulsa «Agrupar» o «Agrupar y unir en una ventana», o elige «Ahora no» o «No volver a preguntar por estos». Nada cambia hasta que pulses un botón, y la IA responde como siempre.
+- **La página del grupo:** «Grupo del proyecto y memorias compartidas» ahora se abre como una pestaña en el área del editor, con el botón junto a «Actual» y «Todos» encima del Explorador. Si moviste la vista Folders fuera del Explorador, el mismo botón está en su barra de título, y también está en la paleta de comandos.
+- **Dónde está cada miembro:** La pestaña muestra en qué entorno está cada miembro (Windows, WSL, SSH) y si su ventana está abierta, cerrada pero con sus archivos accesibles desde aquí, o cerrada. Los miembros cerrados tienen un botón «Abrir».
+- **Añadir proyectos:** «Añadir ventanas abiertas» y «Añadir carpetas al grupo…» incorporan proyectos; no hace falta tener abierta la ventana de la carpeta.
+- **Gestionar el grupo:** Cambia el nombre del grupo, «Salir del grupo» o «Disolver grupo» (púlsalo dos veces). Sin grupo, crea uno aquí o únete a otro.
+
+### Trabajar con los proyectos del grupo
+
+- **Leer los proyectos del grupo:** La IA sabe qué proyectos hay en el grupo y puede leer sus archivos cuando hablas de ellos. Un proyecto en otro entorno (por ejemplo, un proyecto de WSL desde una ventana de Windows) se puede leer mientras su ventana está abierta; si no lo está, se te ofrece abrirlo.
+- **Cambiar los proyectos del grupo:** Con «Permitir que la IA cambie los proyectos del grupo» activado, también puede cambiar sus archivos y ejecutar comandos en sus carpetas. Desactivado por defecto.
+- **Conversaciones compartidas:** Con «Compartir conversaciones» activado, «Conversaciones de los proyectos del grupo…» te deja «Ver» la conversación de otro proyecto, «Continuar aquí» o «Adjuntar a mi próximo mensaje»; «Entregar a un proyecto del grupo…» encarga una tarea a la ventana de otro proyecto y te avisa cuando termina.
+- **Una sola ventana:** «Unir en una ventana» abre los proyectos del grupo como una ventana con varias carpetas, incluidos proyectos de Windows y de WSL juntos. Sus ventanas se cierran y sus conversaciones se copian, cada título marcado con su proyecto. «Separar en ventanas» los vuelve a separar.
+
+### Chat
+
+- **Pestañas de chat junto a las de código:** Las pestañas de chat pueden estar en la misma fila que las de código: una conversación arrastrada desde el historial a la fila de pestañas de archivos, «Abrir en una pestaña del editor» y el botón «New Chat» de una pestaña de chat se quedan donde las pones y ya no se mueven a otra columna.
+- **Historial de conversaciones corregido:** Si un proyecto se había abierto en un espacio de trabajo con varias carpetas, al abrirlo por sí solo sus conversaciones aparecían con su primera línea como título y la hora de apertura como fecha de todas. Ahora cada proyecto conserva los títulos y las fechas de sus conversaciones.
+
+### WSL
+
+- **Ventana vacía de WSL corregida:** Un proyecto de WSL abierto desde un acceso directo a veces mostraba una ventana vacía (un Explorador vacío y «No source control providers registered» en Control de código fuente). Ahora se conecta y muestra el proyecto.
+
 ## 1.4.53 · Hot Update · 2026-11-08
 
 Una actualización en caliente para 1.4.5, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en "Actualizaciones", al pie de la barra lateral de Box.
