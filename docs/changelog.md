@@ -5,6 +5,101 @@ next: false
 
 # Changelog
 
+## 1.4.55 · Hot Update · 2026-11-11
+
+A hot update for 1.4.5, no reinstall needed: Breezell offers it on its own, or check under "Updates" at the foot of the Box sidebar.
+
+### Highlights
+
+- **New User Guide:** A short tour for new users who have not connected an API of their own: Box, the official models, where to add your own key or relay, and the model menu. Open it again any time from Help ▸ "New User Guide".
+- **Working style:** Breezell can pick up how you like it to work (ask less, confirm before changing files, shorter answers) from your own messages, but it changes nothing until you say yes.
+- **More models:** Claude Fable 5.2 and Claude Mythos 5.2 (with Fast), new models on OpenRouter and from Meta, a plan choice for Qwen, and Seedream 5.5 for image generation.
+- **Several keys and addresses for one OpenAI-compatible provider,** with the model list following the key you choose.
+- **Project groups:** A capsule above the message box, four AI permissions and conversations shared inside the group. See [Project Group and Shared Memories](/project-group).
+- **Fewer wasted retries in chat:** A model that uses its whole output limit thinking is asked once to think briefly, then stops with advice, instead of three billed retries. Tool calls that some models write as plain text now run.
+- **Asks before risky changes:** Even with "Auto-approve edits" on, Breezell asks before touching MCP config, git hooks, shell profiles, credential files and similar. Pages in Breezell's browser and Computer Use ask before using your camera, microphone, screen or desktop.
+- **Editor fixes:** The "N files changed · Next" bar no longer sticks, opening a long file with many AI changes no longer freezes the window, and memory no longer keeps growing over long sessions.
+
+### New User Guide
+
+- **Who sees it:** New users who have not connected an API of their own see a short guide made of bubbles you step through with "Next". It does not appear for people who already use their own API.
+- **What it points out:** Box, "Official models (Breezell)", the place where you connect your own API key or a relay, and the menu under the chat box where you switch models. You can press "Skip" at any time.
+- **Seeing it again:** Open Help ▸ "New User Guide".
+
+### Working style
+
+- **Asked before every change:** Breezell reads your own messages for how you like it to work, for example "ask less", "confirm before changing files or running commands", "keep answers short". Before it adjusts anything it asks: "Yes", "Keep as is" or "Never ask again". If you do not answer, nothing changes.
+- **The "Working style" card:** In Box ▸ Super Memory ▸ Budget & Maintenance, the card shows the current preferences. "Read now" looks at your recent messages again and "Clear" removes what it learned.
+- **Privacy:** Only messages you typed yourself are read, and the result stays on this computer.
+
+### Models
+
+- **Claude Fable 5.2 and Claude Mythos 5.2:** Both are supported, including Fast.
+- **OpenRouter and Meta:** OpenRouter gains Nex N2.6, Inkling 2 Small (free) and Muse Ember. Meta gains Muse Ember 1.0.
+- **Qwen "Plan":** Choose "DashScope" (pay as you go) or "Token Plan" (subscription).
+- **Seedream 5.5 image generation:** In Box and in Image Studio you can pick 1K, 1.5K or 2K, use a transparent background (delivered as a PNG) and give up to 10 reference images.
+- **Sign-in connections:** Gemini (Google sign-in) and Kimi Code sign-in were updated to follow their newest versions.
+
+### Box ▸ Models (OpenAI-compatible)
+
+- **Several keys and addresses:** One compatible provider can keep several keys ("Add key") and several request addresses ("Add address"; "Test speed" measures them). The model list follows the key you select, and each model is sent with the key that owns it.
+- **Models a service no longer offers:** They are removed from the list and you are told, with "Undo". When Breezell is not sure, it asks first and you can choose "Keep".
+- **Adding a model by ID:** Type a model ID in the model search box to add it directly.
+
+### Project groups
+
+See [Project Group and Shared Memories](/project-group) for the whole feature.
+
+- **The capsule above the message box:** It shows the group, how many projects it holds, which permissions are on, and what the AI in the group's other windows is doing (idle, working or waiting for you). Which file or command it is working on is shown only while "Share Conversations" is on. Unfold it to see each member's state and model, then "Go to Window", see its conversations, "Hand Over…" a task, switch the permissions, or open the "Group Page".
+- **Four AI permissions:** "AI Permissions" on the group page are now four switches: "Read Files", "Change Files", "Share Memories" and "Share Conversations". "Change Files" replaces "Allow AI to Change Group Projects".
+- **Shared conversations:** With "Share Conversations" on, the AI in each window can read the conversations of the others. "View" opens one as a read-only tab in the editor area, and closing it no longer asks whether to save. "Attach to my next message" puts a tag in the message box.
+- **A group made in the middle of a turn:** The turn under way learns about the group, and you are told that the earlier answers did not use it.
+- **With "External File Access" off:** Group projects this window can reach stay readable.
+- **Fixed:**
+  - Asked about another group project, the AI searched this project and answered that nothing matched.
+  - After merging into one window, the AI was told the project was no longer in the group.
+  - A change to a group project in another environment (a WSL project, for example) ran before you approved it and could not be undone. Such projects are now only read and searched, and a change is offered to that project's window instead.
+  - Without "Change Files", the AI could still change a group project by using its full path.
+  - Conversations inside a project group had no titles.
+- **Cross-Check:** Files the AI changes through a group project's window are checked by Cross-Check too.
+
+### Chat
+
+- **A reply cut while thinking:** When a model spends its whole output limit thinking and writes no reply, it is asked once to think briefly and try again. If that fails, Breezell stops and suggests lowering "Reasoning intensity" or choosing a model with a larger output limit. Before, the same request was sent three times, each one billed, ending with "the model returned an empty reply 3 times in a row".
+- **Tool calls written as text:** Some models (Qwen3-Coder, or GLM through a relay) write a tool call as plain text. It now runs as usual instead of being taken for an empty reply that stopped the work.
+- **Dropping files into a chat tab:** In a chat opened as an editor tab, files or folders dropped on the message box are attached to the message instead of opening as a tab or a window.
+- **Code blocks:** A code block is now one card. The file name, line numbers and buttons sit in its header, and a file name that is too long is cut off.
+- **After Stop:** Nothing asks for approval once you press Stop. If the connection goes silent halfway, the reply is shown as cut short instead of finished.
+- **Smoother replies:** Replies from some relays now appear word by word instead of all at once, the window no longer slows down when the AI writes something very long, and an attached PDF is not uploaded again on every turn.
+- **Gemini:** Native Gemini receives attached pictures, PDFs and screenshots taken by tools.
+- **Tools mentioned while thinking:** A tool the model only mentions in its thinking is not run.
+- **Fixed:**
+  - After editing a conversation, a request to Claude could be refused.
+  - With some models, the results of earlier turns were lost when tools were called one after another.
+
+### Editor
+
+- **"N files changed · Next" bar:** It no longer gets stuck, jumps back and forth or skips files. "Next" goes on from the file the bar shows, and after one file is left it moves on to the next one.
+- **Long files:** Opening a very long file with many AI changes no longer freezes the window for seconds.
+- **Memory:** Memory that kept growing over long sessions is fixed in several places.
+- **Focus folder:** The focus folder label no longer covers the bar of running commands.
+- **WSL and SSH focus folders:** On Windows, with a WSL or SSH folder set as the "Focus folder", every command the AI ran used to fail at once. They now run.
+
+### Security
+
+- **Edits that still ask:** Even with "Auto-approve edits" on, Breezell asks before changes to MCP config, git hooks, auto-run tasks, shell profiles, rules and skills, and credential files, and before deleting a whole workspace folder or a whole folder outside the workspace.
+- **Project MCP servers and untrusted folders:** A project's own MCP server starts only after you allow the command it runs, and asks again if the command changes. An untrusted folder loads no project rules, skills or MCP servers.
+- **Pages in Breezell's browser:** A page asks before it uses the camera, microphone, location, screen recording, clipboard or a connected device. The AI cannot see the values of HttpOnly cookies when it reads cookies.
+- **Computer Use:** Clicks, typing and opening apps ask first, unless "Auto-approve desktop actions" is on (Box ▸ Feature Options ▸ Tool Permissions).
+- **Memory:** Keys, passwords and similar secrets are removed from text before it is kept as a memory. Memory files with Windows line endings no longer lose entries.
+- **Deleting and importing:** Deleting a skill asks first. Deleting a conversation removes only the files Breezell saved for it. When you import a conversation backup, conversations that are invalid or empty are skipped and you are told.
+
+### Plugins
+
+- **Uninstalling:** When you uninstall a plugin, the windows it opened close too.
+- **Floating windows:** A plugin's window that floats over other apps (Activity Island, for example) was misplaced while Breezell was minimized. Fixed.
+- **Slash commands:** A plugin's slash command is not sent while the plugin is not taking messages, and you are pointed to Plugins ▸ "Installed" to check.
+
 ## 1.4.54 · Hot Update · 2026-11-09
 
 A hot update for 1.4.5, no reinstall needed: Breezell offers it on its own, or check under "Updates" at the foot of the Box sidebar.

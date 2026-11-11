@@ -5,6 +5,101 @@ next: false
 
 # Registro de alterações
 
+## 1.4.55 · Hot Update · 2026-11-11
+
+Uma atualização rápida para a 1.4.5, sem precisar reinstalar: o Breezell a oferece sozinho, ou verifique em "Atualizações" no pé da barra lateral do Box.
+
+### Destaques
+
+- **Guia para novos usuários:** Usuários novos que ainda não conectaram a própria API veem um guia curto: o Box, os modelos oficiais, onde conectar sua própria chave ou um relay, e o menu para trocar de modelo. Para ver de novo, abra «Guia para novos usuários» no menu Help.
+- **Forma de trabalhar:** O Breezell lê as suas próprias mensagens para entender como você prefere que ele trabalhe (perguntar menos, confirmar antes de alterar arquivos, respostas mais curtas), mas não muda nada até você dizer que sim.
+- **Mais modelos:** Suporte a Claude Fable 5.2 e Claude Mythos 5.2 (incluindo Fast), modelos novos no OpenRouter e na Meta, a escolha «Plano» no Qwen e geração de imagens com o Seedream 5.5.
+- **Várias chaves e endereços para um mesmo provedor compatível com OpenAI,** com a lista de modelos acompanhando a chave escolhida.
+- **Grupos de projetos:** Uma cápsula acima da caixa de mensagem, quatro permissões da IA e conversas compartilhadas dentro do grupo. Veja [Grupo do projeto e memórias compartilhadas](/pt-br/project-group).
+- **Menos novas tentativas desperdiçadas no chat:** Se um modelo gasta todo o limite de saída pensando, pede-se uma vez que ele pense de forma breve e depois ele para com uma sugestão, em vez de três novas tentativas cobradas. As chamadas de ferramentas que alguns modelos escrevem como texto agora são executadas.
+- **Pergunta antes de mudanças arriscadas:** Mesmo com «Aprovar edições automaticamente» ativado, o Breezell pergunta antes de mexer na configuração do MCP, em git hooks, em perfis de shell, em arquivos de credenciais e coisas parecidas. As páginas do navegador do Breezell e o Computer Use também perguntam antes de usar câmera, microfone, tela ou área de trabalho.
+- **Correções no editor:** A barra «N files changed · Next» não trava mais, abrir um arquivo longo com muitas alterações da IA não congela mais a janela, e a memória deixa de crescer em sessões longas.
+
+### Guia para novos usuários
+
+- **Quem vê:** Usuários novos que ainda não conectaram a própria API veem um guia curto feito de balões, que se percorre com «Próximo». Ele não aparece sozinho para quem já usa a própria API.
+- **O que ele mostra:** O Box, os «Modelos oficiais (Breezell)», o lugar onde você conecta sua própria chave de API ou um relay, e o menu para trocar de modelo abaixo da caixa de mensagem. Você pode clicar em «Pular» quando quiser.
+- **Ver de novo:** Abra «Guia para novos usuários» no menu Help.
+
+### Forma de trabalhar
+
+- **Pergunta antes de cada mudança:** O Breezell lê as suas próprias mensagens para entender como você prefere que ele trabalhe, por exemplo «perguntar menos», «confirmar com você antes de alterar arquivos ou executar comandos» ou «respostas mais curtas». Antes de cada mudança ele pergunta: «Sim», «Manter como está» ou «Não perguntar mais». Se você não responder, nada muda.
+- **O cartão «Forma de trabalhar»:** Em Box ▸ Super Memory ▸ Orçamento e manutenção, o cartão mostra a preferência atual. «Ler agora» lê de novo as suas mensagens recentes e «Limpar» apaga o que foi aprendido.
+- **Privacidade:** Só as suas próprias mensagens são lidas, e o resultado fica apenas neste computador.
+
+### Modelos
+
+- **Claude Fable 5.2 e Claude Mythos 5.2:** Os dois são compatíveis, incluindo Fast.
+- **OpenRouter e Meta:** O OpenRouter ganha Nex N2.6, Inkling 2 Small (grátis) e Muse Ember; a Meta ganha Muse Ember 1.0.
+- **«Plano» do Qwen:** Você pode escolher «DashScope» (pagamento por uso) ou «Token Plan» (assinatura).
+- **Geração de imagens com o Seedream 5.5:** No Box e no Image Studio há 1K, 1.5K e 2K, fundo transparente (entregue como PNG) e até 10 imagens de referência.
+- **Conexões de login:** A conexão do Gemini (login com Google) e do Kimi Code foi atualizada para acompanhar as versões mais recentes.
+
+### Box ▸ Modelos (compatíveis com OpenAI)
+
+- **Várias chaves e endereços:** Um provedor compatível pode guardar várias chaves («Adicionar chave») e vários endereços de requisição («Adicionar endereço», com «Testar velocidade»). A lista de modelos acompanha a chave escolhida, e cada modelo é enviado com a chave a que pertence.
+- **Modelos que o serviço deixou de oferecer:** Saem da lista com um aviso, e você pode «Desfazer»; quando há dúvida, primeiro perguntamos e você pode escolher «Manter».
+- **Adicionar um modelo pelo ID:** Digite um ID de modelo diretamente na caixa de busca para adicioná-lo.
+
+### Grupos de projetos
+
+Tudo sobre o recurso em [Grupo do projeto e memórias compartilhadas](/pt-br/project-group).
+
+- **A cápsula acima da caixa de mensagem:** Mostra o grupo, quantos projetos tem, quais permissões estão ativas e o que a IA das outras janelas do grupo está fazendo (parada, trabalhando ou esperando por você). Qual arquivo ou comando ela está tratando só aparece com «Compartilhar conversas» ativado. Ao expandir, você vê o estado e o modelo de cada membro e pode «Ir para a janela», ver as conversas dela, «Entregar…» uma tarefa, alternar permissões ou abrir a «Página do grupo».
+- **Quatro permissões da IA:** As «Permissões da IA» na página do grupo agora são quatro chaves: «Ler arquivos», «Alterar arquivos», «Compartilhar memórias» e «Compartilhar conversas». «Alterar arquivos» substitui «Permitir que a IA altere os projetos do grupo».
+- **Conversas compartilhadas:** Com «Compartilhar conversas» ativado, a IA de cada janela do grupo lê as conversas das outras. «Ver» abre uma aba somente leitura na área do editor, que ao ser fechada não pergunta mais se deve salvar; «Anexar à minha próxima mensagem» coloca uma etiqueta na caixa de mensagem.
+- **Um grupo criado no meio de um turno:** Esse turno o conhece e você é avisado de que as respostas anteriores não o usaram.
+- **Com «Acesso a Arquivos Externos» desativado:** Os projetos do grupo que esta janela alcança continuam legíveis.
+- **Corrigido:**
+  - Ao perguntar sobre outro projeto do grupo, a IA pesquisava neste projeto e respondia que não havia resultados.
+  - Depois de juntar os projetos em uma só janela, a IA era informada de que o projeto não estava mais no grupo.
+  - Uma alteração em um projeto do grupo em outro ambiente (por exemplo, WSL) era executada antes da sua aprovação e sem como desfazer. Agora esse projeto só é lido e pesquisado, e a alteração é oferecida à janela dele.
+  - Sem «Alterar arquivos», a IA ainda conseguia alterar projetos do grupo por caminhos completos.
+  - As conversas dentro de um grupo de projetos não tinham título.
+- **Cross-Check:** Os arquivos que a IA altera pela janela de um projeto do grupo também passam pelo Cross-Check.
+
+### Chat
+
+- **Uma resposta cortada enquanto pensa:** Se um modelo gasta todo o limite de saída pensando e não escreve resposta, pede-se uma vez que ele pense de forma mais breve e tente de novo; se também não funcionar, ele para e sugere reduzir a «Intensidade de raciocínio» ou usar um modelo com limite de saída maior. Antes, o pedido era reenviado três vezes, com cobrança a cada vez, e terminava com «the model returned an empty reply 3 times in a row».
+- **Chamadas de ferramentas escritas como texto:** As chamadas de ferramentas que alguns modelos escrevem como texto (Qwen3-Coder, GLM por meio de um relay) agora são executadas, em vez de tratadas como resposta vazia que interrompia tudo.
+- **Soltar arquivos em uma aba de chat:** Em um chat aberto em uma aba do editor, arquivos ou pastas soltos na caixa de mensagem são anexados, e não abertos como aba ou janela.
+- **Blocos de código:** Um bloco de código agora é um único cartão: nome do arquivo, linhas e botões ficam no cabeçalho, e nomes muito longos são cortados.
+- **Depois de Parar:** Depois de Parar, nenhum pedido de aprovação aparece; quando a conexão fica em silêncio, a resposta aparece como interrompida, e não como concluída.
+- **Respostas mais fluidas:** As respostas de alguns relays agora aparecem palavra por palavra, e não de uma vez só; a janela não fica mais lenta quando a IA escreve muito; os PDFs anexados não são reenviados a cada turno.
+- **Gemini:** O Gemini nativo recebe as imagens, os PDFs e as capturas de tela de ferramentas anexados.
+- **Ferramentas mencionadas ao pensar:** Uma ferramenta que o modelo apenas menciona enquanto pensa não é executada.
+- **Corrigido:**
+  - O Claude podia recusar uma requisição depois que a conversa era editada.
+  - Com alguns modelos, os resultados dos turnos anteriores se perdiam quando chamavam ferramentas em sequência.
+
+### Editor
+
+- **Barra «N files changed · Next»:** Não trava mais, não fica indo e voltando nem pula arquivos; «Next» continua a partir do arquivo mostrado na barra e, ao restar um arquivo, segue para o próximo.
+- **Arquivos longos:** Abrir um arquivo muito longo com muitas alterações da IA não congela mais a janela por vários segundos.
+- **Memória:** Foi corrigido, em vários pontos, o aumento de memória que crescia em sessões longas.
+- **Pasta em foco:** A etiqueta da pasta em foco não cobre mais a barra de comandos em execução.
+- **Pastas em foco do WSL e do SSH:** No Windows, com uma pasta do WSL ou SSH como «Pasta em foco», todos os comandos da IA falhavam na hora. Agora eles são executados.
+
+### Segurança
+
+- **Mudanças que continuam perguntando:** Mesmo com «Aprovar edições automaticamente» ativado, você é consultado antes de alterações na configuração do MCP, em git hooks, em tarefas de execução automática, em perfis de shell, em regras, em skills e em arquivos de credenciais, e antes de excluir a pasta do espaço de trabalho ou uma pasta inteira fora dele.
+- **Servidores MCP do projeto e pastas não confiáveis:** O servidor MCP de um projeto só inicia depois que você permite o comando dele; se o comando mudar, a pergunta se repete. Pastas não confiáveis não carregam regras, skills nem servidores MCP do projeto.
+- **Páginas do navegador do Breezell:** Uma página pergunta antes de usar câmera, microfone, localização, gravação de tela, área de transferência ou dispositivos conectados. Os valores dos cookies HttpOnly ficam ocultos para a IA.
+- **Computer Use:** Cliques, digitação e abertura de apps perguntam primeiro, a menos que «Aprovar automaticamente ações na área de trabalho» esteja ativado (Box ▸ Opções de Recursos ▸ Permissões de Ferramentas).
+- **Memória:** Chaves e senhas são removidas do texto antes de ele ser guardado como memória; arquivos de memória com quebras de linha do Windows não perdem mais entradas.
+- **Excluir e importar:** Excluir uma skill pede confirmação; excluir uma conversa remove apenas os arquivos que o Breezell guardou para ela; ao importar um backup, conversas inválidas ou vazias são ignoradas com um aviso.
+
+### Plugins
+
+- **Ao desinstalar:** Ao desinstalar um plugin, as janelas dele também são fechadas.
+- **Janelas flutuantes:** Com o Breezell minimizado, a janela flutuante de um plugin sobre outros aplicativos (por exemplo, «Ilha de atividade») ficava mal posicionada. Corrigido.
+- **Comandos de barra:** O comando de barra de um plugin não é enviado enquanto o plugin não está recebendo mensagens, e você é orientado a olhar «Plugins ▸ Instalados».
+
 ## 1.4.54 · Hot Update · 2026-11-09
 
 Uma atualização rápida para a 1.4.5, sem precisar reinstalar: o Breezell a oferece sozinho, ou verifique em "Atualizações" no pé da barra lateral do Box.
