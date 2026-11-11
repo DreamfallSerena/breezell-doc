@@ -5,6 +5,25 @@
  * 網站切到深色時使用 Breezell Dark，淺色時使用 Breezell Light。
  */
 
+@font-face {
+  font-family: "bz-codicon";
+  font-display: block;
+  src: url("/codicon.ttf") format("truetype");
+}
+
+/* 真正的 Codicon 圖示（BzCodicon.vue）：Breezell 的介面圖示就是這套字型圖形。 */
+.bz .bz-ci {
+  display: inline-block;
+  font-family: "bz-codicon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .bz {
   --bz-fg: #393a34;
   --bz-editor-fg: #393a34;
@@ -40,6 +59,16 @@
   --bz-field-border: color-mix(in srgb, var(--bz-fg) 18%, transparent);
   --bz-border3: color-mix(in srgb, var(--bz-fg) 14%, transparent);
 
+  /* 側邊欄與清單：取自 breezell-light.json 的 sideBar／list／activityBar 色票 */
+  --bz-sidebar-fg: #4e4f47;
+  --bz-list-hover: #f7f7f7;
+  --bz-list-active: #f7f7f7;
+  --bz-activity-fg: #393a34;
+  --bz-activity-inactive: #393a3450;
+  --bz-activity-active: color-mix(in srgb, #1e66f5 12%, transparent);
+  --bz-badge-bg: #4e4f47;
+  --bz-badge-fg: #ffffff;
+
   position: relative;
   margin: 20px 0;
   color: var(--bz-fg-1);
@@ -73,6 +102,16 @@
   --bz-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
   --bz-accent: #7fd3c6;
   --bz-accent-fg: #0f1514;
+
+  /* 側邊欄與清單：取自 breezell-dark.json 的 sideBar／list／activityBar 色票 */
+  --bz-sidebar-fg: #bfbaaa;
+  --bz-list-hover: #222222;
+  --bz-list-active: #1e1e1e;
+  --bz-activity-fg: #e4e4e4;
+  --bz-activity-inactive: #dedcd550;
+  --bz-activity-active: color-mix(in srgb, #89b4fa 22%, transparent);
+  --bz-badge-bg: #bfbaaa;
+  --bz-badge-fg: #141414;
 }
 
 .bz *,

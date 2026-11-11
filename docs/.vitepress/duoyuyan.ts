@@ -22,6 +22,7 @@ type yuyanwenben = {
   chaojijiyi: string;
   jiuchanmoshi: string;
   moshi: string;
+  fenzu: string;
   chajian: string;
   yemian: string;
   shangyi: string;
@@ -55,6 +56,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     chaojijiyi: "Super Memory",
     jiuchanmoshi: "Entanglement Mode Overview",
     moshi: "Mode Selection",
+    fenzu: "Project Group and Shared Memories",
     chajian: "Plugins",
     yemian: "On this page",
     shangyi: "Previous page",
@@ -86,6 +88,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     chaojijiyi: "スーパーメモリー",
     jiuchanmoshi: "Entanglement モードの概要",
     moshi: "モードの選択",
+    fenzu: "プロジェクトグループとメモリ共有",
     chajian: "プラグイン",
     yemian: "このページの内容",
     shangyi: "前のページ",
@@ -117,6 +120,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     chaojijiyi: "슈퍼 메모리",
     jiuchanmoshi: "Entanglement 모드 개요",
     moshi: "모드 선택",
+    fenzu: "프로젝트 그룹과 메모리 공유",
     chajian: "플러그인",
     yemian: "이 페이지에서",
     shangyi: "이전 페이지",
@@ -148,6 +152,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     chaojijiyi: "Super Memory",
     jiuchanmoshi: "Resumen del modo Entanglement",
     moshi: "Selección de modo",
+    fenzu: "Grupo del proyecto y memorias compartidas",
     chajian: "Complementos",
     yemian: "En esta página",
     shangyi: "Página anterior",
@@ -179,6 +184,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     chaojijiyi: "Super Memory",
     jiuchanmoshi: "Visão geral do modo Entanglement",
     moshi: "Seleção de modo",
+    fenzu: "Grupo do projeto e memórias compartilhadas",
     chajian: "Plugins",
     yemian: "Nesta página",
     shangyi: "Página anterior",
@@ -210,6 +216,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     chaojijiyi: "Суперпамять",
     jiuchanmoshi: "Обзор режима Entanglement",
     moshi: "Выбор режима",
+    fenzu: "Группа проекта и общая память",
     chajian: "Плагины",
     yemian: "На этой странице",
     shangyi: "Предыдущая страница",
@@ -241,6 +248,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     chaojijiyi: "超级记忆",
     jiuchanmoshi: "Entanglement 模式功能说明",
     moshi: "模式选择",
+    fenzu: "项目分组与共享记忆",
     chajian: "插件",
     yemian: "本页内容",
     shangyi: "上一页",
@@ -272,6 +280,7 @@ const yuyanwenben: Record<string, yuyanwenben> = {
     chaojijiyi: "超級記憶",
     jiuchanmoshi: "Entanglement 模式功能說明",
     moshi: "模式選擇",
+    fenzu: "專案分組與共享記憶",
     chajian: "插件",
     yemian: "本頁內容",
     shangyi: "上一頁",
@@ -314,6 +323,7 @@ function qudebianlan(luyou: string, wenben: yuyanwenben) {
     { text: wenben.duihuakuang, link: lianjie("/dialog-box-overview") },
     { text: wenben.chaojijiyi, link: lianjie("/super-memory") },
     { text: wenben.moshi, link: lianjie("/mode-selection") },
+    { text: wenben.fenzu, link: lianjie("/project-group") },
   ];
   const moshidaoyin = [
     { text: wenben.jiuchanmoshi, link: lianjie("/entanglement-mode-overview") },
@@ -375,8 +385,8 @@ export function qudezhutipeizhi(luyou: string) {
   const jiemian = jiemianwenben[luyou as keyof typeof jiemianwenben];
   const lianjie = (lujing: string) => qudelianjie(luyou, lujing);
   const zhinanzhengze = luyou === "root"
-    ? "^/(introduction|settings-page-language-settings|custom-api|custom-model-vision|prompt-settings|feature-options-overview|dialog-box-overview|super-memory|mode-selection|entanglement-mode-overview)(/|$)"
-    : `^/${luyou}/(introduction|settings-page-language-settings|custom-api|custom-model-vision|prompt-settings|feature-options-overview|dialog-box-overview|super-memory|mode-selection|entanglement-mode-overview)(/|$)`;
+    ? "^/(introduction|settings-page-language-settings|custom-api|custom-model-vision|prompt-settings|feature-options-overview|dialog-box-overview|super-memory|mode-selection|entanglement-mode-overview|project-group)(/|$)"
+    : `^/${luyou}/(introduction|settings-page-language-settings|custom-api|custom-model-vision|prompt-settings|feature-options-overview|dialog-box-overview|super-memory|mode-selection|entanglement-mode-overview|project-group)(/|$)`;
 
   return {
     search: {
