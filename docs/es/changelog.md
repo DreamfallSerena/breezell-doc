@@ -5,6 +5,54 @@ next: false
 
 # Registro de cambios
 
+## 1.4.56 · Hot Update · 2026-11-11
+
+Una actualización en caliente para 1.4.5, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en "Actualizaciones", al pie de la barra lateral de Box.
+
+### Lo más destacado
+
+- **Los subagentes son conversaciones propias:** En Agent y Entanglement, el trabajo que el agente principal entrega a un subagente aparece bajo el chat principal en el historial. Ábrelo para verlo trabajar en el área del editor y escribe para corregirlo; el agente principal ya no espera, y cada subagente informa al terminar.
+- **Modelo del subagente:** Los subagentes siguen el modelo del chat; un modelo que pidas se busca solo en la pasarela actual, y eliges tú cuando no está.
+- **Razonar ya no se come la respuesta:** Cada modelo recibe el máximo de salida que permite su proveedor, así que un razonamiento largo ya no deja la respuesta vacía.
+- **Correcciones:** Aprobaciones de Computer Use sin nada que pulsar, "Breezell could not load its prompts" en el primer chat tras una actualización y "This chat failed to load" en las pestañas de chat tras reiniciar.
+
+### Subagentes
+
+- **Una conversación propia:** En Agent y Entanglement, el trabajo que el agente principal entrega a un subagente ahora es una conversación aparte. Lleva la etiqueta «Subagente» en el historial y cuelga de su chat principal («Contraer subagentes» / «Expandir subagentes»). Un subagente que trabaja tiene una línea discontinua a la izquierda; el que no trabaja se ve atenuado.
+- **Se abre en el área del editor:** Al pulsar un subagente, su conversación se abre en el área del editor y la barra lateral pasa al chat principal. Arriba de la página se ve su estado (Trabajando, Esperando aprobación, Inactivo, Interrumpido, Cerrado), con «Volver al chat principal», «Detener» y «Cerrar subagente».
+- **Corrígelo directamente:** La página de un subagente tiene su propio cuadro de mensaje. Lo que escribes le llega tras su paso actual, o enseguida con «Enviar ahora».
+- **Qué puede hacer:** Leer, editar y ejecutar comandos con las mismas herramientas que el agente principal (salvo Computer Use), desde la carpeta de enfoque del chat principal. En un grupo de proyectos sabe qué hace la IA de las otras ventanas del grupo, como el agente principal, y con «Compartir conversaciones» activado puede leer las conversaciones del grupo.
+- **El agente principal no espera:** Puedes seguir hablando con el agente principal mientras los subagentes trabajan. Cada vez que un subagente termina una parte del trabajo, informa; un agente principal libre continúa por sí solo, y uno ocupado ve el informe en su siguiente paso. El chat principal muestra tarjetas como "El subagente «nombre» terminó su trabajo", con «Abrir» y «Ver informe».
+- **Escribir, leer y cerrar:** El agente principal puede escribir a un subagente, leer su conversación o cerrarlo. Cuando pulsas tú «Cerrar subagente», se le avisa al agente principal. Un subagente cerrado se detiene, y su conversación sigue en el historial.
+- **Cuántos y borrado:** Hasta 5 subagentes de un mismo chat principal trabajan a la vez. Borrar el chat principal borra sus subagentes; Detener en el chat principal no los detiene.
+- **Retirar un mensaje:** Retirar un mensaje del chat principal retira también los subagentes iniciados después: se detienen y cierran, y sus cambios en archivos se deshacen. La confirmación los lista, p. ej. "Subagente «nombre» (2 archivos)".
+- **Cambios y revisión:** Los archivos que cambia un subagente aparecen en la barra de cambios del chat principal, con «Descartar todo» y «Conservar todo», y pasan por Cross-Check. «Revisar» en la página de un subagente muestra los cambios de ese subagente.
+- **Modo Teams:** Sin cambios.
+
+### Modelo del subagente
+
+En Box ▸ Opciones de funciones ▸ Modelos ▸ Modelos dedicados ▸ Modelo del subagente, la elección de modelo aparte ahora es un interruptor.
+
+- **Activado (por defecto):** Los subagentes usan el modelo actual del chat. Cuando pides un modelo concreto, se busca solo en la pasarela actual; si no está allí o coinciden varios, una tarjeta "Elige un modelo para el subagente «nombre»" te pide elegir uno, y luego «Iniciar» (o «No iniciar»). Un modelo que elegiste se reutiliza en el mismo chat.
+- **Desactivado:** Cada subagente nuevo espera a que elijas su modelo.
+
+### Chat
+
+- **Razonar ya no se come la respuesta:** El razonamiento y la respuesta comparten un límite de salida. Muchos modelos recibían cerca de la mitad de lo que permiten, así que un razonamiento largo lo agotaba y la respuesta llegaba vacía. Ahora cada modelo recibe el máximo de salida que permite su proveedor, por ejemplo Claude, DeepSeek, GLM, Grok, Qwen, Doubao y Kimi.
+  - Tras una respuesta cortada, la siguiente solicitud deja más espacio.
+  - Cuando un proveedor rechaza el tamaño, la solicitud se reenvía con el tamaño que acepta.
+  - Cuando un saldo de OpenRouter solo cubre una respuesta más corta, la solicitud se reenvía con esa longitud en lugar de fallar.
+- **Botones de aprobación de Computer Use:** Los clics, la escritura, las teclas, los arrastres y la apertura de apps que esperan tu aprobación vuelven a mostrar "Apply" y "Reject". En 1.4.55 solo mostraban "(Awaiting user permission...)" sin nada que pulsar, y el turno quedaba atascado.
+- **Corregido:**
+  - Con tus propias claves de API, el primer chat tras una actualización podía fallar con "Breezell could not load its prompts".
+  - «Descartar todo» en el chat principal dejaba en disco un archivo creado por un subagente que llevaba un rato terminado, mientras la barra de cambios se vaciaba. Los miembros de Teams tenían el mismo problema tras acabar su equipo; también está corregido.
+
+### Editor
+
+- **Las pestañas de chat se cargan al instante:** Al volver a iniciar Breezell, los chats abiertos en pestañas del editor (también las páginas de subagentes) se cargan directamente, en vez de mostrar "This chat failed to load" y "Retry".
+- **Las pestañas de chat siguen delante:** Con «Abrir archivo automáticamente al editar» activado, un archivo que edita la IA ya no se abre sobre la pestaña de chat que estás leyendo.
+- **Corregido:** En una ventana WSL o remota, un archivo creado por la IA después de pulsar «Descartar todo» no aparecía en la barra de cambios.
+
 ## 1.4.55 · Hot Update · 2026-11-11
 
 Una actualización en caliente para 1.4.5, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en "Actualizaciones", al pie de la barra lateral de Box.

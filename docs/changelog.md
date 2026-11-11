@@ -5,6 +5,54 @@ next: false
 
 # Changelog
 
+## 1.4.56 · Hot Update · 2026-11-11
+
+A hot update for 1.4.5, no reinstall needed: Breezell offers it on its own, or check under "Updates" at the foot of the Box sidebar.
+
+### Highlights
+
+- **Subagents are conversations of their own:** In Agent and Entanglement, work the main agent hands to a subagent is listed under the main chat in the history. Open it to watch it work in the editor area and type to correct it; the main agent no longer waits, and each subagent reports back when done.
+- **Subagent model:** Subagents follow the chat's model; a model you ask for is looked for on the current gateway only, and you choose when it is not there.
+- **Thinking no longer eats the reply:** Every model gets the most output its provider allows, so a long think no longer leaves the reply empty.
+- **Fixes:** Computer Use approvals with nothing to press, "Breezell could not load its prompts" on the first chat after an update, and "This chat failed to load" on chat tabs after a restart.
+
+### Subagents
+
+- **A conversation of its own:** In Agent and Entanglement, work the main agent hands to a subagent is now a separate conversation. It is tagged "Subagent" in the chat history and listed under its main chat ("Collapse subagents" / "Expand subagents"). A working subagent has a dashed line on its left; one that is not working is dimmed.
+- **Opens in the editor area:** Clicking a subagent opens its conversation in the editor area, and the side bar switches to the main chat. The top of the page shows its status (Working, Waiting for approval, Idle, Interrupted, Closed), with "Back to main chat", "Stop" and "Close subagent".
+- **Correct it directly:** A subagent's page has its own message box. What you type reaches it after its current step, or right away with "Send now".
+- **What it can do:** Read, edit and run commands with the same tools as the main agent (except Computer Use), starting in the main chat's focus folder. In a project group it knows what the AI in the group's other windows is doing, like the main agent, and with "Share Conversations" on it can read the group's conversations.
+- **The main agent does not wait:** You can keep talking to the main agent while subagents work. Each time a subagent finishes a piece of work it reports back; an idle main agent continues by itself, a busy one sees the report at its next step. The main chat shows cards such as 'Subagent "name" finished its work', with "Open" and "Show report".
+- **Message, read and close:** The main agent can message a subagent, read its conversation or close it. When you press "Close subagent" yourself, the main agent is told. A closed subagent stops, and its conversation stays in the chat history.
+- **How many, and deleting:** Up to 5 subagents of one main chat work at the same time. Deleting the main chat deletes its subagents; Stop in the main chat does not stop them.
+- **Withdrawing a message:** Withdrawing a message in the main chat also withdraws the subagents started after it: they stop and close, and their file changes are undone. The confirmation lists them, e.g. 'Subagent "name" (2 files)'.
+- **Changes and review:** Files a subagent changes appear on the main chat's change bar, with "Discard all" and "Keep all", and go through Cross-Check. "Review" on a subagent's page shows that subagent's changes.
+- **Teams mode:** Unchanged.
+
+### Subagent model
+
+In Box ▸ Feature Options ▸ Models ▸ Dedicated models ▸ Subagent Model, the separate model choice is now a switch.
+
+- **On (default):** Subagents use the chat's current model. When you ask for a specific model, it is looked for on the current gateway only; if it is missing there or several match, a 'Choose a model for subagent "name"' card asks you to pick one, then "Start" (or "Don’t start"). A model you picked is used again in the same chat.
+- **Off:** Every new subagent waits for you to pick its model.
+
+### Chat
+
+- **Thinking no longer eats the reply:** Thinking and the reply share one output limit. Many models were given about half of what they allow, so a long think used it up and the reply came back empty. Every model now gets the most output its provider allows, for example Claude, DeepSeek, GLM, Grok, Qwen, Doubao and Kimi.
+  - After a reply is cut off, the next request leaves more room.
+  - When a provider refuses the size, the request is sent again with the size it accepts.
+  - When an OpenRouter balance only covers a shorter reply, the request is sent again at that length instead of failing.
+- **Computer Use approval buttons:** Clicks, typing, key presses, drags and app launches waiting for your approval show "Apply" and "Reject". In 1.4.55 they only showed "(Awaiting user permission...)" with nothing to press, and the turn was stuck.
+- **Fixed:**
+  - With your own API keys, the first chat after an update could fail with "Breezell could not load its prompts".
+  - "Discard all" in the main chat left a file a subagent had created on disk, while the change bar cleared, once the subagent had been done for a while. Teams members had the same problem after their team finished; fixed too.
+
+### Editor
+
+- **Chat tabs load right away:** When Breezell starts again, chats left open in editor tabs (subagent pages too) load directly instead of showing "This chat failed to load" and "Retry".
+- **Chat tabs stay in front:** With "Auto open file on edit" on, a file the AI edits no longer opens over the chat tab you are reading.
+- **Fixed:** In a WSL or remote window, a file the AI created after you pressed "Discard all" did not appear on the change bar.
+
 ## 1.4.55 · Hot Update · 2026-11-11
 
 A hot update for 1.4.5, no reinstall needed: Breezell offers it on its own, or check under "Updates" at the foot of the Box sidebar.
