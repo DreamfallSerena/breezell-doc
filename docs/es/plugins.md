@@ -25,7 +25,7 @@ Un complemento que añade un panel o una ventana también aparece bajo Complemen
 | Panel | Un panel dentro de Breezell con su propia página, siguiendo la conversación | Focus Player |
 | AI | Comandos que usan tu modelo de chat | Doc Writer |
 | Window | Una ventana propia, que también puede abrirse sin el editor | Focus Timer |
-| Conversation | Lee conversaciones, envía mensajes y aprueba llamadas a herramientas | Chat Mirror |
+| Conversation | Lee conversaciones, envía mensajes, aprueba llamadas a herramientas, e inicia, escribe y cierra subagentes | Chat Mirror |
 | Screens | Botones, páginas, partes reemplazadas, bloques de código y modos en las propias pantallas de Breezell | Desk Pet |
 | Companion | Una mascota sobre el cuadro de entrada que sigue lo que hace la IA | Desk Pet |
 | Long-running | Mantiene una conversación hasta terminar algo, con límites y su propia página | Goal |
@@ -60,6 +60,10 @@ Un complemento declara en `package.json` los permisos que necesita; lo que no de
 
 Los complementos no pueden llegar a tu cuenta, plan, cuota, facturación, ajustes de API personalizadas, diálogos de permisos, aprobaciones de herramientas ni a las pantallas de gestión de complementos. Lo que necesite tu intervención se muestra por encima de la ventana del complemento, y un botón que añada a Breezell se marca como "De complemento: nombre".
 
+### Subagentes
+
+Desde las versiones de Breezell posteriores a 1.4.56, un plugin también puede trabajar con subagentes: conversaciones propias que inicia una conversación en modo Agent o Entanglement, que conservan el modo de esa conversación y le informan al terminar. Con `chat.read`, un plugin lista los subagentes de una conversación y ve qué conversaciones son subagentes y qué hace cada uno; con `chat.send`, inicia uno con una tarea, le envía mensajes y lo cierra. Lo que un plugin envía así se muestra como del plugin, nunca como tuyo ni del agente principal, y el agente principal recibe aviso cuando un plugin inicia o cierra uno de sus subagentes. Consulta [Subagents](https://github.com/BreezellCode/BreezellCode/blob/main/plugins/docs/chat.md#subagents-chatread-chatsend) en la guía para desarrolladores.
+
 ## Publicar
 
 Haz un fork del [repositorio BreezellCode](https://github.com/BreezellCode/BreezellCode), empaqueta el complemento (`npm run package:open` o `npm run package:closed`), ejecuta `npm run submit -- --market` y abre una pull request. La comprobación del mercado se ejecuta y un mantenedor lo revisa. Los complementos de código cerrado solo incluyen código minificado.
@@ -72,6 +76,7 @@ La guía completa —`package.json`, cada permiso, cada llamada de la API, error
 - [Primeros pasos](https://github.com/BreezellCode/BreezellCode/blob/main/plugins/docs/getting-started.md)
 - [Referencia de la API](https://github.com/BreezellCode/BreezellCode/blob/main/plugins/docs/api.md)
 - [Permisos](https://github.com/BreezellCode/BreezellCode/blob/main/plugins/docs/permissions.md)
+- [Chat y subagentes](https://github.com/BreezellCode/BreezellCode/blob/main/plugins/docs/chat.md)
 - [Publicación](https://github.com/BreezellCode/BreezellCode/blob/main/plugins/docs/publishing.md)
 
 Todo complemento creado desde una plantilla incluye además una skill de IA en `.agents/skills/breezell-plugin/`, con esas páginas como referencias, para que un asistente pueda seguir la misma guía.

@@ -25,7 +25,7 @@ Breezell のプラグインは VS Code 拡張機能で、`vscode.breezell` も�
 | Panel | Breezell 内に独自ページを開き、会話に追随する | Focus Player |
 | AI | ユーザーのチャットモデルを使うコマンド | Doc Writer |
 | Window | 独自のウィンドウ。エディターを開かずに起動できる | Focus Timer |
-| Conversation | 会話を読み、メッセージを送り、ツール呼び出しを承認する | Chat Mirror |
+| Conversation | 会話を読み、メッセージを送り、ツール呼び出しを承認し、サブエージェントを開始・メッセージ送信・終了する | Chat Mirror |
 | Screens | Breezell 自身の画面にボタン、ページ、差し替え、コードフェンス、モードを追加する | Desk Pet |
 | Companion | 入力欄の上で AI の動きに合わせる相棒 | Desk Pet |
 | Long-running | 完了まで会話を続け、上限と独自ページを持つ | Goal |
@@ -60,6 +60,10 @@ npm install
 
 プラグインはアカウント、プラン、クォータ、請求、カスタム API 設定、権限ダイアログ、ツール承認、プラグイン管理画面には触れられません。ユーザーの操作が必要なものはプラグインの画面の上に表示され、Breezell に追加されたボタンには「プラグインから：名前」と表示されます。
 
+### サブエージェント
+
+1.4.56 より新しい Breezell では、プラグインはサブエージェントも扱えます。サブエージェントは、Agent またはエンタングルメントモードの会話が開始する独立した会話で、その会話のモードのまま動作し、終わると報告します。`chat.read` を持つプラグインは会話のサブエージェントを一覧し、どの会話がサブエージェントで、それぞれ何をしているかが分かります。`chat.send` を持つプラグインはタスクを渡してサブエージェントを開始し、メッセージを送り、終了できます。この方法でプラグインが送った内容は必ずプラグインのものとして表示され、あなたやメインのエージェントの言葉としては扱われません。プラグインがサブエージェントを開始・終了したときは、メインのエージェントにも伝わります。詳しくは開発者向けガイドの [Subagents](https://github.com/BreezellCode/BreezellCode/blob/main/plugins/docs/chat.md#subagents-chatread-chatsend) を参照してください。
+
 ## 公開
 
 [BreezellCode リポジトリ](https://github.com/BreezellCode/BreezellCode) を fork し、プラグインをパッケージして（`npm run package:open` または `npm run package:closed`）、`npm run submit -- --market` を実行し、pull request を作成します。マーケットのチェックが走り、メンテナーがレビューします。クローズドソースのプラグインは圧縮済みコードのみを含みます。
@@ -72,6 +76,7 @@ npm install
 - [はじめかた](https://github.com/BreezellCode/BreezellCode/blob/main/plugins/docs/getting-started.md)
 - [API リファレンス](https://github.com/BreezellCode/BreezellCode/blob/main/plugins/docs/api.md)
 - [権限](https://github.com/BreezellCode/BreezellCode/blob/main/plugins/docs/permissions.md)
+- [会話とサブエージェント](https://github.com/BreezellCode/BreezellCode/blob/main/plugins/docs/chat.md)
 - [公開](https://github.com/BreezellCode/BreezellCode/blob/main/plugins/docs/publishing.md)
 
 テンプレートから作ったプラグインには AI スキル（`.agents/skills/breezell-plugin/`）も付属し、これらのページを参照資料として使うため、AI アシスタントも同じガイドに沿って開発できます。

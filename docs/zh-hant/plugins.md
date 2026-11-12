@@ -25,7 +25,7 @@ Breezell 插件是一種 VS Code 擴充功能，另外附帶 `vscode.breezell`�
 | Panel | 在 Breezell 內開啟自己的頁面，並跟著對話走 | Focus Player |
 | AI | 使用你的對話模型的指令 | Doc Writer |
 | Window | 自己的視窗，也可以不開編輯器單獨啟動 | Focus Timer |
-| Conversation | 讀取對話、傳送訊息、核准工具呼叫 | Chat Mirror |
+| Conversation | 讀取對話、傳送訊息、核准工具呼叫，以及開啟、傳話給、關閉子代理 | Chat Mirror |
 | Screens | 在 Breezell 自己的畫面上加入按鈕、頁面、替換區塊、程式碼區塊與模式 | Desk Pet |
 | Companion | 浮在對話框上、跟著 AI 動作的小夥伴 | Desk Pet |
 | Long-running | 讓對話持續進行到完成，有次數限制與自己的頁面 | Goal |
@@ -60,6 +60,10 @@ npm install
 
 插件碰不到你的帳號、方案、額度、計費、自訂 API 設定、權限對話框、工具核准與插件管理畫面。需要你處理的提示一律顯示在插件畫面之上；插件加進 Breezell 的按鈕會標示「來自插件：名稱」。
 
+### 子代理
+
+從比 1.4.56 新的 Breezell 開始，插件也能操作子代理：子代理是「代理」或「糾纏」模式的對話開出的獨立對話，沿用那段對話的模式，做完會回報給它。有 `chat.read` 的插件可以列出一段對話的子代理，看出哪些對話是子代理、各自在做什麼；有 `chat.send` 的插件可以用一項任務開子代理、傳話給它、關閉它。插件這樣送出的內容一律標示為插件的，不會當成你或主 agent 說的話；插件開啟或關閉子代理時，主 agent 也會收到通知。詳見開發者指南的 [Subagents](https://github.com/BreezellCode/BreezellCode/blob/main/plugins/docs/chat.md#subagents-chatread-chatsend)。
+
 ## 發佈
 
 Fork [BreezellCode 儲存庫](https://github.com/BreezellCode/BreezellCode)，打包插件（`npm run package:open` 或 `npm run package:closed`），執行 `npm run submit -- --market`，再開一個 pull request。市集檢查會先跑過，接著由維護者審查。閉源插件只會包含壓縮後的程式碼。
@@ -72,6 +76,7 @@ Fork [BreezellCode 儲存庫](https://github.com/BreezellCode/BreezellCode)，�
 - [開始開發](https://github.com/BreezellCode/BreezellCode/blob/main/plugins/docs/getting-started.md)
 - [API 參考](https://github.com/BreezellCode/BreezellCode/blob/main/plugins/docs/api.md)
 - [權限](https://github.com/BreezellCode/BreezellCode/blob/main/plugins/docs/permissions.md)
+- [對話與子代理](https://github.com/BreezellCode/BreezellCode/blob/main/plugins/docs/chat.md)
 - [發佈](https://github.com/BreezellCode/BreezellCode/blob/main/plugins/docs/publishing.md)
 
 從範本建立的插件也會附上 AI 技能（`.agents/skills/breezell-plugin/`），並以這些頁面作為參考資料，因此 AI 助理也能照著同一份指南開發。

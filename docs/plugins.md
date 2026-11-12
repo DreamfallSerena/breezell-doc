@@ -25,7 +25,7 @@ A plugin that adds a panel or a window also appears under Plugins in the Box sid
 | Panel | A panel inside Breezell with its own page, following the conversation | Focus Player |
 | AI | Commands that use your chat model | Doc Writer |
 | Window | A window of its own, which can also open without the editor | Focus Timer |
-| Conversation | Reads conversations, sends messages and approves tool calls | Chat Mirror |
+| Conversation | Reads conversations, sends messages, approves tool calls, and starts, messages and closes subagents | Chat Mirror |
 | Screens | Buttons, pages, replaced parts, code fences and modes in Breezell's own screens | Desk Pet |
 | Companion | A pet on the chat box that follows what the AI is doing | Desk Pet |
 | Long-running | Keeps a conversation going until something is done, with limits and its own page | Goal |
@@ -60,6 +60,10 @@ A plugin declares the permissions it needs in `package.json`; anything it does n
 
 Plugins cannot reach your account, plan, quota, billing, custom API settings, permission dialogs, tool approvals or the plugin management screens. Anything that needs you is shown above the plugin's own window, and a button a plugin adds to Breezell is marked "From plugin: name".
 
+### Subagents
+
+From Breezell newer than 1.4.56, a plugin can also work with subagents: conversations of their own that a conversation in Agent or Entanglement mode starts, which keep that conversation's mode and report back to it. With `chat.read` a plugin lists a conversation's subagents and sees which conversations are subagents and what each is doing; with `chat.send` it starts one with a task, sends it a message and closes it. What a plugin sends this way is shown as the plugin's, never as yours or the main agent's, and the main agent is told when a plugin starts or closes one of its subagents. See [Subagents](https://github.com/BreezellCode/BreezellCode/blob/main/plugins/docs/chat.md#subagents-chatread-chatsend) in the developer guide.
+
 ## Publish
 
 Fork the [BreezellCode repository](https://github.com/BreezellCode/BreezellCode), pack the plugin (`npm run package:open` or `npm run package:closed`), run `npm run submit -- --market`, then open a pull request. The market check runs on it and a maintainer reviews it. Closed-source plugins ship minified code only.
@@ -72,6 +76,7 @@ The complete guide — `package.json`, every permission, every call of the API, 
 - [Getting started](https://github.com/BreezellCode/BreezellCode/blob/main/plugins/docs/getting-started.md)
 - [API reference](https://github.com/BreezellCode/BreezellCode/blob/main/plugins/docs/api.md)
 - [Permissions](https://github.com/BreezellCode/BreezellCode/blob/main/plugins/docs/permissions.md)
+- [Chat and subagents](https://github.com/BreezellCode/BreezellCode/blob/main/plugins/docs/chat.md)
 - [Publishing](https://github.com/BreezellCode/BreezellCode/blob/main/plugins/docs/publishing.md)
 
 Every plugin made from a template also carries an AI skill in `.agents/skills/breezell-plugin/`, with those pages as its references, so an assistant can follow the same guide.
