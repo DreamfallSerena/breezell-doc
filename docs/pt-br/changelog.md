@@ -5,6 +5,34 @@ next: false
 
 # Registro de alterações
 
+## 1.4.57 · Hot Update · 2026-11-11
+
+Uma atualização rápida para a 1.4.5, sem precisar reinstalar: o Breezell a oferece sozinho, ou verifique em "Atualizações" no pé da barra lateral do Box.
+
+### Destaques
+
+- **Os subagentes mantêm o modo do chat principal:** Um subagente iniciado no Emaranhamento trabalha no Emaranhamento, um iniciado no Agent trabalha no Agent, e o seletor de modo na página dele fica travado em vez de trocar o chat principal.
+- **As perguntas são feitas no chat principal:** As decisões que dependem de você são perguntadas pelo agente principal no chat principal; o subagente não continua mais tentando perguntar.
+- **Aviso de aprovação:** Enquanto um subagente aguarda sua aprovação, o chat principal avisa sobre a caixa de mensagem; «Abrir» leva você à página dele.
+- **Os plugins podem trabalhar com subagentes:** Listar e iniciar subagentes, enviar mensagens a eles e fechá-los.
+
+### Subagentes
+
+- **O modo em que começou:** Um subagente agora trabalha no modo que o chat principal tinha quando o iniciou: um iniciado no Emaranhamento trabalha no Emaranhamento, com um Painel de Emaranhamento próprio; um iniciado no Agent trabalha no Agent. O modo de plugin escolhido na hora também vai junto. Trocar o chat principal depois não muda mais um subagente que já está trabalhando.
+- **Um seletor de modo travado:** O seletor de modo na página do subagente mostra o modo dele e trava os outros; ao escolher um, aparece «Um subagente mantém o modo que o chat principal tinha quando ele começou e não pode ser trocado. Para mudar o modo, volte ao chat principal.» Antes, trocar o seletor na página de um subagente trocava o chat principal.
+- **A página segue o modo do subagente:** Tudo na página do subagente segue o modo dele: o Painel de Emaranhamento do chat principal e as divisórias de troca de modo não aparecem mais ali.
+- **As perguntas passam pelo chat principal:** O agente principal pergunta com um cartão de pergunta antes de iniciar um subagente. Um subagente que precisa da sua decisão no meio do trabalho coloca a pergunta no relatório, para o agente principal perguntar a você no chat principal e repassar sua resposta. Antes, o subagente continuava tentando perguntar até ser parado, e o agente principal mandava você para a página do subagente, onde não havia pergunta para responder.
+- **Aviso de aprovação:** Enquanto um subagente aguarda sua aprovação, o chat principal mostra «O subagente "nome" está esperando sua aprovação» sobre a caixa de mensagem; «Abrir» leva você à página dele para aprovar.
+
+### Plugins
+
+- **Trabalhar com subagentes:** Os plugins podem listar os subagentes de uma conversa, iniciar um, enviar mensagem a ele e fechá-lo. O que um plugin envia aparece na página do subagente como «O plugin "nome"», nunca como você ou o agente principal.
+- **O chat principal é avisado:** Quando um plugin inicia ou fecha um subagente, um cartão aparece no chat principal e o agente principal é avisado; ele deixa o fechamento do subagente de um plugin por conta desse plugin.
+- **Limites:** Um plugin não pode fazer um subagente fechado voltar a trabalhar nem mudar o modo de um subagente.
+- **Abrir conversas:** Quando um plugin pede para abrir uma conversa que não está na tela, ela agora abre; um subagente abre na própria aba.
+
+Quem desenvolve plugins encontra como usar isso em "Subagentes" na página [Plugins](/pt-br/plugins).
+
 ## 1.4.56 · Hot Update · 2026-11-11
 
 Uma atualização rápida para a 1.4.5, sem precisar reinstalar: o Breezell a oferece sozinho, ou verifique em "Atualizações" no pé da barra lateral do Box.

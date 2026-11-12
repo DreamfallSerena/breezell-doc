@@ -5,6 +5,34 @@ next: false
 
 # Registro de cambios
 
+## 1.4.57 · Hot Update · 2026-11-11
+
+Una actualización en caliente para 1.4.5, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en "Actualizaciones", al pie de la barra lateral de Box.
+
+### Lo más destacado
+
+- **Los subagentes conservan el modo de su chat principal:** Un subagente iniciado en Entanglement trabaja en Entanglement, uno iniciado en Agent trabaja en Agent, y el selector de modo de su página está bloqueado en lugar de cambiar el chat principal.
+- **Las preguntas se hacen en el chat principal:** Las decisiones que te necesitan las pregunta el agente principal en el chat principal; un subagente ya no sigue intentando preguntar.
+- **Aviso de aprobación:** Mientras un subagente espera tu aprobación, el chat principal te lo indica sobre su cuadro de mensaje; «Abrir» te lleva a su página.
+- **Los complementos pueden trabajar con subagentes:** Listar y iniciar subagentes, enviarles mensajes y cerrarlos.
+
+### Subagentes
+
+- **El modo en que empezó:** Un subagente ahora trabaja en el modo que tenía su chat principal cuando lo inició: uno iniciado en Entanglement trabaja en Entanglement, con su propio Panel de Entanglement; uno iniciado en Agent trabaja en Agent. El modo de complemento elegido entonces también se mantiene. Cambiar el chat principal más tarde ya no modifica a un subagente que ya está trabajando.
+- **Un selector de modo bloqueado:** El selector de modo de la página de un subagente muestra su propio modo y bloquea los demás; al elegir otro aparece "Un subagente conserva el modo que tenía el chat principal cuando empezó y no se puede cambiar. Para cambiar el modo, vuelve al chat principal." Antes, cambiar el selector en la página de un subagente cambiaba el chat principal.
+- **La página sigue el modo del subagente:** Todo lo que hay en la página de un subagente sigue el modo del propio subagente: el Panel de Entanglement del chat principal y las separaciones que marcan el cambio de modo ya no se ven allí.
+- **Las preguntas pasan por el chat principal:** El agente principal pregunta con una tarjeta de pregunta antes de iniciar un subagente. Un subagente que necesita tu decisión a mitad de camino pone la pregunta en su informe, de modo que el agente principal te la hace en el chat principal y le transmite tu respuesta. Antes, un subagente seguía intentando preguntar hasta que se le detenía, y el agente principal te enviaba a la página del subagente, donde no había ninguna pregunta que responder.
+- **Aviso de aprobación:** Mientras un subagente espera tu aprobación, el chat principal muestra "El subagente «nombre» espera tu aprobación" sobre su cuadro de mensaje; «Abrir» te lleva a su página para aprobar.
+
+### Complementos
+
+- **Trabajar con subagentes:** Los complementos pueden listar los subagentes de una conversación, iniciar uno, enviarle un mensaje y cerrarlo. Lo que envía un complemento aparece en la página del subagente como "El plugin «nombre»", nunca como tú ni como el agente principal.
+- **Se avisa al chat principal:** Cuando un complemento inicia o cierra un subagente, aparece una tarjeta en el chat principal y se avisa al agente principal; este deja el cierre del subagente de un complemento en manos de ese complemento.
+- **Límites:** Un complemento no puede volver a poner en marcha un subagente cerrado ni cambiar el modo de un subagente.
+- **Abrir conversaciones:** Cuando un complemento pide abrir una conversación que no está en pantalla, ahora se abre; un subagente se abre en su propia pestaña.
+
+Los autores de complementos pueden ver cómo usarlo en «Subagentes», en la página [Complementos](/es/plugins).
+
 ## 1.4.56 · Hot Update · 2026-11-11
 
 Una actualización en caliente para 1.4.5, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en "Actualizaciones", al pie de la barra lateral de Box.

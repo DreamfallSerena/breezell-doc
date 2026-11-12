@@ -156,7 +156,7 @@ const gongzuoqu = [
             <span class="bz-hz-gengxin"><BzTubiao ming="circle-arrow-up" :daxiao="17" /></span>
             <span class="bz-hz-ka-wen">
               <span class="bz-hz-ka-ming">{{ t("box.updates.title") }}</span>
-              <span class="bz-hz-ka-ci">v1.4.56</span>
+              <span class="bz-hz-ka-ci">v1.4.57</span>
             </span>
           </div>
           <div v-if="!zhanghu" class="bz-hz-ka">

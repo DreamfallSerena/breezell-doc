@@ -5,6 +5,34 @@ next: false
 
 # Changelog
 
+## 1.4.57 · Hot Update · 2026-11-11
+
+A hot update for 1.4.5, no reinstall needed: Breezell offers it on its own, or check under "Updates" at the foot of the Box sidebar.
+
+### Highlights
+
+- **Subagents keep their main chat's mode:** A subagent started in Entanglement works in Entanglement, one started in Agent works in Agent, and the mode picker on its page is locked instead of switching the main chat.
+- **Questions are asked in the main chat:** Decisions that need you are asked by the main agent in the main chat; a subagent no longer keeps trying to ask.
+- **Approval notice:** While a subagent waits for your approval, the main chat tells you over its message box; "Open" takes you to its page.
+- **Plugins can work with subagents:** List and start subagents, send them messages and close them.
+
+### Subagents
+
+- **The mode it started in:** A subagent now works in the mode its main chat had when it started it: one started in Entanglement works in Entanglement, with an Entanglement Dashboard of its own; one started in Agent works in Agent. The plugin mode picked then comes along too. Switching the main chat later no longer changes a subagent that is already running.
+- **A locked mode picker:** The mode picker on a subagent's page shows its own mode and locks the others; picking one says "A subagent keeps the mode its main chat had when it started, and cannot switch. To change the mode, go back to the main chat." Before, switching the picker on a subagent's page switched the main chat.
+- **The page follows the subagent's mode:** Everything on a subagent's page follows the subagent's own mode: the main chat's Entanglement Dashboard and mode-switch dividers no longer show there.
+- **Questions go through the main chat:** The main agent asks with a question card before it starts a subagent. A subagent that needs your decision midway puts the question in its report, so the main agent asks you in the main chat and passes your answer on. Before, a subagent kept trying to ask until it was stopped, and the main agent sent you to the subagent's page, where there was no question to answer.
+- **Approval notice:** While a subagent waits for your approval, the main chat shows 'Subagent "name" is waiting for your approval' over its message box; "Open" takes you to its page to approve.
+
+### Plugins
+
+- **Working with subagents:** Plugins can list a conversation's subagents, start one, send it a message and close it. What a plugin sends shows on the subagent's page as 'The plugin "name"', never as you or the main agent.
+- **The main chat is told:** When a plugin starts or closes a subagent, a card shows in the main chat and the main agent is told; it leaves closing a plugin's subagent to that plugin.
+- **Limits:** A plugin cannot get a closed subagent working again or change a subagent's mode.
+- **Opening conversations:** When a plugin asks to open a conversation that is not on screen, it now opens; a subagent opens in its own tab.
+
+Plugin authors can find how to use it under "Subagents" on the [Plugins](/plugins) page.
+
 ## 1.4.56 · Hot Update · 2026-11-11
 
 A hot update for 1.4.5, no reinstall needed: Breezell offers it on its own, or check under "Updates" at the foot of the Box sidebar.
