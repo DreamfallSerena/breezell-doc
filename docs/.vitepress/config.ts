@@ -79,7 +79,7 @@ export default defineConfig({
       {
         text: "Guide",
         link: "/introduction",
-        activeMatch: "^/(introduction|settings-page-language-settings|custom-api|custom-model-vision|prompt-settings|feature-options-overview|dialog-box-overview|super-memory|mode-selection|entanglement-mode-overview|project-group)(/|$)",
+        activeMatch: "^/(introduction|settings-page-language-settings|custom-api|custom-model-vision|prompt-settings|feature-options-overview|dialog-box-overview|super-memory|mode-selection|entanglement-mode-overview|project-group|agents-page)(/|$)",
       },
       { text: "About", link: "/about" },
       { text: "Contact", link: "/contact" },
@@ -126,6 +126,7 @@ export default defineConfig({
             { text: "Super Memory", link: "/super-memory" },
             { text: "Mode Selection", link: "/mode-selection" },
             { text: "Project Group and Shared Memories", link: "/project-group" },
+            { text: "Agents Page", link: "/agents-page" },
           ],
         },
         {
@@ -169,6 +170,7 @@ export default defineConfig({
             { text: "Super Memory", link: "/super-memory" },
             { text: "Mode Selection", link: "/mode-selection" },
             { text: "Project Group and Shared Memories", link: "/project-group" },
+            { text: "Agents Page", link: "/agents-page" },
           ],
         },
         {
@@ -212,6 +214,7 @@ export default defineConfig({
             { text: "Super Memory", link: "/super-memory" },
             { text: "Mode Selection", link: "/mode-selection" },
             { text: "Project Group and Shared Memories", link: "/project-group" },
+            { text: "Agents Page", link: "/agents-page" },
           ],
         },
         {
@@ -251,6 +254,7 @@ export default defineConfig({
             { text: "Super Memory", link: "/super-memory" },
             { text: "Mode Selection", link: "/mode-selection" },
             { text: "Project Group and Shared Memories", link: "/project-group" },
+            { text: "Agents Page", link: "/agents-page" },
           ],
         },
         {
