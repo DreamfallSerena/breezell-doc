@@ -5,6 +5,41 @@ next: false
 
 # Registro de alterações
 
+## 1.4.58 · Hot Update · 2026-11-13
+
+Uma atualização rápida para a 1.4.5, sem precisar reinstalar: o Breezell a oferece sozinho, ou verifique em «Atualizações» no pé da barra lateral do Box.
+
+### Destaques
+
+- **Página Agents:** a barra de título tem um novo seletor «Agents | IDE | Box», e as conversas de todos os seus projetos ficam em uma só página, para ler e continuar sem trocar de janela.
+- **Continuar outros projetos daqui:** enviar, aprovar, parar e manter ou desfazer alterações acontecem naquele projeto; se ele não tem janela aberta, o Breezell abre uma em segundo plano.
+- **A aprovação automática explica o motivo:** um comando que ainda pede confirmação mesmo com a aprovação automática ligada agora explica o porquê sob o cartão, e as exclusões comuns de arquivos por nome não perguntam mais.
+- **As notas de trabalho não travam mais:** quando as notas não têm nada novo, a IA não falha mais repetidamente até ser parada.
+
+### Página Agents
+
+- **Seletor e inicialização:** o seletor «Agents | IDE | Box» na barra de título alterna entre as três páginas. Janelas novas abrem na página Agents; depois, cada janela reabre na página em que estava ao ser fechada. Se preferir não começar ali, desative em «Configurações».
+- **Lista de projetos:** a lista «Agentes» à esquerda mostra primeiro o projeto desta janela, depois os outros projetos com conversas e os que você adicionou, do mais recente ao mais antigo. «Agrupar por» oferece «Projeto», «Tempo» e «Status», e a busca no topo encontra conversas.
+- **Adicionar projetos:** o botão de pasta ao lado de «Agentes» adiciona pastas (deste computador, do WSL ou do ambiente remoto ao qual a janela está conectada). O «+» ao lado de cada projeto inicia ali um agente novo; clique com o botão direito em um projeto para ver «Novo agente em» esse projeto, «Abrir no IDE» e «Remover da barra lateral».
+- **Conversas de outros projetos:** continue-as aqui mesmo: enviar, editar uma mensagem, aprovar, parar e manter ou desfazer alterações acontecem naquele projeto, e a página atualiza ao vivo. Se esse projeto não tem janela aberta, o Breezell abre uma em segundo plano sem exibi-la e a fecha depois de um tempo ociosa. Para ver essa janela, clique com o botão direito no projeto e escolha «Abrir no IDE».
+- **Subagentes:** aparecem sob a conversa que os iniciou, com «Recolher subagentes» e «Mostrar subagentes»; ao clicar em um, ele abre em uma aba à direita.
+- **Menu da conversa:** «Abrir à direita», «Referenciar conversa», «Renomear», «Fixar no topo», «Favoritar», «Exportar chat» e «Excluir». As conversas de outros projetos têm também «Continuar na Janela Dela»; renomear, fixar, favoritar e excluir essas conversas é feito naquele projeto.
+- **Lado direito e larguras:** o lado direito é a área do editor: arquivos, abas de chat e o navegador integrado, lado a lado; arraste uma conversa da lista para a direita para vê-la ao lado das outras. A lista e o lado direito podem ser redimensionados arrastando a borda; com clique duplo na borda da lista, ela volta à largura padrão.
+- **Barra da conta:** o pé da lista mostra sua foto, nome, plano e saldo. A engrenagem abre «Configurações»; o menu «⋯» tem «Gerenciar plano», «Atualizações», «Enviar feedback» e «Sair».
+- **Links de arquivos:** nas conversas de outros projetos, os links de arquivos nas respostas são procurados naquele projeto e abrem na linha certa.
+- **Espaços de trabalho com vários projetos:** as conversas trazidas de um projeto membro mostram esse projeto como uma pequena etiqueta colorida em vez de «[nome do projeto]» no título, e o nome do espaço de trabalho lista os projetos dele, para distinguir dois espaços com o mesmo nome.
+
+### Aprovação automática
+
+- **Explica o motivo:** um comando ou alteração que ainda precisa da sua confirmação mesmo com a aprovação automática ligada agora explica o motivo sob o cartão: por exemplo, ele pode apagar uma pasta inteira, não dá para saber de antemão o que ele apaga, ou ele altera as regras, habilidades, memórias ou configurações de MCP da IA.
+- **Pergunta menos:** um comando find que apaga só arquivos com um determinado nome (por exemplo `find . -name "*.pyc" -delete`) e um comando que primeiro vai a `cd ~/projeto` e depois apaga uma pasta dentro dele não pedem mais confirmação. Comandos que apagam uma pasta inteira, ou cujo alvo não pode ser lido, continuam perguntando antes.
+
+### Notas de trabalho
+
+- **Não travam mais:** quando as notas de trabalho não têm nada novo, a IA não mostra mais «Working notes attempted» repetidamente até ser parada; o cartão mostra «Working notes unchanged» e a IA segue com a tarefa.
+
+Veja a [Página Agents](/pt-br/agents-page) para o guia completo.
+
 ## 1.4.57 · Hot Update · 2026-11-11
 
 Uma atualização rápida para a 1.4.5, sem precisar reinstalar: o Breezell a oferece sozinho, ou verifique em "Atualizações" no pé da barra lateral do Box.

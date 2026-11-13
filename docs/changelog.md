@@ -5,6 +5,41 @@ next: false
 
 # Changelog
 
+## 1.4.58 · Hot Update · 2026-11-13
+
+This is a hot update for 1.4.5, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.
+
+### Highlights
+
+- **Agents page:** the title bar has a new "Agents | IDE | Box" switch, and the conversations of all your projects are on one page, to read and go on with without switching windows.
+- **Go on with other projects here:** sending, approving, stopping, and keeping or undoing changes all happen in that project; when it has no open window, Breezell opens one in the background.
+- **Auto-approve says why:** a command that still asks for confirmation although auto-approve is on now explains why under its card, and common deletes of files by name no longer ask.
+- **Working notes no longer get stuck:** when the notes have nothing new, the AI no longer fails again and again until it is stopped.
+
+### Agents page
+
+- **Switching and startup:** the "Agents | IDE | Box" switch in the title bar moves between the three pages. New windows open on the Agents page; after that, each window reopens on the page it was on when it was closed. If you would rather not start there, turn it off in Settings.
+- **Project list:** the "Agents" list on the left shows this window's project first, then every other project with conversations and the projects you added, most recently used first. "Group By" offers "Project", "Time" and "Status", and the search at the top finds conversations.
+- **Adding projects:** the folder button beside "Agents" adds folders (from this computer, from WSL, or from the remote environment this window is connected to). The "+" beside each project starts a new agent there; right-click a project for "New Agent in" that project, "Open in IDE" and "Remove from Side Bar".
+- **Other projects' conversations:** continue them right here: sending, editing a message, approving, stopping, and keeping or undoing changes all happen in that project, and the page updates live. When that project has no open window, Breezell opens one in the background without showing it, and closes it again after it has been idle for a while. To see that window, right-click the project and choose "Open in IDE".
+- **Subagents:** listed under the conversation that started them, with "Fold Subagents" and "Show Subagents"; clicking one opens it in a tab on the right.
+- **Conversation menu:** "Open on the Right", "Reference conversation", "Rename", "Pin to top", "Favorite", "Export chat" and "Delete". Conversations of other projects also have "Continue in Its Window", and renaming, pinning, favoriting and deleting them is done in that project.
+- **Right side and widths:** the right side is the editor area: files, chat tabs and the built-in browser side by side; drag a conversation from the list to the right to see it beside the others. Both the list and the right side can be resized by dragging their edge; double-click the list's edge to go back to the default width.
+- **Account bar:** the bottom of the list shows your picture, name, plan and balance. The gear opens "Settings"; the "⋯" menu has "Manage plan", "Updates", "Send Feedback" and "Sign out".
+- **File links:** in conversations of other projects, file links in replies are looked up in that project and open at the right line.
+- **Multi-project workspaces:** conversations brought in from a member project show that project as a small colored tag instead of "[project name]" in the title, and the workspace name lists the projects in it, so two workspaces with the same name can be told apart.
+
+### Auto-approve
+
+- **Says why:** a command or change that still needs your confirmation although auto-approve is on now says why under its card: for example, it may delete a whole folder, what it deletes cannot be known in advance, or it changes the AI's rules, skills, memories or MCP settings.
+- **Asks less:** a find command that deletes only files with a given name (for example `find . -name "*.pyc" -delete`), and a command that first goes to `cd ~/project` and then deletes a folder inside it, no longer ask for confirmation. Commands that delete a whole folder, or whose target cannot be read, still ask first.
+
+### Working notes
+
+- **No longer stuck:** when the working notes have nothing new, the AI no longer shows "Working notes attempted" again and again until it is stopped; the card shows "Working notes unchanged" and the AI goes on with the task.
+
+See [Agents page](/agents-page) for the full guide.
+
 ## 1.4.57 · Hot Update · 2026-11-11
 
 A hot update for 1.4.5, no reinstall needed: Breezell offers it on its own, or check under "Updates" at the foot of the Box sidebar.
