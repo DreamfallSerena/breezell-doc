@@ -5,6 +5,45 @@ next: false
 
 # Registro de cambios
 
+## 1.4.59 · Hot Update · 2026-11-14
+
+Una actualización en caliente para 1.4.5, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en «Actualizaciones», al pie de la barra lateral de Box.
+
+### Lo más destacado
+
+- **Git al estilo de IntelliJ IDEA:** «Box», a la izquierda de la página Agents, ahora es «Git» y abre «Commit», «Registro» y «Apartados» en el centro de la página; el IDE tiene la misma pestaña «Git».
+- **Confirma solo lo que quieres:** marca archivos, o usa «Mostrar fragmentos (commit de parte del archivo)» para marcar partes de un archivo; los archivos que cambian las conversaciones de IA se agrupan por conversación.
+- **Terminales en la página Agents:** los terminales que abres en la página se abren a la derecha, en el proyecto de la conversación, y vuelven al panel en el IDE.
+- **Las conversaciones de otros proyectos hacen más:** se envían los archivos y las imágenes adjuntos, las tarjetas de comando muestran la salida en directo, y funcionan los botones de las tarjetas, los mensajes en cola y los puntos de control.
+
+### Git
+
+- **Cómo abrirlo:** «Git» a la izquierda de la página Agents, con el número de archivos cambiados al lado; «Volver a la conversación» o `Esc` regresa. Muestra el proyecto de la conversación que estás viendo, también otros proyectos, incluidos los de WSL y SSH.
+- **Commit:** marca los archivos o fragmentos que quieres confirmar; los grupos son «Agent · *título de la conversación*», «Cambios» y «Archivos sin control de versiones»; además hay «Modificar el último commit», «Historial de mensajes de commit», «Escribir el mensaje de commit con IA (a partir de los cambios marcados)», «Revisión con IA de los cambios marcados» y «Commit y push…».
+- **Conflictos:** «Conflictos de fusión» lista los archivos en conflicto, con «Resolver…» y «Que la IA resuelva los conflictos», y luego «Continuar», «Omitir» o «Anular».
+- **Registro:** el gráfico de ramas, con los filtros «Texto o hash», «Autor» y «Ruta»; con clic derecho en un commit: «Cherry-pick», «Revertir commit», «Deshacer commit», «Restablecer la rama actual aquí», «Editar mensaje del commit…», «Eliminar commit…» y «Rebase interactivo desde aquí…».
+- **Apartados:** «Apartar cambios…» deja los cambios a un lado, para «Recuperar» o «Aplicar y conservar» más tarde.
+- **Push:** «Push…» lista antes los commits, con «Enviar etiquetas» y «Push forzado (with lease)».
+- **Ventana de ramas:** «Recientes», «Locales» y «Remotas», con «Añadir a favoritos»; checkout, comparar, fusionar, rebase, renombrar y eliminar, y «Smart Checkout» cuando un checkout sobrescribiría cambios locales.
+- **Actualizar proyecto:** «Actualizar proyecto» hace fetch y pone al día la rama actual; los cambios locales se apartan mientras tanto y se recuperan.
+- **IDE y teclas:** `Git: Commit…`, `Git: Show Log` y los demás comandos de la paleta de comandos abren la pestaña «Git»; `` Alt+` `` abre «Operaciones de Git»; busca `breezell.git` en Configuración para usar las teclas de Git de IntelliJ IDEA.
+
+### Página Agents
+
+- **Interruptor de páginas:** la barra de título ahora muestra «Box | Agents | IDE».
+- **Lado derecho y terminales:** el lado derecho es el área del editor propia de la página, y los archivos que abres allí no se añaden a las pestañas del IDE; los terminales se abren a la derecha y vuelven al panel en el IDE; en la página, `Ctrl+Alt+B` abre y cierra el lado derecho.
+- **Conversaciones de otros proyectos:** se envían archivos adjuntos, selecciones de código, imágenes y texto pegado; las tarjetas de comando tienen «A segundo plano» y «Detener»; los botones de las tarjetas de plan, equipo y otras actúan en ese proyecto; funcionan los mensajes en cola, el uso de contexto, «Compresión manual», «Revertir hasta este punto» y los puntos de control.
+- **La lista:** al desplazarse, las entradas de arriba y su título quedan fijos y el nombre de un proyecto se queda arriba; la búsqueda también encuentra primeros mensajes, borradores y nombres de subagentes.
+- **Guía para nuevos usuarios:** ahora empieza en la página Agents y te devuelve a la página en la que estabas.
+
+### Interfaz y correcciones
+
+- **Textos emergentes:** todos los textos emergentes de la interfaz de Breezell tienen el mismo aspecto, con los colores del tema; los divisores vuelven a iluminarse al pasar el puntero o arrastrar.
+- **Tras dividir un grupo de proyectos:** enviar a sus conversaciones, iniciar un agente nuevo, «Abrir en el IDE» o «Continuar en su ventana» ya no muestra «Path does not exist»; un aviso explica el motivo y te devuelve tu mensaje.
+- **Windows:** una ventana cerrada estando minimizada se reabre donde estaba y con su tamaño, maximizada si lo estaba.
+
+Consulta [Git](/es/git) y [Página Agents](/es/agents-page) para las guías completas.
+
 ## 1.4.58 · Hot Update · 2026-11-13
 
 Una actualización en caliente para 1.4.5, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en «Actualizaciones», al pie de la barra lateral de Box.

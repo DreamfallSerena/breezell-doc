@@ -5,6 +5,45 @@ next: false
 
 # Changelog
 
+## 1.4.59 · Hot Update · 2026-11-14
+
+This is a hot update for 1.4.5, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.
+
+### Highlights
+
+- **Git in the style of IntelliJ IDEA:** "Box" on the left of the Agents page is now "Git", which opens "Commit", "Log" and "Shelf" in the middle of the page; the IDE has the same "Git" tab.
+- **Commit only what you mean to:** check files, or use "Show hunks (commit part of the file)" to check parts of a file; files changed by AI conversations are grouped by conversation.
+- **Terminals on the Agents page:** terminals opened on the page open on the right, in the conversation's project, and are back in the panel on the IDE.
+- **Other projects' conversations do more:** attached files and pictures are sent along, command cards show live output, and card buttons, queued messages and checkpoints work.
+
+### Git
+
+- **Opening it:** "Git" on the left of the Agents page, with the number of changed files beside it; "Back to the conversation" or `Esc` returns. It shows the project of the conversation you are looking at, other projects, WSL and SSH ones included.
+- **Commit:** check the files or hunks to commit; the groups are "Agent · *conversation title*", "Changes" and "Unversioned Files"; there are also "Amend", "Commit message history", "Write the commit message with AI (from the checked changes)", "AI review of the checked changes" and "Commit and Push…".
+- **Conflicts:** "Merge conflicts" lists the files in conflict, with "Resolve…" and "Let AI resolve the conflicts", then "Continue", "Skip" or "Abort".
+- **Log:** the branch graph, with "Text or hash", "Author" and "Path" filters; right-click a commit for "Cherry-Pick", "Revert Commit", "Undo Commit", "Reset Current Branch to Here", "Edit Commit Message…", "Drop Commit…" and "Interactively Rebase from Here…".
+- **Shelf:** "Shelve Changes…" puts changes aside, to "Unshelve" or "Apply, Keep on Shelf" later.
+- **Push:** "Push…" lists the commits first, with "Push tags" and "Force push (with lease)".
+- **Branches popup:** "Recent", "Local" and "Remote", with "Add to favorites"; check out, compare, merge, rebase, rename and delete, and "Smart Checkout" when a checkout would overwrite local changes.
+- **Update Project:** "Update Project" fetches and brings the current branch up to date; local changes are put aside meanwhile and brought back.
+- **IDE and keys:** `Git: Commit…`, `Git: Show Log` and the other commands in the Command Palette open the "Git" tab; `` Alt+` `` opens "Git operations"; search Settings for `breezell.git` to use IntelliJ IDEA's Git keys.
+
+### Agents page
+
+- **Page switch:** the title bar now shows "Box | Agents | IDE".
+- **Right side and terminals:** the right side is the page's own editor area, and files opened there are not added to the IDE's tabs; terminals open on the right and are back in the panel on the IDE; on the page, `Ctrl+Alt+B` opens and closes the right side.
+- **Other projects' conversations:** attached files, code selections, pictures and pasted text are sent along; command cards have "To background" and "Stop"; plan, team and other card buttons take effect in that project; queued messages, context usage, "Manual compress", "Revert to this point" and checkpoints work.
+- **The list:** while it scrolls, the entries above it and its title stay in place and a project's name stays at the top; search also matches first messages, drafts and subagent names.
+- **New User Guide:** it now starts on the Agents page and returns you to the page you were on.
+
+### Interface and fixes
+
+- **Hover texts:** every hover text in Breezell's interface has the same look, in the theme's colors; dividers light up again on hover or drag.
+- **After a project group is split:** sending to its conversations, starting a new agent, "Open in IDE" or "Continue in Its Window" no longer pops up "Path does not exist"; a notice says why and gives your message back.
+- **Windows:** a window closed while minimized reopens where it was and at its size, maximized if it was.
+
+See [Git](/git) and [Agents page](/agents-page) for the full guides.
+
 ## 1.4.58 · Hot Update · 2026-11-13
 
 This is a hot update for 1.4.5, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.
