@@ -334,6 +334,7 @@ function qudebianlan(luyou: string, wenben: yuyanwenben) {
     { text: wenben.moshi, link: lianjie("/mode-selection") },
     { text: wenben.fenzu, link: lianjie("/project-group") },
     { text: wenben.agentsye, link: lianjie("/agents-page") },
+    { text: "Git", link: lianjie("/git") },
   ];
   const moshidaoyin = [
     { text: wenben.jiuchanmoshi, link: lianjie("/entanglement-mode-overview") },
@@ -395,8 +396,8 @@ export function qudezhutipeizhi(luyou: string) {
   const jiemian = jiemianwenben[luyou as keyof typeof jiemianwenben];
   const lianjie = (lujing: string) => qudelianjie(luyou, lujing);
   const zhinanzhengze = luyou === "root"
-    ? "^/(introduction|settings-page-language-settings|custom-api|custom-model-vision|prompt-settings|feature-options-overview|dialog-box-overview|super-memory|mode-selection|entanglement-mode-overview|project-group|agents-page)(/|$)"
-    : `^/${luyou}/(introduction|settings-page-language-settings|custom-api|custom-model-vision|prompt-settings|feature-options-overview|dialog-box-overview|super-memory|mode-selection|entanglement-mode-overview|project-group|agents-page)(/|$)`;
+    ? "^/(introduction|settings-page-language-settings|custom-api|custom-model-vision|prompt-settings|feature-options-overview|dialog-box-overview|super-memory|mode-selection|entanglement-mode-overview|project-group|agents-page|git)(/|$)"
+    : `^/${luyou}/(introduction|settings-page-language-settings|custom-api|custom-model-vision|prompt-settings|feature-options-overview|dialog-box-overview|super-memory|mode-selection|entanglement-mode-overview|project-group|agents-page|git)(/|$)`;
 
   return {
     search: {

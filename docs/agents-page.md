@@ -1,17 +1,17 @@
 ---
 title: Agents Page
-description: "The Agents page in Breezell 1.4.58: new windows open on the conversations of every project. How to switch pages, the side bar, grouping, adding projects, subagents, the conversation menu, carrying on other projects' conversations from here, the right side, the account bar, multi-project workspaces, the auto-approve notes, and the current limits."
+description: "The Agents page of Breezell (new in 1.4.58, updated in 1.4.59): new windows open on the conversations of every project. How to switch pages, the side bar and Git, grouping, adding projects, subagents, the conversation menu, carrying on other projects' conversations from here, the right side and terminals, the account bar, multi-project workspaces, the auto-approve notes, the New User Guide, and the current limits."
 ---
 
 # Agents Page
 
 The Agents page is a page of Breezell that puts **the conversations of all your projects in one place**. On the left is a side bar that lists every project and its conversations. On the right is the same editor area as in the IDE, where files, conversations and the built-in browser can sit side by side. You can see what every AI is doing and which one is waiting for you without opening each project's window first, and you can carry on with a conversation right here.
 
-This guide describes Breezell 1.4.58, where the Agents page first arrived. It covers how to switch pages, every part of the side bar, how to add projects, the conversation menu, how to work with the conversations of other projects, the right side, the account bar, multi-project workspaces, and the current limits.
+This guide describes Breezell 1.4.59 (the Agents page first arrived in 1.4.58). It covers how to switch pages, every part of the side bar, how to add projects, the conversation menu, how to work with the conversations of other projects, the right side and terminals, the account bar, multi-project workspaces, the New User Guide, and the current limits.
 
 ## Get to the page {#open}
 
-The title bar has a switch: **Agents | IDE | Box**. Click **Agents** for this page, **IDE** for the editor you know, and **Box** for the page with the models, the feature options and all of Breezell's settings.
+The title bar has a switch: **Box | Agents | IDE**. Click **Box** for the page with the models, the feature options and all of Breezell's settings, **Agents** for this page, and **IDE** for the editor you know.
 
 - New windows open on the Agents page by default.
 - When you close a window and open it again, it comes back on the page it was on when it was closed (Agents, IDE or Box).
@@ -30,7 +30,7 @@ The title bar has a switch: **Agents | IDE | Box**. Click **Agents** for this pa
 At the top of the side bar are four entries:
 
 - **New Chat** starts a new conversation in this window's project.
-- **Box** switches to the Box page.
+- **Git** opens this project's Git in the middle of the page; the number beside it is how many files have changed. See [Git](/git) for how to use it.
 - **Customize** opens rules, memories and skills.
 - The search button (**Search conversations**) opens a search box. Type to filter the conversations. `Esc` clears it and closes it.
 
@@ -40,6 +40,7 @@ Below them is the **Agents** section, which lists conversations by project:
 - Each project row shows its environment (for example `WSL: ubuntu` or `SSH: host`), when it was last used, and a **+**. The **+** (tooltip "New Agent in {project}") starts a new conversation in that project.
 - Each conversation has a dot that shows its state: **Working**, **Waiting for you**, or idle (no special mark). Next to it is its age, for example "now", "5m" or "2h".
 - When a project has more conversations than fit, click **Show more**.
+- While the list scrolls, the entries above it and the **Agents** title stay in place; grouped by project, a project's name stays at the top of the list until the next project scrolls up.
 
 To hide the side bar, click the button at its top left (**Toggle Side Bar**). While it is hidden, the top of the page has a button to bring it back, next to a **New Chat** button.
 
@@ -101,6 +102,10 @@ Everything you do here happens in that project:
 - Sending a message and editing an earlier one.
 - Approving or refusing what the AI wants to do, and **Stop**.
 - **Keep all** and **Discard all** on its change bar.
+- Attached files, code selections, pictures and pasted text are sent with the message.
+- The plan card, the mode switch card, a subagent's **Start**, interaction designs, the model choice for image generation, and the buttons of team cards.
+- Command cards show live output, with **To background** and **Stop**; **Open** opens that command's terminal on the right, where you can type.
+- Queued messages are sent when the reply ends; context usage, **Manual compress**, **Revert to this point** and checkpoints work.
 
 If that project has no open window, Breezell opens one in the background without showing it. It closes by itself after it has been idle for a while: nothing is running, nobody is looking at it and no file is unsaved. To see its window, right-click the project and choose **Open in IDE**.
 
@@ -110,11 +115,13 @@ To work in the project's own window instead, right-click the conversation and ch
 
 ## The right side {#right}
 
-The right side is the editor area, as in the IDE. Files, conversation tabs and the built-in browser can be open side by side.
+The right side is the Agents page's own editor area. Files, conversation tabs and the built-in browser can be open side by side, as in the IDE, but files opened here are not added to the IDE's tabs, and the IDE's tabs do not show here.
 
 - Drag a conversation from the side bar to the right side to see it side by side, or use **Open on the Right** in its menu.
 - The button at the top of the page (**Show Right Panel** / **Hide Right Panel**) hides it and brings it back.
 - Drag the edge of the side bar to change its width, and double-click the edge to reset it. The edge of the right side can be dragged to resize it too.
+- Terminals opened on this page (`Ctrl+J`, `` Ctrl+` ``, **Toggle Panel** in the title bar, **New Terminal**, or **Open** on a command card) open on the right, in the project of the conversation you are looking at; a WSL project gets a WSL terminal. On the IDE, this window's terminals are back in the IDE's panel.
+- On this page, `Ctrl+Alt+B` opens and closes the right side.
 
 ## The account bar {#account}
 
@@ -143,9 +150,12 @@ Even with auto-approve on, some actions still stop and ask you, and the card now
 
 These confirmations appear in the same way when you work on another project's conversation from the Agents page.
 
+## New User Guide {#tour}
+
+The first time you use Breezell, the New User Guide starts on this page: **New Chat**, switching models, **Git**, **Customize**, moving between Box, Agents and IDE, then Box for the official models and how to add your own API. When it ends you are back on the page you were on. To see it again, open "New User Guide" from the Help menu.
+
 ## Limits {#limits}
 
-- In another project's conversation only text is sent. Attached files and images are not.
 - In another project's conversation the **Try again** button of a failed reply is not available.
 - From a window on this computer, file links of an SSH project cannot be opened.
-- With **Status** grouping, other projects' agents are all listed under **Other**, whether they are working or waiting for you.
+- With **Status** grouping, other projects' agents are sorted into **Working** or **Waiting for you** only while that project's window is open (also in the background); otherwise they are listed under **Other**.

@@ -79,7 +79,7 @@ export default defineConfig({
       {
         text: "Guide",
         link: "/introduction",
-        activeMatch: "^/(introduction|settings-page-language-settings|custom-api|custom-model-vision|prompt-settings|feature-options-overview|dialog-box-overview|super-memory|mode-selection|entanglement-mode-overview|project-group|agents-page)(/|$)",
+        activeMatch: "^/(introduction|settings-page-language-settings|custom-api|custom-model-vision|prompt-settings|feature-options-overview|dialog-box-overview|super-memory|mode-selection|entanglement-mode-overview|project-group|agents-page|git)(/|$)",
       },
       { text: "About", link: "/about" },
       { text: "Contact", link: "/contact" },
@@ -127,6 +127,7 @@ export default defineConfig({
             { text: "Mode Selection", link: "/mode-selection" },
             { text: "Project Group and Shared Memories", link: "/project-group" },
             { text: "Agents Page", link: "/agents-page" },
+            { text: "Git", link: "/git" },
           ],
         },
         {
@@ -171,6 +172,7 @@ export default defineConfig({
             { text: "Mode Selection", link: "/mode-selection" },
             { text: "Project Group and Shared Memories", link: "/project-group" },
             { text: "Agents Page", link: "/agents-page" },
+            { text: "Git", link: "/git" },
           ],
         },
         {
@@ -215,6 +217,7 @@ export default defineConfig({
             { text: "Mode Selection", link: "/mode-selection" },
             { text: "Project Group and Shared Memories", link: "/project-group" },
             { text: "Agents Page", link: "/agents-page" },
+            { text: "Git", link: "/git" },
           ],
         },
         {
@@ -255,6 +258,7 @@ export default defineConfig({
             { text: "Mode Selection", link: "/mode-selection" },
             { text: "Project Group and Shared Memories", link: "/project-group" },
             { text: "Agents Page", link: "/agents-page" },
+            { text: "Git", link: "/git" },
           ],
         },
         {

@@ -1,17 +1,17 @@
 ---
 title: Página Agents
-description: "La página Agents de Breezell 1.4.58: las ventanas nuevas se abren con las conversaciones de todos tus proyectos. Cómo cambiar de página, la barra lateral, la agrupación, añadir proyectos, los subagentes, el menú de una conversación, cómo seguir desde aquí las conversaciones de otros proyectos, el lado derecho, la barra de la cuenta, los espacios de trabajo de varios proyectos, los avisos de la aprobación automática y los límites actuales."
+description: "La página Agents de Breezell (nueva en 1.4.58, actualizada en 1.4.59): las ventanas nuevas se abren con las conversaciones de todos tus proyectos. Cómo cambiar de página, la barra lateral y Git, la agrupación, añadir proyectos, los subagentes, el menú de una conversación, cómo seguir desde aquí las conversaciones de otros proyectos, el lado derecho y los terminales, la barra de la cuenta, los espacios de trabajo de varios proyectos, los avisos de la aprobación automática, la Guía para nuevos usuarios y los límites actuales."
 ---
 
 # Página Agents
 
 La página Agents es una página de Breezell que reúne **las conversaciones de todos tus proyectos en un solo lugar**. A la izquierda hay una barra lateral con cada proyecto y sus conversaciones. A la derecha está la misma área del editor que en el IDE, donde pueden estar abiertos a la vez archivos, conversaciones y el navegador integrado. Puedes ver qué hace cada IA y cuál te está esperando sin abrir antes la ventana de cada proyecto, y puedes seguir una conversación aquí mismo.
 
-Esta guía describe Breezell 1.4.58, donde apareció la página Agents. Explica cómo cambiar de página, cada parte de la barra lateral, cómo añadir proyectos, el menú de las conversaciones, cómo trabajar con las conversaciones de otros proyectos, el lado derecho, la barra de la cuenta, los espacios de trabajo de varios proyectos y los límites actuales.
+Esta guía describe Breezell 1.4.59 (la página Agents apareció en 1.4.58). Explica cómo cambiar de página, cada parte de la barra lateral, cómo añadir proyectos, el menú de las conversaciones, cómo trabajar con las conversaciones de otros proyectos, el lado derecho y los terminales, la barra de la cuenta, los espacios de trabajo de varios proyectos, la Guía para nuevos usuarios y los límites actuales.
 
 ## Cómo llegar a la página {#open}
 
-La barra de título tiene un interruptor: **Agents | IDE | Box**. **Agents** abre esta página, **IDE** el editor de siempre y **Box** la página con los modelos, las opciones de funciones y todos los ajustes de Breezell.
+La barra de título tiene un interruptor: **Box | Agents | IDE**. **Box** abre la página con los modelos, las opciones de funciones y todos los ajustes de Breezell, **Agents** abre esta página e **IDE** el editor de siempre.
 
 - Las ventanas nuevas se abren por defecto en la página Agents.
 - Si cierras una ventana y la vuelves a abrir, vuelve a la página en la que estaba al cerrarla (Agents, IDE o Box).
@@ -30,7 +30,7 @@ La barra de título tiene un interruptor: **Agents | IDE | Box**. **Agents** abr
 En la parte superior de la barra lateral hay cuatro entradas:
 
 - **Nuevo chat** inicia una conversación nueva en el proyecto de esta ventana.
-- **Box** cambia a la página Box.
+- **Git** abre el Git de este proyecto en el centro de la página; el número a su lado es cuántos archivos han cambiado. Consulta [Git](/es/git) para saber cómo usarlo.
 - **Personalizar** abre las reglas, las memorias y las habilidades.
 - El botón de búsqueda (**Buscar conversaciones**) abre un cuadro de búsqueda. Escribe para filtrar las conversaciones. `Esc` lo borra y lo cierra.
 
@@ -40,6 +40,7 @@ Debajo está la sección **Agentes**, que muestra las conversaciones por proyect
 - Cada fila de proyecto muestra su entorno (por ejemplo `WSL: ubuntu` o `SSH: host`), cuándo se usó por última vez y un **+**. El **+** (descripción «Nuevo agente en {proyecto}») inicia una conversación nueva en ese proyecto.
 - Cada conversación tiene un punto que indica su estado: **Trabajando**, **Esperando tu respuesta** o inactiva (sin marca). Al lado se muestra su antigüedad, por ejemplo «ahora», «5 min» o «2 h».
 - Cuando un proyecto tiene más conversaciones de las que caben, pulsa **Mostrar más**.
+- Mientras la lista se desplaza, las entradas de arriba y el título **Agentes** se quedan en su sitio; con la agrupación por proyecto, el nombre de un proyecto se queda arriba de la lista hasta que sube el siguiente.
 
 Para ocultar la barra lateral, pulsa el botón de su esquina superior izquierda (**Mostrar u ocultar la barra lateral**). Mientras está oculta, en la parte superior de la página hay un botón para volver a mostrarla y, al lado, un botón **Nuevo chat**.
 
@@ -101,6 +102,10 @@ Todo lo que haces aquí se hace en ese proyecto:
 - Enviar un mensaje y editar uno anterior.
 - Aprobar o rechazar lo que la IA quiere hacer, y **Detener**.
 - **Conservar todo** y **Descartar todo** en su barra de cambios.
+- Los archivos adjuntos, las selecciones de código, las imágenes y el texto pegado se envían con el mensaje.
+- La tarjeta de plan, la tarjeta de cambio de modo, el **Iniciar** de un subagente, los diseños de interacción, la elección del modelo para generar imágenes y los botones de las tarjetas de equipo.
+- Las tarjetas de comando muestran la salida en directo, con **A segundo plano** y **Detener**; **Abrir** abre el terminal de ese comando a la derecha, donde puedes escribir.
+- Los mensajes en cola se envían al terminar la respuesta; el uso de contexto, **Compresión manual**, **Revertir hasta este punto** y los puntos de control funcionan.
 
 Si ese proyecto no tiene una ventana abierta, Breezell abre una en segundo plano sin mostrarla. Se cierra sola cuando lleva un rato inactiva: nada se está ejecutando, nadie la está mirando y no hay archivos sin guardar. Para ver su ventana, haz clic con el botón derecho en el proyecto y elige **Abrir en el IDE**.
 
@@ -110,11 +115,13 @@ Para trabajar en la ventana propia del proyecto, haz clic con el botón derecho 
 
 ## El lado derecho {#right}
 
-El lado derecho es el área del editor, como en el IDE. Archivos, pestañas de conversaciones y el navegador integrado pueden estar abiertos uno junto a otro.
+El lado derecho es el área del editor propia de la página Agents. Archivos, pestañas de conversaciones y el navegador integrado pueden estar abiertos uno junto a otro, como en el IDE, pero los archivos que abres aquí no se añaden a las pestañas del IDE, y las pestañas del IDE no se muestran aquí.
 
 - Arrastra una conversación de la barra lateral al lado derecho para verla al lado, o usa **Abrir a la derecha** en su menú.
 - El botón de la parte superior de la página (**Mostrar panel derecho** / **Ocultar panel derecho**) lo oculta y lo vuelve a mostrar.
 - Arrastra el borde de la barra lateral para cambiar su ancho y haz doble clic en el borde para restablecerlo. El borde del lado derecho también se puede arrastrar para cambiar su tamaño.
+- Los terminales que abres en esta página (`Ctrl+J`, `` Ctrl+` ``, **Toggle Panel** en la barra de título, **New Terminal**, o **Abrir** en una tarjeta de comando) se abren a la derecha, en el proyecto de la conversación que estás viendo; un proyecto de WSL recibe un terminal de WSL. En el IDE, los terminales de esta ventana vuelven al panel del IDE.
+- En esta página, `Ctrl+Alt+B` abre y cierra el lado derecho.
 
 ## La barra de la cuenta {#account}
 
@@ -143,9 +150,12 @@ Aunque la aprobación automática esté activada, algunas acciones se detienen y
 
 Estas confirmaciones aparecen igual cuando sigues desde la página Agents la conversación de otro proyecto.
 
+## Guía para nuevos usuarios {#tour}
+
+La primera vez que usas Breezell, la Guía para nuevos usuarios empieza en esta página: **Nuevo chat**, el cambio de modelos, **Git**, **Personalizar**, el paso entre Box, Agents e IDE, y después Box, con los modelos oficiales y cómo añadir tu propia API. Al terminar vuelves a la página en la que estabas. Para verla de nuevo, abre «Guía para nuevos usuarios» en el menú Help.
+
 ## Límites actuales {#limits}
 
-- En la conversación de otro proyecto solo se envía texto. Los archivos e imágenes adjuntos no se envían.
 - En la conversación de otro proyecto no está disponible el botón **Reintentar** de una respuesta fallida.
 - Desde una ventana de este equipo no se pueden abrir los enlaces a archivos de un proyecto SSH.
-- Con la agrupación por **Estado**, los agentes de otros proyectos aparecen todos en **Otros**, estén trabajando o esperándote.
+- Con la agrupación por **Estado**, los agentes de otros proyectos se reparten en **Trabajando** o **Esperando tu respuesta** solo mientras la ventana de ese proyecto está abierta (también en segundo plano); si no, aparecen en **Otros**.
