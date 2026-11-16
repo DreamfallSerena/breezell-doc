@@ -5,6 +5,69 @@ next: false
 
 # Registro de alterações
 
+## 1.4.6 · 2026-11-16
+
+Esta é uma nova versão completa: baixe o instalador e instale de novo. Ela inclui tudo das atualizações rápidas 1.4.51 a 1.4.59. A seguir, as mudanças desde a 1.4.59.
+
+### Destaques
+
+- **Os subagentes terminam antes de o trabalho continuar:** depois de iniciar um subagente ou enviar uma mensagem a ele, o agente principal espera até ele terminar, com o relatório e os arquivos que ele alterou; subagentes iniciados juntos trabalham lado a lado.
+- **Um subagente que você para continua parado:** clique em Parar na página de um subagente ou no agente principal dele, e o agente principal não o coloca mais para trabalhar até você escrever para ele ou para o agente principal.
+- **Muito menos aprovações:** os comandos de terminal são aprovados automaticamente por padrão; um comando que apagaria um disco inteiro, sua pasta pessoal ou o projeto inteiro continua perguntando a você.
+- **A conclusão com Tab volta a funcionar:** as conclusões inline (incluindo a conclusão com Tab do Breezell), que não apareciam no aplicativo instalado desde a 1.4.5, voltam a aparecer.
+- **Veja uma prévia antes de mudar uma tela:** quando você quer que uma tela fique melhor sem dizer exatamente como, o agente cria uma página de prévia com o código real do seu projeto, coloca a tela atual e algumas opções lado a lado para você escolher, e só altera os arquivos reais depois da sua escolha.
+- **Novos modelos:** GPT 6.2 Sol, GPT 6.2 Astra e Gemini 4 Hydrogen.
+
+### Subagentes
+
+- **Esperar pelos subagentes:** quando o agente principal inicia um subagente ou envia uma mensagem a ele, por padrão espera até o subagente terminar e continua com o relatório e os arquivos que ele alterou; subagentes iniciados na mesma resposta trabalham lado a lado. O agente principal também pode deixar um subagente trabalhando em segundo plano, e o relatório chega depois.
+- **A linha do subagente:** depois de iniciado, um subagente é uma única linha: a grade à esquerda se move enquanto ele trabalha e mostra o resultado quando termina; o nome abre a página dele; a linha de baixo acompanha os passos e termina com um resumo em inglês como "Completed · 12 steps · 1m 32s · 2 files changed"; "Report" abre o relatório.
+- **Relatórios na página do agente principal:** o relatório de um subagente aparece como o mesmo tipo de linha, dizendo como ele terminou, por exemplo "Completed · 2 files changed", "Stopped by you" ou "Failed".
+- **Mensagens e fechamentos em sequência:** várias mensagens a subagentes, ou vários subagentes fechados, em sequência aparecem como uma só linha (por exemplo "Messaged A, B ×5"); "Messages" mostra cada mensagem e a resposta, e um nome abre aquele subagente.
+- **Subagentes em segundo plano:** ficam listados acima da caixa de mensagem do agente principal, com o passo em que cada um está, um caminho até a página dele e uma forma de pará-lo; vários se juntam em uma linha, que também avisa quando um deles está aguardando aprovação.
+- **Parar:** um subagente que você para, na página dele ou no agente principal, continua parado: o relatório dele não o coloca mais para trabalhar até você escrever para ele ou para o agente principal. Parar o agente principal também para os subagentes que trabalham para ele, inclusive os em segundo plano.
+- **Um só turno:** os relatórios de um subagente, e as mensagens que o agente principal envia a ele enquanto trabalha, continuam o mesmo turno em vez de iniciar uma nova seção da conversa.
+- **A tarefa do subagente:** a tarefa no topo da página de um subagente é recolhida em poucas linhas e pode ser aberta.
+- **Só o agente principal:** quando um subagente tenta algo que só o agente principal pode fazer, ele é avisado para colocar o que tem a dizer no relatório, e a página do subagente mostra o motivo em vez de uma falha sem explicação.
+- **Histórico de conversas:** os subagentes ficam listados sob o agente principal, com um ícone para o estado («Trabalhando», «Aguardando aprovação», «Ocioso», «Interrompido», «Fechado»); o botão de expandir do agente principal mostra quantos subagentes ele tem.
+
+### Aprovações
+
+- **Comandos de terminal aprovados automaticamente por padrão:** as instalações existentes são ativadas uma vez; se depois você desativar «Aprovar terminal automaticamente» em Box ▸ Opções de Recursos ▸ Permissões de Ferramentas, ele continua desativado. Um comando que apagaria um disco inteiro, uma pasta de sistema de nível superior, sua pasta pessoal ou o projeto inteiro continua perguntando a você; apagar algo dentro da pasta temporária não pergunta mais.
+- **Comandos sempre permitidos:** com «Aprovar terminal automaticamente» desativado, escolha "Always allow" na confirmação de um comando e esse mesmo comando passa a rodar direto neste projeto. A lista fica em Box ▸ Opções de Recursos ▸ Permissões de Ferramentas, em «Comandos sempre permitidos neste projeto», onde você pode removê-los. Um comando que pode apagar uma pasta inteira continua perguntando.
+- **Aprovar edições automaticamente:** com «Aprovar edições automaticamente» ligado, o agente escreve, apaga e renomeia arquivos diretamente, inclusive as regras, habilidades e configuração de MCP dele, git hooks, perfis de shell e pastas fora do projeto. Apagar um arquivo só pergunta onde o terminal também perguntaria, como apagar um disco inteiro ou o projeto inteiro.
+
+### Agent
+
+- **Uma prévia antes de mudar uma tela:** no modo Agent, quando você quer que uma tela fique diferente sem dizer exatamente como, o agente primeiro cria uma página de prévia: a tela atual desenhada com os componentes e estilos do seu próprio projeto, ao lado de 2 a 3 opções que mudam uma coisa cada, aberta no navegador integrado. Ele só altera os arquivos reais depois que você escolhe uma e apaga os arquivos da prévia. Quando você já disse exatamente o que mudar, ele simplesmente muda.
+- **Breezell Interaction Design removido:** «Breezell Interaction Design» em Box ▸ Experimental foi removido, substituído pela prévia acima. As escolhas que você fez em conversas antigas continuam nessas conversas.
+- **Aviso de espera:** «O modelo está demorando mais para responder. Continuamos aguardando» agora aparece após 30 segundos sem resposta, em vez de 15.
+
+### Modo notas
+
+- **Mensagens recentes mantidas após um novo contexto:** após um novo contexto, as mensagens mais recentes são mantidas, então o modelo não esquece mais o que acabou de fazer.
+- **Todas as seções das notas mantidas:** objetivo, estado, decisões, pendências e arquivos são todos mantidos; quando falta espaço, cada um mantém seus itens mais novos, em vez de só as duas primeiras seções.
+- **Lembretes só quando necessário:** o modelo é lembrado de atualizar as notas só quando elas ficaram para trás, então as notas não se enchem mais de passos sem importância.
+- **Uma passagem de contexto mais clara:** após um novo contexto ou uma compactação, a passagem lista os arquivos que foram alterados e os que só foram lidos.
+
+### Modelos
+
+- **GPT 6.2 Sol e GPT 6.2 Astra:** escolha-os na lista de modelos do Breezell, com esforço de low a max.
+- **Gemini 4 Hydrogen:** também disponível com a sua própria chave do Google, com preço de $1.50 de entrada / $7.50 de saída por milhão de tokens, esforço low, medium ou high, sendo high o padrão.
+- **Preço do Max Plus:** "Max Plus" no menu de modelos agora mostra o preço, com a lista de preços completa ao passar o mouse, em vez de "$$".
+- **Preços escritos do mesmo jeito:** os preços no menu de modelos coincidem com Box ▸ Modelos, então um mesmo modelo não mostra mais $2.2 em um lugar e $2.17 no outro.
+
+### Conta
+
+- **Contas pagas reconhecidas:** uma conta paga não vê mais «Provedores personalizados exigem um plano pago», sem precisar sair e entrar de novo.
+- **O login continua válido:** um login cuja vinculação do dispositivo ainda não terminou continua válido em vez de expirar no dia seguinte.
+- **Problemas de rede identificados:** quando a conexão é bloqueada pela rede ou por um proxy, o Breezell diz que é um problema de rede em vez de pedir que você entre de novo.
+
+### Correções
+
+- **Conclusões inline:** desde a 1.4.5 o aplicativo instalado não mostrava o texto de conclusão inline (incluindo a conclusão com Tab do Breezell); ele volta a aparecer. Um editor que não abre mostra o erro em vez de uma página em branco.
+- **Image Studio:** ele não abre mais em branco e as dicas de ferramenta voltam a aparecer.
+
 ## 1.4.59 · Hot Update · 2026-11-14
 
 Uma atualização rápida para a 1.4.5, sem precisar reinstalar: o Breezell a oferece sozinho, ou verifique em «Atualizações» no pé da barra lateral do Box.

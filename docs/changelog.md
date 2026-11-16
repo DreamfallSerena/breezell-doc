@@ -5,6 +5,69 @@ next: false
 
 # Changelog
 
+## 1.4.6 · 2026-11-16
+
+This is a new full release: download the installer and install it again. It includes everything from the 1.4.51 to 1.4.59 hot updates. Below are the changes since 1.4.59.
+
+### Highlights
+
+- **Subagents finish before the work goes on:** after starting a subagent or sending it a message, the main agent waits until it is done, with its report and the files it changed; subagents started together work side by side.
+- **A subagent you stop stays stopped:** press Stop on a subagent's page or on its main agent, and the main agent no longer sends it back to work until you write to it or to the main agent.
+- **Far fewer approvals:** terminal commands are approved automatically by default; a command that would delete a whole drive, your home folder or the whole project still asks you.
+- **Tab completion works again:** inline completions (Breezell's Tab completion included), missing from the installed app since 1.4.5, show again.
+- **See a preview before a screen is changed:** when you want a screen to look better without saying exactly how, the agent builds a preview page from your project's real code, puts the current screen and a few options side by side for you to pick, and changes the real files only after you choose.
+- **New models:** GPT 6.2 Sol, GPT 6.2 Astra and Gemini 4 Hydrogen.
+
+### Subagents
+
+- **Waiting for subagents:** when the main agent starts a subagent or sends it a message, it waits by default until the subagent is done and continues with its report and the files it changed; subagents started in the same reply work side by side. The main agent can also leave a subagent working in the background, and its report arrives later.
+- **The subagent's row:** once started, a subagent is one row: the lattice on the left moves while it works and shows the result when it is done; its name opens its page; the line under it follows its steps and ends with an English summary such as "Completed · 12 steps · 1m 32s · 2 files changed"; "Report" opens its report.
+- **Reports on the main agent's page:** a subagent's report shows as the same kind of row, saying how it ended, for example "Completed · 2 files changed", "Stopped by you" or "Failed".
+- **Messages and closes in a row:** several messages to subagents, or several subagents closed, in a row show as one row (for example "Messaged A, B ×5"); "Messages" shows each message and its reply, and a name opens that subagent.
+- **Subagents in the background:** they are listed above the main agent's message box with the step each one is on, a way to its page and a way to stop it; several fold into one line, which also says when one of them is waiting for approval.
+- **Stop:** a subagent you stop, on its page or on its main agent, stays stopped: its report no longer sends it back to work until you write to it or to its main agent. Stop on the main agent also stops the subagents working for it, those in the background included.
+- **One turn:** a subagent's reports, and the messages its main agent sends it while it works, continue the same turn instead of starting a new section of the conversation.
+- **The subagent's task:** the task at the top of a subagent's page folds to a few lines and can be opened.
+- **Main agent only:** when a subagent tries something only its main agent can do, it is told to put what it has to say in its report, and the subagent's page shows why instead of a bare failure.
+- **Conversation history:** subagents are listed under their main agent, with an icon for their state ("Working", "Waiting for approval", "Idle", "Interrupted", "Closed"); the main agent's expand button shows how many subagents it has.
+
+### Approvals
+
+- **Terminal commands approved automatically by default:** existing installs are switched on once; if you then turn off "Auto-approve terminal" in Box ▸ Feature Options ▸ Tool Permissions, it stays off. A command that would delete a whole drive, a top-level system folder, your home folder or the whole project still asks you; deleting something inside the temporary folder no longer does.
+- **Commands always allowed:** with "Auto-approve terminal" off, choose "Always allow" on a command's confirmation and the same command runs directly in this project from then on. The list is in Box ▸ Feature Options ▸ Tool Permissions under "Commands always allowed in this project", where you can remove them. A command that may delete a whole folder still asks.
+- **Auto-approve edits:** with "Auto-approve edits" on, the agent writes, deletes and renames files directly, including its rules, skills and MCP configuration, git hooks, shell profiles and folders outside the project. Deleting a file asks only where the terminal would also ask, such as deleting a whole drive or the whole project.
+
+### Agent
+
+- **A preview before a screen is changed:** in Agent mode, when you want a screen to look different without saying exactly how, the agent first builds a preview page: the current screen drawn with your project's own components and styles, next to 2 to 3 options that each change one thing, opened in the built-in browser. It changes the real files only after you pick one, and deletes the preview files. When you already said exactly what to change, it just changes it.
+- **Breezell Interaction Design removed:** "Breezell Interaction Design" in Box ▸ Experimental is gone, replaced by the preview above. Choices you made in older conversations stay in those conversations.
+- **Waiting notice:** "The model is taking longer to respond. Still waiting" now appears after 30 seconds without a response, instead of 15.
+
+### Notes mode
+
+- **Recent messages kept after a new context:** after a new context, the most recent messages are kept, so the model no longer forgets what it just did.
+- **Every section of the notes kept:** goal, state, decisions, open items and files are all kept; when space is short each keeps its newest items, instead of only the first two sections.
+- **Reminders only when needed:** the model is reminded to update its notes only when they have fallen behind, so the notes no longer fill up with unimportant steps.
+- **A clearer handover:** after a new context or a compaction, the handover lists the files that were changed and the files that were only read.
+
+### Models
+
+- **GPT 6.2 Sol and GPT 6.2 Astra:** pick them in the Breezell model list, with effort from low to max.
+- **Gemini 4 Hydrogen:** also available with your own Google key, priced at $1.50 input / $7.50 output per million tokens, effort low, medium or high, high by default.
+- **Max Plus price:** "Max Plus" in the model menu now shows its price, with the full price list on hover, instead of "$$".
+- **Prices written the same way:** prices in the model menu match Box ▸ Models, so one model no longer shows $2.2 in one place and $2.17 in the other.
+
+### Account
+
+- **Paid accounts recognized:** a paid account no longer sees "Custom providers need a paid plan", with no need to sign out and in.
+- **Sign-in stays valid:** a sign-in whose device binding has not finished stays valid instead of expiring the next day.
+- **Network problems named:** when the connection is blocked by the network or a proxy, Breezell says it is a network problem instead of asking you to sign in again.
+
+### Fixes
+
+- **Inline completions:** since 1.4.5 the installed app showed no inline completion text (Breezell's Tab completion included); it shows again. An editor that fails to open shows its error instead of a blank page.
+- **Image Studio:** it no longer opens blank, and its tooltips show again.
+
 ## 1.4.59 · Hot Update · 2026-11-14
 
 This is a hot update for 1.4.5, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.
