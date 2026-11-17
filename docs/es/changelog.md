@@ -5,6 +5,45 @@ next: false
 
 # Registro de cambios
 
+## 1.4.6.1 · Hot Update · 2026-11-17
+
+Una actualización en caliente para 1.4.6, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en «Actualizaciones», al pie de la barra lateral de Box.
+
+### Lo más destacado
+
+- **Nivel Auto:** los modelos propios de Breezell que lo ofrecen pueden usar «Precio más bajo primero» o «Más estable primero», y cuando hay mucha demanda Breezell lo reorganiza por sí solo y continúa.
+- **Box sin proyecto:** con solo la página Agents abierta, «Revisión de código», «Super Memory», «Limpieza de datos» y más muestran los datos de cualquier proyecto.
+- **La aprobación automática hace lo que configuras:** con «Aprobar terminal automáticamente» o «Aprobar ediciones automáticamente» activado, ni siquiera borrar una unidad o un proyecto entero pide confirmación.
+- **Modelos nuevos:** Qwen4-Max ya publicado, Tencent Hy4 flash, Baidu ERNIE 5.5 Flash Preview y Ling 3.2 Flash gratis en OpenRouter.
+
+### Modelos
+
+- **Nivel Auto:** en el menú de modelos, los modelos propios de Breezell que lo ofrecen tienen «Auto», con «Precio más bajo primero» o «Más estable primero». Si hay mucha demanda, Breezell lo reorganiza por sí solo y continúa, sin nada que reenviar; «Más estable primero» puede costar algo más. El menú muestra el precio más bajo; se aplica el cargo real.
+- **Un inicio lento ya no termina en error:** con los modelos propios de Breezell, una respuesta que tarda en empezar se espera hasta que llega, en lugar de terminar antes con un error.
+- **Qwen4-Max publicado:** con tu propia clave, el Qwen4-Max ya publicado encabeza la lista de Qwen (contexto de 1 millón de tokens, entrada de imagen y vídeo), con la vista previa debajo; Qwen4 Plus, Qwen4 Flash y Qwen4 27B, que nunca se publicaron, salen de la lista.
+- **Más modelos nuevos:** Tencent Hy4 flash (TokenHub y OpenRouter) y Baidu ERNIE 5.5 Flash Preview; OpenRouter añade también Ling 3.2 Flash (gratis) y Qwen4 Max.
+- **Variantes gratis de OpenRouter:** los modelos de OpenRouter cuyo nombre termina en «:free» usan ahora la longitud máxima de salida correcta.
+
+### Box
+
+- **Ventanas sin proyecto:** en una ventana sin proyecto abierto (solo la página Agents, por ejemplo), «Revisión de código», «Super Memory», «Limpieza de datos», «Motor de contexto» y «Aciertos de caché» permiten elegir los datos de cualquier proyecto; en Opciones de funciones ▸ Permisos de herramientas, «Comandos siempre permitidos en este proyecto» muestra los comandos de cada proyecto, agrupados por proyecto.
+- **Cambios de otros proyectos:** «Cambios por revisar en otros proyectos», en «Revisión de código», muestra lo que cada proyecto tiene pendiente de revisar. La conversación de otro proyecto aquí solo se puede ver: para aceptar o rechazar pasos sueltos, usa «Ir a su ventana»; «Aceptar todo» y «Rechazar todo» los hace la ventana de ese proyecto, para toda la conversación.
+- **Biblioteca de memoria:** «Biblioteca de memoria», en «Super Memory», ofrece todos los proyectos con memorias, en cualquier ventana.
+
+### Aprobaciones
+
+- **La aprobación automática hace lo que configuras:** con «Aprobar terminal automáticamente» activado, se ejecuta cualquier comando de terminal, incluidos los que borran una unidad entera, una carpeta de nivel superior del sistema, la carpeta personal o el proyecto entero; con «Aprobar ediciones automáticamente» activado, también se ejecuta cualquier borrado de archivos. Para que se te pregunte antes, desactiva el interruptor en Box ▸ Opciones de funciones ▸ Permisos de herramientas.
+- **Comandos siempre permitidos:** con «Aprobar terminal automáticamente» desactivado, un comando de «Comandos siempre permitidos en este proyecto» que sea arriesgado (un borrado amplio, por ejemplo) se sigue preguntando antes.
+
+### Subagentes
+
+- **Páginas de subagentes abiertas desde otra ventana:** los mensajes del agente principal se muestran ahora como del agente principal.
+
+### Rendimiento y espacio en disco
+
+- **Menos espacio en la unidad del sistema:** Breezell borra por sí solo las cachés que dejaron versiones anteriores y las descargas de complementos que se cortaron.
+- **Comparación de memorias más ligera:** comparar memorias en segundo plano usa menos CPU.
+
 ## 1.4.6 · 2026-11-16
 
 Esta es una nueva versión completa: descarga el instalador y vuelve a instalar. Incluye todo lo de las actualizaciones en caliente de la 1.4.51 a la 1.4.59. A continuación, los cambios desde la 1.4.59.

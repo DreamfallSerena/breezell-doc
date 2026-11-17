@@ -5,6 +5,45 @@ next: false
 
 # Registro de alterações
 
+## 1.4.6.1 · Hot Update · 2026-11-17
+
+Uma atualização rápida para a 1.4.6, sem precisar reinstalar: o Breezell a oferece sozinho, ou verifique em «Atualizações» no pé da barra lateral do Box.
+
+### Destaques
+
+- **Nível Auto:** os modelos próprios do Breezell que o oferecem podem usar «Menor preço primeiro» ou «Mais estável primeiro», e quando há muita demanda o Breezell se reorganiza sozinho e continua.
+- **Box sem projeto:** com só a página Agents aberta, «Revisão de código», «Super Memory», «Limpeza de dados» e outras mostram os dados de qualquer projeto.
+- **A aprovação automática faz o que você configurou:** com «Aprovar terminal automaticamente» ou «Aprovar edições automaticamente» ligado, nem apagar uma unidade ou um projeto inteiro pede confirmação.
+- **Novos modelos:** o Qwen4-Max já lançado, Tencent Hy4 flash, Baidu ERNIE 5.5 Flash Preview e o Ling 3.2 Flash grátis no OpenRouter.
+
+### Modelos
+
+- **Nível Auto:** no menu de modelos, os modelos próprios do Breezell que o oferecem têm «Auto», com «Menor preço primeiro» ou «Mais estável primeiro». Quando há muita demanda, o Breezell se reorganiza sozinho e continua, sem precisar reenviar; «Mais estável primeiro» pode custar um pouco mais. O menu mostra o menor preço; vale a cobrança real.
+- **Um início lento não termina mais em erro:** com os modelos próprios do Breezell, uma resposta que demora a começar é aguardada até chegar, em vez de terminar antes com um erro.
+- **Qwen4-Max lançado:** com sua própria chave, o Qwen4-Max lançado lidera a lista do Qwen (contexto de 1 milhão de tokens, entrada de imagem e vídeo), com a prévia logo abaixo; Qwen4 Plus, Qwen4 Flash e Qwen4 27B, que nunca foram lançados, saíram da lista.
+- **Mais modelos novos:** Tencent Hy4 flash (TokenHub e OpenRouter) e Baidu ERNIE 5.5 Flash Preview; o OpenRouter também ganha Ling 3.2 Flash (grátis) e Qwen4 Max.
+- **Variantes grátis do OpenRouter:** modelos do OpenRouter cujo nome termina em «:free» agora usam o comprimento máximo de saída correto.
+
+### Box
+
+- **Janelas sem projeto:** numa janela sem projeto aberto (só a página Agents, por exemplo), «Revisão de código», «Super Memory», «Limpeza de dados», «Motor de contexto» e «Acertos de cache» deixam escolher os dados de qualquer projeto; em Opções de Recursos ▸ Permissões de Ferramentas, «Comandos sempre permitidos neste projeto» mostra os comandos de cada projeto, agrupados por projeto.
+- **Alterações de outros projetos:** «Alterações a revisar em outros projetos», em «Revisão de código», mostra o que cada projeto ainda tem para revisar. A conversa de outro projeto aqui só pode ser vista: para aceitar ou rejeitar etapas, use «Ir para a janela»; «Aceitar tudo» e «Rejeitar tudo» são feitos pela janela daquele projeto, para a conversa inteira.
+- **Biblioteca de memória:** «Biblioteca de memória», em «Super Memory», oferece todos os projetos com memórias, em qualquer janela.
+
+### Aprovações
+
+- **A aprovação automática faz o que você configurou:** com «Aprovar terminal automaticamente» ligado, qualquer comando de terminal é executado, inclusive os que apagam uma unidade inteira, uma pasta de nível superior do sistema, a pasta pessoal ou o projeto inteiro; com «Aprovar edições automaticamente» ligado, qualquer exclusão de arquivos também é executada. Para ser consultado antes, desligue a chave em Box ▸ Opções de Recursos ▸ Permissões de Ferramentas.
+- **Comandos sempre permitidos:** com «Aprovar terminal automaticamente» desligado, um comando de «Comandos sempre permitidos neste projeto» que seja arriscado (uma exclusão ampla, por exemplo) ainda é perguntado antes.
+
+### Subagentes
+
+- **Páginas de subagentes abertas de outra janela:** as mensagens do agente principal agora aparecem como do agente principal.
+
+### Desempenho e espaço em disco
+
+- **Menos espaço na unidade do sistema:** o Breezell apaga sozinho os caches deixados por versões anteriores e os downloads de plugins que foram interrompidos.
+- **Comparação de memórias mais leve:** comparar memórias em segundo plano usa menos CPU.
+
 ## 1.4.6 · 2026-11-16
 
 Esta é uma nova versão completa: baixe o instalador e instale de novo. Ela inclui tudo das atualizações rápidas 1.4.51 a 1.4.59. A seguir, as mudanças desde a 1.4.59.

@@ -5,6 +5,45 @@ next: false
 
 # Changelog
 
+## 1.4.6.1 · Hot Update · 2026-11-17
+
+This is a hot update for 1.4.6, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.
+
+### Highlights
+
+- **Auto tier:** Breezell's own models that offer Auto can run "Lowest price first" or "Most stable first", and when it gets busy Breezell reschedules on its own and carries on.
+- **Box without a project:** with only the Agents page open, "Code Review", "Super Memory", "Data Cleanup" and more show every project's data.
+- **Auto-approve does what you set:** with "Auto-approve terminal" or "Auto-approve edits" on, even deleting a whole drive or project is no longer asked about.
+- **New models:** the released Qwen4-Max, Tencent Hy4 flash, Baidu ERNIE 5.5 Flash Preview, and the free Ling 3.2 Flash on OpenRouter.
+
+### Models
+
+- **Auto tier:** in the model menu, Breezell's own models that offer it have "Auto", with "Lowest price first" or "Most stable first". When it gets busy, Breezell reschedules on its own and carries on, with nothing to resend; "Most stable first" may cost a little more. The menu shows the lowest price; the actual charge applies.
+- **A late start no longer ends in an error:** with Breezell's own models, a reply that takes a while to start is waited for until it arrives, instead of ending early in an error.
+- **Qwen4-Max released:** with your own key, the released Qwen4-Max leads the Qwen list (1M-token context, image and video input), with the preview below it; Qwen4 Plus, Qwen4 Flash and Qwen4 27B, never released, have left the list.
+- **More new models:** Tencent Hy4 flash (TokenHub and OpenRouter) and Baidu ERNIE 5.5 Flash Preview; OpenRouter also adds Ling 3.2 Flash (free) and Qwen4 Max.
+- **OpenRouter free variants:** OpenRouter models whose name ends in ":free" now use the right maximum output length.
+
+### Box
+
+- **Windows with no project:** in a window with no project open (the Agents page alone, for example), "Code Review", "Super Memory", "Data Cleanup", "Context Engine" and "Cache hits" let you pick any project's data; under Feature Options ▸ Tool Permissions, "Commands always allowed in this project" lists every project's commands, by project.
+- **Other projects' changes:** "Changes to review in other projects" in "Code Review" lists what each project still has to review. Another project's conversation can only be looked at here: to accept or reject single steps, use "Go to its window"; "Accept all" and "Reject all" are done in that project's window, for the whole conversation.
+- **Memory Library:** "Memory Library" in "Super Memory" offers every project that has memories, in any window.
+
+### Approvals
+
+- **Auto-approve does what you set:** with "Auto-approve terminal" on, every terminal command runs, including commands that delete a whole drive, a top-level system folder, the home folder or the whole project; with "Auto-approve edits" on, every file deletion runs too. To be asked first, turn the switch off under Box ▸ Feature Options ▸ Tool Permissions.
+- **Always-allowed commands:** with "Auto-approve terminal" off, a command in "Commands always allowed in this project" that is risky (a broad delete, for example) is still asked about first.
+
+### Subagents
+
+- **Subagent pages opened from another window:** messages from the main agent now show as the main agent's.
+
+### Performance and disk space
+
+- **Less on the system drive:** Breezell clears the caches that older versions left behind, and plugin downloads that were cut off.
+- **Lighter memory matching:** matching memories in the background takes less CPU.
+
 ## 1.4.6 · 2026-11-16
 
 This is a new full release: download the installer and install it again. It includes everything from the 1.4.51 to 1.4.59 hot updates. Below are the changes since 1.4.59.
