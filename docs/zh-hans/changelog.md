@@ -5,6 +5,28 @@ next: false
 
 # 更新日志
 
+## 1.4.62 · 热更新 · 2026-11-18
+
+这是 1.4.6 的热更新，无需重新安装：Breezell 会自动提示下载，也可以到 Box 侧栏底部的「版本更新」手动检查。
+
+### 亮点
+
+- **GPT 6.2 支持更多供应商：** ChatGPT（Codex）登录、OpenAI、Azure、GitHub Copilot、OpenRouter 和 AIHubMix 现在都能使用 GPT 6.2 Sol 和 GPT 6.2 Astra。
+- **子代理不再被打断：** 主 agent 交代好任务后就让子代理专心做，只有你要求时才会再给它发消息。
+
+### 模型
+
+- **GPT 6.2 Sol 和 GPT 6.2 Astra：** 这两个模型已加入 ChatGPT（Codex）登录、OpenAI、Azure、GitHub Copilot、OpenRouter 和 AIHubMix 的模型列表，OpenRouter 另外提供固定使用 Pro 模式的版本。如果这个供应商已经开了 5 个模型，新模型会先保持关闭，到 Box ▸ 模型 打开就能使用。
+- **Codex 登录的上下文大小：** GPT 6.2 Sol 可以选 272K、500K 或 1M，GPT 6.2 Astra 可以选 272K 或 1M。
+- **GPT 6.2 Astra 的价格：** 现在显示 OpenAI 公布的价格：每百万 tokens 输入 $8、输出 $40。
+- **Ultrafast：** GPT 6.2 Sol 和 GPT 6.2 Astra 支持 Ultrafast，费用到 2027 年 2 月 28 日是标准价格的 3 倍，之后是 6 倍；在 Codex 里能否使用取决于你的套餐。模型菜单中 GPT 6.1 Sol 和 GPT 6 Astra 的 Ultrafast 倍数也修正为 6 倍。
+
+### 子代理
+
+- **主 agent 只在开始时交代任务：** 主 agent 启动子代理时会把任务说清楚，之后不会自己再给它发消息。想补充要求就告诉主 agent，它会帮你转达；你回答了主 agent 的问题，答案也会发给需要的子代理。你随时可以打开子代理的页面查看进度，或直接对它说话。
+- **没有发出的消息：** 主 agent 的消息如果因此没有发出，对话里会显示“未完成”，点 Details 可以看原因，不会当成错误。
+- **长对话不会忘记任务：** 对话变得很长时，子代理仍记得完整的任务；主对话收到子代理的回报后，也仍记得你最初的要求。
+
 ## 1.4.6.1 · 热更新 · 2026-11-17
 
 这是 1.4.6 的热更新，无需重新安装：Breezell 会自动提示下载，也可以到 Box 侧栏底部的「版本更新」手动检查。

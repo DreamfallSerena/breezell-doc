@@ -5,6 +5,28 @@ next: false
 
 # Registro de alterações
 
+## 1.4.62 · Hot Update · 2026-11-18
+
+Uma atualização rápida para a 1.4.6, sem precisar reinstalar: o Breezell a oferece sozinho, ou verifique em «Atualizações» no pé da barra lateral do Box.
+
+### Destaques
+
+- **GPT 6.2 em mais provedores:** login com ChatGPT (Codex), OpenAI, Azure, GitHub Copilot, OpenRouter e AIHubMix agora podem usar GPT 6.2 Sol e GPT 6.2 Astra.
+- **Subagentes trabalham sem interrupções:** depois de passar a tarefa, o agente principal só volta a escrever para um subagente quando você pede.
+
+### Modelos
+
+- **GPT 6.2 Sol e GPT 6.2 Astra:** os dois estão nas listas de modelos do login com ChatGPT (Codex), OpenAI, Azure, GitHub Copilot, OpenRouter e AIHubMix, e o OpenRouter também tem versões fixas no modo Pro. Se um provedor já tem 5 modelos ligados, os novos começam desligados: ligue-os em Box ▸ Modelos.
+- **Tamanho do contexto no login do Codex:** GPT 6.2 Sol oferece 272K, 500K ou 1M, e GPT 6.2 Astra 272K ou 1M.
+- **Preço do GPT 6.2 Astra:** agora mostra o preço publicado pela OpenAI: $8 de entrada e $40 de saída por milhão de tokens.
+- **Ultrafast:** GPT 6.2 Sol e GPT 6.2 Astra têm Ultrafast, a 3 vezes o preço padrão até 28 de fevereiro de 2027 e 6 vezes depois; no Codex depende do seu plano. O menu de modelos agora também mostra o 6x correto para GPT 6.1 Sol e GPT 6 Astra.
+
+### Subagentes
+
+- **O agente principal passa a tarefa no início:** ele explica a tarefa ao iniciar um subagente e não volta a escrever por conta própria. Para acrescentar algo, diga ao agente principal e ele repassa; quando você responde a uma pergunta dele, a resposta chega ao subagente que precisa. Você pode abrir a página de um subagente a qualquer momento para acompanhar o progresso ou falar com ele diretamente.
+- **Mensagens não enviadas:** uma mensagem do agente principal retida assim aparece na conversa como "não feito", com o motivo em Details. Isso não é tratado como erro.
+- **Conversas longas mantêm a tarefa:** mesmo em uma conversa muito longa, o subagente mantém a tarefa inteira, e a conversa principal continua com o que você pediu no início depois de receber o relatório.
+
 ## 1.4.6.1 · Hot Update · 2026-11-17
 
 Uma atualização rápida para a 1.4.6, sem precisar reinstalar: o Breezell a oferece sozinho, ou verifique em «Atualizações» no pé da barra lateral do Box.

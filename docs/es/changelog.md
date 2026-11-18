@@ -5,6 +5,28 @@ next: false
 
 # Registro de cambios
 
+## 1.4.62 · Hot Update · 2026-11-18
+
+Una actualización en caliente para 1.4.6, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en «Actualizaciones», al pie de la barra lateral de Box.
+
+### Lo más destacado
+
+- **GPT 6.2 en más proveedores:** el inicio de sesión con ChatGPT (Codex), OpenAI, Azure, GitHub Copilot, OpenRouter y AIHubMix ya pueden usar GPT 6.2 Sol y GPT 6.2 Astra.
+- **Los subagentes trabajan sin interrupciones:** una vez dada la tarea, el agente principal solo vuelve a escribir a un subagente cuando tú se lo pides.
+
+### Modelos
+
+- **GPT 6.2 Sol y GPT 6.2 Astra:** ya están en las listas de modelos del inicio de sesión con ChatGPT (Codex), OpenAI, Azure, GitHub Copilot, OpenRouter y AIHubMix, y OpenRouter ofrece además versiones fijadas en modo Pro. Si un proveedor ya tiene 5 modelos activados, los nuevos empiezan desactivados: actívalos en Box ▸ Modelos.
+- **Tamaño de contexto con el inicio de sesión de Codex:** GPT 6.2 Sol ofrece 272K, 500K o 1M, y GPT 6.2 Astra 272K o 1M.
+- **Precio de GPT 6.2 Astra:** ahora muestra el precio publicado por OpenAI: $8 de entrada y $40 de salida por millón de tokens.
+- **Ultrafast:** GPT 6.2 Sol y GPT 6.2 Astra admiten Ultrafast, a 3 veces el precio estándar hasta el 28 de febrero de 2027 y a 6 veces después; en Codex depende de tu plan. El menú de modelos también muestra ya el 6x correcto para GPT 6.1 Sol y GPT 6 Astra.
+
+### Subagentes
+
+- **El agente principal da la tarea al empezar:** explica la tarea al iniciar un subagente y no vuelve a escribirle por su cuenta. Para añadir algo, díselo al agente principal y él lo transmite; cuando respondes a una pregunta suya, la respuesta llega al subagente que la necesita. Puedes abrir la página de un subagente en cualquier momento para seguir su avance o hablarle directamente.
+- **Mensajes que no se enviaron:** un mensaje del agente principal retenido así aparece en la conversación como "no se hizo", con el motivo en Details. No se trata como un error.
+- **Las conversaciones largas conservan la tarea:** aunque una conversación sea muy larga, el subagente conserva toda su tarea, y la conversación principal sigue teniendo lo que pediste al principio después de recibir su informe.
+
 ## 1.4.6.1 · Hot Update · 2026-11-17
 
 Una actualización en caliente para 1.4.6, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en «Actualizaciones», al pie de la barra lateral de Box.

@@ -5,6 +5,28 @@ next: false
 
 # Changelog
 
+## 1.4.62 · Hot Update · 2026-11-18
+
+This is a hot update for 1.4.6, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.
+
+### Highlights
+
+- **GPT 6.2 on more providers:** ChatGPT (Codex) sign-in, OpenAI, Azure, GitHub Copilot, OpenRouter and AIHubMix can now use GPT 6.2 Sol and GPT 6.2 Astra.
+- **Subagents are left to work:** once the main agent has given a subagent its task, it writes to it again only when you ask.
+
+### Models
+
+- **GPT 6.2 Sol and GPT 6.2 Astra:** both are in the model lists of ChatGPT (Codex) sign-in, OpenAI, Azure, GitHub Copilot, OpenRouter and AIHubMix, and OpenRouter also has versions fixed to Pro mode. If a provider already has 5 models switched on, the new ones start switched off: turn them on in Box ▸ Models.
+- **Context size with Codex sign-in:** GPT 6.2 Sol offers 272K, 500K or 1M, and GPT 6.2 Astra 272K or 1M.
+- **GPT 6.2 Astra price:** it now shows the price OpenAI published: $8 input and $40 output per million tokens.
+- **Ultrafast:** GPT 6.2 Sol and GPT 6.2 Astra support Ultrafast, at 3x the Standard price through February 28, 2027 and 6x after that; in Codex it depends on your plan. The model menu now also shows the right 6x for GPT 6.1 Sol and GPT 6 Astra.
+
+### Subagents
+
+- **The main agent gives the task at the start:** it explains the task when it starts a subagent and does not write to it again on its own. To add something, tell the main agent and it passes it on; when you answer the main agent's question, the answer goes to the subagent that needs it. You can open a subagent's page at any time to follow its progress or talk to it directly.
+- **Messages that were not sent:** a message from the main agent held back this way shows as "not done" in the conversation, with the reason under Details. It is not treated as an error.
+- **Long conversations keep the task:** when a conversation gets very long, a subagent still has its whole task, and after a subagent reports, the main conversation still has what you first asked for.
+
 ## 1.4.6.1 · Hot Update · 2026-11-17
 
 This is a hot update for 1.4.6, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.
