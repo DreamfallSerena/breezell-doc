@@ -5,6 +5,52 @@ next: false
 
 # Changelog
 
+## 1.4.63 · Hot Update · 2026-11-20
+
+This is a hot update for 1.4.6, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.
+
+### Highlights
+
+- **Replies show sooner and more smoothly:** the first word appears at once, and a reply that arrives in large pieces every few seconds now flows in during the wait instead of standing still and then jumping.
+- **Less memory with many windows:** with many windows open, Breezell uses less memory.
+- **Gemini 4 Neon:** now in the Gemini and OpenRouter model lists.
+
+### Chat
+
+- **The first word at once:** the first text of a reply and of its thinking shows as soon as it arrives. When a reply goes on past the output limit, the rest also shows from its first word, not all at once when it ends.
+- **Replies that come in pieces:** some models send a reply in large pieces every few seconds. The text used to stand still and then jump; it now flows in during the wait.
+- **Answers that mention a think tag:** when an answer mentions a think tag, the rest of the answer no longer disappears as if it were thinking.
+- **Failed edits:** a failed edit or write shows only "Edit attempted" and the file name, with no path or reason after it, and folds into the Codebase Explored group instead of splitting it in two.
+- **Deleting a conversation:** also deletes its messages from your computer. They used to stay on disk.
+- **Other agents' messages in long conversations:** when a conversation grows long and its earlier part is condensed, the agent no longer takes messages from the main agent or a subagent for your requests.
+
+### Agent
+
+- **Fewer tokens:** each request in Agent mode uses about 1,000 fewer tokens.
+- **Scratch files in .tmp/:** the scripts, tests, screenshots and comparison pages the agent makes for itself go in a .tmp/ folder at the root of the project (with a .gitignore, so they are not committed) and are deleted after use, instead of piling up in the project root.
+- **Comparing a visual change:** to show you a change on screen, the agent builds a before-and-after page from screenshots of the real screen and opens it in the built-in browser; the conversation shows it as an "Opened" line in Codebase Explored.
+- **Files of WSL projects:** the built-in browser now opens a WSL project's files instead of refusing them as outside the workspace.
+
+### Models
+
+- **Gemini 4 Neon:** added to Gemini and OpenRouter: a 1,048,576-token context shared by input, thinking and output, up to 65,536 output tokens per request, $3 input and $15 output per million tokens, cached input $0.15. Thinking is always on, at low, medium or high (high by default). Google offers it on paid plans only.
+- **GPT 6.2 Astra Pro batch on OpenRouter:** OpenRouter's list adds openai/gpt-6.2-astra-pro:batch, at $4 input and $20 output per million tokens.
+- **Replies from custom APIs:** with a custom API address, some services answer in a different format from the one asked for. Such replies used to fail, hang or lose their thinking; they now show normally, and an error in the middle of a reply keeps the service's own message.
+- **Claude under other names:** Claude models used through a custom API under names like opus-5-5 or sonnet5 are recognised as Claude and show their thinking summary.
+- **Sign-in:** GitHub Copilot, Kimi Code, Grok, Google account (Gemini) and DeepSeek account sign-in are updated to these services' current versions.
+
+### Performance
+
+- **Less memory with many windows:** many open windows use less memory, and idle windows the Agents page opens in the background close by themselves. While a conversation streams, other windows may show its time, message count and usage a few seconds late.
+- **Projects with many uncommitted changes:** in a project with many uncommitted changes or several repositories, each agent step puts less work on Git, and the agent's changes still show in the Git panel at once.
+
+### Interface
+
+- **Deleting skills other tools installed:** skills installed by another tool (npx skills, for example) can now be deleted in Rules & Skills & Memory. A dialog lists every place first, and every copy of that name goes; a link is removed as a link, so the folder it points to stays.
+- **Open icon in the skills panel:** the skills panel of the chat input has an open icon next to My Skills that opens the Skills tab of Rules & Skills & Memory, in the Agents page's own dialog when the chat is there.
+- **The Agents page side bar:** with two or more windows open, the Agents page side bar sometimes would not collapse; it now always does, and how agents are listed and which subagents are folded follow every window.
+- **Explorer menu:** "Breezell: CD to Folder in Terminal" is removed; use "Open in Integrated Terminal" instead.
+
 ## 1.4.62 · Hot Update · 2026-11-18
 
 This is a hot update for 1.4.6, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.

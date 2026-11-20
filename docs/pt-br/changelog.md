@@ -5,6 +5,52 @@ next: false
 
 # Registro de alterações
 
+## 1.4.63 · Hot Update · 2026-11-20
+
+Uma atualização rápida para a 1.4.6, sem precisar reinstalar: o Breezell a oferece sozinho, ou verifique em «Atualizações» no pé da barra lateral do Box.
+
+### Destaques
+
+- **Respostas aparecem mais cedo e com mais fluidez:** a primeira palavra aparece na hora, e uma resposta que chega em pedaços grandes a cada poucos segundos agora flui durante a espera, em vez de ficar parada e saltar de uma vez.
+- **Menos memória com muitas janelas:** com muitas janelas abertas, o Breezell usa menos memória.
+- **Gemini 4 Neon:** agora está nas listas de modelos do Gemini e do OpenRouter.
+
+### Chat
+
+- **A primeira palavra na hora:** o primeiro texto de uma resposta e do raciocínio aparece assim que chega. Quando uma resposta continua além do limite de saída, a continuação também aparece desde a primeira palavra, e não toda de uma vez no fim.
+- **Respostas que chegam em pedaços:** alguns modelos enviam a resposta em pedaços grandes a cada poucos segundos. Antes o texto ficava parado e depois saltava; agora ele flui durante a espera.
+- **Respostas que mencionam uma tag think:** quando uma resposta menciona uma tag think, o resto dela não some mais como se fosse raciocínio.
+- **Edições que falharam:** uma edição ou gravação que falhou mostra só "Edit attempted" e o nome do arquivo, sem caminho nem motivo depois, e entra no grupo Codebase Explored em vez de dividi-lo em dois.
+- **Excluir uma conversa:** também apaga as mensagens dela do seu computador. Antes elas ficavam no disco.
+- **Mensagens de outros agentes em conversas longas:** quando uma conversa fica longa e a parte inicial é condensada, o agente não toma mais mensagens do agente principal ou dos subagentes como pedidos seus.
+
+### Agent
+
+- **Menos tokens:** cada solicitação no modo Agent usa cerca de 1.000 tokens a menos.
+- **Arquivos temporários em .tmp/:** os scripts, testes, capturas de tela e páginas de comparação que o agente cria para si vão para uma pasta .tmp/ na raiz do projeto (com um .gitignore, então não entram em commits) e são apagados depois do uso, em vez de se acumularem na raiz do projeto.
+- **Comparar uma mudança visual:** para mostrar uma mudança na tela, o agente monta uma página de antes e depois com capturas da tela real e a abre no navegador integrado; na conversa ela aparece como uma linha "Opened" em Codebase Explored.
+- **Arquivos de projetos WSL:** o navegador integrado agora abre arquivos de um projeto WSL em vez de recusá-los como fora do espaço de trabalho.
+
+### Modelos
+
+- **Gemini 4 Neon:** adicionado ao Gemini e ao OpenRouter: contexto de 1.048.576 tokens compartilhado por entrada, raciocínio e saída, até 65.536 tokens de saída por solicitação, $3 de entrada e $15 de saída por milhão de tokens, entrada em cache a $0,15. O raciocínio fica sempre ligado, em low, medium ou high (high por padrão). O Google oferece o modelo só em planos pagos.
+- **GPT 6.2 Astra Pro em lote no OpenRouter:** a lista do OpenRouter ganha openai/gpt-6.2-astra-pro:batch, a $4 de entrada e $20 de saída por milhão de tokens.
+- **Respostas de APIs personalizadas:** com um endereço de API personalizado, alguns serviços respondem num formato diferente do pedido. Essas respostas falhavam, travavam ou perdiam o raciocínio; agora aparecem normalmente, e um erro no meio da resposta mantém a mensagem original do serviço.
+- **Claude com outros nomes:** modelos Claude usados por uma API personalizada com nomes como opus-5-5 ou sonnet5 são reconhecidos como Claude e mostram o resumo do raciocínio.
+- **Login:** o login com GitHub Copilot, Kimi Code, Grok, conta Google (Gemini) e conta DeepSeek foi atualizado para as versões atuais desses serviços.
+
+### Desempenho
+
+- **Menos memória com muitas janelas:** muitas janelas abertas usam menos memória, e as janelas ociosas que a página Agents abre em segundo plano fecham sozinhas. Enquanto uma conversa é transmitida, outras janelas podem mostrar o horário, o número de mensagens e o uso dela com alguns segundos de atraso.
+- **Projetos com muitas mudanças sem commit:** num projeto com muitas mudanças sem commit ou vários repositórios, cada passo do agente dá menos trabalho ao Git, e as mudanças do agente continuam aparecendo na hora no painel Git.
+
+### Interface
+
+- **Excluir skills instaladas por outras ferramentas:** skills instaladas por outra ferramenta (npx skills, por exemplo) agora podem ser excluídas em Rules & Skills & Memory. Um diálogo lista antes todos os locais e todas as cópias com esse nome são apagadas; um link é removido como link, então a pasta para a qual ele aponta continua lá.
+- **Ícone de abrir no painel de skills:** o painel de skills do campo de chat tem um ícone de abrir ao lado de Minhas Skills, que abre a aba Skills de Rules & Skills & Memory, no próprio diálogo da página Agents quando o chat está lá.
+- **A barra lateral da página Agents:** com duas ou mais janelas abertas, a barra lateral da página Agents às vezes não recolhia; agora sempre recolhe, e a ordem dos agentes e os subagentes recolhidos são os mesmos em todas as janelas.
+- **Menu do Explorer:** "Breezell: CD to Folder in Terminal" foi removido; use "Open in Integrated Terminal".
+
 ## 1.4.62 · Hot Update · 2026-11-18
 
 Uma atualização rápida para a 1.4.6, sem precisar reinstalar: o Breezell a oferece sozinho, ou verifique em «Atualizações» no pé da barra lateral do Box.
