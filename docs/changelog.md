@@ -5,6 +5,52 @@ next: false
 
 # Changelog
 
+## 1.4.64 · Hot Update · 2026-11-20
+
+This is a hot update for 1.4.6, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.
+
+### Highlights
+
+- **Other projects' agents you can rely on:** On the Agents page, agents of other projects keep up with what happens in their windows, and Stop, approvals and answers reach the right place.
+- **Git says when it failed:** Push, Pull, Fetch and Update Project say why when they fail instead of reporting success, and more than 500 changes commit in one go.
+- **Plugin rules by setting and model:** For example the new GPT Tune in the market, which makes GPT models' replies sound less like an AI.
+
+### Agents page
+
+- **New Agent in another project:** With "+" beside another project in the side bar, the message box now sits in the middle of the page, as for a new conversation of this project, with that project and where it lives above it.
+- **Several windows:** With several windows open, unfolded and folded projects, the side bar's width, and the projects listed in a project group's or a workspace file's window are the same in every window, without a reload.
+- **Agents of other projects:** Pressing Stop while its window is still opening puts a message that has not arrived back into the box instead of starting it there. If it is deleted in its own window, the page tells you and stops it, and you can still read it here. It updates live as soon as its project's window opens.
+- **Approve, answer and reject:** These act only on the request you see. A message sent on the page no longer blinks out for a moment.
+- **Background windows waiting for you:** A window opened in the background whose agent waits for your approval, and that no page shows, closes after 30 minutes. Opened again, the conversation still waits for you.
+
+### Git panel
+
+- **Failures are reported:** When "Push", "Pull", "Fetch" or "Update Project" fails (say the remote cannot be reached), git's error is shown and the dialog stays open instead of reporting success.
+- **More than 500 changes:** Checking a whole section, or committing all, now includes the files the list does not show, and the section's count and checkbox include them too.
+- **GBK and Big5 files:** Files that are not UTF-8 (such as GBK or Big5) can have part of their changes committed.
+- **Very large diffs:** When another project's file diff is too large, only that file says it cannot be shown; the rest of the panel keeps working.
+- **Commit message:** The message the AI writes and the one "Undo Commit" brings back now show up in the message box.
+- **Log and Shelf:** "Log" and "Shelf" no longer jump back to the top while an agent changes files.
+- **Switching conversations:** Choosing another conversation while an operation runs no longer shows the last project's failure or dialog on the new one.
+
+### Chat and models
+
+- **Models that think before going on:** Some models write a first line, then think quietly for a while before going on. That pause used to count as a dropped connection, so the reply was cut off at the same place every time; now Breezell waits for it.
+
+### What the AI does
+
+- **Deleting files and writing to databases:** The AI no longer says it will ask you before deleting files or writing to a database. With auto-approve on, as it is by default, these run at once; local files go to the trash.
+- **Analyze mode:** "Analyze" answers you directly, and it can open pages in the built-in browser and look at screenshots, without clicking or typing in them.
+- **Content too long to read at once:** The AI reads the rest, or tells you which part it could not read.
+
+### Plugins
+
+- **Rules by setting and model:** A plugin's rules for the AI can now apply only while the plugin's setting is on, and only for some models. The new GPT Tune in the market works this way: after installing it, open it under "Plugins" in the Box side bar to make GPT models' replies sound less like an AI.
+
+### Interface
+
+- **Dropdown menus in settings:** Dropdown menus on the "Breezell Settings" pages use the same font as everything else, no longer a serif one.
+
 ## 1.4.63 · Hot Update · 2026-11-20
 
 This is a hot update for 1.4.6, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.

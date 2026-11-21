@@ -5,6 +5,52 @@ next: false
 
 # Registro de cambios
 
+## 1.4.64 · Hot Update · 2026-11-20
+
+Una actualización en caliente para 1.4.6, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en «Actualizaciones», al pie de la barra lateral de Box.
+
+### Lo destacado
+
+- **Agentes de otros proyectos más fiables:** En la página Agents, los agentes de otros proyectos siguen lo que pasa en sus ventanas, y detener, aprobar y responder llegan al lugar correcto.
+- **Git dice cuándo falla:** Insertar, Extraer, Fetch y Actualizar proyecto dicen por qué fallan en lugar de indicar éxito, y más de 500 cambios se confirman de una vez.
+- **Reglas de plugins por ajuste y modelo:** Por ejemplo, el nuevo Ajuste de GPT del mercado, que hace que las respuestas de los modelos GPT suenen menos a IA.
+
+### Página Agents
+
+- **Nuevo agente en otro proyecto:** Con «+» junto a otro proyecto en la barra lateral, el cuadro de mensaje queda en el centro de la página, como en una conversación nueva de este proyecto, con ese proyecto y el lugar donde funciona encima.
+- **Varias ventanas:** Con varias ventanas abiertas, los proyectos desplegados y plegados, el ancho de la barra lateral y la lista de proyectos de la ventana de un grupo de proyectos o de un archivo de espacio de trabajo son iguales en todas las ventanas, sin recargar.
+- **Agentes de otros proyectos:** Si pulsas Detener mientras su ventana aún se abre, el mensaje que no llegó vuelve al cuadro en lugar de empezar allí. Si se elimina en su propia ventana, la página te avisa y lo detiene, y aquí puedes seguir leyéndolo. Se actualiza en directo en cuanto se abre la ventana de su proyecto.
+- **Aprobar, responder y rechazar:** Solo actúan sobre la solicitud que ves. Un mensaje enviado en la página ya no desaparece un instante.
+- **Ventanas en segundo plano que te esperan:** Una ventana abierta en segundo plano cuyo agente espera tu aprobación, y que ninguna página muestra, se cierra a los 30 minutos. Al abrirla de nuevo, la conversación te sigue esperando.
+
+### Panel de Git
+
+- **Los fallos se informan:** Cuando «Insertar», «Extraer», «Fetch» o «Actualizar proyecto» fallan (por ejemplo, si no se alcanza el remoto), se muestra el error de git y el diálogo queda abierto en lugar de indicar éxito.
+- **Más de 500 cambios:** Marcar una sección entera, o confirmar todo, ahora incluye los archivos que la lista no muestra, y el número y la casilla de la sección también los cuentan.
+- **Archivos GBK y Big5:** En los archivos que no están en UTF-8 (como GBK o Big5) se puede confirmar solo una parte de los cambios.
+- **Diferencias muy grandes:** Cuando la diferencia de un archivo de otro proyecto es demasiado grande, solo ese archivo dice que no se puede mostrar; el resto del panel sigue funcionando.
+- **Mensaje del commit:** El mensaje que escribe la IA y el que trae «Deshacer commit» aparecen ahora en el cuadro de mensaje.
+- **Registro y Apartados:** «Registro» y «Apartados» ya no vuelven arriba mientras un agente cambia archivos.
+- **Cambiar de conversación:** Elegir otra conversación durante una operación ya no muestra el fallo o el diálogo del proyecto anterior en el nuevo.
+
+### Chat y modelos
+
+- **Modelos que piensan antes de seguir:** Algunos modelos escriben una primera línea y luego piensan en silencio un rato antes de seguir. Esa pausa contaba como una conexión perdida y la respuesta se cortaba siempre en el mismo sitio; ahora Breezell espera.
+
+### Lo que hace la IA
+
+- **Borrar archivos y escribir en bases de datos:** La IA ya no dice que te preguntará antes de borrar archivos o escribir en una base de datos. Con la aprobación automática, activada por defecto, se ejecutan al momento; los archivos locales van a la papelera.
+- **Modo Analizar:** «Analizar» te responde directamente, y puede abrir páginas en el navegador integrado y ver capturas, sin hacer clic ni escribir en ellas.
+- **Contenido demasiado largo:** La IA lee el resto o te dice qué parte no pudo leer.
+
+### Plugins
+
+- **Reglas por ajuste y modelo:** Las reglas de un plugin para la IA ahora pueden aplicarse solo mientras su ajuste está activado y solo para algunos modelos. El nuevo Ajuste de GPT del mercado funciona así: después de instalarlo, ábrelo en «Plugins» en la barra lateral de Box para que las respuestas de los modelos GPT suenen menos a IA.
+
+### Interfaz
+
+- **Menús desplegables en los ajustes:** Los menús desplegables de las páginas de «Ajustes de Breezell» usan la misma fuente que el resto, ya no una con serifas.
+
 ## 1.4.63 · Hot Update · 2026-11-20
 
 Una actualización en caliente para 1.4.6, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en «Actualizaciones», al pie de la barra lateral de Box.
