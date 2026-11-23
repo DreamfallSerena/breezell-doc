@@ -5,6 +5,32 @@ next: false
 
 # Registro de cambios
 
+## 1.4.65 · Hot Update · 2026-11-22
+
+Una actualización en caliente para 1.4.6, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en «Actualizaciones», al pie de la barra lateral de Box.
+
+### Lo destacado
+
+- **Chatea con tu propio Claude Code en Breezell:** El nuevo plugin Agent Bridge del mercado lleva al chat de Breezell el Claude Code que instalaste y en el que iniciaste sesión tú mismo: sus comandos se ejecutan en la terminal de Breezell, y sus cambios en archivos los conservas o deshaces en el editor.
+- **Compatibilidad con GLM-5.4:** Con tu propio GLM Coding Plan, GLM-5.4 lee imágenes y vídeo, y escribe respuestas más largas.
+
+### Plugins
+
+- **Agent Bridge:** Instálalo desde «Plugins › Mercado» en Box. Instala Claude Code e inicia sesión en él tú mismo, y luego activa su tarjeta en «Modelos › Iniciar sesión» en Box. Sus modelos aparecen en el selector de modelos, en «Inicio de sesión de cuenta», y chateas con ellos como con cualquier modelo. Necesita un plan de Breezell con Custom API.
+- **Comandos y cambios en archivos:** Los comandos de Claude Code se ejecutan en la terminal de Breezell, con la salida en directo en la tarjeta, y puedes detenerlos o pasarlos a segundo plano. Los archivos que cambia aparecen en el editor para que los conserves o deshagas, y en «Revisión de código». «Aprobar ediciones automáticamente», «Aprobar terminal automáticamente», «Aceptar cambios de código automáticamente», «Abrir archivo automáticamente al editar» y «Corregir errores de lint automáticamente» se aplican igual que a los modelos de Breezell.
+- **Memoria y conversaciones:** Lo que Breezell recuerda va a Claude Code con tus mensajes, y Breezell aprende de los turnos terminados. Si se corta la conexión, vuelve a conectarse como los modelos de Breezell y sigue desde donde se detuvo. Tus conversaciones de Claude Code en el proyecto también aparecen en la lista de conversaciones del proyecto.
+- **Para desarrolladores de plugins:** Un plugin ahora puede añadir una tarjeta en «Modelos › Iniciar sesión» para una herramienta en la que el usuario inicia sesión por su cuenta, y responder conversaciones con su propio agente. Cómo hacerlo está en la documentación para desarrolladores del mercado de plugins.
+
+### Modelos
+
+- **GLM-5.4:** Con tu propio GLM Coding Plan (BigModel o Z.ai), GLM-5.4 lee imágenes y vídeo, y una respuesta puede llegar a 131.072 tokens en vez de cortarse en 32.768.
+- **El razonamiento de GLM-5.3 y GLM-5.4:** Estos modelos no pueden desactivar el razonamiento. Si eliges no razonar en un endpoint compatible con OpenAI, ahora usan su nivel de razonamiento más bajo.
+
+### Correcciones
+
+- **Títulos de las conversaciones:** Una conversación nueva que empiezas para otro proyecto en la página Agents ahora recibe su título; mientras la ventana de ese proyecto estaba en segundo plano, se quedaba en «Nuevo chat».
+- **Tarjetas de comandos en segundo plano:** Si un comando pasado a segundo plano no mostraba nada hasta terminar, su tarjeta podía seguir indicando que se ejecutaba; ahora muestra cómo terminó.
+
 ## 1.4.64 · Hot Update · 2026-11-20
 
 Una actualización en caliente para 1.4.6, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en «Actualizaciones», al pie de la barra lateral de Box.

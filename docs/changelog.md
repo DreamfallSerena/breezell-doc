@@ -5,6 +5,32 @@ next: false
 
 # Changelog
 
+## 1.4.65 · Hot Update · 2026-11-22
+
+This is a hot update for 1.4.6, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.
+
+### Highlights
+
+- **Chat with your own Claude Code in Breezell:** The new Agent Bridge plugin in the market brings the Claude Code you installed and signed in to yourself into Breezell's chat: its commands run in Breezell's terminal, and you keep or undo its file changes in the editor.
+- **GLM-5.4:** With your own GLM Coding Plan, GLM-5.4 reads images and video, and its replies can be much longer.
+
+### Plugins
+
+- **Agent Bridge:** Install it from "Plugins › Market" in Box. Install Claude Code and sign in to it yourself, then turn on its tile under "Models › Sign in" in Box. Its models then show under "Account sign-in" in the model picker, and you chat with them as with any model. It needs a Breezell plan that includes Custom API.
+- **Commands and file changes:** Claude Code's commands run in Breezell's terminal, with their output live on the card, and you can stop them or move them to the background. The files it changes show in the editor for you to keep or undo, and are listed in "Code Review". "Auto-approve edits", "Auto-approve terminal", "Auto-accept code changes", "Auto open file on edit" and "Auto-fix lint errors" apply to it as to Breezell's own models.
+- **Memory and conversations:** What Breezell remembers goes to Claude Code with your messages, and Breezell learns from its finished turns. When the connection drops, it reconnects as Breezell's own models do and carries on from where it stopped. Your Claude Code conversations of the project show in the project's conversation list too.
+- **For plugin developers:** A plugin can now add a tile under "Models › Sign in" for a tool the user signs in to themselves, and answer conversations with its own agent. How is in the plugin market's developer docs.
+
+### Models
+
+- **GLM-5.4:** With your own GLM Coding Plan (BigModel or Z.ai), GLM-5.4 reads images and video, and a reply can be up to 131,072 tokens long instead of being cut off at 32,768.
+- **Thinking of GLM-5.3 and GLM-5.4:** These models cannot turn thinking off. Choosing no thinking on an OpenAI-compatible endpoint now uses their lowest thinking level.
+
+### Fixes
+
+- **Conversation titles:** A new conversation you start for another project on the Agents page now gets its title; while that project's window was in the background, it stayed "New Chat".
+- **Background command cards:** A command moved to the background that printed nothing until it ended could leave its card showing it was still running; the card now shows how it ended.
+
 ## 1.4.64 · Hot Update · 2026-11-20
 
 This is a hot update for 1.4.6, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.
