@@ -16,7 +16,7 @@ This is a hot update for 1.4.6, so there is nothing to reinstall: Breezell offer
 
 ### Plugins
 
-- **Agent Bridge:** Install it from "Plugins › Market" in Box. Install Claude Code and sign in to it yourself, then turn on its tile under "Models › Sign in" in Box. Its models then show under "Account sign-in" in the model picker, and you chat with them as with any model. It needs a Breezell plan that includes Custom API.
+- **Agent Bridge:** Install it from "Plugins › Market" in Box. Install Claude Code and sign in to it yourself, then turn on its tile under "Models › Sign in" in Box. Its models then show under "Account sign-in" in the model picker, and you chat with them as with any model. On the Breezell side no paid plan is needed: signing in is enough.
 - **Commands and file changes:** Claude Code's commands run in Breezell's terminal, with their output live on the card, and you can stop them or move them to the background. The files it changes show in the editor for you to keep or undo, and are listed in "Code Review". "Auto-approve edits", "Auto-approve terminal", "Auto-accept code changes", "Auto open file on edit" and "Auto-fix lint errors" apply to it as to Breezell's own models.
 - **Memory and conversations:** What Breezell remembers goes to Claude Code with your messages, and Breezell learns from its finished turns. When the connection drops, it reconnects as Breezell's own models do and carries on from where it stopped. Your Claude Code conversations of the project show in the project's conversation list too.
 - **For plugin developers:** A plugin can now add a tile under "Models › Sign in" for a tool the user signs in to themselves, and answer conversations with its own agent. How is in the plugin market's developer docs.
