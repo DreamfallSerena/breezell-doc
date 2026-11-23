@@ -5,6 +5,35 @@ next: false
 
 # Registro de alterações
 
+## 1.4.66 · Hot Update · 2026-11-23
+
+Uma atualização rápida para a 1.4.6, sem precisar reinstalar: o Breezell a oferece sozinho, ou verifique em «Atualizações» no pé da barra lateral do Box.
+
+### Destaques
+
+- **Claude Code integrado ao Breezell:** Com o Agent Bridge 1.0.2, o Claude Code vê as imagens que você cola, segue as regras do projeto e o modo de chat que você escolhe, e pode usar os servidores MCP que você configurou no Breezell.
+- **Veja o que ele consome:** O anel de contexto, «Uso de tokens» no Box e cada resposta agora contam também as conversas com o Claude Code.
+
+### Claude Code (plugin Agent Bridge)
+
+- **Atualize o plugin primeiro:** Estas mudanças precisam do Agent Bridge 1.0.2. Atualize em «Plugins › Mercado» no Box.
+- **Anexos:** Capturas de tela e PDFs colados chegam ao Claude Code como estão. Arquivos e pastas arrastados do Explorador vão pelo caminho, o código selecionado vai com os números das linhas, e problemas, saída do terminal e mensagens citadas vão como texto.
+- **Regras do projeto:** As regras do projeto chegam ao Claude Code uma vez, no início da conversa, e não a cada mensagem. Quando mudam, sua próxima mensagem avisa uma vez. Cada projeto usa suas próprias regras.
+- **Modos de chat:** Em «Planejar», o Claude Code só planeja e não muda nada. O plano aparece como o cartão de plano do Breezell, que você pode editar, e «Executar» faz ele colocar o plano em prática. Em «Analisar» ele lê e responde, e em «Chat» só responde; em nenhum deles muda arquivos ou executa comandos.
+- **Cartão de perguntas:** Quando o Claude Code pergunta algo, o cartão de perguntas do Breezell mostra as opções e deixa você responder com suas palavras. Ele espera sua resposta mesmo com a aprovação automática ligada.
+- **Servidores MCP:** Os servidores MCP que você configurou no Breezell funcionam no Claude Code. O Breezell os executa com as próprias conexões, e cada chamada aparece como um passo desse servidor. Um servidor ou ferramenta desligado no Breezell também fica desligado para o Claude Code. «Use Claude Code's own MCP servers» na página do plugin decide se os servidores próprios dele continuam ligados também.
+- **Menos confirmações:** Ler e pesquisar arquivos, buscar páginas e pesquisar na web não pedem mais confirmação, como nos modelos do próprio Breezell. As ferramentas MCP do próprio Claude Code seguem «Aprovar ferramentas MCP automaticamente».
+
+### Uso e contexto
+
+- **Anel de contexto:** Numa conversa com o Claude Code, o anel mostra o contexto que ele realmente ocupa, sobre o tamanho de contexto do modelo dele.
+- **Uso de tokens:** «Modelos › Uso de tokens» no Box mostra o uso do Claude Code por modelo, incluindo os modelos dos subagentes, e cada resposta mostra os tokens daquele turno.
+- **Compressão manual:** «Compressão manual» numa conversa com o Claude Code faz o Claude Code comprimir o próprio contexto, e a conversa continua como antes. Quando ele comprime por conta própria, o chat também mostra.
+
+### Para desenvolvedores de plugins
+
+- **Seu próprio agente:** O agente de um plugin agora recebe o modo de chat, as regras do projeto, o conteúdo dos anexos e os pedidos de compressão, pode informar o uso e a compressão, e pode usar o cartão de plano, o cartão de perguntas do Breezell e os servidores MCP do usuário. Veja a documentação para desenvolvedores do mercado de plugins.
+
 ## 1.4.65 · Hot Update · 2026-11-22
 
 Uma atualização rápida para a 1.4.6, sem precisar reinstalar: o Breezell a oferece sozinho, ou verifique em «Atualizações» no pé da barra lateral do Box.

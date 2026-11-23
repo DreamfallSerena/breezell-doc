@@ -5,6 +5,35 @@ next: false
 
 # Changelog
 
+## 1.4.66 · Hot Update · 2026-11-23
+
+This is a hot update for 1.4.6, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.
+
+### Highlights
+
+- **Claude Code fits into Breezell:** With Agent Bridge 1.0.2, Claude Code sees the pictures you paste, follows your project rules and the chat mode you pick, and can use the MCP servers you set up in Breezell.
+- **See what it uses:** The context ring, Token usage in Box and each reply now count Claude Code conversations too.
+
+### Claude Code (Agent Bridge plugin)
+
+- **Update the plugin first:** These changes need Agent Bridge 1.0.2. Update it from "Plugins › Market" in Box.
+- **Attachments:** Pasted screenshots and PDFs go to Claude Code as they are. Files and folders dragged in from the Explorer go by their path. Selected code goes with its line numbers, and problems, terminal output and quoted messages go as text.
+- **Project rules:** Your project's rules go to Claude Code once, when a conversation starts, not again with every message. When they change, your next message tells it once. Each project uses its own rules.
+- **Chat modes:** In "Plan", Claude Code plans and changes nothing. Its plan shows as Breezell's plan card, which you can edit, and "Execute" has it carry the plan out. In "Analyze" it reads and answers, in "Chat" it answers; neither changes a file or runs a command.
+- **Question card:** When Claude Code asks you something, Breezell's question card shows its options, with room for your own answer. It waits for you even with auto-approve on.
+- **MCP servers:** The MCP servers you set up in Breezell work in Claude Code. Breezell runs them with its own connections, and each call shows as a step of that server. A server or tool you turn off in Breezell is off for Claude Code too. "Use Claude Code's own MCP servers" on the plugin's page decides whether its own servers stay on as well.
+- **Fewer prompts:** Reading and searching files, fetching pages and searching the web no longer ask first, as with Breezell's own models. Its own MCP tools follow "Auto-approve MCP tools".
+
+### Usage and context
+
+- **Context ring:** In a Claude Code conversation the ring shows the context it really takes, out of its model's context length.
+- **Token usage:** "Models › Token usage" in Box lists Claude Code's usage by model, its subagents' models included, and each reply shows that turn's tokens.
+- **Manual compress:** "Manual compress" in a Claude Code conversation has Claude Code compress its own context, and the conversation goes on as before. When it compresses by itself, the chat shows that too.
+
+### For plugin developers
+
+- **Your own agent:** A plugin's agent now gets the chat mode, the project's rules, the content of attachments and requests to compress, can report its usage and compression, and can use Breezell's plan card, question card and the user's MCP servers. See the developer docs of the plugin market.
+
 ## 1.4.65 · Hot Update · 2026-11-22
 
 This is a hot update for 1.4.6, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.
