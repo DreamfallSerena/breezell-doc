@@ -5,6 +5,19 @@ next: false
 
 # Registro de cambios
 
+## 1.4.67 · Hot Update · 2026-11-23
+
+Una actualización en caliente para 1.4.6, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en «Actualizaciones», al pie de la barra lateral de Box.
+
+### Lo destacado
+
+- **Iniciar un servidor ya no detiene la respuesta:** Cuando la IA inicia un servidor de desarrollo o un backend, pasa a segundo plano en cuanto muestra su dirección, y la respuesta sigue al momento.
+
+### Terminal
+
+- **Inicio de servidores:** Un comando que la IA inicia como servidor (npm run dev, un backend) antes solo se devolvía cuando su salida quedaba en silencio, así que un servidor que no deja de escribir registros detenía la respuesta más de veinte segundos. Ahora pasa a segundo plano en cuanto muestra su dirección, y la IA recibe esa dirección. Los vigilantes que no muestran dirección y las ejecuciones de pruebas funcionan como antes.
+- **También Claude Code:** Con Claude Code a través de Agent Bridge, los servidores que inicia pasan a segundo plano del mismo modo, y su respuesta no se detiene.
+
 ## 1.4.66 · Hot Update · 2026-11-23
 
 Una actualización en caliente para 1.4.6, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en «Actualizaciones», al pie de la barra lateral de Box.

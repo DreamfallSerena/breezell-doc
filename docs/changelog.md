@@ -5,6 +5,19 @@ next: false
 
 # Changelog
 
+## 1.4.67 · Hot Update · 2026-11-23
+
+This is a hot update for 1.4.6, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.
+
+### Highlights
+
+- **Starting a server no longer holds the reply:** When the AI starts a dev server or a backend server, it goes to the background as soon as it prints its address, and the reply goes on at once.
+
+### Terminal
+
+- **Starting servers:** A command the AI starts as a server (npm run dev, a backend server) used to be handed back only once its output went quiet, so a server that keeps logging held the reply for over twenty seconds. Now it goes to the background as soon as it prints its address, and the AI gets the address. Watchers that print no address, and test runs, work as before.
+- **Claude Code too:** With Claude Code through Agent Bridge, the servers it starts go to the background the same way, and its reply is not held up.
+
 ## 1.4.66 · Hot Update · 2026-11-23
 
 This is a hot update for 1.4.6, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.
