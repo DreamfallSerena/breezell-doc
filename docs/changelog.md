@@ -5,6 +5,34 @@ next: false
 
 # Changelog
 
+## 1.4.68 · Hot Update · 2026-11-25
+
+This is a hot update for 1.4.6, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.
+
+### Highlights
+
+- **Claude Code no longer repeats after a restart:** With Claude Code through Agent Bridge, if Breezell closes while it replies, the message no longer shows twice after you reopen Breezell, and no copy of the conversation appears.
+- **The chat no longer jumps while it streams:** When part of a reply folds away as it streams, the scrollbar no longer jumps up: the view slides smoothly to the new bottom.
+
+### Chat
+
+- **No jump while streaming:** When part of a reply folded away as it streamed, the view used to jump down and the scrollbar up. Now it holds, then slides smoothly to the new bottom. Scrolling up to read is not affected.
+- **Words fade in:** Replies and thinking fade in word by word instead of appearing in chunks, Claude Code's replies too. Nothing plays when the system is set to reduce motion.
+- **Empty thinking box:** Thinking made only of blank space no longer draws an empty box with a dark strip.
+- **Stuck on thinking:** Some connections send only blank space while the model thinks, to stay open. That used to count as progress, so the chat could sit on an empty thinking line. Now only visible text counts, and a stall is caught and handled like any other.
+- **.tmp files stay out of changes:** Scripts and files the AI writes in the .tmp folder at the project root no longer show in the changed files, the diff view or code review. Checkpoints still keep them and restore them.
+
+### Claude Code
+
+- **No repeats or extra conversations after a restart:** If Breezell closes while Claude Code replies, what is synced back after you reopen it no longer shows twice, and no second conversation is made for it.
+- **Only what you typed:** Messages and titles brought back from Claude Code no longer carry what Breezell sent along with them, such as memories, rules and the list of attachments.
+
+### Network
+
+- **Longest wait while the thinking is held:** A new setting in Box ▸ Performance ▸ Network & chat. When a model's thinking is held back and sent only once it is done, Breezell keeps waiting and checks now and then that the API is up. If nothing new arrives for this long, the request is treated as lost and sent again. Default 10 minutes, from 1 to 60.
+- **Requests the server turns away:** Over HTTP/2, when the server turns a request away before answering it (too many at once, for example), Breezell sends it again by itself instead of showing an error.
+- **Fuller error messages:** When a model request fails, the error card now shows the start of the server's answer, and a network problem names the kind of connection error.
+
 ## 1.4.67 · Hot Update · 2026-11-23
 
 This is a hot update for 1.4.6, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.

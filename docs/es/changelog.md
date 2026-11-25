@@ -5,6 +5,34 @@ next: false
 
 # Registro de cambios
 
+## 1.4.68 · Hot Update · 2026-11-25
+
+Una actualización en caliente para 1.4.6, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en «Actualizaciones», al pie de la barra lateral de Box.
+
+### Destacados
+
+- **Claude Code ya no se repite tras reiniciar:** Con Claude Code mediante Agent Bridge, si Breezell se cierra a mitad de una respuesta, al volver a abrirlo el mensaje ya no aparece dos veces ni surge una copia de la conversación.
+- **El chat ya no salta mientras responde:** Cuando parte de una respuesta se pliega en pleno flujo, la barra de desplazamiento ya no salta hacia arriba: la vista se desliza suave hasta el nuevo final.
+
+### Chat
+
+- **Sin saltos durante el flujo:** Cuando parte de una respuesta se plegaba en pleno flujo, la vista saltaba hacia abajo y la barra hacia arriba. Ahora se detiene y luego se desliza suave hasta el nuevo final. Desplazarse hacia arriba para leer no se ve afectado.
+- **Las palabras aparecen con fundido:** Las respuestas y el razonamiento aparecen palabra a palabra en lugar de a bloques, también las de Claude Code. No se reproduce si el sistema está configurado para reducir el movimiento.
+- **Cuadro de razonamiento vacío:** Un razonamiento hecho solo de espacios en blanco ya no dibuja un cuadro vacío con una franja oscura.
+- **Atascado en el razonamiento:** Algunas conexiones envían solo espacios en blanco mientras el modelo piensa, para seguir abiertas. Antes eso contaba como avance y el chat podía quedarse en un razonamiento vacío. Ahora solo cuenta el texto visible, y un atasco se detecta y se trata como cualquier otra interrupción.
+- **Los archivos .tmp no entran en los cambios:** Los scripts y archivos que la IA escribe en la carpeta .tmp de la raíz del proyecto ya no aparecen en la lista de cambios, la vista de diferencias ni la revisión de código. Los puntos de control los siguen guardando y restaurando.
+
+### Claude Code
+
+- **Sin repeticiones ni conversaciones de más tras reiniciar:** Si Breezell se cierra mientras Claude Code responde, lo que se sincroniza al volver a abrirlo ya no aparece dos veces ni crea una segunda conversación.
+- **Solo lo que escribiste:** Los mensajes y títulos que vuelven de Claude Code ya no llevan lo que Breezell le envió junto con ellos, como memorias, reglas y la lista de adjuntos.
+
+### Red
+
+- **Espera máxima con el razonamiento retenido:** Nuevo ajuste en Box ▸ Rendimiento ▸ Red y chat. Cuando el razonamiento de un modelo se retiene y llega entero solo al terminar, Breezell sigue esperando y comprueba de vez en cuando que la API funciona. Si en ese tiempo no llega nada nuevo, la solicitud se da por perdida y se envía de nuevo. Por defecto 10 minutos, de 1 a 60.
+- **Solicitudes que el servidor rechaza:** Con HTTP/2, cuando el servidor rechaza una solicitud antes de responderla (por ejemplo, porque hay demasiadas a la vez), Breezell la envía otra vez por su cuenta en lugar de mostrar un error.
+- **Mensajes de error más completos:** Cuando falla una solicitud al modelo, la tarjeta de error muestra el comienzo de la respuesta del servidor, y un problema de red indica qué tipo de error de conexión es.
+
 ## 1.4.67 · Hot Update · 2026-11-23
 
 Una actualización en caliente para 1.4.6, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en «Actualizaciones», al pie de la barra lateral de Box.
