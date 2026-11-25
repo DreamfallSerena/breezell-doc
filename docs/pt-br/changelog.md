@@ -5,6 +5,35 @@ next: false
 
 # Registro de alterações
 
+## 1.4.69 · Hot Update · 2026-11-25
+
+Uma atualização rápida para a 1.4.6, sem precisar reinstalar: o Breezell a oferece sozinho, ou verifique em «Atualizações» no pé da barra lateral do Box.
+
+### Destaques
+
+- **Chats novos continuam no seu modelo:** Se você usa um modelo de um plugin, como Claude Code ou Antigravity CLI, um chat novo começa nesse mesmo modelo e não volta ao modelo de chat normal.
+- **Antigravity CLI no Breezell:** Com o Agent Bridge 1.1.0, o Antigravity CLI do Google funciona direto no chat do Breezell, e o raciocínio aparece enquanto é escrito.
+
+### Chat
+
+- **Modelo de um chat novo:** Se você usa um modelo de um plugin (Claude Code, Antigravity CLI), um chat novo agora começa nesse mesmo modelo; antes voltava ao modelo de chat normal. O mesmo quando um chat vazio que você deixou aberto é usado como o novo.
+- **Linha de espera:** Alguns segundos depois do envio, o chat não diz mais "Taking a bit longer than usual". Mostra "Building context" enquanto o Breezell se prepara e "Deciding next step" entre etapas; só um modelo realmente lento faz aparecer "O modelo está demorando mais para responder. Continuamos aguardando".
+- **Modelo dos subagentes:** Os subagentes do próprio Breezell trabalham com o modelo que você escolheu para o chat; só usam outro quando você pede na mensagem.
+
+### Página Agents
+
+- **Chats novos em outros projetos:** Na página Agents, um chat novo em outro projeto começa no modelo que você está usando, e é esse modelo que responde. Num chat de outro projeto em que você escolhe o modelo de um plugin, responde esse modelo, não outro.
+- **Abrir chat:** "Abrir chat" nas páginas de registros de solicitações, cache e armazenamento do Box agora funciona na página Agents: um chat desta janela aparece quando o Box fecha, e o de outro projeto abre no meio da página.
+
+### Plugin Agent Bridge 1.1.0
+
+- **Atualize o plugin primeiro:** Isto precisa do Agent Bridge 1.1.0. Atualize em «Plugins › Mercado» no Box.
+- **Antigravity CLI:** Ative em Box ▸ Modelos ▸ Entrar ▸ Antigravity CLI para usar o Antigravity CLI (agy) do Google nos seus chats. Os modelos dele ficam no seletor de modelos e a página dele mostra os limites do seu plano; ele altera arquivos e executa comandos com as ferramentas do Breezell, então você revisa, mantém ou desfaz as mudanças como as do Breezell.
+- **Raciocínio enquanto é escrito:** Enquanto um modelo do Antigravity CLI pensa, o resumo do raciocínio preenche "Thinking" conforme o agy o escreve, uma parte a cada poucos segundos, sem esperar o fim da etapa. Os subagentes dele têm linha e página próprias.
+- **Os próprios servidores MCP dele:** Os servidores MCP configurados no agy só funcionam enquanto "Aprovar ferramentas MCP automaticamente" em "Permissões de Ferramentas" está ligado; caso contrário, o agy não os usa. Seus servidores MCP do Breezell estão sempre disponíveis.
+- **Apagar chats lá também:** A página do Antigravity CLI tem "Delete in Antigravity CLI too" (desligado por padrão): ligado, apagar um chat no Breezell também o apaga no agy, junto com os chats dos subagentes dele.
+- **Subagentes do Claude Code:** A página do plugin tem "Subagents use this conversation's model" (ligado por padrão): todo subagente que o Claude Code inicia trabalha com o modelo e o esforço que você escolheu para o chat. Desligado, o Claude Code escolhe por eles e gasta menos do seu plano.
+
 ## 1.4.68 · Hot Update · 2026-11-25
 
 Uma atualização rápida para a 1.4.6, sem precisar reinstalar: o Breezell a oferece sozinho, ou verifique em «Atualizações» no pé da barra lateral do Box.

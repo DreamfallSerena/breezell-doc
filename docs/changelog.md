@@ -5,6 +5,35 @@ next: false
 
 # Changelog
 
+## 1.4.69 · Hot Update · 2026-11-25
+
+This is a hot update for 1.4.6, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.
+
+### Highlights
+
+- **New chats keep the model you are on:** On a model a plugin gives, such as Claude Code or Antigravity CLI, a new chat starts on that same model instead of the regular chat model.
+- **Antigravity CLI in Breezell:** With Agent Bridge 1.1.0, Google's Antigravity CLI works right in Breezell's chat, and its thinking shows as it is written.
+
+### Chat
+
+- **A new chat's model:** On a model a plugin gives (Claude Code, Antigravity CLI), a new chat now starts on that same model; before, it went back to the regular chat model. The same when an empty chat you left open is taken as the new one.
+- **Wait line:** A few seconds after you send, the chat no longer says "Taking a bit longer than usual". It reads "Building context" while Breezell gets ready, and "Deciding next step" between steps; only a model that is really slow brings up "The model is taking longer to respond. Still waiting".
+- **Subagents' model:** Breezell's own subagents work on the model you picked for the chat; they use another one only when you ask for it in your message.
+
+### Agents page
+
+- **New chats in other projects:** On the Agents page, a new chat in another project starts on the model you are on, and that model answers it. A chat of another project where you pick a plugin's model is answered by that model, not another one.
+- **Open chat:** "Open chat" on Box's request records, cache and storage pages now works on the Agents page: a chat of this window shows once Box closes, and another project's chat opens in the middle of the page.
+
+### Agent Bridge plugin 1.1.0
+
+- **Update the plugin first:** These need Agent Bridge 1.1.0. Update it from "Plugins › Market" in Box.
+- **Antigravity CLI:** Turn it on in Box ▸ Models ▸ Sign in ▸ Antigravity CLI to use Google's Antigravity CLI (agy) in your chats. Its models are in the model picker and its tile shows your plan's limits; it changes files and runs commands through Breezell's tools, so you review, keep or undo its changes like Breezell's own.
+- **Thinking as it is written:** While an Antigravity CLI model thinks, its thought summary fills "Thinking" as agy writes it down, a part every few seconds, without waiting for the step to end. Its subagents get a row and a page of their own.
+- **Its own MCP servers:** The MCP servers agy has of its own run only while "Auto-approve MCP tools" under "Tool Permissions" is on; otherwise agy does not use them. Your MCP servers in Breezell are always there.
+- **Delete chats there too:** The Antigravity CLI tile has "Delete in Antigravity CLI too" (off by default): when on, deleting a chat in Breezell also deletes it in agy, with its subagents' chats.
+- **Claude Code's subagents:** The plugin page has "Subagents use this conversation's model" (on by default): every subagent Claude Code starts works on the model and effort you picked for the chat. Off: Claude Code picks for them, which uses less of your plan.
+
 ## 1.4.68 · Hot Update · 2026-11-25
 
 This is a hot update for 1.4.6, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.
