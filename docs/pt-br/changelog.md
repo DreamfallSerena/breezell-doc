@@ -5,6 +5,33 @@ next: false
 
 # Registro de alterações
 
+## 1.4.692 · Hot Update · 2026-11-26
+
+Uma atualização rápida para a 1.4.6, sem precisar reinstalar: o Breezell a oferece sozinho, ou verifique em «Atualizações» no pé da barra lateral do Box.
+
+### Destaques
+
+- **Plugins podem adicionar um espaço próprio ao Box:** O seletor de espaços, no topo da barra lateral do Box, mostra os espaços que os plugins adicionam, depois dos do Breezell; ao abrir um, a barra lateral mostra as páginas dele.
+- **Agent Bridge 1.2.0:** O Agent Bridge no mercado de plugins chegou à 1.2.0: usa bem menos CPU e memória enquanto o Claude Code ou o Antigravity CLI estão conectados e pode manter o agente rodando entre as suas mensagens.
+
+### Espaços de plugins
+
+- **Onde:** O seletor de espaços, no topo da barra lateral do Box, mostra os espaços que os plugins adicionam, depois do Breezell Console, do Breezell Mind e dos outros, com a marca de plugin no canto do ícone. Ao abrir um, a barra lateral lista as páginas dele; ao voltar depois, ele abre na página onde você parou.
+- **O que uma página mostra:** O Breezell desenha cada página a partir do que o plugin declara, com o mesmo visual do resto do Box: texto, linhas de informação, barras de uso, listas, botões e as configurações do próprio plugin (chaves, opções, números, cores, texto). Um plugin também pode mostrar uma página própria, que roda em um quadro isolado. Toda página começa com "Do plugin:" e o nome do plugin.
+- **Só o que é dele:** As configurações nas páginas de um espaço alteram apenas as configurações do próprio plugin, e os botões e listas executam apenas os comandos do próprio plugin. Se o plugin for removido ou desativado, ou não tiver mais permissão para adicionar itens às telas do Breezell, o espaço dele some e o Box volta ao Breezell Console.
+- **Os plugins que você já tem:** Os plugins já instalados continuam funcionando como antes; nenhum precisa ser atualizado.
+
+### Agent Bridge 1.2.0 (mercado de plugins)
+
+- **Mais leve:** Enquanto o Claude Code ou o Antigravity CLI estão conectados, as verificações ao voltar ao Breezell ou abrir uma janela, e a leitura do raciocínio do Antigravity CLI, usam bem menos CPU e memória. As barras de uso se atualizam sozinhas no máximo a cada 5 minutos; "Verificar de novo" as atualiza na hora.
+- **Keep running between messages:** As páginas do Claude Code e do Antigravity CLI ganharam "Keep running between messages…", desligado por padrão. Ligado, o agente de uma conversa continua rodando depois de responder até ficar ocioso pelo tempo que você escolher, e a próxima resposta começa mais cedo (no Claude Code, cerca de 1 segundo a menos cada). Em troca, cada conversa mantida ocupa cerca de 200–300 MB de memória nesse tempo.
+- **Antigravity CLI no WSL:** Em uma conversa longa com o Antigravity CLI no WSL, o raciocínio dele não para mais de aparecer depois de um tempo.
+- **Como atualizar:** Atualize o Agent Bridge em Box › Plugins › Instalados.
+
+### Para quem desenvolve plugins
+
+- **Spaces in Box:** O guia de plugins tem uma nova seção, "Spaces in Box": o espaço é declarado com ui.spaces e as páginas dele são preenchidas com ui.setState; o validate das ferramentas de desenvolvimento verifica a declaração do espaço. https://github.com/BreezellCode/BreezellCode/blob/main/plugins/docs/ui.md
+
 ## 1.4.691 · Hot Update · 2026-11-26
 
 Uma atualização rápida para a 1.4.6, sem precisar reinstalar: o Breezell a oferece sozinho, ou verifique em «Atualizações» no pé da barra lateral do Box.
