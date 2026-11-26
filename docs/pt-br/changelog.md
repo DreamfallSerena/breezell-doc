@@ -5,6 +5,25 @@ next: false
 
 # Registro de alterações
 
+## 1.4.691 · Hot Update · 2026-11-26
+
+Uma atualização rápida para a 1.4.6, sem precisar reinstalar: o Breezell a oferece sozinho, ou verifique em «Atualizações» no pé da barra lateral do Box.
+
+### Destaques
+
+- **A cápsula do grupo mostra todos os membros:** Ao abrir a cápsula do grupo acima da caixa de mensagem, o projeto desta janela também aparece, e projetos com o mesmo nome mostram o caminho.
+- **"Remover da Lista" também tira do grupo:** Ao usar "Remover da Lista" em um projeto de grupo na lista Todos, o grupo, a cápsula do grupo e as memórias compartilhadas também são atualizados.
+
+### Grupos de projetos
+
+- **Cápsula do grupo:** Ao ser aberta, a cápsula do grupo acima da caixa de mensagem começa pelo projeto desta janela, marcado "Esta janela", e mostra tantos projetos quanto conta. Antes mostrava só os outros membros: "3 projetos" e duas linhas.
+- **Projetos com o mesmo nome:** Quando dois projetos de um grupo têm o mesmo nome (duas pastas chamadas nfWorkspace), a cápsula do grupo e a página "Grupo do projeto e memórias compartilhadas" mostram o caminho completo de cada um abaixo do nome; passe o ponteiro para ver o caminho inteiro. Antes um deles era só "nfWorkspace-2", sem dizer qual pasta era.
+- **Remover da Lista:** "Remover da Lista" em um projeto de grupo na lista Todos agora também o tira do grupo, e a cápsula do grupo, a página "Grupo do projeto e memórias compartilhadas" e as memórias compartilhadas acompanham. Antes ele saía da lista, mas continuava no grupo e nas memórias compartilhadas. Um projeto removido assim antes pode ser tirado com "Remover" na linha dele na "Página do grupo".
+
+### Página Agents
+
+- **Modelos de plugins:** Ao começar na página Agents um chat em um projeto cuja janela não está aberta, com um modelo que um plugin oferece (Claude Code, Antigravity CLI), ele não falha mais logo de início dizendo que o plugin não está em execução: o chat espera o plugin ficar pronto e então responde.
+
 ## 1.4.69 · Hot Update · 2026-11-25
 
 Uma atualização rápida para a 1.4.6, sem precisar reinstalar: o Breezell a oferece sozinho, ou verifique em «Atualizações» no pé da barra lateral do Box.

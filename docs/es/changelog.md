@@ -5,6 +5,25 @@ next: false
 
 # Registro de cambios
 
+## 1.4.691 · Hot Update · 2026-11-26
+
+Una actualización en caliente para 1.4.6, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en «Actualizaciones», al pie de la barra lateral de Box.
+
+### Lo más destacado
+
+- **La cápsula del grupo muestra a todos los miembros:** Al desplegar la cápsula del grupo sobre el cuadro de mensaje aparece también el proyecto de esta ventana, y los proyectos con el mismo nombre muestran su ruta.
+- **«Quitar de la lista» también lo saca del grupo:** Al usar «Quitar de la lista» con un proyecto de un grupo en la lista Todos, también se actualizan el grupo, la cápsula del grupo y las memorias compartidas.
+
+### Grupos de proyectos
+
+- **Cápsula del grupo:** Al desplegarla, la cápsula del grupo sobre el cuadro de mensaje empieza por el proyecto de esta ventana, marcado «Esta ventana», y muestra tantos proyectos como cuenta. Antes solo mostraba a los demás miembros: «3 proyectos» y dos filas.
+- **Proyectos con el mismo nombre:** Cuando dos proyectos de un grupo se llaman igual (dos carpetas llamadas nfWorkspace), la cápsula del grupo y la página «Grupo del proyecto y memorias compartidas» muestran la ruta completa de cada uno bajo su nombre; al pasar el puntero se ve entera. Antes uno era solo «nfWorkspace-2», sin indicar qué carpeta era.
+- **Quitar de la lista:** «Quitar de la lista» sobre un proyecto de un grupo en la lista Todos ahora también lo saca del grupo, y la cápsula del grupo, la página «Grupo del proyecto y memorias compartidas» y las memorias compartidas se actualizan. Antes desaparecía de la lista pero seguía en el grupo y en sus memorias compartidas. Un proyecto quitado así antes se puede sacar con «Quitar» en su fila de la «Página del grupo».
+
+### Página Agents
+
+- **Modelos de plugins:** Al empezar en la página Agents un chat en un proyecto cuya ventana no está abierta, con un modelo que da un plugin (Claude Code, Antigravity CLI), ya no falla al instante diciendo que el plugin no está en marcha: el chat espera a que el plugin esté listo y luego responde.
+
 ## 1.4.69 · Hot Update · 2026-11-25
 
 Una actualización en caliente para 1.4.6, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en «Actualizaciones», al pie de la barra lateral de Box.

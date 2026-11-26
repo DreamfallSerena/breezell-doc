@@ -5,6 +5,25 @@ next: false
 
 # Changelog
 
+## 1.4.691 · Hot Update · 2026-11-26
+
+This is a hot update for 1.4.6, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.
+
+### Highlights
+
+- **The group capsule lists every member:** Unfolded, the group capsule above the message box now lists this window's project too, and projects that share a name show their path.
+- **Remove from List takes it out of the group too:** Removing a grouped project with "Remove from List" in the All list now updates the group, the group capsule and the shared memories as well.
+
+### Project groups
+
+- **Group capsule:** Unfolded, the group capsule above the message box starts with this window's project, marked "This window", so it lists as many projects as it counts. Before, it listed only the other members: "3 projects" showed two.
+- **Projects with the same name:** When two projects in a group share a name (two folders called nfWorkspace), the group capsule and the "Project Group and Shared Memories" page show each one's full path under its name; hover for the whole path. Before, one was just "nfWorkspace-2", with nothing to tell which folder it was.
+- **Remove from List:** "Remove from List" on a grouped project in the All list now takes it out of its group too, and the group capsule, the "Project Group and Shared Memories" page and the shared memories follow. Before, it left the list but stayed in the group and its shared memories. A project removed that way earlier can be taken out with "Remove" on its row on the Group Page.
+
+### Agents page
+
+- **Models from plugins:** Starting a chat on the Agents page in a project whose window is not open, on a model a plugin gives (Claude Code, Antigravity CLI), no longer fails at once saying the plugin is not running: the chat waits until the plugin is ready, then answers.
+
 ## 1.4.69 · Hot Update · 2026-11-25
 
 This is a hot update for 1.4.6, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.
