@@ -5,6 +5,26 @@ next: false
 
 # Changelog
 
+## 1.4.694 · Hot Update · 2026-11-27
+
+This is a hot update for 1.4.6, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.
+
+### Highlights
+
+- **Opening a conversation in the IDE no longer adds a tab:** A conversation another window's Agents page follows, picked from the IDE's conversation history, shows in the chat beside the editors.
+- **OpenCode Go: completions and commit messages work again:** With OpenCode Go models, autocomplete, commit messages, Model monitor and conversation titles are no longer refused.
+- **Every GLM model gets its icon:** Models named like "GLM 5.4" or glm5.3 show the GLM icon too.
+
+### Agents page
+
+- **A followed conversation, opened from the IDE:** A conversation started or opened on another window's Agents page is followed by that page from then on. Back in the project's own window, picking it from the IDE's conversation history shows it in the chat beside the editors, and the file in the middle stays. Before, it opened in a new tab in the middle. A conversation that already has a tab still comes up in its tab.
+- **Shown by a plugin:** A plugin that shows such a conversation now shows it in the chat beside the editors. Before, nothing switched to it and the plugin kept waiting.
+
+### Models
+
+- **OpenCode Go:** With OpenCode Go models, "FIM autocomplete", Source Control's "Breezell: Generate Commit Message", the checks in Box ▸ Model monitor and the titles conversations get on their own all work. Before, OpenCode Go refused these requests, which belong to no conversation (MissingSessionID).
+- **GLM icons:** Models named "GLM 5.4", glm5.3, glm_4.6 and the like show the GLM icon too; before, only names with "glm-" had it. GLM-Z1 and GLM-Zero, named without a version number, keep it.
+
 ## 1.4.693 · Hot Update · 2026-11-27
 
 This is a hot update for 1.4.6, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.

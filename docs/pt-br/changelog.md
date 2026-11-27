@@ -5,6 +5,26 @@ next: false
 
 # Registro de alterações
 
+## 1.4.694 · Hot Update · 2026-11-27
+
+Uma atualização rápida para a 1.4.6, sem precisar reinstalar: o Breezell a oferece sozinho, ou verifique em «Atualizações» no pé da barra lateral do Box.
+
+### Destaques
+
+- **Abrir uma conversa no IDE não cria mais uma aba:** Uma conversa que a página Agents de outra janela acompanha, aberta pelo histórico de conversas do IDE, aparece no chat ao lado dos editores.
+- **OpenCode Go: o autocompletar e as mensagens de commit voltam a funcionar:** Com os modelos do OpenCode Go, o autocompletar, a criação de mensagens de commit, o monitor de modelos e os títulos das conversas não são mais recusados.
+- **Todo modelo GLM tem seu ícone:** Modelos com nomes como "GLM 5.4" ou glm5.3 também mostram o ícone do GLM.
+
+### Página Agents
+
+- **Uma conversa acompanhada, aberta pelo IDE:** Uma conversa iniciada ou aberta na página Agents de outra janela passa a ser acompanhada por essa página. Ao voltar para a janela do projeto dela e abri-la pelo histórico de conversas do IDE, ela aparece no chat ao lado dos editores, e o arquivo do centro continua onde está. Antes ela abria em uma aba nova no centro. Uma conversa que já tem sua aba continua abrindo nela.
+- **Quando um plugin a mostra:** Um plugin que mostra uma conversa assim agora a mostra no chat ao lado dos editores. Antes a tela não mudava e o plugin ficava esperando.
+
+### Modelos
+
+- **OpenCode Go:** Com os modelos do OpenCode Go funcionam "Autocompletar FIM", "Breezell: Generate Commit Message" no Controle do Código-Fonte, as verificações de Box ▸ Monitor de modelos e os títulos que as conversas ganham sozinhas. Antes o OpenCode Go recusava essas solicitações, que não pertencem a nenhuma conversa (MissingSessionID).
+- **Ícones do GLM:** Modelos com nomes como "GLM 5.4", glm5.3 ou glm_4.6 também mostram o ícone do GLM; antes só os nomes com "glm-" tinham. GLM-Z1 e GLM-Zero, sem número de versão no nome, continuam com ele.
+
 ## 1.4.693 · Hot Update · 2026-11-27
 
 Uma atualização rápida para a 1.4.6, sem precisar reinstalar: o Breezell a oferece sozinho, ou verifique em «Atualizações» no pé da barra lateral do Box.

@@ -5,6 +5,26 @@ next: false
 
 # Registro de cambios
 
+## 1.4.694 · Hot Update · 2026-11-27
+
+Una actualización en caliente para 1.4.6, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en «Actualizaciones», al pie de la barra lateral de Box.
+
+### Lo más destacado
+
+- **Abrir una conversación en el IDE ya no añade una pestaña:** Una conversación que sigue la página Agents de otra ventana, abierta desde el historial de conversaciones del IDE, se muestra en el chat junto a los editores.
+- **OpenCode Go: el autocompletado y los mensajes de commit vuelven a funcionar:** Con los modelos de OpenCode Go, el autocompletado, la creación de mensajes de commit, el monitor de modelos y los títulos de las conversaciones ya no se rechazan.
+- **Todos los modelos GLM tienen su icono:** Los modelos con nombres como "GLM 5.4" o glm5.3 también muestran el icono de GLM.
+
+### Página Agents
+
+- **Una conversación seguida, abierta desde el IDE:** Una conversación iniciada o abierta en la página Agents de otra ventana queda seguida por esa página. Al volver a la ventana de su proyecto y abrirla desde el historial de conversaciones del IDE, se muestra en el chat junto a los editores y el archivo del centro se queda donde está. Antes se abría en una pestaña nueva en el centro. Una conversación que ya tiene su pestaña sigue abriéndose en ella.
+- **Cuando la muestra un plugin:** Un plugin que muestra una conversación así ahora la muestra en el chat junto a los editores. Antes la pantalla no cambiaba y el plugin se quedaba esperando.
+
+### Modelos
+
+- **OpenCode Go:** Con los modelos de OpenCode Go funcionan "Autocompletado FIM", "Breezell: Generate Commit Message" en Control de código fuente, las comprobaciones de Box ▸ Monitor de modelos y los títulos que las conversaciones reciben solas. Antes OpenCode Go rechazaba estas solicitudes, que no pertenecen a ninguna conversación (MissingSessionID).
+- **Iconos de GLM:** Los modelos con nombres como "GLM 5.4", glm5.3 o glm_4.6 también muestran el icono de GLM; antes solo lo tenían los nombres con "glm-". GLM-Z1 y GLM-Zero, sin número de versión en el nombre, lo conservan.
+
 ## 1.4.693 · Hot Update · 2026-11-27
 
 Una actualización en caliente para 1.4.6, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en «Actualizaciones», al pie de la barra lateral de Box.
