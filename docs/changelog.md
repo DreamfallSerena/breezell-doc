@@ -5,6 +5,42 @@ next: false
 
 # Changelog
 
+## 1.4.693 · Hot Update · 2026-11-27
+
+This is a hot update for 1.4.6, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.
+
+### Highlights
+
+- **Subagents' changes in Box's review too:** The changes bar over the message box always counted a conversation's subagents' and teammates' changes, but Box ▸ Code Review did not show them. Both list the same changes now.
+- **An undo no longer wipes out others' changes:** An undo takes out only the lines its own steps wrote; what others changed in the same file since stays.
+- **Thoughts no longer replay or slow the chat:** Opening a folded thought no longer fades its words in a second time, and a very long thought no longer leaves the chat unable to scroll.
+
+### Code Review
+
+- **Subagents and teammates:** Review Changes lists the steps of the conversation's subagents and teammates with its own, tagged "Subagent" or "Teammate"; Review Overview counts them in the conversation's row; "Changes to review in other projects" lists a conversation's subagents under it. Before, only the changes bar over the message box counted them and Box did not have them.
+- **An undo takes out only its own lines:** Undoing in Box, with the changes bar's "Discard all" or a file's own button takes out only the lines those steps wrote. Lines changed since by another conversation, a subagent, by hand or by a formatter stay. If those very lines were changed since, nothing is written and the page says why. Before, an undo rewrote the whole file as it was before the conversation's first change.
+- **"Keep all" and "Discard all" for every file:** Also for files a script changed and files whose pending changes are no longer in the editor (after reopening Breezell, or with auto-accept on), with or without Git. Before, such files were marked as undone but kept their changes.
+- **Deleted files:** A file the agent deleted is a step of its own, listed until you decide it; undoing it puts the file back.
+- **No more runaway counts:** For files with Windows line endings (CRLF), the changes bar's line count no longer jumps to tens of thousands; it never shows more than the steps changed.
+- **One row per file:** The changes bar no longer lists the same file twice (a path written two ways, or a WSL file named two ways); two different files with the same name show their folder; a row whose file cannot be opened opens Code Review.
+- **What was undone stays undone:** A step already undone, or rolled back with a checkpoint, is not brought back by a later undo; undoing a step that a later step depends on asks you first.
+- **Review Overview's order:** Review Overview lists conversations newest first again; a conversation edited again moves to the top.
+
+### Thinking
+
+- **No replay when opened:** A folded thought opened while its reply is still being written, or a thought you switch back to while it is still thinking, shows the words already shown at once; only new words fade in.
+- **Long thoughts no longer slow the chat:** A thought written as one long block (lines with no blank line between, or one long list) made every update slower until the chat could not be scrolled. Past about 2,000 characters its new words now appear without the fade.
+- **Scrolling answers at once:** While text streams in, the chat and a thought's box scroll at once instead of waiting for the drawing.
+- **Whole thoughts:** Thoughts under "Codebase Explored" show whole instead of stopping at 4,000 characters. Thought boxes in analysis reports no longer have a band across their top.
+
+### Agents page
+
+- **Other projects' conversations:** Watching another project's conversation stream on the Agents page no longer redraws the whole chat with each update: smoother scrolling and reading.
+
+### Plugin agents
+
+- **Thinking time:** Thoughts of Claude Code and Antigravity CLI (Agent Bridge) keep their real time: "Thought for" no longer says 0.1s once a conversation is opened again, and a thought under the turn's tools ends when the reply begins, subagents' too.
+
 ## 1.4.692 · Hot Update · 2026-11-26
 
 This is a hot update for 1.4.6, so there is nothing to reinstall: Breezell offers the download by itself, or check by hand under "Updates" at the bottom of the Box side bar.

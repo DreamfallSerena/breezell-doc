@@ -5,6 +5,42 @@ next: false
 
 # Registro de alterações
 
+## 1.4.693 · Hot Update · 2026-11-27
+
+Uma atualização rápida para a 1.4.6, sem precisar reinstalar: o Breezell a oferece sozinho, ou verifique em «Atualizações» no pé da barra lateral do Box.
+
+### Destaques
+
+- **As alterações dos subagentes também na revisão do Box:** A barra de alterações acima da caixa de mensagem sempre contava as alterações dos subagentes e colegas, mas o Box ▸ Revisão de código não as mostrava. Agora os dois mostram as mesmas alterações.
+- **Desfazer não apaga mais as alterações dos outros:** Desfazer tira só as linhas que os próprios passos escreveram; o que outros mudaram depois no mesmo arquivo fica.
+- **Os pensamentos não se repetem nem travam o chat:** Abrir um pensamento recolhido não faz mais o texto aparecer uma segunda vez, e um pensamento muito longo não deixa mais o chat sem conseguir rolar.
+
+### Revisão de código
+
+- **Subagentes e colegas:** "Revisar alterações" mostra os passos dos subagentes e colegas da conversa junto com os dela, marcados como "Subagente" ou "Colega"; "Visão geral da revisão" os conta na linha da conversa; "Alterações a revisar em outros projetos" mostra os subagentes embaixo da conversa. Antes só a barra de alterações acima da caixa de mensagem os contava, e o Box não os tinha.
+- **Desfazer tira só as próprias linhas:** Desfazer no Box, com "Descartar tudo" da barra de alterações ou com o botão de um arquivo tira só as linhas que esses passos escreveram. As linhas mudadas depois por outra conversa, um subagente, à mão ou por um formatador ficam. Se exatamente essas linhas mudaram depois, nada é gravado e a página explica o motivo. Antes, desfazer regravava o arquivo inteiro como estava antes da primeira alteração da conversa.
+- **"Manter tudo" e "Descartar tudo" em todos os arquivos:** Também em arquivos que um script alterou e em arquivos cujas alterações pendentes não estão mais no editor (depois de reabrir o Breezell ou com a aceitação automática ligada), com ou sem Git. Antes, esses arquivos ficavam marcados como desfeitos, mas mantinham as alterações.
+- **Arquivos excluídos:** Um arquivo que o agente excluiu é um passo próprio e fica na lista até você decidir; desfazê-lo traz o arquivo de volta.
+- **Sem contagens disparadas:** Em arquivos com quebras de linha do Windows (CRLF), a contagem de linhas da barra de alterações não salta mais para dezenas de milhares nem passa do que os passos mudaram.
+- **Uma linha por arquivo:** A barra de alterações não mostra mais o mesmo arquivo duas vezes (um caminho escrito de dois jeitos ou um arquivo do WSL com dois nomes); dois arquivos diferentes com o mesmo nome mostram a pasta; a linha de um arquivo que não abre abre a Revisão de código.
+- **O que foi desfeito continua desfeito:** Um passo já desfeito, ou revertido com um ponto de verificação, não volta com um desfazer posterior; antes de desfazer um passo do qual um passo posterior depende, você é consultado.
+- **A ordem da visão geral da revisão:** "Visão geral da revisão" volta a mostrar as conversas da mais recente para a mais antiga; uma conversa editada de novo sobe para o topo.
+
+### Raciocínio
+
+- **Sem repetir ao abrir:** Ao abrir um pensamento recolhido enquanto a resposta ainda está sendo escrita, ou ao voltar para uma conversa que ainda está pensando, o texto já mostrado aparece na hora; só as palavras novas surgem aos poucos.
+- **Pensamentos longos não travam mais o chat:** Um pensamento escrito como um bloco só (linhas sem linha em branco entre elas ou uma lista longa) deixava cada atualização mais lenta até o chat não rolar mais. Agora, depois de uns 2.000 caracteres, as palavras novas aparecem sem o efeito de surgir.
+- **A rolagem responde na hora:** Enquanto o texto chega, o chat e a caixa de um pensamento rolam na hora, sem esperar o desenho.
+- **Pensamentos inteiros:** Os pensamentos de "Codebase Explored" aparecem inteiros em vez de parar em 4.000 caracteres. As caixas de pensamento dos relatórios de análise não têm mais uma faixa no topo.
+
+### Página Agents
+
+- **Conversas de outros projetos:** Acompanhar na página Agents a conversa de outro projeto enquanto ela é escrita não redesenha mais o chat inteiro a cada atualização: rolagem e leitura mais suaves.
+
+### Agentes de plugins
+
+- **Tempo de raciocínio:** Os pensamentos do Claude Code e do Antigravity CLI (Agent Bridge) guardam o tempo real: "Thought for" não mostra mais 0.1 s ao reabrir uma conversa, e um pensamento sob as ferramentas do turno termina quando a resposta começa, também o dos subagentes.
+
 ## 1.4.692 · Hot Update · 2026-11-26
 
 Uma atualização rápida para a 1.4.6, sem precisar reinstalar: o Breezell a oferece sozinho, ou verifique em «Atualizações» no pé da barra lateral do Box.

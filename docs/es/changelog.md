@@ -5,6 +5,42 @@ next: false
 
 # Registro de cambios
 
+## 1.4.693 · Hot Update · 2026-11-27
+
+Una actualización en caliente para 1.4.6, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en «Actualizaciones», al pie de la barra lateral de Box.
+
+### Lo más destacado
+
+- **Los cambios de los subagentes, también en la revisión de Box:** La barra de cambios sobre el cuadro de mensaje siempre contaba los cambios de los subagentes y compañeros, pero Box ▸ Revisión de código no los mostraba. Ahora ambos muestran los mismos cambios.
+- **Deshacer ya no borra los cambios de otros:** Deshacer quita solo las líneas que escribieron sus pasos; lo que otros cambiaron después en el mismo archivo se queda.
+- **Los pensamientos ya no se repiten ni frenan el chat:** Abrir un pensamiento plegado ya no hace aparecer su texto una segunda vez, y un pensamiento muy largo ya no deja el chat sin poder desplazarse.
+
+### Revisión de código
+
+- **Subagentes y compañeros:** "Revisar cambios" muestra los pasos de los subagentes y compañeros de la conversación junto a los suyos, con la etiqueta "Subagente" o "Compañero"; "Resumen de revisión" los cuenta en la fila de la conversación; "Cambios por revisar en otros proyectos" muestra los subagentes debajo de su conversación. Antes solo los contaba la barra de cambios sobre el cuadro de mensaje y Box no los tenía.
+- **Deshacer quita solo sus propias líneas:** Deshacer en Box, con "Descartar todo" de la barra de cambios o con el botón de un archivo quita solo las líneas que escribieron esos pasos. Las líneas cambiadas después por otra conversación, un subagente, a mano o por un formateador se quedan. Si justo esas líneas cambiaron después, no se escribe nada y la página explica por qué. Antes, deshacer reescribía el archivo entero como estaba antes del primer cambio de la conversación.
+- **"Conservar todo" y "Descartar todo" en cada archivo:** También en archivos que cambió un script y en archivos cuyos cambios pendientes ya no están en el editor (después de volver a abrir Breezell o con la aceptación automática activada), con o sin Git. Antes, esos archivos quedaban marcados como deshechos pero conservaban sus cambios.
+- **Archivos eliminados:** Un archivo que el agente eliminó es un paso propio y queda en la lista hasta que decidas; deshacerlo devuelve el archivo.
+- **Sin recuentos disparados:** En archivos con saltos de línea de Windows (CRLF), el recuento de líneas de la barra de cambios ya no salta a decenas de miles ni supera lo que cambiaron los pasos.
+- **Una fila por archivo:** La barra de cambios ya no muestra el mismo archivo dos veces (una ruta escrita de dos formas o un archivo de WSL nombrado de dos maneras); dos archivos distintos con el mismo nombre muestran su carpeta; la fila de un archivo que no se puede abrir abre Revisión de código.
+- **Lo deshecho sigue deshecho:** Un paso ya deshecho, o revertido con un punto de control, no vuelve con un deshacer posterior; antes de deshacer un paso del que depende otro posterior, se te pregunta.
+- **El orden del resumen de revisión:** "Resumen de revisión" vuelve a mostrar las conversaciones de la más reciente a la más antigua; una conversación editada de nuevo sube arriba.
+
+### Pensamiento
+
+- **Sin repetir al abrir:** Al abrir un pensamiento plegado mientras la respuesta aún se escribe, o al volver a una conversación que sigue pensando, el texto ya mostrado aparece de inmediato; solo las palabras nuevas aparecen poco a poco.
+- **Los pensamientos largos ya no frenan el chat:** Un pensamiento escrito como un solo bloque (líneas sin línea en blanco entre ellas o una lista larga) hacía cada actualización más lenta hasta que el chat no se podía desplazar. Ahora, pasados unos 2.000 caracteres, sus palabras nuevas aparecen sin el efecto de fundido.
+- **El desplazamiento responde al instante:** Mientras llega el texto, el chat y el cuadro de un pensamiento se desplazan al instante sin esperar al dibujo.
+- **Pensamientos completos:** Los pensamientos de "Codebase Explored" se muestran completos en lugar de cortarse en 4.000 caracteres. Los cuadros de pensamiento de los informes de análisis ya no tienen una franja arriba.
+
+### Página Agents
+
+- **Conversaciones de otros proyectos:** Seguir en la página Agents la conversación de otro proyecto mientras se escribe ya no vuelve a dibujar todo el chat con cada actualización: desplazamiento y lectura más fluidos.
+
+### Agentes de plugins
+
+- **Tiempo de pensamiento:** Los pensamientos de Claude Code y Antigravity CLI (Agent Bridge) guardan su tiempo real: "Thought for" ya no dice 0.1 s al volver a abrir una conversación, y un pensamiento bajo las herramientas del turno termina cuando empieza la respuesta, también el de los subagentes.
+
 ## 1.4.692 · Hot Update · 2026-11-26
 
 Una actualización en caliente para 1.4.6, sin necesidad de reinstalar: Breezell la ofrece por sí solo, o compruébala en «Actualizaciones», al pie de la barra lateral de Box.
